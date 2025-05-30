@@ -141,7 +141,9 @@ Sample Output 4
 
 def solve():
   n = int(input())
-  a = [int(input()) for _ in range(n)]
+  a = input().split()
+  for i in range(0, len(a)):
+    a[i] = int(a[i])
   
   best_val = -float('inf')
   best_ops = []

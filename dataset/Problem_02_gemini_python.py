@@ -81,9 +81,11 @@ Sample Output 3
 
 def solve():
     n = int(input())
-    print(n)
+    print(f"{n} {n * 3} {n * 3}")
+    '''
     print(n * 3)
     print(n * 3)
+    '''
 
 solve()
 

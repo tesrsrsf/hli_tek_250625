@@ -1,0 +1,71 @@
+/*
+Ring
+
+  Write a program which finds a pattern $p$ in a ring shaped text $s$.
+
+Input
+
+  In the first line, the text $s$ is given.
+
+  In the second line, the pattern $p$ is given.
+
+Output
+
+  If $p$ is in $s$, print 
+Yes
+ in a line, otherwise 
+No
+.
+
+Constraints
+
+$1 \leq $ length of $p \leq $ length of $s \leq 100$
+
+$s$ and $p$ consists of lower-case letters
+
+Sample Input 1
+
+vanceknowledgetoad
+advance
+
+Sample Output 1
+
+Yes
+
+Sample Input 2
+
+vanceknowledgetoad
+advanced
+
+Sample Output 2
+
+No
+*/
+
+
+// =============SOLUTION STARTS HERE==============
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        String p = scanner.nextLine();
+        scanner.close();
+
+        // Create a new string by concatenating s with itself
+        String doubledS = s + s;
+
+        // Check if pattern p is in the doubled string
+        if (doubledS.contains(p)) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+
+

@@ -1,0 +1,165 @@
+/*
+Score : 
+100
+ points
+
+Problem Statement
+There are 
+N
+ items, numbered 
+1, 2, \ldots, N
+.
+For each 
+i
+ (
+1 \leq i \leq N
+), Item 
+i
+ has a weight of 
+w_i
+ and a value of 
+v_i
+.
+
+Taro has decided to choose some of the 
+N
+ items and carry them home in a knapsack.
+The capacity of the knapsack is 
+W
+, which means that the sum of the weights of items taken must be at most 
+W
+.
+
+Find the maximum possible sum of the values of items that Taro takes home.
+
+Constraints
+
+All values in input are integers.
+
+1 \leq N \leq 100
+
+1 \leq W \leq 10^5
+
+1 \leq w_i \leq W
+
+1 \leq v_i \leq 10^9
+
+Input
+Input is given from Standard Input in the following format:
+
+N
+
+W
+
+w_1
+
+v_1
+
+w_2
+
+v_2
+
+:
+
+w_N
+
+v_N
+
+Output
+Print the maximum possible sum of the values of items that Taro takes home.
+
+Sample Input 1
+3 8
+3 30
+4 50
+5 60
+
+Sample Output 1
+90
+
+Items 
+1
+ and 
+3
+ should be taken.
+Then, the sum of the weights is 
+3 + 5 = 8
+, and the sum of the values is 
+30 + 60 = 90
+.
+
+Sample Input 2
+5 5
+1 1000000000
+1 1000000000
+1 1000000000
+1 1000000000
+1 1000000000
+
+Sample Output 2
+5000000000
+
+The answer may not fit into a 32-bit integer type.
+
+Sample Input 3
+6 15
+6 5
+5 6
+6 4
+6 6
+3 5
+7 2
+
+Sample Output 3
+17
+
+Items 
+2, 4
+ and 
+5
+ should be taken.
+Then, the sum of the weights is 
+5 + 6 + 3 = 14
+, and the sum of the values is 
+6 + 6 + 5 = 17
+.
+*/
+
+
+// =============SOLUTION STARTS HERE==============
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int N = scanner.nextInt();
+        int W = scanner.nextInt();
+        int[] weights = new int[N];
+        long[] values = new long[N];
+        
+        for (int i = 0; i < N; i++) {
+            weights[i] = scanner.nextInt();
+            values[i] = scanner.nextLong();
+        }
+        
+        long[][] dp = new long[N + 1][W + 1];
+        
+        for (int i = 1; i <= N; i++) {
+            for (int w = 0; w <= W; w++) {
+                dp[i][w] = dp[i - 1][w]; // Not taking the item
+                if (weights[i - 1] <= w) {
+                    dp[i][w] = Math.max(dp[i][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]);
+                }
+            }
+        }
+        
+        System.out.println(dp[N][W]);
+        scanner.close();
+    }
+}
+
+

@@ -1,0 +1,178 @@
+/*
+Score : 
+600
+ points
+
+Problem Statement
+You are given an integer sequence 
+A
+ of length 
+N
+ and an integer 
+K
+.
+You will perform the following operation on this sequence 
+Q
+ times:
+
+Choose a contiguous subsequence of length 
+K
+, then remove the smallest element among the 
+K
+ elements contained in the chosen subsequence (if there are multiple such elements, choose one of them as you like).
+
+Let 
+X
+ and 
+Y
+ be the values of the largest and smallest element removed in the 
+Q
+ operations. You would like 
+X-Y
+ to be as small as possible.
+Find the smallest possible value of 
+X-Y
+ when the 
+Q
+ operations are performed optimally.
+
+Constraints
+
+1 \leq N \leq 2000
+
+1 \leq K \leq N
+
+1 \leq Q \leq N-K+1
+
+1 \leq A_i \leq 10^9
+
+All values in input are integers.
+
+Input
+Input is given from Standard Input in the following format:
+
+N
+
+K
+
+Q
+
+A_1
+
+A_2
+
+...
+
+A_N
+
+Output
+Print the smallest possible value of 
+X-Y
+.
+
+Sample Input 1
+5 3 2
+4 3 1 5 2
+
+Sample Output 1
+1
+
+In the first operation, whichever contiguous subsequence of length 
+3
+ we choose, the minimum element in it is 
+1
+.
+Thus, the first operation removes 
+A_3=1
+ and now we have 
+A=(4,3,5,2)
+.
+In the second operation, it is optimal to choose 
+(A_2,A_3,A_4)=(3,5,2)
+ as the contiguous subsequence of length 
+3
+ and remove 
+A_4=2
+.
+In this case, the largest element removed is 
+2
+, and the smallest is 
+1
+, so their difference is 
+2-1=1
+.
+
+Sample Input 2
+10 1 6
+1 1 2 3 5 8 13 21 34 55
+
+Sample Output 2
+7
+
+Sample Input 3
+11 7 5
+24979445 861648772 623690081 433933447 476190629 262703497 211047202 971407775 628894325 731963982 822804784
+
+Sample Output 3
+451211184
+*/
+
+
+// =============SOLUTION STARTS HERE==============
+
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+int main() {
+  int n, k, q;
+  cin >> n >> k >> q;
+
+  vector<int> a(n);
+  for (int i = 0; i < n; ++i) {
+    cin >> a[i];
+  }
+
+  int min_diff = INT_MAX;
+  for (int i = 0; i < (1 << (n - k + 1)); ++i) {
+    if (__builtin_popcount(i) != q) continue;
+
+    vector<int> removed;
+    vector<int> b = a;
+    vector<int> indices;
+    for (int j = 0; j < n - k + 1; ++j) {
+      if ((i >> j) & 1) {
+        indices.push_back(j);
+      }
+    }
+    
+    for (int index : indices) {
+      int min_val = INT_MAX;
+      int min_idx = -1;
+      for (int j = index; j < index + k; ++j) {
+        if (b[j] < min_val) {
+          min_val = b[j];
+          min_idx = j;
+        }
+      }
+      removed.push_back(min_val);
+      b[min_idx] = INT_MAX;
+    }
+    
+    if (removed.size() != q) continue;
+
+    sort(removed.begin(), removed.end());
+    min_diff = min(min_diff, removed[q - 1] - removed[0]);
+  }
+
+  cout << min_diff << endl;
+
+  return 0;
+}
+
+

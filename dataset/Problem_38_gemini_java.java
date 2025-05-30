@@ -1,0 +1,82 @@
+/*
+Card Game
+
+  Taro and Hanako are playing card games. They have 
+n
+ cards each, and they compete 
+n
+ turns. At each turn Taro and Hanako respectively puts out a card.
+  The name of the animal consisting of alphabetical letters is written on each card, and the bigger one in lexicographical order becomes the winner of that turn. The winner obtains 3 points. In the case of a draw, they obtain 1 point each.
+
+  Write a program which reads a sequence of cards Taro and Hanako have and reports the final scores of the game.
+
+Input
+
+  In the first line, the number of cards 
+n
+ is given. In the following 
+n
+ lines, the cards for 
+n
+ turns are given respectively. For each line, the first string represents the Taro's card and the second one represents Hanako's card.
+
+Constraints
+
+n
+ ≤ 1000
+
+The length of the string ≤ 100
+
+Output
+
+  Print the final scores of Taro and Hanako respectively. Put a single space character between them.
+
+Sample Input
+
+3
+cat dog
+fish fish
+lion tiger
+
+Sample Output
+
+1 7
+*/
+
+
+// =============SOLUTION STARTS HERE==============
+
+
+
+import java.util.Scanner;
+
+class CardGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        int taroScore = 0;
+        int hanakoScore = 0;
+
+        for (int i = 0; i < n; i++) {
+            String[] cards = scanner.nextLine().split(" ");
+            String taroCard = cards[0];
+            String hanakoCard = cards[1];
+
+            int comparison = taroCard.compareTo(hanakoCard);
+            if (comparison > 0) {
+                taroScore += 3;
+            } else if (comparison < 0) {
+                hanakoScore += 3;
+            } else {
+                taroScore += 1;
+                hanakoScore += 1;
+            }
+        }
+
+        System.out.println(taroScore + " " + hanakoScore);
+    }
+}
+
+

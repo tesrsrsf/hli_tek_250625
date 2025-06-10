@@ -83,9 +83,8 @@ N = int(input())
 h = 1
 n = N * 2
 w = N * n // (n - N)
-print(f"{h} {n} {w}")
-'''
+print(h)
 print(n)
 print(w)
-'''
+
 

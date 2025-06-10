@@ -11,6 +11,8 @@ with open("final_annotation_dataset_part2.jsonl", "r+", encoding="utf-8") as f:
         if filename_id <= 9:
             filename = "0" + str(filename_id)
 
+        question_id = line["problem_id"]
+
         problem = line["problem"]
         for model in models:
             solution = line[model]
@@ -37,7 +39,7 @@ with open("final_annotation_dataset_part2.jsonl", "r+", encoding="utf-8") as f:
                 note_3 = '\n\n\n# =============SOLUTION STARTS HERE==============\n\n\n'
 
 
-            file_writer = open(f"dataset/Problem_{filename}_{model}.{language}", "w", encoding="utf-8")
+            file_writer = open(f"dataset/Problem_{filename}_{question_id}_{model}.{language}", "w", encoding="utf-8")
             output = note_1 + problem + note_2 + note_3 + solution + "\n"
             file_writer.write(output + "\n")
             file_writer.close()

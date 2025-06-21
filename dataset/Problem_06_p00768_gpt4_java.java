@@ -287,7 +287,7 @@ Output for the Sample Input
 
 import java.util.*;
 
-public class Main {
+public class Problem_06_p00768_gpt4_java {
     static class Team {
         int id;
         int problemsSolved;
@@ -320,12 +320,15 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> results = new ArrayList<>();
         while (true) {
             int M = scanner.nextInt();
             int T = scanner.nextInt();
             int P = scanner.nextInt();
             int R = scanner.nextInt();
-            if (M == 0 && T == 0 && P == 0 && R == 0) break;
+            if (M == 0 && T == 0 && P == 0 && R == 0) {
+                break;
+            }
 
             Team[] teams = new Team[T + 1];
             for (int i = 1; i <= T; i++) {
@@ -333,11 +336,11 @@ public class Main {
             }
 
             for (int i = 0; i < R; i++) {
-                int elapsed = scanner.nextInt();
+                int timeTaken = scanner.nextInt();
                 int teamId = scanner.nextInt();
                 int problemId = scanner.nextInt();
-                int judgment = scanner.nextInt();
-                teams[teamId].submit(elapsed, problemId, judgment == 0);
+                int resultTag = scanner.nextInt();
+                teams[teamId].submit(timeTaken, problemId, resultTag == 0);
             }
 
             List<Team> teamList = new ArrayList<>(Arrays.asList(teams).subList(1, T + 1));
@@ -351,25 +354,29 @@ public class Main {
                 return Integer.compare(b.id, a.id); // Higher team ids first
             });
 
-            StringBuilder result = new StringBuilder();
+            String result = "";
             int lastSolved = -1, lastTime = -1;
             for (int i = 0; i < teamList.size(); i++) {
                 Team team = teamList.get(i);
                 if (i > 0) {
                     if (team.problemsSolved == lastSolved && team.totalTime == lastTime) {
-                        result.append("=");
+                        result += "=";
                     } else {
-                        result.append(",");
+                        result += ",";
                     }
                 }
-                result.append(team.id);
+                result += team.id;
                 lastSolved = team.problemsSolved;
                 lastTime = team.totalTime;
             }
-            System.out.println(result.toString());
+            results.add(result);
         }
         scanner.close();
+        for (String res : results) {
+            System.out.println(res);
+        }
     }
 }
 
 
+// {annotation: "changed the way to construct the output string to avoid using string builder for better readability"}

@@ -143,37 +143,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_03_p03413_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        List<Long> a = new ArrayList<>();
+        List<Integer> a = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            a.add(scanner.nextLong());
+            a.add(scanner.nextInt());
         }
 
-        long maxFinalElement = Long.MIN_VALUE;
+        int maxFinalElement = Integer.MIN_VALUE;
         List<Integer> bestOperations = null;
 
         for (int i = 0; i < (1 << (n - 1)); i++) {
-            List<Long> currentSequence = new ArrayList<>(a);
+            List<Integer> currentSequence = new ArrayList<>(a);
             List<Integer> currentOperations = new ArrayList<>();
-            int currentBitmask = i;
 
             while (currentSequence.size() > 1) {
                 int chosenIndex = -1;
-                long currentMax = Long.MIN_VALUE;
+                int currentMax = Integer.MIN_VALUE;
 
                 for (int j = 0; j < currentSequence.size(); j++) {
-                    long currentValue = currentSequence.get(j);
+                    int currentValue = currentSequence.get(j);
                     if (j == 0 || j == currentSequence.size() - 1) {
                         if (currentValue > currentMax) {
                             currentMax = currentValue;
                             chosenIndex = j;
                         }
                     } else {
-                        long sum = currentSequence.get(j - 1) + currentSequence.get(j + 1);
+                        int sum = currentSequence.get(j - 1) + currentSequence.get(j + 1);
                         if (sum > currentMax) {
                             currentMax = sum;
                             chosenIndex = j;
@@ -186,7 +185,7 @@ public class Main {
                     currentSequence.remove(chosenIndex);
                 } else {
                     currentOperations.add(chosenIndex + 1);
-                    long sum = currentSequence.get(chosenIndex - 1) + currentSequence.get(chosenIndex + 1);
+                    int sum = currentSequence.get(chosenIndex - 1) + currentSequence.get(chosenIndex + 1);
                     currentSequence.set(chosenIndex - 1, sum);
                     currentSequence.remove(chosenIndex);
                     currentSequence.remove(chosenIndex); 
@@ -210,3 +209,4 @@ public class Main {
 }
 
 
+// {"annotation": "The logic seems make sense, but does not work for given test cases. Replaced the long datatype to int which is easier to understand"}

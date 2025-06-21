@@ -81,19 +81,18 @@ Sample Output 3
 
 import java.util.Scanner;
 
-class Main {
+class Problem_02_p03583_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
-        long h = N;
-        long n = 2 * N;
-        long w = 2 * N;
+        int h = N;
+        int n = 2 * N;
+        int w = 2 * N;
 
-        System.out.println(h);
-        System.out.println(n);
-        System.out.println(w);
+        System.out.printf("%d %d %d\n", h, n, w);
     }
 }
 
 
+// {annotation: "modified the code using printf instead of println to organize the output format as required, also changed the datatype, still broken"}

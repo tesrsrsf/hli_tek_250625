@@ -78,11 +78,13 @@ F
 
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_04_p02411_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> results = new ArrayList<>();
         
         while (true) {
             int m = scanner.nextInt();
@@ -93,19 +95,24 @@ public class Main {
                 break;
             }
             
-            String grade = evaluateGrade(m, f, r);
-            System.out.println(grade);
+            String grade = calcGrade(m, f, r);
+            results.add(grade);
+        }
+
+        for (String result : results) {
+            System.out.println(result);
         }
         
         scanner.close();
     }
     
-    private static String evaluateGrade(int m, int f, int r) {
+    public static String calcGrade(int m, int f, int r) {
+        int total = m + f;
+
         if (m == -1 || f == -1) {
             return "F";
         }
         
-        int total = m + f;
         
         if (total >= 80) {
             return "A";
@@ -114,7 +121,11 @@ public class Main {
         } else if (total >= 50) {
             return "C";
         } else if (total >= 30) {
-            return (r >= 50) ? "C" : "D";
+            if (r >= 50) {
+                return "C";
+            } else {
+                return "D";
+            }
         } else {
             return "F";
         }
@@ -122,3 +133,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed the method to calcGrade to match my style. used ArrayList to store results and print them at once."}

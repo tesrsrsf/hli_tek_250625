@@ -79,11 +79,13 @@ F
 
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
     int m, f, r;
-    
+    vector <string> grades;
+
     while (true) {
         cin >> m >> f >> r;
         if (m == -1 && f == -1 && r == -1) {
@@ -91,28 +93,35 @@ int main() {
         }
 
         if (m == -1 || f == -1) {
-            cout << "F" << endl;
+            grades.push_back("F");
         } else {
             int total = m + f;
             if (total >= 80) {
-                cout << "A" << endl;
+                grades.push_back("A");
             } else if (total >= 65) {
-                cout << "B" << endl;
+                grades.push_back("B");
             } else if (total >= 50) {
-                cout << "C" << endl;
+                grades.push_back("C");
             } else if (total >= 30) {
                 if (r >= 50) {
-                    cout << "C" << endl;
+                    grades.push_back("C");
                 } else {
-                    cout << "D" << endl;
+                    grades.push_back("D");
                 }
             } else {
-                cout << "F" << endl;
+                grades.push_back("F");
             }
         }
     }
+    
+
+    for (auto grade : grades) {
+        cout << grade << endl;
+    }
+    
 
     return 0;
 }
 
 
+// {annotation: "used vector to store grades and print them at once"}

@@ -122,21 +122,25 @@ gcd(2, 5, 20, 63) = 1
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 int main() {
     int N;
-    std::cin >> N;
+    cin >> N;
 
-    std::vector<int> specialSet;
+    vector<int> specialSet;
     for (int i = 1; i <= N; ++i) {
         specialSet.push_back(i * 2 + 1); // Producing odd numbers: 3, 5, 7, ..., (2*N + 1)
     }
     
     for (int i = 0; i < N; ++i) {
-        std::cout << specialSet[i] << (i < N - 1 ? " " : "");
+        cout << specialSet[i];
+        cout << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
     return 0;
 }
 
 
+// {annotation: "in cpp, using namespace std is more preferred by human (since it reduces the amount of work)"}

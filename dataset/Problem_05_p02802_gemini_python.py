@@ -133,27 +133,40 @@ Sample Output 3
 
 
 def solve():
-  n, m = map(int, input().split())
+  input_str = input().split()
+  n, m = int(input_str[0]), int(input_str[1])
   submissions = []
-  for _ in range(m):
-    submissions.append(input().split())
+  for i in range(0, m):
+    input_str_sub = input().split()
+    temp = {}
+    temp[input_str_sub[0]] = input_str_sub[1]
+    submissions.append(temp)
 
   correct_answers = 0
-  penalties = 0
-  solved = [False] * (n + 1)
-  wa_counts = [0] * (n + 1)
+  attempt = 0
+  solved = {}
+  wa_counts = {}
 
-  for problem_num, verdict in submissions:
-    problem_num = int(problem_num)
-    if verdict == "AC" and not solved[problem_num]:
+  for sub in submissions:
+    pid = list(sub.keys())[0]
+    #print(submissions)
+    res = sub[pid]
+    pid_int = int(pid)
+
+    if pid not in wa_counts:
+      solved[pid] = False
+      wa_counts[pid] = 0
+
+    if res == "AC" and not solved[pid]:
       correct_answers += 1
-      penalties += wa_counts[problem_num]
-      solved[problem_num] = True
-    elif verdict == "WA" and not solved[problem_num]:
-        wa_counts[problem_num] +=1
+      attempt += wa_counts[pid]
+      solved[pid] = True
+    elif res == "WA" and not solved[pid]:
+        wa_counts[pid] += 1
   
-  print(correct_answers, penalties)
+  print(correct_answers, attempt)
 
 solve()
 
 
+# {annotation: "improved the code using a list of dictionaries to store submissions, also using dicts to track solved problems and wa counts"}

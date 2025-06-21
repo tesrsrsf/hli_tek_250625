@@ -87,15 +87,16 @@ int main() {
   int n;
   cin >> n;
 
-  int h = n;
-  int n_val = 2 * n;
-  int w = 2 * n;
+  int h = n / 2;
+  int n_res = n;
+  int w = n;
 
-  cout << h << endl;
-  cout << n_val << endl;
+  cout << h << " ";
+  cout << n_res << " ";
   cout << w << endl;
 
   return 0;
 }
 
 
+// {annotation: "made the code more humanly by changing the variable names and adding spaces in the output. The logic is still broken but more humanly."}

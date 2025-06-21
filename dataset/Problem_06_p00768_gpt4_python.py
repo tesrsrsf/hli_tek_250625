@@ -285,28 +285,32 @@ Output for the Sample Input
 
 
 
+import sys
+from collections import defaultdict
 def rank_teams():
-    import sys
-    from collections import defaultdict
-    
-    input = sys.stdin.read
-    data = input().strip().splitlines()
+
+    data = []
+    while True:
+        line = input()
+        M, T, P, R = int(line.split()[0]), int(line.split()[1]), int(line.split()[2]), int(line.split()[3])
+        data.append(line)
+        if M == 0 and T == 0 and P == 0 and R == 0:
+            break
     
     index = 0
     results = []
     
     while True:
         # Read the M, T, P, R line
-        M, T, P, R = map(int, data[index].split())
-        if M == 0 and T == 0 and P == 0 and R == 0:
-            break
+        M, T, P, R = int(data[index].split()[0]), int(data[index].split()[1]), int(data[index].split()[2]), int(data[index].split()[3])
+        
             
         index += 1
         
         teams = defaultdict(lambda: {'solved': 0, 'time': 0, 'penalty': defaultdict(int)})
 
-        for _ in range(R):
-            m_k, t_k, p_k, j_k = map(int, data[index].split())
+        for i in range(0, R):
+            m_k, t_k, p_k, j_k = int(data[index].split()[0]), int(data[index].split()[1]), int(data[index].split()[2]), int(data[index].split()[3])
             if j_k == 0:
                 if teams[t_k]['penalty'][p_k] >= 0:  # If not solved yet
                     teams[t_k]['solved'] += 1
@@ -325,8 +329,8 @@ def rank_teams():
             total_time = teams[team]['time']
             ranked_teams.append((solved, total_time, team))
         
-        # Sort by number of solves (desc), total time (asc), team number (asc)
-        ranked_teams.sort(key=lambda x: (-x[0], x[1], x[2]))
+        # Sort by number of solves (desc), total time (asc)
+        ranked_teams.sort(key=lambda x: (-x[0], x[1]))
 
         # Build the output format handling ties
         output = []
@@ -352,3 +356,4 @@ def rank_teams():
 rank_teams()
 
 
+# {annotation: "modified the way to get input to use input() directly instead of sys.stdin.read()"}

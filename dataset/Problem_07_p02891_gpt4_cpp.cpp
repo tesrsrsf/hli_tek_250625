@@ -89,17 +89,14 @@ int main() {
     long long len = S.length();
     long long operations = 0;
 
-    // Count adjacent duplicates in a single instance of S
     for (int i = 1; i < len; i++) {
         if (S[i] == S[i - 1]) {
             operations++;
         }
     }
 
-    // Operations needed to make T valid
     operations *= K;
 
-    // Handle the merging of blocks: if S ends and starts with the same character
     if (S[0] == S[len - 1]) {
         operations += (K - 1);
     }

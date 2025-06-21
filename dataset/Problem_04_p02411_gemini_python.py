@@ -78,26 +78,32 @@ F
 
 
 
+res = []
 while True:
-    m, f, r = map(int, input().split())
+    input_str = input().split()
+    m, f, r = int(input_str[0]), int(input_str[1]), int(input_str[2])
     if m == -1 and f == -1 and r == -1:
         break
     if m == -1 or f == -1:
-        print('F')
+        res.append('F')
     else:
         total = m + f
         if total >= 80:
-            print('A')
+            res.append('A')
         elif total >= 65:
-            print('B')
+            res.append('B')
         elif total >= 50:
-            print('C')
+            res.append('C')
         elif total >= 30:
             if r >= 50:
-                print('C')
+                res.append('C')
             else:
-                print('D')
+                res.append('D')
         else:
-            print('F')
+            res.append('F')
 
 
+for grade in res:
+    print(grade)
+
+# {annotation: "This prints the grades after receiving all inputs. also modified the way to read input"}

@@ -311,6 +311,7 @@ struct Team {
 };
 
 int main() {
+    vector<string> results;
     while (true) {
         int M, T, P, R;
         cin >> M >> T >> P >> R;
@@ -346,14 +347,23 @@ int main() {
                 }
             }
         }
-
+        
+        string result;
         for (size_t i = 0; i < ranking.size(); ++i) {
-            cout << ranking[i];
-            if (i < ranking.size() - 1) cout << ",";
+            result = result + ranking[i];
+            if (i < ranking.size() - 1) {
+                result += ",";
+            }
         }
-        cout << endl;
+        results.push_back(result);
     }
+
+    for (auto res : results) {
+        cout << res << endl;
+    }
+
     return 0;
 }
 
 
+// {annotation: "modified the output format to match the requirements of the problem statement"}

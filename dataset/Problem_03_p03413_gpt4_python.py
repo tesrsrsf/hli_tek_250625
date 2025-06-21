@@ -140,22 +140,29 @@ Sample Output 4
 
 
 N = int(input())
-a = list(map(int, input().split()))
+a = []
+
+a_str = input().split()
+for aval in a_str:
+    a.append(int(aval))
 
 ops = []
 while len(a) > 1:
     if a[0] >= a[-1]:
         ops.append(1)
         a[1] += a[0]
-        a.pop(0)
+        a = a[1:]
     else:
         ops.append(len(a))
         a[-2] += a[-1]
-        a.pop()
+        a = a[:-1]
+
 result = a[0]
 
 print(result)
 print(len(ops))
-print('\n'.join(map(str, ops)))
+for op in ops:
+    print(op) 
 
 
+# {annotation: "Modified the way to get the input and output format. replaced pop with slicing to remove elements from the list."}

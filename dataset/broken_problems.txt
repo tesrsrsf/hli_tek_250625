@@ -1,13 +1,38 @@
 [python]
-p03394,gemini
-p03394,gpt4
-p03583,gemini
-p03583,gpt4
 
 [cpp]
-p03394,gemini
 
 [java]
+
+
+P.S. I tried to make these broken cases looks human-like, without fixing it
+
+
+NOT BROKEN PROBLEMS
+[python]
+p02411 gemini
+p02411 gpt4
+p02802 gemini
+p02802 gpt4
+p00768 gemini
+p00768 gpt4
+
+[cpp]
+p02411 gemini
+p02411 gpt4
+p02802 gemini
+p02802 gpt4
+p00768 gemini
+p00768 gpt4
+
+[java]
+p02411 gemini
+p02411 gpt4
+p02802 gemini
+p02802 gpt4
+p00768 gemini
+p00768 gpt4
+
 
 
 P.S. I tried to make these broken cases looks human-like, without fixing it

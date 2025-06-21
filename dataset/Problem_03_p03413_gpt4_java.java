@@ -141,14 +141,19 @@ Sample Output 4
 
 import java.util.*;
 
-public class Main {
+public class Problem_03_p03413_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
-        long[] a = new long[N];
+        int[] a = new int[N];
+        scanner.nextLine(); // Consume the newline character
+        String nums_str = scanner.nextLine();
+        String[] nums = nums_str.split(" ");
         for (int i = 0; i < N; i++) {
-            a[i] = scanner.nextInt();
+            a[i] = Integer.parseInt(nums[i]);
         }
+
+        scanner.close();
 
         List<Integer> operations = new ArrayList<>();
         while (N > 1) {
@@ -193,3 +198,4 @@ public class Main {
 }
 
 
+// {annotation: "this program will lead to an infinite loop, I don't think I can fix it, but I replaced the input with my way. "}

@@ -79,34 +79,45 @@ F
 
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 int main() {
+  vector <string> grades;
   int m, f, r;
-  while (cin >> m >> f >> r && (m != -1 || f != -1 || r != -1)) {
+  cin >> m >> f >> r;
+  while (m != -1 || f != -1 || r != -1) {
     if (m == -1 || f == -1) {
-      cout << "F" << endl;
+      grades.push_back("F");
     } else {
       int total = m + f;
       if (total >= 80) {
-        cout << "A" << endl;
+        grades.push_back("A");
       } else if (total >= 65) {
-        cout << "B" << endl;
+        grades.push_back("B");
       } else if (total >= 50) {
-        cout << "C" << endl;
+        grades.push_back("C");
       } else if (total >= 30) {
         if (r >= 50) {
-          cout << "C" << endl;
+          grades.push_back("C");
         } else {
-          cout << "D" << endl;
+          grades.push_back("D");
         }
       } else {
-        cout << "F" << endl;
+        grades.push_back("F");
       }
     }
+    
+    cin >> m >> f >> r;
   }
+
+  for (const auto& grade : grades) {
+    cout << grade << endl;
+  }
+
   return 0;
 }
 
 
+// {annotation: "used vector to store grades, not printing immediately, which matches the requirement"}

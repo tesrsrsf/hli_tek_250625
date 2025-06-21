@@ -141,17 +141,18 @@ Sample Output 4
 
 def solve():
   n = int(input())
-  a = [int(input()) for _ in range(n)]
+  input_str = input()
+  a = input_str.split()
+  for i in range(0, len(a)):
+    a[i] = int(a[i])
   
   best_val = -float('inf')
   best_ops = []
   
-  for i in range(1 << (n - 1)):
+  for i in range(0, 2 ** (n - 1)):
     ops = []
     curr_a = a[:]
     curr_ops = []
-    
-    indices_to_remove = []
     
     for j in range(n - 1):
       if (i >> j) & 1:
@@ -161,12 +162,12 @@ def solve():
       best_choice_idx = -1
       best_choice_val = -float('inf')
       
-      for k in range(len(curr_a)):
+      for k in range(0, len(curr_a)):
         
-        if k == 0 or k == len(curr_a) -1:
+        if k == 0 or (k == (len(curr_a) - 1)):
             val = curr_a[k]
         else:
-            val = curr_a[k-1] + curr_a[k+1]
+            val = curr_a[k - 1] + curr_a[k + 1]
         
         
         if val > best_choice_val:
@@ -176,15 +177,15 @@ def solve():
       
       if best_choice_idx == 0:
         curr_ops.append(1)
-        curr_a.pop(0)
+        curr_a = curr_a[1:]
       elif best_choice_idx == len(curr_a) - 1:
           curr_ops.append(len(curr_a))
           curr_a.pop()
       else:
         curr_ops.append(best_choice_idx + 1)
-        curr_a[best_choice_idx] = curr_a[best_choice_idx-1] + curr_a[best_choice_idx+1]
-        curr_a.pop(best_choice_idx+1)
-        curr_a.pop(best_choice_idx-1)
+        curr_a[best_choice_idx] = curr_a[best_choice_idx - 1] + curr_a[best_choice_idx + 1]
+        curr_a.pop(best_choice_idx + 1)
+        curr_a.pop(best_choice_idx - 1)
     
     
     if curr_a[0] > best_val:
@@ -199,3 +200,4 @@ def solve():
 solve()
 
 
+# {annotation: "reformatted the code to match my style, also changed the input method, removed the redundant variable, works, but not match the testcases"}

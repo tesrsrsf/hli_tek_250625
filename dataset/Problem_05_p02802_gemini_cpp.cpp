@@ -143,25 +143,25 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    unordered_map<int, bool> solved;
+    unordered_map<int, bool> solved_problem;
     unordered_map<int, int> wa_count;
 
     int correct_answers = 0;
     int penalties = 0;
 
-    for (int i = 0; i < m; ++i) {
+    for (int i = 0; i < m; i++) {
         int p;
         string s;
         cin >> p >> s;
 
         if (s == "AC") {
-            if (!solved[p]) {
+            if (solved_problem[p] == false) {
                 correct_answers++;
                 penalties += wa_count[p];
-                solved[p] = true;
+                solved_problem[p] = true;
             }
         } else {
-            if (!solved[p]) {
+            if (solved_problem[p] == false) {
                 wa_count[p]++;
             }
         }
@@ -173,3 +173,4 @@ int main() {
 }
 
 
+// {annotation: "reformatted the conditional statement to improve readability"}

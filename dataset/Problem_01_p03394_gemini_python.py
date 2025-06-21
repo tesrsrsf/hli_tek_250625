@@ -136,8 +136,14 @@ def solve():
         ans.append(5)
         for i in range(n - 2):
             ans.append(63 + i * 1)
-    print(*ans)
 
-solve()
+    return ans
 
+def print_solution(ans):
+    for n in ans:
+        print(n, end=' ')
 
+solution = solve()
+print_solution(solution)
+
+# {annotation: "I don't think people use print(*ans)"}

@@ -285,32 +285,58 @@ Output for the Sample Input
 
 
 
+def sort_teams(teams):
+    res = list(teams.items())
+
+    for i in range(len(res)):
+        for j in range(i + 1, len(res)):
+            team_i = res[i]
+            team_j = res[j]
+
+            solved_i = team_i[1]['solved']
+            solved_j = team_j[1]['solved']
+            time_i = team_i[1]['time']
+            time_j = team_j[1]['time']
+            id_i = team_i[0]
+            id_j = team_j[0]
+
+            if ((solved_j > solved_i) or (solved_j == solved_i and time_j < time_i) or (solved_j == solved_i and time_j == time_i and id_j > id_i)):
+                res[i], res[j] = res[j], res[i]
+
+    return res
+
+
 def solve():
+    res = []
     while True:
         line = input().split()
-        if len(line) == 4 and all(x == '0' for x in line):
+        M, T, P, R = int(line[0]), int(line[1]), int(line[2]), int(line[3])
+        if M == 0 and T == 0 and P == 0 and R == 0:
             break
-        M, T, P, R = map(int, line)
+
         submissions = []
-        for _ in range(R):
-            submissions.append(list(map(int, input().split())))
+        for i in range(0, R):
+            input_line = input().split()
+            for j_s in range(0, len(input_line)):
+                input_line[j_s] = int(input_line[j_s])
+            submissions.append(input_line)
 
         teams = {}
         for team_num in range(1, T + 1):
             teams[team_num] = {'solved': 0, 'time': 0, 'problems': {}}
 
-        for m, t, p, j in submissions:
-            if p not in teams[t]['problems']:
-                teams[t]['problems'][p] = {'attempts': 0, 'solved_time': -1}
+        for m_s, t_s, p_s, j_s in submissions:
+            if p_s not in teams[t_s]['problems']:
+                teams[t_s]['problems'][p_s] = {'attempts': 0, 'solved_time': -1}
             
-            if j == 0 and teams[t]['problems'][p]['solved_time'] == -1:
-                teams[t]['solved'] += 1
-                teams[t]['time'] += m + teams[t]['problems'][p]['attempts'] * 20
-                teams[t]['problems'][p]['solved_time'] = m
-            elif j != 0 and teams[t]['problems'][p]['solved_time'] == -1:
-                teams[t]['problems'][p]['attempts'] += 1
+            if j_s == 0 and teams[t_s]['problems'][p_s]['solved_time'] == -1:
+                teams[t_s]['solved'] += 1
+                teams[t_s]['time'] += m_s + teams[t_s]['problems'][p_s]['attempts'] * 20
+                teams[t_s]['problems'][p_s]['solved_time'] = m_s
+            elif j_s != 0 and teams[t_s]['problems'][p_s]['solved_time'] == -1:
+                teams[t_s]['problems'][p_s]['attempts'] += 1
         
-        sorted_teams = sorted(teams.items(), key=lambda item: (-item[1]['solved'], item[1]['time'], -item[0]))
+        sorted_teams = sort_teams(teams)
         
         rankings = []
         current_rank = []
@@ -328,15 +354,20 @@ def solve():
         
         rankings.append(sorted_teams[-1][0] if len(current_rank) == 1 else current_rank)
         
-        output = []
+        output = ""
         for rank in rankings:
             if isinstance(rank, list):
-                output.append("=".join(map(str, sorted(rank, reverse=True))))
+                output += "=".join(map(str, sorted(rank, reverse=True)))
             else:
-                output.append(str(rank))
+                output += str(rank)
+            output += (",")
 
-        print(','.join(output))
+        res.append(output[:-1])
+    
+    for line in res:
+        print(line)
 
 solve()
 
 
+# {annotation: "avoided the usage of lambda to improve readability, also modified the way to construct output"}

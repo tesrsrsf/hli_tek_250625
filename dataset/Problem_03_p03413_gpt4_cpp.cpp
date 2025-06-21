@@ -153,7 +153,7 @@ struct Operation {
 int main() {
     int N;
     cin >> N;
-    vector<long long> a(N);
+    vector<int> a(N);
     for (int i = 0; i < N; i++) {
         cin >> a[i];
     }
@@ -163,8 +163,12 @@ int main() {
     while (a.size() > 1) {
         if (a.size() == 2) {
             // Only two elements, choose one to delete, maximizing the sum
-            long long finalValue = max(a[0], a[1]);
-            ops.push_back({1, 'd'});
+            int finalValue = max(a[0], a[1]);
+            Operation temp_op;
+            temp_op.index = 1;
+            temp_op.type = 'd';
+
+            ops.push_back(temp_op);
             a.erase(a.begin() + (finalValue == a[0] ? 0 : 1));
             cout << finalValue << endl;
             cout << ops.size() << endl;
@@ -175,17 +179,25 @@ int main() {
         }
 
         // Greedily choose an operation to maximize the value
-        long long leftValue = a[0] + a[1];
-        long long rightValue = a[a.size() - 1] + a[a.size() - 2];
+        int leftValue = a[0] + a[1];
+        int rightValue = a[a.size() - 1] + a[a.size() - 2];
         
         if (leftValue >= rightValue) {
-            ops.push_back({1, 's'}); // operation at index 1 (1-based)
-            long long newValue = leftValue;
+            Operation temp_op;
+            temp_op.index = 1;
+            temp_op.type = 's';
+
+            ops.push_back(temp_op); // operation at index 1 (1-based)
+            int newValue = leftValue;
             a.erase(a.begin() + 1, a.begin() + 3);
             a[0] = newValue; // update the first element
         } else {
-            ops.push_back({(int)a.size(), 's'}); // operation at index size (1-based)
-            long long newValue = rightValue;
+            Operation temp_op;
+            temp_op.index = a.size() - 1;
+            temp_op.type = 's';
+
+            ops.push_back(temp_op); // operation at index size (1-based)
+            int newValue = rightValue;
             a.erase(a.end() - 2, a.end());
             a[a.size() - 1] = newValue; // update the last element
         }
@@ -202,3 +214,4 @@ int main() {
 }
 
 
+// {annotation: "replaced some datatypes with what I think is more appropriate, modified the vector push back with temp_op for better readibility"}

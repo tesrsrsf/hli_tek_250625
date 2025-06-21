@@ -298,7 +298,7 @@ struct TeamResult {
     int totalTime;
 };
 
-bool compareTeams(const TeamResult& a, const TeamResult& b) {
+bool compareTeams(TeamResult& a, TeamResult& b) {
     if (a.solvedProblems != b.solvedProblems) {
         return a.solvedProblems > b.solvedProblems;
     } else if (a.totalTime != b.totalTime) {
@@ -310,8 +310,10 @@ bool compareTeams(const TeamResult& a, const TeamResult& b) {
 
 int main() {
     int M, T, P, R;
-    while (cin >> M >> T >> P >> R, M || T || P || R) {
-        vector<vector<int>> wrongSubmissions(T + 1, vector<int>(P + 1, 0));
+    cin >> M >> T >> P >> R;
+    vector<string> results;
+    while (M || T || P || R) {
+        vector<vector<int>> wa_subs(T + 1, vector<int>(P + 1, 0));
         vector<vector<int>> solvedTime(T + 1, vector<int>(P + 1, -1));
 
         for (int i = 0; i < R; ++i) {
@@ -320,7 +322,7 @@ int main() {
             if (j == 0 && solvedTime[t][p] == -1) {
                 solvedTime[t][p] = m;
             } else if (j != 0 && solvedTime[t][p] == -1) {
-                wrongSubmissions[t][p]++;
+                wa_subs[t][p]++;
             }
         }
 
@@ -332,35 +334,35 @@ int main() {
             for (int problem = 1; problem <= P; ++problem) {
                 if (solvedTime[team][problem] != -1) {
                     teamResults[team - 1].solvedProblems++;
-                    teamResults[team - 1].totalTime += solvedTime[team][problem] + 20 * wrongSubmissions[team][problem];
+                    teamResults[team - 1].totalTime += solvedTime[team][problem] + 20 * wa_subs[team][problem];
                 }
             }
         }
 
         sort(teamResults.begin(), teamResults.end(), compareTeams);
 
-        stringstream output;
+        string output = "";
         int rank = 1;
-        int prevSolved = -1;
-        int prevTime = -1;
+        int previousSolved = -1;
+        int previousTime = -1;
         vector<int> sameRankTeams;
 
         for (int i = 0; i < T; ++i) {
-            if (i == 0 || teamResults[i].solvedProblems != prevSolved || teamResults[i].totalTime != prevTime) {
+            if (i == 0 || teamResults[i].solvedProblems != previousSolved || teamResults[i].totalTime != previousTime) {
                 if (!sameRankTeams.empty()) {
                     sort(sameRankTeams.begin(), sameRankTeams.end(), greater<int>());
                     for (int j = 0; j < sameRankTeams.size(); ++j) {
-                        output << sameRankTeams[j];
+                        output = output + to_string(sameRankTeams[j]);
                         if (j < sameRankTeams.size() - 1) {
-                            output << "=";
+                            output = output + "=";
                         }
                     }
-                    output << ",";
+                    output = output + ",";
                     sameRankTeams.clear();
                 }
                 sameRankTeams.push_back(teamResults[i].teamNumber);
-                prevSolved = teamResults[i].solvedProblems;
-                prevTime = teamResults[i].totalTime;
+                previousSolved = teamResults[i].solvedProblems;
+                previousTime = teamResults[i].totalTime;
             } else {
                 sameRankTeams.push_back(teamResults[i].teamNumber);
             }
@@ -369,15 +371,22 @@ int main() {
         if (!sameRankTeams.empty()) {
             sort(sameRankTeams.begin(), sameRankTeams.end(), greater<int>());
             for (int j = 0; j < sameRankTeams.size(); ++j) {
-                output << sameRankTeams[j];
+                output = output + to_string(sameRankTeams[j]);
                 if (j < sameRankTeams.size() - 1) {
-                    output << "=";
+                    output = output + "=";
                 }
             }
         }
-        cout << output.str() << endl;
+        results.push_back(output);
+        cin >> M >> T >> P >> R;
     }
+
+    for (string result : results) {
+        cout << result << endl;
+    }
+
     return 0;
 }
 
 
+// {annotation: "renamed the variables to fit my style, also modified the output format to match the requirements of the problem statement"}

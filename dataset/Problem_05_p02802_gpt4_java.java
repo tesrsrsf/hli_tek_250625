@@ -136,41 +136,46 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_05_p02802_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
         int N = scanner.nextInt();
         int M = scanner.nextInt();
         
-        Map<Integer, Integer> penalties = new HashMap<>();
+        Map<Integer, Integer> wa_counts = new HashMap<>();
         Map<Integer, Boolean> solved = new HashMap<>();
         
         for (int i = 0; i < M; i++) {
-            int problem = scanner.nextInt();
-            String verdict = scanner.next();
+            int pid = scanner.nextInt();
+            String res = scanner.next();
             
-            if (verdict.equals("WA")) {
-                if (!solved.getOrDefault(problem, false)) {
-                    penalties.put(problem, penalties.getOrDefault(problem, 0) + 1);
+            if (res.equals("WA")) {
+                if (!solved.getOrDefault(pid, false)) {
+                    int currentCount = wa_counts.getOrDefault(pid, 0);
+                    wa_counts.put(pid, currentCount + 1);
                 }
-            } else if (verdict.equals("AC")) {
-                if (!solved.getOrDefault(problem, false)) {
-                    solved.put(problem, true);
+            } else if (res.equals("AC")) {
+                if (!solved.getOrDefault(pid, false)) {
+                    solved.put(pid, true);
                 }
             }
         }
         
         int correctAnswers = solved.size();
-        int totalPenalties = penalties.entrySet().stream()
-                                       .filter(entry -> solved.getOrDefault(entry.getKey(), false))
-                                       .mapToInt(Map.Entry::getValue)
-                                       .sum();
+        int totalwa = 0;
+
+        for (Integer pid : solved.keySet()) {
+            if (solved.get(pid)) {
+                totalwa += wa_counts.getOrDefault(pid, 0);
+            }
+        }
         
-        System.out.println(correctAnswers + " " + totalPenalties);
+        System.out.println(correctAnswers + " " + totalwa);
         
         scanner.close();
     }
 }
 
 
+// {annotation: "rewrote the total wa calculation using a forloop, also changed variable names to fit my habits"}

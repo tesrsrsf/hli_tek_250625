@@ -119,20 +119,25 @@ gcd(2, 5, 20, 63) = 1
 
 
 
-import sys
 from math import gcd
 from functools import reduce
 
-N = int(sys.stdin.read().strip())
+N = int(input())
 
 # Generate a list of distinct integers
-S = list(range(2, N + 2))
+S = []
+for i in range(2, N + 2):
+    S.append(i)
 
 # To ensure that the gcd of the entire set is 1, we can simply add 1
 # This will create the set: {1, 2, 3, ..., N}
-S = [x * 2 for x in S]  # Scale up to fit within the problem constraints
+# Scale up to fit within the problem constraints
+for i in range(0, len(S)):
+    S[i] = S[i] * 2
+
 S[0] = 1  # Ensure that the gcd remains 1
 
 print(" ".join(map(str, S)))
 
 
+# {annotation: "changed the input, the way to generate and modify the set, logic still broken but more humanly"}

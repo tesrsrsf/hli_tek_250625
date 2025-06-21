@@ -81,10 +81,9 @@ Sample Output 3
 
 def solve():
     n = int(input())
-    print(n)
-    print(n * 3)
-    print(n * 3)
+    print(f"{n} {n * 3} {n * 3}")
 
 solve()
 
 
+# {annotation: "the logic is completely broken, reorganized the output format to match the problem statement"}

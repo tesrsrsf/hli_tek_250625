@@ -124,22 +124,24 @@ gcd(2, 5, 20, 63) = 1
 #include <numeric>
 #include <algorithm>
 
+using namespace std;
+
 int gcd(int a, int b) {
     while (b) {
         a %= b;
-        std::swap(a, b);
+        swap(a, b);
     }
     return a;
 }
 
 int main() {
     int N;
-    std::cin >> N;
-    std::vector<int> S;
+    cin >> N;
+    vector<int> S;
     S.push_back(2);
     S.push_back(5);
-    for (int i = 1; S.size() < N; ++i) {
-        int val = 63 + (i -1)*20;       
+    for (int i = 1; S.size() < N; i++) {
+        int val = 63 + (i - 1)*20;
         bool valid = true;
         for (int x : S){
             if(val == x)
@@ -151,10 +153,12 @@ int main() {
         
     }
      for (int i = 0; i< S.size(); ++i) {
-        std::cout << S[i] << (i == S.size() - 1 ? "" : " ");
+        cout << S[i];
+        cout << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
     return 0;
 }
 
 
+// {annotation: "In cpp, we use using namespace to skip the use of std:: ,also i++ is more preferred"}

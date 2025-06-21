@@ -136,42 +136,43 @@ Sample Output 3
 #include <unordered_map>
 #include <string>
 
+using namespace std;
+
 int main() {
     int N, M;
-    std::cin >> N >> M;
+    cin >> N >> M;
 
-    std::unordered_map<int, int> wa_count; // Count of WA for each problem
-    std::unordered_map<int, bool> ac_received; // AC status for each problem
+    unordered_map<int, int> wa_count; // Count of WA for each problem
+    unordered_map<int, bool> solved; // AC status for each problem
 
     for (int i = 0; i < M; ++i) {
         int p;
-        std::string verdict;
-        std::cin >> p >> verdict;
+        string res;
+        cin >> p >> res;
 
-        if (verdict == "WA") {
+        if (res == "WA") {
             // Count WA for the problem
-            if (!ac_received[p]) {
+            if (!solved[p]) {
                 wa_count[p]++;
             }
-        } else if (verdict == "AC") {
+        } else if (res == "AC") {
             // Mark AC for the problem
-            ac_received[p] = true;
+            solved[p] = true;
         }
     }
 
     int correct_answers = 0;
     int penalties = 0;
 
-    for (const auto& entry : ac_received) {
-        if (entry.second) {
-            correct_answers++;
-            penalties += wa_count[entry.first];
-        }
+    for (auto entry : solved) {
+        correct_answers++;
+        penalties += wa_count[entry.first];
     }
 
-    std::cout << correct_answers << " " << penalties << std::endl;
+    cout << correct_answers << " " << penalties << endl;
 
     return 0;
 }
 
 
+// {annotation: "added the use of namespace std, rewrited the output part"}

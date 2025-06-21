@@ -102,330 +102,25 @@ def solve():
   ans = count * k
   
   for i in range(n - 1):
-    if s[i] == s[i+1]:
+    if s[i] == s[i + 1]:
         continue
     
-    if i+2 < n and s[i] == s[i+2]:
-      ans -=1
-      
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  ans_final = 0
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
- 
+    if i + 2 < n and s[i] == s[i + 2]:
+      ans -= 1
+   
   total_repeats = 0  
-  for _ in range(k):
+  for i in range(0, k):
       s_temp= s
       repeats = 0
-      for i in range(len(s)-1):
-          if s_temp[i] == s_temp[i+1]:
-              repeats+=1
+      for i in range(len(s) - 1):
+          if s_temp[i] == s_temp[i + 1]:
+              repeats += 1
       total_repeats += repeats
-      
       
       temp_s = ""
       
       for j in range(len(s)):
-          if j >0 and s[j] == s[j-1]:
+          if j > 0 and s[j] == s[j - 1]:
             temp_s += " "
           else:
               temp_s += s[j]
@@ -434,12 +129,9 @@ def solve():
       s=temp_s.replace(" ", "")
 
   print(total_repeats)
-  
-  
-  
-  
-  
+
 
 solve()
 
 
+# {annotation: "removed a lot of blank lines and reformatted the code to make it readable"}

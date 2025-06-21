@@ -121,14 +121,16 @@ gcd(2, 5, 20, 63) = 1
 
 import java.util.*;
 
-public class Main {
+public class Problem_01_p03394_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
+        scanner.close();
         List<Integer> specialSet = new ArrayList<>();
         
         for (int i = 1; i <= N; i++) {
-            specialSet.add(i * 2 + 1); // Use odd numbers starting from 3
+            int res = i * 2 + 1;
+            specialSet.add(res); // Use odd numbers starting from 3
         }
         
         // Ensure the gcd of the full set is 1
@@ -138,8 +140,9 @@ public class Main {
         
         for (int num : specialSet) {
             System.out.print(num + " ");
-        }
+        }        
+        System.out.print("\n");
     }
 }
 
-
+// {annotation: "This program is so strange that I can't fix it without rewriting it, but I still modified the output and closed the scanner to make it more humanly. "}

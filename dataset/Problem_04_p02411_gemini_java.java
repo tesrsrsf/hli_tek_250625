@@ -78,11 +78,13 @@ F
 
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_04_p02411_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> grades = new ArrayList<>();
         while (true) {
             int m = scanner.nextInt();
             int f = scanner.nextInt();
@@ -91,28 +93,33 @@ public class Main {
                 break;
             }
             if (m == -1 || f == -1) {
-                System.out.println("F");
+                grades.add("F");
             } else {
                 int total = m + f;
                 if (total >= 80) {
-                    System.out.println("A");
+                    grades.add("A");
                 } else if (total >= 65 && total < 80) {
-                    System.out.println("B");
+                    grades.add("B");
                 } else if (total >= 50 && total < 65) {
-                    System.out.println("C");
+                    grades.add("C");
                 } else if (total >= 30 && total < 50) {
                     if (r >= 50) {
-                        System.out.println("C");
+                        grades.add("C");
                     } else {
-                        System.out.println("D");
+                        grades.add("D");
                     }
                 } else {
-                    System.out.println("F");
+                    grades.add("F");
                 }
             }
         }
         scanner.close();
+
+        for (String grade : grades) {
+            System.out.println(grade);
+        }
     }
 }
 
 
+// {annotation: "used a list to store grades and print them at the end"}

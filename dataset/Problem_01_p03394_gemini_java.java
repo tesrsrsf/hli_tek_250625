@@ -123,7 +123,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+class Problem_01_p03394_gemini_java {
 
     public static int gcd(int a, int b) {
         if (b == 0) {
@@ -175,9 +175,15 @@ public class Main {
             set.add(2);
             set.add(5);
             int current = 63;
-            for (int i = 3; i < n; i++) {
-                set.add(current);
-                current +=1;
+            int i = 2;
+            while (i < n) {
+                if (isSpecial(set)) {
+                    set.add(current);
+                    current += i;
+                } else {
+                    set.add(current + i);
+                }
+                i++;
             }
 
         }
@@ -191,4 +197,4 @@ public class Main {
     }
 }
 
-
+// {annotation: "somehow made case when n > 5 look make sense"}

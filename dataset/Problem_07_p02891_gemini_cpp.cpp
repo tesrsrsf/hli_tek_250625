@@ -85,15 +85,15 @@ using namespace std;
 
 int main() {
     string s;
-    long long k;
+    int k;
     cin >> s >> k;
 
     int n = s.length();
-    long long ans = 0;
+    int ans = 0;
 
     if (k == 1) {
-        for (int i = 0; i < n - 1; ++i) {
-            if (s[i] == s[i+1]) {
+        for (int i = 0; i < n - 1; i++) {
+            if (s[i] == s[i + 1]) {
                 ans++;
             }
         }
@@ -103,7 +103,7 @@ int main() {
             counts[c - 'a']++;
         }
 
-        for (int i = 0; i < n - 1; ++i) {
+        for (int i = 0; i < n - 1; i++) {
             if (s[i] == s[i+1]) {
                 ans++;
                 s[i + 1] = ' ';
@@ -111,8 +111,8 @@ int main() {
         }
         
         int same_pairs = 0;
-        for(int i = 0; i < n-1; ++i){
-            if(s[i] == s[i+1] && s[i] != ' '){
+        for(int i = 0; i < n - 1; i++){
+            if(s[i] == s[i + 1] && s[i] != ' '){
                 same_pairs++;
             }
         }
@@ -120,12 +120,12 @@ int main() {
         ans = (k * (n - 1));
 
         vector<int> same_count;
-        for (int i = 0; i < n - 1; ++i) {
+        for (int i = 0; i < n - 1; i++) {
             if (s[i] == s[i + 1] && s[i] != ' ') {
                 same_count.push_back(1);
-                s[i+1] = ' ';
+                s[i + 1] = ' ';
             }else{
-                if(s[i+1] == ' '){
+                if(s[i + 1] == ' '){
                     continue;
                 }
                
@@ -134,16 +134,16 @@ int main() {
         
         
         int count_same_pairs = 0;
-        for(int i = 0; i < n - 1; ++i){
-            if(s[i] == s[i+1] && s[i] != ' '){
+        for(int i = 0; i < n - 1; i++){
+            if(s[i] == s[i + 1] && s[i] != ' '){
                 count_same_pairs++;
             }
         }
         
-        ans = (k*n) - (k*n - k);
+        ans = (k * n) - (k * n - k);
         
         int temp = 0;
-        for(int i = 0; i < n - 1; ++i){
+        for(int i = 0; i < n - 1; i++){
             if(s[i] == s[i+1] && s[i] != ' '){
                 temp++;
             }
@@ -152,36 +152,36 @@ int main() {
         ans = (k * temp);
         
         int same_adj = 0;
-        for(int i = 0; i < n-1; ++i){
-            if(s[i] == s[i+1] && s[i] != ' '){
+        for(int i = 0; i < n - 1; i++){
+            if(s[i] == s[i + 1] && s[i] != ' '){
                 same_adj++;
             }
         }
-         ans = (k -1) * same_adj;
+         ans = (k - 1) * same_adj;
         
         ans = 0;
         int run_count = 0;
-         for (int i = 0; i < n - 1; ++i) {
-                if (s[i] == s[i+1]){
+         for (int i = 0; i < n - 1; i++) {
+                if (s[i] == s[i + 1]){
                     run_count++;
                 }
          }
          ans = run_count * (k);
 
         int total_same_adj = 0;
-         for (int i = 0; i < n - 1; ++i) {
-                if (s[i] == s[i+1]){
+         for (int i = 0; i < n - 1; i++) {
+                if (s[i] == s[i + 1]){
                     total_same_adj++;
                 }
          }
         ans = (k - 1) * total_same_adj;
 
-        for(int i = 0; i < n-1; ++i){
-            if(s[i] == s[i+1]){
+        for(int i = 0; i < n-1; i++){
+            if(s[i] == s[i + 1]){
                 ans++;
             }
         }
-          ans = (k-1) * ans;
+          ans = (k - 1) * ans;
          
     }
 
@@ -191,3 +191,4 @@ int main() {
 }
 
 
+// {annotation: "reformatted the program to fit my coding style, still broken though"}

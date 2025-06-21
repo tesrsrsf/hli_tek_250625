@@ -326,10 +326,11 @@ class Team implements Comparable<Team> {
     }
 }
 
-public class Main {
+public class Problem_06_p00768_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> results = new ArrayList<>();
         while (true) {
             int M = scanner.nextInt();
             int T = scanner.nextInt();
@@ -358,28 +359,30 @@ public class Main {
             }
             Collections.sort(sortedTeams);
 
-            StringBuilder output = new StringBuilder();
-            int rank = 1;
+            String output = "";
             int prevSolved = -1;
             int prevTime = -1;
             for (int i = 0; i < sortedTeams.size(); i++) {
                 Team team = sortedTeams.get(i);
                 if (team.solvedProblems != prevSolved || team.totalTime != prevTime) {
                     if (i != 0) {
-                        output.append("\n");
+                        output += ",";
                     }
                     prevSolved = team.solvedProblems;
                     prevTime = team.totalTime;
-                    output.append(team.teamNumber);
-                    rank = i + 1;
+                    output += team.teamNumber;
                 } else {
-                    output.append("=").append(team.teamNumber);
+                    output += "=" + team.teamNumber;
                 }
             }
-            System.out.println(output.toString());
+            results.add(output);
         }
         scanner.close();
+        for (String result : results) {
+            System.out.println(result);
+        }
     }
 }
 
 
+// {annotations: "changed the way to construct the output string to avoid unnecessary complexity, also changed the time to print the result"}

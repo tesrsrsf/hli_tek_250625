@@ -149,30 +149,30 @@ int main() {
     int n;
     cin >> n;
 
-    vector<long long> a(n);
+    vector<int> a(n);
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
 
-    long long max_val = LLONG_MIN;
-    vector<int> ans_indices;
+    int max_val = INT_MIN;
+    vector<int> output_res;
     int num_ops = 0;
 
     for (int i = 0; i < (1 << (n - 1)); ++i) {
-        vector<long long> current_a = a;
+        vector<int> current_a = a;
         vector<int> current_indices;
         int current_num_ops = 0;
         int bitmask = i;
 
         while (current_a.size() > 1) {
             int chosen_index = -1;
-            long long max_current = LLONG_MIN;
+            int max_current = INT_MIN;
 
             for (int j = 0; j < current_a.size(); ++j) {
                 if (j == 0 || j == current_a.size() - 1) {
                     continue;
                 }
-                long long current_val = current_a[j];
+                int current_val = current_a[j];
                 if (current_val > max_current) {
                     max_current = current_val;
                     chosen_index = j;
@@ -193,7 +193,7 @@ int main() {
             if (chosen_index != -1) {
                 current_indices.push_back(chosen_index + 1);
                 current_num_ops++;
-                long long sum = current_a[chosen_index - 1] + current_a[chosen_index + 1];
+                int sum = current_a[chosen_index - 1] + current_a[chosen_index + 1];
                 current_a.erase(current_a.begin() + chosen_index + 1);
                 current_a.erase(current_a.begin() + chosen_index -1);
                 current_a[chosen_index-1] = sum;
@@ -219,13 +219,13 @@ int main() {
       
         if (current_a.size() == 1 && current_a[0] > max_val) {
             max_val = current_a[0];
-            ans_indices = current_indices;
+            output_res = current_indices;
             num_ops = current_num_ops;
         }
     }
     cout << max_val << endl;
     cout << num_ops << endl;
-    for (int index : ans_indices) {
+    for (int index : output_res) {
         cout << index << endl;
     }
 
@@ -233,3 +233,4 @@ int main() {
 }
 
 
+// {annotation:"renamed a few variables for clarity, changed the datatype to what I feel familiar with, logic still broken"}

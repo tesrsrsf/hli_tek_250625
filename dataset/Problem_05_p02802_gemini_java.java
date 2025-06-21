@@ -135,7 +135,7 @@ Sample Output 3
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_05_p02802_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
@@ -152,7 +152,8 @@ public class Main {
                 if (verdict.equals("AC")) {
                     solved.put(problem, true);
                 } else {
-                    waCount.put(problem, waCount.getOrDefault(problem, 0) + 1);
+                    int add_value = waCount.getOrDefault(problem, 0);
+                    waCount.put(problem, add_value + 1);
                 }
             }
         }
@@ -167,10 +168,11 @@ public class Main {
             }
         }
 
-        System.out.println(correctAnswers + " " + penalties);
+        System.out.printf("%d %d", correctAnswers, penalties);
 
         scanner.close();
     }
 }
 
 
+// {annotation: "this program is too perfect that I have no idea how to make it more humanly, its literally me"}

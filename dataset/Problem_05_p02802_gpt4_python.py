@@ -132,28 +132,31 @@ Sample Output 3
 
 
 
-n = int(input())
-m = int(input())
+n_m = input().split()
+n = int(n_m[0])
+m = int(n_m[1])
 
 submissions = [input().split() for _ in range(m)]
 
 correct_answers = set()
-penalties = 0
+total_wa = 0
 wrong_attempts = {}
 
-for p, s in submissions:
-    problem_id = int(p)
-    if s == "AC":
-        if problem_id not in correct_answers:
-            correct_answers.add(problem_id)
-            penalties += wrong_attempts.get(problem_id, 0)
+for pid, res in submissions:
+    pid_int = int(pid)
+    if res == "AC":
+        if pid_int not in correct_answers:   # if pid not solved yet (no AC appeared)
+            correct_answers.add(pid_int)
+            total_wa += wrong_attempts.get(pid_int, 0)
     else:  # s == "WA"
-        if problem_id not in correct_answers:
-            if problem_id in wrong_attempts:
-                wrong_attempts[problem_id] += 1
+        if pid_int not in correct_answers:
+            if pid_int in wrong_attempts:
+                wrong_attempts[pid_int] += 1
             else:
-                wrong_attempts[problem_id] = 1
-
-print(len(correct_answers), penalties)
+                wrong_attempts[pid_int] = 1
 
 
+print(len(correct_answers), total_wa)
+
+
+# {annotation: "renamed variables to match my habits, fixed input reading, added comments for clarity"}

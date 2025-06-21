@@ -78,29 +78,30 @@ Sample Output 3
 
 import java.util.Scanner;
 
-class Solution {
+class Problem_07_p02891_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.next();
-        int k = scanner.nextInt();
-        int n = s.length();
-        int ans = 0;
+        long k = scanner.nextLong();
+        long n = s.length();
+        long ans = 0;
         if (k == 1) {
             for (int i = 0; i < n - 1; i++) {
                 if (s.charAt(i) == s.charAt(i + 1)) {
                     ans++;
                 }
             }
+
             System.out.println(ans);
+            scanner.close();
             return;
         }
+
         for (int i = 0; i < n; i++) {
-            int count = 0;
             for (int j = 0; j < n; j++) {
-                if (i == j)
+                if (i == j) {
                     continue;
-                if (s.charAt(i) == s.charAt(j))
-                    count++;
+                }
             }
             if (i > 0 && s.charAt(i) == s.charAt(i - 1))
                 ans++;
@@ -109,19 +110,18 @@ class Solution {
         
         int totalChar = 0;
         for(int i = 0; i < n; i++){
-            if(i > 0 && s.charAt(i) == s.charAt(i-1)){
+            if(i > 0 && s.charAt(i) == s.charAt(i - 1)){
                 totalChar++;
             }
         }
         
-        ans = totalChar *k;
-        
-        if(k>1){
-            
-        }
+        ans = totalChar * k;
         
         System.out.println(ans);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "reformatted the program and removed unnecessary parts, which were confusing the logic and redundant"}

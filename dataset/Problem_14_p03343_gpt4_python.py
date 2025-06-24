@@ -122,35 +122,37 @@ Sample Output 3
 
 
 
-def min_difference(N, K, Q, A):
-    candidates = []
+def min_diff(n, k, q, data):
+    data = []
     
-    for i in range(N - K + 1):
-        min_value = min(A[i:i + K])
-        candidates.append(min_value)
+    for i in range(0, n - k + 1):
+        min_value = min(data[i:i + k])
+        data.append(min_value)
     
-    candidates.sort()
+    data.sort()
     
-    if Q > len(candidates):
+    if q > len(data):
         return 0
     
-    best_difference = float('inf')
+    best_diff = float('inf')
     
-    for i in range(len(candidates) - Q + 1):
-        current_difference = candidates[i + Q - 1] - candidates[i]
-        best_difference = min(best_difference, current_difference)
+    for i in range(0, len(data) - q + 1):
+        curr_diff = data[i + q - 1] - data[i]
+        best_diff = min(best_diff, curr_diff)
     
-    return best_difference
-
-import sys
-input = sys.stdin.read
-data = list(map(int, input().strip().split()))
-
-N = data[0]
-K = data[1]
-Q = data[2]
-A = data[3:]
-
-print(min_difference(N, K, Q, A))
+    return best_diff
 
 
+data = input().split()
+for i in range(0, len(data)):
+    data[i] = int(data[i])
+
+n = data[0]
+k = data[1]
+q = data[2]
+a = data[3:]
+
+print(min_diff(n, k, q, a))
+
+
+# {annotation: "renamed variables to lowercase, simplified variable names for better readability"}

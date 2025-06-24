@@ -121,7 +121,7 @@ The answer can be
 #include <algorithm>
 using namespace std;
 
-const int MOD = 1e9 + 7;
+const int mod = 1e9 + 7;
 
 int main() {
     int N, A, B, C, D;
@@ -133,14 +133,14 @@ int main() {
     for (int i = 1; i <= N; ++i) {
         for (int j = C; j <= D; ++j) {
             for (int k = A; k <= B && k <= i; ++k) {
-                dp[i][j] = (dp[i][j] + dp[i - k][j - 1]) % MOD;
+                dp[i][j] = (dp[i][j] + dp[i - k][j - 1]) % mod;
             }
         }
     }
 
     int result = 0;
     for (int j = C; j <= D; ++j) {
-        result = (result + dp[N][j]) % MOD;
+        result = (result + dp[N][j]) % mod;
     }
 
     cout << result << endl;

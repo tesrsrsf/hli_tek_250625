@@ -91,51 +91,52 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 using namespace std;
 
-vector<vector<int>> adj; // Adjacency list
-vector<int> d, f, visited;
+vector<vector<int>> adj_list;
+vector<int> graph, times, visited_nodes;
 int time_counter = 1;
 
 void dfs(int v) {
-    visited[v] = 1;
-    d[v] = time_counter++;
-    for (int to : adj[v]) {
-        if (!visited[to]) {
+    visited_nodes[v] = 1;
+    graph[v] = time_counter++;
+    for (int to : adj_list[v]) {
+        if (!visited_nodes[to]) {
             dfs(to);
         }
     }
-    f[v] = time_counter++;
+    times[v] = time_counter++;
 }
 
 int main() {
     int n;
     cin >> n;
     
-    adj.resize(n + 1);
-    d.resize(n + 1);
-    f.resize(n + 1);
-    visited.resize(n + 1, 0);
+    adj_list.resize(n + 1);
+    graph.resize(n + 1);
+    times.resize(n + 1);
+    visited_nodes.resize(n + 1, 0);
     
     for (int i = 0; i < n; i++) {
         int u, k;
         cin >> u >> k;
-        adj[u].resize(k);
+        adj_list[u].resize(k);
         for (int j = 0; j < k; j++) {
-            cin >> adj[u][j];
+            cin >> adj_list[u][j];
         }
-        sort(adj[u].begin(), adj[u].end()); // Ensure edges are in ascending order
+        sort(adj_list[u].begin(), adj_list[u].end()); // Ensure edges are in ascending order
     }
 
     for (int i = 1; i <= n; i++) {
-        if (!visited[i]) {
+        if (!visited_nodes[i]) {
             dfs(i);
         }
     }
 
     for (int i = 1; i <= n; i++) {
-        cout << i << " " << d[i] << " " << f[i] << endl;
+        cout << i << " " << graph[i] << " " << times[i] << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed nodes to improve readability"}

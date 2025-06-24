@@ -124,25 +124,30 @@ Sample Output 3
 
 import java.util.*;
 
-public class Main {
+public class Problem_14_p03343_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
         int K = scanner.nextInt();
         int Q = scanner.nextInt();
-        int[] A = new int[N];
+        ArrayList<Integer> A = new ArrayList<>();
         
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            int temp = scanner.nextInt();
+            A.add(temp);
         }
+
+        scanner.close();
         
         // Calculate the min and max of removed elements in every segment of length K
-        List<Integer> removedMins = new ArrayList<>();
+        ArrayList<Integer> removedMins = new ArrayList<>();
         
         for (int i = 0; i <= N - K; i++) {
             int min = Integer.MAX_VALUE;
             for (int j = i; j < i + K; j++) {
-                min = Math.min(min, A[j]);
+                if (A.get(j) < min) {
+                    min = A.get(j);
+                }
             }
             removedMins.add(min);
         }
@@ -151,9 +156,12 @@ public class Main {
         int result = Integer.MAX_VALUE;
 
         for (int i = 0; i + Q - 1 < removedMins.size(); i++) {
-            int minRemoved = removedMins.get(i);
-            int maxRemoved = removedMins.get(i + Q - 1);
-            result = Math.min(result, maxRemoved - minRemoved);
+            int removedMin = removedMins.get(i);
+            int removedMax = removedMins.get(i + Q - 1);
+
+            if (removedMax - removedMin < result) {
+                result = removedMax - removedMin;
+            }
         }
         
         System.out.println(result);
@@ -161,3 +169,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed variable names for better readability"}

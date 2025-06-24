@@ -97,16 +97,24 @@ def dfs(graph, vertex, timestamps, visited, time):
     time[0] += 1
     timestamps[vertex][1] = time[0]  # finish time
 
-def main():
-    import sys
-    input = sys.stdin.read
-    data = input().strip().splitlines()
 
-    n = int(data[0])
-    graph = {i: [] for i in range(1, n + 1)}
+def main():
+    n = int(input())
+    graph = {}
+    for i in range(1, n + 1):
+        graph[i] = []
+
+    data = [0]
+    for i in range(0, n):
+        line_str = input()
+        data.append(line_str)
     
     for line in data[1:n + 1]:
-        parts = list(map(int, line.split()))
+        parts = []
+        line_str = line.split()
+        for i in range(0, len(line_str)):
+            parts.append(int(line_str[i]))
+
         u = parts[0]
         k = parts[1]
         if k > 0:
@@ -127,3 +135,4 @@ if __name__ == "__main__":
     main()
 
 
+# {annotation: "modified how input is initialized, avoid using sys library"}

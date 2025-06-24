@@ -139,32 +139,33 @@ int main() {
       int l = left;
       int r = right;
       bool found = false;
-      while(l < r){
-          if(s[l] == s[r]){
-              l++;
-              r--;
-          }else{
-              break;
-          }
-      }
-      if(l >= r){
-          operations += right - left;
+      while (l < r) {
+        if (s[l] == s[r]) {
+          l++;
+          r--;
+        } else {
           break;
+        }
+      }
+      if (l >= r) {
+        operations += right - left;
+        break;
       }
       l = left;
       r = right;
       
-      while(l < r){
-          if(s[l] == s[r]){
-              l++;
-              r--;
-          }else{
-              break;
-          }
-      }
-      if(l >= r){
-          operations += right - left;
+      while (l < r) {
+        if (s[l] == s[r]) {
+          l++;
+          r--;
+        } else {
           break;
+        }
+      }
+
+      if (l >= r) {
+        operations += right - left;
+        break;
       }
       
       operations = -1;
@@ -178,3 +179,4 @@ int main() {
 }
 
 
+// {annotation: "fixed some strange indentations"}

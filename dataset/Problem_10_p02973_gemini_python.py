@@ -90,19 +90,20 @@ import bisect
 
 def solve():
   n = int(input())
-  a = []
-  for _ in range(n):
-    a.append(int(input()))
+  data = []
+  for i in range(0, n):
+    data.append(int(input()))
   
   tails = []
-  for x in a:
-    if not tails or x > tails[-1]:
-      tails.append(x)
+  for num in data:
+    if not tails or num > tails[-1]:
+      tails.append(num)
     else:
-      idx = bisect.bisect_left(tails, x)
-      tails[idx] = x
+      idx = bisect.bisect_left(tails, num)
+      tails[idx] = num
   print(len(tails))
 
 solve()
 
 
+# {annotation: "renamed some variables to match my style, also avoided use of _ in for loop"}

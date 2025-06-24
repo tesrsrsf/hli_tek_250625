@@ -83,18 +83,23 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_08_p02963_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long S = scanner.nextLong();
         // To ensure the area is S/2, we'll use a formula derived from the vertices
         // We can set the vertices as follows:
-        long X1 = 0, Y1 = 0;
-        long X2 = S, Y2 = 0;
-        long X3 = 0, Y3 = S;
+        long X1 = 0;
+        long Y1 = 0;
+        long X2 = S; 
+        long Y2 = 0;
+        long X3 = 0; 
+        long Y3 = S;
 
         System.out.println(X1 + " " + Y1 + " " + X2 + " " + Y2 + " " + X3 + " " + Y3);
+        scanner.close();
     }
 }
 
 
+// {annotation: "reformatted the code to fit my style"}

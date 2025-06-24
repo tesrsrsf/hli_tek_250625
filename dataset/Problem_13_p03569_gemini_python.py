@@ -120,7 +120,8 @@ def solve():
     s = input()
     n = len(s)
     ans = 0
-    l, r = 0, n - 1
+    l = 0
+    r = n - 1
     
     while l < r:
         if s[l] == s[r]:
@@ -131,31 +132,33 @@ def solve():
             l += 1
             
     
-    temp_s = s
-    ans_temp = float('inf')
-    for i in range(n + 1):
+    res = float('inf')
+    for i in range(0, n + 1):
         temp_s = s
         temp_ans = 0
-        l, r = 0, n - 1
+        l = 0
+        r = n - 1
         
         while l < r:
             if temp_s[l] == temp_s[r]:
                 l += 1
                 r -= 1
             else:
-                temp_s = temp_s[:l] + temp_s[l] + temp_s[l:r] + temp_s[r] + temp_s[r+1:]
+                temp_s = temp_s[:l] + temp_s[l] + temp_s[l:r] + temp_s[r] + temp_s[r + 1:]
                 temp_ans += 1
                 r -= 1
                 
         if temp_s == temp_s[::-1]:
-            ans_temp = min(ans_temp, temp_ans)
+            res = min(res, temp_ans)
            
             
-    if ans_temp == float('inf'):
+    if res == float('inf'):
         print(-1)
     else:
-        print(ans_temp)
+        print(res)
+
 
 solve()
 
 
+# {annotation: "modified variable names and format to fit my style"}

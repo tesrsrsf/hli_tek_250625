@@ -91,54 +91,56 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 using namespace std;
 
-vector<int> d, f;
-vector<vector<int>> adj;
-vector<bool> visited;
+vector<int> graph, times;
+vector<vector<int>> adj_list;
+vector<bool> visited_nodes;
 int time_stamp;
 
 void dfs_visit(int u) {
-    d[u] = ++time_stamp;
-    visited[u] = true;
-    for (int v : adj[u]) {
-        if (!visited[v]) {
+    graph[u] = ++time_stamp;
+    visited_nodes[u] = true;
+    for (int v : adj_list[u]) {
+        if (!visited_nodes[v]) {    // if never visited before
             dfs_visit(v);
         }
     }
-    f[u] = ++time_stamp;
+    times[u] = ++time_stamp;
 }
+
 
 int main() {
     int n;
     cin >> n;
 
-    adj.resize(n + 1);
-    d.resize(n + 1, 0);
-    f.resize(n + 1, 0);
-    visited.resize(n + 1, false);
+    adj_list.resize(n + 1);
+    graph.resize(n + 1, 0);
+    times.resize(n + 1, 0);
+    visited_nodes.resize(n + 1, false);
     time_stamp = 0;
 
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i < n + 1; i++) {
         int u, k;
         cin >> u >> k;
-        for (int j = 0; j < k; ++j) {
+        for (int j = 0; j < k; j++) {
             int v;
             cin >> v;
-            adj[u].push_back(v);
+            adj_list[u].push_back(v);
         }
-        sort(adj[u].begin(), adj[u].end());
+        sort(adj_list[u].begin(), adj_list[u].end());
     }
 
-    for (int i = 1; i <= n; ++i) {
-        if (!visited[i]) {
+    for (int i = 1; i < n + 1; i++) {
+        if (!visited_nodes[i]) {
             dfs_visit(i);
         }
     }
 
-    for (int i = 1; i <= n; ++i) {
-        cout << i << " " << d[i] << " " << f[i] << endl;
+    for (int i = 1; i < n + 1; i++) {
+        cout << i << " " << graph[i] << " " << times[i] << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed single letter vars for better readability, replaced ++i in forloop to i++ to fit my style"}

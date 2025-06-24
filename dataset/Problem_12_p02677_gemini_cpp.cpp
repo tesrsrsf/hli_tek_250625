@@ -90,14 +90,22 @@ int main() {
     double hour_angle = (H * 60 + M) * 0.5;
     double minute_angle = M * 6;
 
-    double angle = abs(hour_angle - minute_angle);
-    angle = min(angle, 360 - angle);
+    double angle = hour_angle - minute_angle;
 
-    double distance = sqrt(A * A + B * B - 2 * A * B * cos(angle * M_PI / 180.0));
+    if (angle < 0) {
+        angle = -angle;
+    }
 
-    cout << fixed << setprecision(20) << distance << endl;
+    if (angle > 360 - angle) {
+        angle = 360 - angle;
+    }
+    
+    double res = sqrt(A * A + B * B - 2 * A * B * cos(angle * M_PI / 180.0));
+
+    printf("%.20f\n", res);
 
     return 0;
 }
 
 
+// {annotation: "made the code more explicit which fits my style"}

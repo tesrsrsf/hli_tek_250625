@@ -118,25 +118,32 @@ xxoxxx
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_13_p03569_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
-        int result = minInsertionsToMakePalindrome(s);
+        scanner.close();
+
+        int result = minInsert2Palin(s);
+
         System.out.println(result);
     }
 
-    public static int minInsertionsToMakePalindrome(String s) {
-        int n = s.length();
+    public static int minInsert2Palin(String str) {
+        int n = str.length();
         int[][] dp = new int[n][n];
 
-        for (int length = 2; length <= n; length++) {
-            for (int i = 0; i <= n - length; i++) {
-                int j = i + length - 1;
-                if (s.charAt(i) == s.charAt(j)) {
-                    dp[i][j] = dp[i + 1][j - 1];
+        for (int i = 2; i <= n; i++) {
+            for (int j = 0; j <= n - i; j++) {
+                int k = j + i - 1;
+                if (str.charAt(j) == str.charAt(k)) {
+                    dp[j][k] = dp[j + 1][k - 1];
                 } else {
-                    dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1;
+                    if (dp[j + 1][k] < dp[j][k - 1]) {
+                        dp[j][k] = dp[j + 1][k] + 1;
+                    } else {
+                        dp[j][k] = dp[j][k - 1] + 1;
+                    }
                 }
             }
         }
@@ -146,3 +153,4 @@ public class Main {
 }
 
 
+// {annotation: "avoiding use of implicit methods, closed scanner, renamed variables to fit my style"}

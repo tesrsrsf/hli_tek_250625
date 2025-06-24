@@ -116,10 +116,9 @@ Be sure to print the number of strings modulo
 
 
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_20_p03088_gemini_java {
 
     private static final int MOD = 1000000007;
 
@@ -127,11 +126,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
 
-        long[][][][] dp = new long[n + 1][4][4][4];
+        long[][][][] DYNAMIC_PROGRAMMING = new long[n + 1][4][4][4];
 
-        // Initialize base cases
         for (int i = 0; i < 4; i++) {
-            dp[1][i][0][0] = 1;
+            DYNAMIC_PROGRAMMING[1][i][0][0] = 1;
         }
 
         for (int i = 2; i <= n; i++) {
@@ -139,16 +137,15 @@ public class Main {
                 for (int k = 0; k < 4; k++) {
                     for (int l = 0; l < 4; l++) {
                         for (int m = 0; m < 4; m++) {
-                            // Check for AGC substring
                             if (k == 0 && l == 1 && m == 2) {
                                 continue;
                             }
 
-                            if (j == 0 && k == 1 && l == 2) continue;
-                            if (j == 1 && k == 0 && l == 2) continue;
-                            if (j == 2 && k == 0 && l == 1) continue;
+                            if ((j == 0 && k == 1 && l == 2) || (j == 1 && k == 0 && l == 2) || (j == 2 && k == 0 && l == 1)) {
+                                continue;
+                            }
 
-                            dp[i][k][l][m] = (dp[i][k][l][m] + dp[i - 1][j][k][l]) % MOD;
+                            DYNAMIC_PROGRAMMING[i][k][l][m] = (DYNAMIC_PROGRAMMING[i][k][l][m] + DYNAMIC_PROGRAMMING[i - 1][j][k][l]) % MOD;
                         }
                     }
                 }
@@ -159,13 +156,16 @@ public class Main {
         for (int j = 0; j < 4; j++) {
             for (int k = 0; k < 4; k++) {
                 for (int l = 0; l < 4; l++) {
-                    result = (result + dp[n][j][k][l]) % MOD;
+                    result = (result + DYNAMIC_PROGRAMMING[n][j][k][l]) % MOD;
                 }
             }
         }
 
         System.out.println(result);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "changed for-loop to my style, using i++ instead of ++i"}

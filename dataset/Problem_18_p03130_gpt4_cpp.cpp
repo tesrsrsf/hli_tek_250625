@@ -98,25 +98,25 @@ YES
 using namespace std;
 
 int main() {
-    unordered_map<int, int> degree;
-    vector<pair<int, int>> roads(3);
+    unordered_map<int, int> degrees;
+    vector<pair<int, int>> edges;
+    int oddCount = 0;
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; i++) {
         int a, b;
         cin >> a >> b;
-        roads[i] = {a, b};
-        degree[a]++;
-        degree[b]++;
+        edges.push_back({a, b});
+        degrees[a]++;
+        degrees[b]++;
     }
 
-    int oddCount = 0;
-    for (auto& pair : degree) {
+    for (auto pair : degrees) {
         if (pair.second % 2 != 0) {
             oddCount++;
         }
     }
 
-    if (oddCount == 0) {
+    if (oddCount == 0 || oddCount == 2) {
         cout << "YES" << endl;
     } else {
         cout << "NO" << endl;
@@ -126,3 +126,4 @@ int main() {
 }
 
 
+// {annotation: "fixed logic, renamed variables to fit human habits, also simplified unnecessary type declarations"}

@@ -189,7 +189,7 @@ z
 
 import java.util.*;
 
-public class Main {
+public class Problem_09_p02763_gpt4_java {
     static class SegmentTree {
         private int[] tree;
         private int n;
@@ -242,36 +242,46 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = Integer.parseInt(scanner.nextLine());
-        String S = scanner.nextLine();
-        int Q = Integer.parseInt(scanner.nextLine());
+        int N;
+        String S;
+        int Q;
+
+        N = scanner.nextInt();
+        scanner.nextLine();
+        
+        S = scanner.nextLine();
+        
+        Q = scanner.nextInt();
+        scanner.nextLine();
 
         SegmentTree segTree = new SegmentTree(N);
         for (int i = 0; i < N; i++) {
             segTree.update(i, S.charAt(i), S.charAt(i));
         }
 
-        StringBuilder output = new StringBuilder();
+        String output = "";
         for (int i = 0; i < Q; i++) {
-            String[] query = scanner.nextLine().split(" ");
-            int type = Integer.parseInt(query[0]);
+            String[] cmd = scanner.nextLine().split(" ");
+            int type = Integer.parseInt(cmd[0]);
             if (type == 1) {
-                int idx = Integer.parseInt(query[1]) - 1;
-                char newChar = query[2].charAt(0);
-                char oldChar = S.charAt(idx);
-                S = S.substring(0, idx) + newChar + S.substring(idx + 1);
-                segTree.update(idx, oldChar, newChar);
+                int idx = Integer.parseInt(cmd[1]) - 1;
+                char ncr = cmd[2].charAt(0);
+                char ocr = S.charAt(idx);
+                S = S.substring(0, idx) + ncr + S.substring(idx + 1);
+                segTree.update(idx, ocr, ncr);
             } else if (type == 2) {
-                int l = Integer.parseInt(query[1]) - 1;
-                int r = Integer.parseInt(query[2]) - 1;
+                int l = Integer.parseInt(cmd[1]) - 1;
+                int r = Integer.parseInt(cmd[2]) - 1;
                 int freq = segTree.query(l, r);
                 int count = Integer.bitCount(freq);
-                output.append(count).append("\n");
+                
+                output += count + "\n";
             }
         }
-        System.out.print(output.toString());
+        System.out.print(output);
         scanner.close();
     }
 }
 
 
+// {annotation: "why is it making a simple task so complicated... do you really need a tree for this? but it works, so whatever"}

@@ -32,17 +32,23 @@ Sample Output 1
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Main {
+class Problem_16_p02393_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] input = scanner.nextLine().split(" ");
-        int[] numbers = new int[3];
+        String[] input_str = scanner.nextLine().split(" ");
+        int[] numbers = {0, 0, 0};
+
         for (int i = 0; i < 3; i++) {
-            numbers[i] = Integer.parseInt(input[i]);
+            numbers[i] = Integer.parseInt(input_str[i]);
         }
+
         Arrays.sort(numbers);
+
         System.out.println(numbers[0] + " " + numbers[1] + " " + numbers[2]);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "I dont like using new int[3], so replaced it with an array literal"}

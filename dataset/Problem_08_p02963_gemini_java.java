@@ -87,8 +87,11 @@ class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long s = scanner.nextLong();
-        System.out.println("0 0 1 " + s + " 2 0");
+        String output_message = "0 0 1 " + s + " 2 0";
+        System.out.println(output_message);
+        scanner.close();
     }
 }
 
 
+// {annotation: "modified the way to construct the output string to fit my coding style"}

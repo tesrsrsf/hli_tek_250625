@@ -110,31 +110,33 @@ def solve():
           dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
     return dp[m][n]
   
-  max_len = 0
+  res = 0
   for i in range(1 << (n * 5)):
     temp_s = list(s)
-    changes = 0
+    change = 0
     
     temp = i
     temp_chars = []
-    for _ in range(n):
+    for l in range(0, n):
       temp_chars.append(temp % 32)
       temp //= 32
     
-    for j in range(n):
+    for j in range(0, n):
       if temp_chars[j] != ord(s[j]) - ord('a'):
-        changes += 1
+        change += 1
         
-    if changes <= k:
-      for j in range(n):
+    if change <= k:
+      for j in range(0, n):
         if temp_chars[j] != ord(s[j]) - ord('a'):
           temp_s[j] = chr(ord('a') + temp_chars[j])
       
       reversed_s = "".join(temp_s[::-1])
-      max_len = max(max_len, longest_common_subsequence("".join(temp_s), reversed_s))
+      res = max(res, longest_common_subsequence("".join(temp_s), reversed_s))
 
-  print(max_len)
+  print(res)
+
 
 solve()
 
 
+# {annotation: "renamed some variables to fit my style"}

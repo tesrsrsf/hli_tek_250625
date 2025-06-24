@@ -76,37 +76,29 @@ Sample Output 3
 
 
 
-def min_operations_to_diff_adjacent(S, K):
-    # Count frequency of each character in S
-    from collections import Counter
-    freq = Counter(S)
+import sys
+from collections import Counter
+def main(S, K):
+    frequency = Counter(S)
     
-    # Calculate operations needed in the original string S
     operations_in_S = 0
-    for count in freq.values():
+    for count in frequency.values():
         operations_in_S += count // 2
     
-    # Calculate operations needed in the concatenated string T
-    length_S = len(S)
     operations_in_T = operations_in_S * K
 
-    # Handling the edges where T ends and starts with same character
     if K > 1:
-        # Need to compare the last char of S and the first char of S in T
         if S[0] == S[-1]:
             operations_in_T += 1 * (K - 1)
     
     return operations_in_T
 
-# Read input
-import sys
-input = sys.stdin.read
-data = input().split()
-S = data[0]
-K = int(data[1])
 
-# Get the result and print
-result = min_operations_to_diff_adjacent(S, K)
+S = input()
+K = int(input())
+
+result = main(S, K)
 print(result)
 
 
+# {annotation: "changed the input and modified the format to match my code style"}

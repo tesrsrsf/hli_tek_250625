@@ -87,11 +87,18 @@ M = int(input())
 hour_angle = ((H % 12) + (M / 60)) * 30
 minute_angle = M * 6
 
-angle_diff = abs(hour_angle - minute_angle)
+angle_diff = hour_angle - minute_angle
+if angle_diff < 0:
+    angle_diff = -angle_diff
+
 angle_rad = math.radians(angle_diff)
 
-distance = math.sqrt(A**2 + B**2 - 2 * A * B * math.cos(angle_rad))
+p1 = A * A
+p2 = B * B
+p3 = 2 * A * B * math.cos(angle_rad)
+res = math.sqrt(p1 + p2 - p3)
 
-print(distance)
+print(res)
 
 
+# {annotation: "made the program more explicit by replacing abstract formula with calculations, also divided the formula calculation to several parts for better understanding"}

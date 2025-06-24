@@ -89,7 +89,9 @@ int main() {
   long long s;
   cin >> s;
 
-  long long x1 = 0, y1 = 0, x2 = s, y2 = 0, x3 = 0, y3 = 1;
+  long long x1 = 0, y1 = 0;
+  long long x2 = s, y2 = 0;
+  long long x3 = 0, y3 = 1;
 
   cout << x1 << " " << y1 << " " << x2 << " " << y2 << " " << x3 << " " << y3 << endl;
 
@@ -97,3 +99,4 @@ int main() {
 }
 
 
+// {annotation: "reorganized the program to match my style"}

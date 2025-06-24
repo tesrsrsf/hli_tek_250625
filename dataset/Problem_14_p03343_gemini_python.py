@@ -123,10 +123,14 @@ Sample Output 3
 
 
 def solve():
-    n, k, q = map(int, input().split())
-    a = list(map(int, input().split()))
+    line = input().split()
+    n, k, q = int(line[0]), int(line[1]), int(line[2])
+    a = []
+    line = input().split()
+    for word in line:
+        a.append(int(word))
     
-    ans = float('inf')
+    res = float('inf')
     
     for i in range(1 << (n - k + 1)):
         removed = []
@@ -142,10 +146,8 @@ def solve():
                 ops.append(j)
                 count += 1
                 
-        
         if count != q:
             continue
-
         
         for op_index in ops:
             subsequence = b[op_index : op_index + k]
@@ -154,15 +156,13 @@ def solve():
             removed.append(min_val)
             b.pop(op_index + min_index_in_subsequence)
             
-            
-            
-            
         if len(removed) == q:
           
-            ans = min(ans, max(removed) - min(removed))
+            res = min(res, max(removed) - min(removed))
             
-    print(ans)
+    print(res)
     
 solve()
 
 
+# {annotation: "modified the way to get input, also renamed the variable names in my style"}

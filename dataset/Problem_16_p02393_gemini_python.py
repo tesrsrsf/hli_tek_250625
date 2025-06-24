@@ -30,7 +30,7 @@ Sample Output 1
 
 
 nums = list(map(int, input().split()))
-nums.sort()
-print(*nums)
+print(*sorted(nums))
 
 
+# {annotation: "compare to .sort() method, sorted() has better readability"}

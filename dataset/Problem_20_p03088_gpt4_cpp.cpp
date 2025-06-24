@@ -119,31 +119,28 @@ Be sure to print the number of strings modulo
 #include <iostream>
 #include <vector>
 
-const int MOD = 1e9 + 7;
+using namespace std;
+
+int mod = 1e9 + 7;
 
 int main() {
     int N;
-    std::cin >> N;
+    cin >> N;
 
-    // dp[i] will store the number of valid strings of length i.
-    std::vector<long long> dp(N + 1, 0);
-    dp[0] = 1; // There's one way to make an empty string.
+    vector<long long> dp(N + 1, 0);
+    dp[0] = 1;
 
-    // We also need to keep track of the last few strings that could create "AGC"
     for (int i = 1; i <= N; ++i) {
-        // We can pick any of the 4 characters for this position
-        dp[i] = (4 * dp[i - 1]) % MOD;
+        dp[i] = (4 * dp[i - 1]) % mod;
 
-        // We need to subtract cases where we form "AGC"
         if (i >= 3) {
-            // The number of cases where "AGC" is a substring ending at i
-            // Can come from dp[i-3] strings appended with "AGC"
-            dp[i] = (dp[i] - dp[i - 3] + MOD) % MOD;
+            dp[i] = (dp[i] - dp[i - 3] + mod) % mod;
         }
     }
 
-    std::cout << dp[N] << std::endl;
+    cout << dp[N] << endl;
     return 0;
 }
 
 
+// {annotation: "removed redundant comments, avoid using unnecessary uppercase letters for identifiers"}

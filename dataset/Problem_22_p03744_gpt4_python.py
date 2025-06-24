@@ -163,35 +163,33 @@ Although the temperature of water may exceed
 
 
 
-import sys
-
-input = sys.stdin.read
-data = input().splitlines()
-
-N = int(data[0])
-L = int(data[1])
+nl_line = input().split()
+N = int(nl_line[0])
+L = int(nl_line[1])
 
 water_in = []
-for i in range(N):
-    t, v = map(int, data[2 + 2 * i:4 + 2 * i])
+for i in range(0, N):
+    line = input().split()
+    t, v = int(line[0]), int(line[1])
     water_in.append((t, v))
 
-results = []
-total_v = 0
-total_temp = 0
+ress = []
+ttl_vol = 0
+ttl_tmp = 0
 
-for i in range(N):
+for i in range(0, N):
     t_i, v_i = water_in[i]
-    total_v += v_i
-    total_temp = (total_temp * total_v + t_i * v_i) / (total_v + v_i)
+    ttl_vol += v_i
+    ttl_tmp = (ttl_tmp * ttl_vol + t_i * v_i) / (ttl_vol + v_i)
 
-    if total_v >= L:
-        dis_v = total_v - L
-        results.append((total_temp * total_v - dis_v * 1e9) / L if dis_v > 0 else total_temp)
+    if ttl_vol >= L:
+        dis_v = ttl_vol - L
+        ress.append((ttl_tmp * ttl_vol - dis_v * 1e9) / L if dis_v > 0 else ttl_tmp)
     else:
-        results.append(total_temp)
+        ress.append(ttl_tmp)
 
-for result in results:
-    print(f"{result:.7f}")
+for res in ress:
+    print(f"{res:.7f}")
 
 
+# {annotation: "simplified variable names, avoided usage of stdin"}

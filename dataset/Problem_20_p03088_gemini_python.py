@@ -116,36 +116,41 @@ Be sure to print the number of strings modulo
 
 
 
-def solve():
+ILLEGAL_CHARS = ['A', 'C', 'G', 'T']
+
+def count_strs(length, prev_chars, dp, mod):
+    if length == 0:
+        return 1
+        
+    if (length, tuple(prev_chars)) in dp:
+        return dp[(length, tuple(prev_chars))]
+        
+    count = 0
+    for char in ILLEGAL_CHARS:
+        valid = True
+        temp_chars = prev_chars[1:] + [char]
+            
+        if len(temp_chars) >= 3 and "".join(temp_chars[-3:]) == "AGC":
+            valid = False
+            
+        if valid:
+            count = (count + count_strs(length - 1, temp_chars)) % mod
+                
+    dp[(length, tuple(prev_chars))] = count
+    return count
+
+
+def main():
     n = int(input())
     mod = 10**9 + 7
-    
     dp = {}
     
-    def count_strings(length, prev_chars):
-        if length == 0:
-            return 1
-        
-        if (length, tuple(prev_chars)) in dp:
-            return dp[(length, tuple(prev_chars))]
-        
-        count = 0
-        for char in ['A', 'C', 'G', 'T']:
-            valid = True
-            temp_chars = prev_chars[1:] + [char]
-            
-            if len(temp_chars) >= 3 and "".join(temp_chars[-3:]) == "AGC":
-                valid = False
-            
-            if valid:
-                count = (count + count_strings(length - 1, temp_chars)) % mod
-                
-        dp[(length, tuple(prev_chars))] = count
-        return count
+    result = count_strs(n, [""] * 2, dp, mod)
 
-    result = count_strings(n, [""] * 2)
     print(result)
 
-solve()
+
+main()
 
 
+# {annotation: "renamed identifiers for better clarity, also moved function count_strs outside main for more elegant structure"}

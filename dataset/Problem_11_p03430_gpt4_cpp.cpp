@@ -101,19 +101,21 @@ Sample Output 2
 using namespace std;
 
 int main() {
-    string S;
+    string s;
     int K;
-    cin >> S >> K;
-    int n = S.size();
+    cin >> s >> K;
+    int n = s.size();
     
     // dp[i][j][k] = longest common subsequence of S[0..i-1] and S[0..j-1] with k changes left
     vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(n + 1, vector<int>(K + 1, 0)));
 
     for (int i = 1; i <= n; ++i) {
+        char c1 = s[i - 1];
+
         for (int j = 1; j <= n; ++j) {
+            char c2 = s[n - j];
+
             for (int k = 0; k <= K; ++k) {
-                char c1 = S[i - 1];
-                char c2 = S[n - j];  // S' (reversed) position
                 if (c1 == c2) {
                     dp[i][j][k] = dp[i - 1][j - 1][k] + 1;
                 } else {
@@ -131,3 +133,4 @@ int main() {
 }
 
 
+// {annotation: "moved position of some variables to understand the logic better, also follows my coding style"}

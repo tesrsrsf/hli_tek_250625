@@ -29,8 +29,12 @@ Sample Output 1
 
 
 
-numbers = list(map(int, input().split()))
+numbers = input().split()
+for i in range(0, len(numbers)):
+  numbers[i] = int(numbers[i])
+    
 numbers.sort()
 print(*numbers)
 
 
+# {annotation: "using explicit for loop to convert strings to integers"}

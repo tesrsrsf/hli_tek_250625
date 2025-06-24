@@ -88,24 +88,28 @@ We have to paint all the integers with distinct colors.
 
 import java.util.*;
 
-public class Main {
+public class Problem_10_p02973_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> data = new ArrayList<>();
+
         int N = scanner.nextInt();
-        int[] A = new int[N];
         
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            data.add(scanner.nextInt());
         }
         
-        Map<Integer, Integer> countMap = new HashMap<>();
-        for (int num : A) {
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        for (int num : data) {
             countMap.put(num, countMap.getOrDefault(num, 0) + 1);
         }
         
         int maxCount = Collections.max(countMap.values());
         System.out.println(maxCount);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "changed the way to use list (to arraylist)"}

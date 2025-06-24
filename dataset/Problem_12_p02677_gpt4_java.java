@@ -79,7 +79,7 @@ The two hands will be in the positions shown in the figure below. Note that each
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_12_p02677_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
@@ -89,8 +89,8 @@ public class Main {
         int M = scanner.nextInt();
 
         // Calculate the angles in degrees
-        double hourAngle = (H % 12) * 30 + (M / 60.0) * 30; // 360 degrees / 12 hours = 30 degrees per hour
-        double minuteAngle = M * 6; // 360 degrees / 60 minutes = 6 degrees per minute
+        double hourAngle = (H % 12) * 30 + (M / 60.0) * 30;
+        double minuteAngle = M * 6;
 
         // Convert angles to radians
         double hourRad = Math.toRadians(hourAngle);
@@ -102,14 +102,16 @@ public class Main {
         double minuteX = B * Math.cos(minuteRad);
         double minuteY = B * Math.sin(minuteRad);
 
-        // Calculate the distance between the two endpoints
-        double distance = Math.sqrt(Math.pow(hourX - minuteX, 2) + Math.pow(hourY - minuteY, 2));
+        double a = hourX - minuteX;
+        double b = hourY - minuteY;
+        double res = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 
         // Print the result with required precision
-        System.out.printf("%.20f%n", distance);
+        System.out.printf("%.20f%n", res);
         
         scanner.close();
     }
 }
 
 
+// {annotation: "reformatted the code to match my style"}

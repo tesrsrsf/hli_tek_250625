@@ -96,12 +96,15 @@ LOOP
 def solve():
     while True:
         try:
-            h, w = map(int, input().split())
+            line = input().split()
+            h, w = int (line[0]), int(line[1])
+            space = []
+
             if h == 0 and w == 0:
                 break
-            grid = []
-            for _ in range(h):
-                grid.append(input())
+            
+            for i in range(0, h):
+                space.append(input())
             
             visited = set()
             x, y = 0, 0
@@ -111,20 +114,27 @@ def solve():
                 visited.add((x, y))
                 path.append((x, y))
                 
-                tile = grid[y][x]
-                if tile == '>':
-                    x += 1
-                elif tile == '<':
-                    x -= 1
-                elif tile == '^':
-                    y -= 1
-                elif tile == 'v':
-                    y += 1
-                    
+                cell = space[y][x]
+                is_dot = False
+                match cell:
+                    case '>':
+                        x += 1
+                    case '<':
+                        x -= 1
+                    case '^':
+                        y -= 1
+                    case 'v':
+                        y += 1
+                    case '.':
+                        is_dot = True
+
+                if is_dot:
+                    break
+                
                 if not (0 <= x < w and 0 <= y < h):
                     break
                     
-            if (x, y) in visited:
+            if not is_dot:
                 print("LOOP")
             else:
                 print(x, y)
@@ -135,3 +145,4 @@ def solve():
 solve()
 
 
+# {annotation: "fixed broken logic, and simplified code for better readability and clarity"}

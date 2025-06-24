@@ -198,13 +198,15 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_19_p03330_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
         int C = scanner.nextInt();
         int[][] D = new int[C + 1][C + 1];
+        int[][] colors = new int[N][N];
+        long minWrong = Long.MAX_VALUE;
         
         for (int i = 1; i <= C; i++) {
             for (int j = 1; j <= C; j++) {
@@ -212,41 +214,42 @@ public class Main {
             }
         }
 
-        int[][] colors = new int[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 colors[i][j] = scanner.nextInt();
             }
         }
 
-        long minWrongness = Long.MAX_VALUE;
-
         for (int color1 = 1; color1 <= C; color1++) {
             for (int color2 = 1; color2 <= C; color2++) {
                 for (int color3 = 1; color3 <= C; color3++) {
-                    boolean valid = (color1 != color2 && color1 != color3 && color2 != color3);
-                    if (!valid) continue;
+                    if (!(color1 != color2 && color1 != color3 && color2 != color3)) {
+                        continue;
+                    }
 
-                    long currentWrongness = 0;
+                    long curWrong = 0;
                     
                     for (int i = 0; i < N; i++) {
                         for (int j = 0; j < N; j++) {
                             int pos = (i + j) % 3;
-                            int targetColor = (pos == 0) ? color1 : (pos == 1) ? color2 : color3;
+                            int tgtColor = (pos == 0) ? color1 : (pos == 1) ? color2 : color3;
                             
-                            if (colors[i][j] != targetColor) {
-                                currentWrongness += D[colors[i][j]][targetColor];
+                            if (colors[i][j] != tgtColor) {
+                                curWrong += D[colors[i][j]][tgtColor];
                             }
                         }
                     }
 
-                    minWrongness = Math.min(minWrongness, currentWrongness);
+                    minWrong = Math.min(minWrong, curWrong);
                 }
             }
         }
 
-        System.out.println(minWrongness);
+        System.out.println(minWrong);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "closed the scanner, moved data structures to the top for clarity, renamed variables for better understanding"}

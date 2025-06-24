@@ -118,10 +118,12 @@ xxoxxx
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_13_p03569_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.next();
+        scanner.close();
+
         int n = s.length();
         int operations = 0;
         int left = 0;
@@ -132,21 +134,21 @@ public class Main {
                 left++;
                 right--;
             } else {
-                int leftIndex = left;
-                int rightIndex = right;
-                boolean foundMatch = false;
+                int leftIdx = left;
+                int rightIdx = right;
+                boolean matches = false;
 
-                while (leftIndex < rightIndex) {
-                    if (s.charAt(leftIndex) == s.charAt(rightIndex)) {
-                        foundMatch = true;
+                while (leftIdx < rightIdx) {
+                    if (s.charAt(leftIdx) == s.charAt(rightIdx)) {
+                        matches = true;
                         break;
                     }
-                    rightIndex--;
+                    rightIdx--;
                 }
 
-                if (foundMatch) {
-                    operations += (right - rightIndex);
-                     right = rightIndex -1;
+                if (matches == true) {
+                    operations += (right - rightIdx);
+                     right = rightIdx -1;
                      left++;
 
                 } else {
@@ -165,3 +167,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed variables to my style"}

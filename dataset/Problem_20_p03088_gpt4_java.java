@@ -118,30 +118,31 @@ Be sure to print the number of strings modulo
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_20_p03088_gpt4_java {
     private static final int MOD = 1000000007;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
+        int n = scanner.nextInt();
         scanner.close();
 
-        long[][] dp = new long[N + 1][4]; // 4 for A, C, G, T
-        dp[0][0] = dp[0][1] = dp[0][2] = dp[0][3] = 1; // Empty string
+        long[][] dp = new long[n + 1][4];
+        dp[0][0] = dp[0][1] = dp[0][2] = dp[0][3] = 1;
 
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i <= n; i++) {
             for (int j = 0; j < 4; j++) {
                 dp[i][j] = ((dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][2] + dp[i - 1][3]) % MOD);
             }
-            dp[i][0] = (dp[i][0] - dp[i - 1][1] + MOD) % MOD; // A can follow anything except C
-            dp[i][1] = (dp[i][1] - dp[i - 1][2] + MOD) % MOD; // C can follow anything except G
-            dp[i][2] = (dp[i][2] - dp[i - 1][3] + MOD) % MOD; // G can follow anything except T
-            dp[i][3] = (dp[i][3] - dp[i - 1][0] - dp[i - 1][1] + MOD) % MOD; // T can follow anything except A, C
+            dp[i][0] = (dp[i][0] - dp[i - 1][1] + MOD) % MOD;
+            dp[i][1] = (dp[i][1] - dp[i - 1][2] + MOD) % MOD;
+            dp[i][2] = (dp[i][2] - dp[i - 1][3] + MOD) % MOD;
+            dp[i][3] = (dp[i][3] - dp[i - 1][0] - dp[i - 1][1] + MOD) % MOD;
         }
 
-        long total = (dp[N][0] + dp[N][1] + dp[N][2] + dp[N][3]) % MOD;
-        System.out.println(total);
+        long res = (dp[n][0] + dp[n][1] + dp[n][2] + dp[n][3]) % MOD;
+        System.out.println(res);
     }
 }
 
 
+// {annotation: "removed unnecessary comments, renamed total to res to indicate result"}

@@ -207,49 +207,50 @@ int main() {
     cin >> n >> c;
 
     vector<vector<int>> d(c, vector<int>(c));
-    for (int i = 0; i < c; ++i) {
-        for (int j = 0; j < c; ++j) {
+    for (int i = 0; i < c; i++) {
+        for (int j = 0; j < c; j++) {
             cin >> d[i][j];
         }
     }
 
-    vector<vector<int>> grid(n, vector<int>(n));
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            cin >> grid[i][j];
-            grid[i][j]--; 
+    vector<vector<int>> space(n, vector<int>(n));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> space[i][j];
+            space[i][j]--; 
         }
     }
 
-    long long min_wrongness = -1;
+    long long min_wrong = -1;
 
     for (int color1 = 0; color1 < c; ++color1) {
         for (int color2 = 0; color2 < c; ++color2) {
             for (int color3 = 0; color3 < c; ++color3) {
-                long long current_wrongness = 0;
+                long long curr_wrong = 0;
                 for (int i = 0; i < n; ++i) {
                     for (int j = 0; j < n; ++j) {
-                        int target_color;
+                        int tgt_color;
                         if ((i + j) % 3 == 0) {
-                            target_color = color1;
+                            tgt_color = color1;
                         } else if ((i + j) % 3 == 1) {
-                            target_color = color2;
+                            tgt_color = color2;
                         } else {
-                            target_color = color3;
+                            tgt_color = color3;
                         }
-                        current_wrongness += d[grid[i][j]][target_color];
+                        curr_wrong += d[space[i][j]][tgt_color];
                     }
                 }
-                if (min_wrongness == -1 || current_wrongness < min_wrongness) {
-                    min_wrongness = current_wrongness;
+                if (min_wrong == -1 || curr_wrong < min_wrong) {
+                    min_wrong = curr_wrong;
                 }
             }
         }
     }
 
-    cout << min_wrongness << endl;
+    cout << min_wrong << endl;
 
     return 0;
 }
 
 
+// {annotation: "simplified variable names, shorten the length of the variable names without losing clarity"}

@@ -116,28 +116,26 @@ Be sure to print the number of strings modulo
 
 
 
-def count_strings(n):
-    MOD = 10**9 + 7
+def count_strs(n):
+    mod = 10**9 + 7
     
-    # dp[i] will hold the count of valid strings of length i
     dp = [0] * (n + 1)
-    # Base case: empty string
     dp[0] = 1
     
     for i in range(1, n + 1):
-        dp[i] = (4 * dp[i - 1]) % MOD
+        dp[i] = (4 * dp[i - 1]) % mod
         
         if i >= 3:
-            # Subtract invalid substrings of the form AGC, ACG, GAC
-            dp[i] = (dp[i] - dp[i - 3] + MOD) % MOD
+            dp[i] = (dp[i] - dp[i - 3] + mod) % mod
             
         if i >= 4:
-            # Add back valid strings that were counted twice
-            dp[i] = (dp[i] + 3 * dp[i - 4]) % MOD
+            dp[i] = (dp[i] + 3 * dp[i - 4]) % mod
     
     return dp[n]
 
-N = int(input().strip())
-print(count_strings(N))
+
+N = int(input())
+print(count_strs(N))
 
 
+# {annotation: "removed unnecessary comments, simplified identifier names"}

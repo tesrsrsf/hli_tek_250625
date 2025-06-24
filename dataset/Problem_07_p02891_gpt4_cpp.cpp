@@ -89,8 +89,8 @@ int main() {
     long long len = S.length();
     long long operations = 0;
 
-    for (int i = 1; i < len; i++) {
-        if (S[i] == S[i - 1]) {
+    for (int i = 0; i < len - 1; i++) {
+        if (S[i] == S[i + 1]) {
             operations++;
         }
     }
@@ -107,3 +107,4 @@ int main() {
 }
 
 
+// {annotation: "removed comments that I will not use, reformatted the loop"}

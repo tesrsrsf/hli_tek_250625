@@ -116,9 +116,15 @@ xxoxxx
 
 
 
-def min_insertions_to_palindrome(s):
+def min_insert_2_palin(s):
     n = len(s)
-    dp = [[0] * n for _ in range(n)]
+    dp = []
+
+    for i in range(0, n):
+        temp = []
+        for j in range(0, n):
+            temp.append(0)
+        dp.append(temp)
     
     for length in range(2, n + 1):
         for i in range(n - length + 1):
@@ -128,14 +134,15 @@ def min_insertions_to_palindrome(s):
             else:
                 dp[i][j] = min(dp[i + 1][j], dp[i][j - 1]) + 1
 
-    # The result is the number of insertions needed to make the whole string a palindrome
     return dp[0][n - 1]
 
-s = input().strip()
-min_ops = min_insertions_to_palindrome(s)
-if min_ops == 1 and len(s) % 2 == 0:
+
+s = input()
+res = min_insert_2_palin(s)
+if res == 1 and len(s) % 2 == 0:
     print(-1)
 else:
-    print(min_ops)
+    print(res)
 
 
+# {annotation: "modified input and changed identifier names to match my style, also used explicit 2D list creation for clarity"}

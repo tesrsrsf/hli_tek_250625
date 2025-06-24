@@ -102,40 +102,42 @@ atcoder
 
 
 
-import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_17_p04026_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
+        String str = scanner.nextLine();
         scanner.close();
 
-        int n = s.length();
-        int[] count = new int[26];
+        int str_len = str.length();
+        int[] count = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-        for (int i = 0; i < n; i++) {
-            count[s.charAt(i) - 'a']++;
+        for (int i = 0; i < str_len; i++) {
+            count[str.charAt(i) - 'a']++;
 
             if (i >= 1) {
-                char first = s.charAt(i);
-                char second = s.charAt(i - 1);
-                if (first == second) {
+                char fst_char = str.charAt(i);
+                char sec_char = str.charAt(i - 1);
+                if (fst_char == sec_char) {
                     System.out.println((i) + " " + (i + 1));
                     return;
                 }
 
                 if (i >= 2) {
-                    char third = s.charAt(i - 2);
-                    if (first == second || second == third || first == third) {
+                    char thd_char = str.charAt(i - 2);
+                    if (fst_char == sec_char || sec_char == thd_char || fst_char == thd_char) {
                         System.out.println((i - 1) + " " + (i + 1));
                         return;
                     }
                 }
             }
         }
+
+
         System.out.println("-1 -1");
     }
 }
 
 
+// {annotation: "initialized count array manually to keep it explicit, renamed variables for clarity, removed not used import"}

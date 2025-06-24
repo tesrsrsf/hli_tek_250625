@@ -99,58 +99,75 @@ LOOP
 using namespace std;
 
 int main() {
-    int H, W;
-    while (cin >> H >> W && (H != 0 || W != 0)) {
-        vector<string> room(H);
-        for (int i = 0; i < H; ++i) {
-            cin >> room[i];
+    int h, w;
+    cin >> h >> w;
+    while (h != 0 && w != 0) {
+        vector<string> space;
+        for (int i = 0; i < h; ++i) {
+            string line;
+            cin >> line;
+            space.push_back(line);
         }
 
         int x = 0, y = 0;
         int steps = 0;
         vector<pair<int, int>> visited;
-        bool loop = false;
+        bool isLoop = false;
 
-        while (steps < H * W * 2) {
+        while (steps < h * w * 2) {
             steps++;
-            char tile = room[y][x];
-            if (tile == '>') {
+            char cell = space[y][x];
+            
+            bool isDot = false;
+            switch (cell) {
+            case '>':
                 x++;
-            } else if (tile == '<') {
+                break;
+            case '<':
                 x--;
-            } else if (tile == '^') {
+                break;
+            case '^':
                 y--;
-            } else if (tile == 'v') {
+                break;
+            case 'v':
                 y++;
-            } else {
+                break;
+            default:
+                isDot = true;
+                break;
+            }
+            if (isDot) {
                 break;
             }
 
-            if (x < 0 || x >= W || y < 0 || y >= H) {
+            if (x < 0 || x >= w || y < 0 || y >= h) {
                 break;
             }
 
-            bool found = false;
-            for (const auto& p : visited) {
+            bool isFound = false;
+            for (auto p : visited) {
                 if (p.first == x && p.second == y) {
-                    found = true;
+                    isFound = true;
                     break;
                 }
             }
-            if (found) {
-                loop = true;
+            if (isFound ) {
+                isLoop = true;
                 break;
             }
             visited.push_back({x, y});
         }
 
-        if (loop) {
+        if (isLoop) {
             cout << "LOOP" << endl;
         } else {
             cout << x << " " << y << endl;
         }
+
+        cin >> h >> w;
     }
     return 0;
 }
 
 
+// {annotation: "fixed broken logic, replaced if-else with switch-case for better readability, also renamed variables for clarity"}

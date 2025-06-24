@@ -86,11 +86,19 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 
 def dfs(graph, n):
-    discover = [0] * (n + 1)
-    finish = [0] * (n + 1)
-    time = 0
-    visited = [False] * (n + 1)
+    discover = []
+    for i in range(0, n + 1):
+        discover.append(0)
 
+    finish = []
+    for i in range(0, n + 1):
+        finish.append(0)
+
+    visited = []
+    for i in range(0, n + 1):
+        visited.append(False)
+
+    time = 0
     def dfs_visit(u):
         nonlocal time
         time += 1
@@ -102,17 +110,26 @@ def dfs(graph, n):
         time += 1
         finish[u] = time
 
+
     for u in range(1, n + 1):
         if not visited[u]:
             dfs_visit(u)
 
     return discover, finish
 
+
 if __name__ == "__main__":
     n = int(input())
-    graph = {i: [] for i in range(1, n + 1)}
-    for _ in range(n):
-        line = list(map(int, input().split()))
+    graph = {}
+    for i in range(1, n + 1):
+        graph[i] = []
+
+    for i in range(0, n):
+        line_str = input().split()
+        line = []
+        for word in line_str:
+            line.append(int(word))
+
         u = line[0]
         for v in line[2:]:
             graph[u].append(v)
@@ -123,3 +140,4 @@ if __name__ == "__main__":
         print(i, discover[i], finish[i])
 
 
+# {annotation: "modified data initialization, making it working explicitly"}

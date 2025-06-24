@@ -94,33 +94,34 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_18_p03130_gpt4_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        HashMap<Integer, HashSet<Integer>> graph = new HashMap<>();
+        HashMap<Integer, HashSet<Integer>> towns = new HashMap<>();
         
-        for (int i = 1; i <= 4; i++) {
-            graph.put(i, new HashSet<>());
+        for (int i = 1; i < 5; i++) {
+            towns.put(i, new HashSet<>());
         }
         
         for (int i = 0; i < 3; i++) {
             int a = scanner.nextInt();
             int b = scanner.nextInt();
-            graph.get(a).add(b);
-            graph.get(b).add(a);
+
+            towns.get(a).add(b);
+            towns.get(b).add(a);
         }
         
-        int oddDegreeCount = 0;
+        int oddDegree = 0;
 
-        for (int town : graph.keySet()) {
-            if (graph.get(town).size() % 2 != 0) {
-                oddDegreeCount++;
+        for (int town : towns.keySet()) {
+            if (towns.get(town).size() % 2 == 1) {
+                oddDegree++;
             }
         }
 
-        if (oddDegreeCount == 0) {
+        if (oddDegree == 0 || oddDegree == 2) {
             System.out.println("YES");
         } else {
             System.out.println("NO");
@@ -131,3 +132,4 @@ public class Main {
 }
 
 
+// {annotation: "fixed logic, renamed variables which matches natural language"}

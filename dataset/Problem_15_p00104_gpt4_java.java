@@ -96,33 +96,33 @@ LOOP
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_15_p00104_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            int H = scanner.nextInt();
-            int W = scanner.nextInt();
-            if (H == 0 && W == 0) break;
+            int h = scanner.nextInt();
+            int w = scanner.nextInt();
+            if (h == 0 && w == 0) break;
 
-            char[][] room = new char[H][W];
+            char[][] space = new char[h][w];
             scanner.nextLine(); // consume the remaining newline
-            for (int i = 0; i < H; i++) {
-                room[i] = scanner.nextLine().toCharArray();
+            for (int i = 0; i < h; i++) {
+                space[i] = scanner.nextLine().toCharArray();
             }
 
             int x = 0, y = 0;
-            HashSet<String> visited = new HashSet<>();
-            boolean loop = false;
+            HashSet<String> visited_cells = new HashSet<>();
+            boolean isLoop = false;
             
             while (true) {
-                String position = x + "," + y;
-                if (visited.contains(position)) {
-                    loop = true;
+                String cell = x + "," + y;
+                if (visited_cells.contains(cell)) {
+                    isLoop = true;
                     break;
                 }
-                visited.add(position);
+                visited_cells.add(cell);
 
-                switch (room[y][x]) {
+                switch (space[y][x]) {
                     case '>':
                         x++;
                         break;
@@ -139,12 +139,12 @@ public class Main {
                         break;
                 }
 
-                if (room[y][x] == '.') {
+                if (space[y][x] == '.') {
                     break;
                 }
             }
 
-            if (loop) {
+            if (isLoop) {
                 System.out.println("LOOP");
             } else {
                 System.out.println(x + " " + y);
@@ -155,3 +155,4 @@ public class Main {
 }
 
 
+// {annotation: "avoid using uppercase letters in variable names, also renaming variables to be more descriptive"}

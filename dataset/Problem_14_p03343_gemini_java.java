@@ -125,32 +125,28 @@ Sample Output 3
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Scanner;
 
-public class Main {
-
+public class Problem_14_p03343_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int k = scanner.nextInt();
         int q = scanner.nextInt();
-        int[] a = new int[n];
+        int[] data = new int[n];
         for (int i = 0; i < n; i++) {
-            a[i] = scanner.nextInt();
+            data[i] = scanner.nextInt();
         }
         scanner.close();
 
-        int minDiff = Integer.MAX_VALUE;
+        int res = Integer.MAX_VALUE;
         for (int i = 0; i < (1 << (n - k + 1)); i++) {
             if (Integer.bitCount(i) != q) {
                 continue;
             }
 
-            List<Integer> removed = new ArrayList<>();
-            int[] currentA = Arrays.copyOf(a, n);
+            ArrayList<Integer> removed = new ArrayList<>();
+            int[] currentA = Arrays.copyOf(data, n);
             int bitmask = i;
 
             for (int j = 0; j < n - k + 1; j++) {
@@ -165,18 +161,21 @@ public class Main {
                     }
 
                     removed.add(minVal);
-                    currentA[minIndex] = Integer.MAX_VALUE; // Mark as removed.
+                    currentA[minIndex] = Integer.MAX_VALUE;
                 }
                 bitmask >>= 1;
             }
 
             if (removed.size() == q) {
                 Collections.sort(removed);
-                minDiff = Math.min(minDiff, removed.get(q - 1) - removed.get(0));
+                if (res > removed.get(q - 1) - removed.get(0)) {
+                    res = removed.get(q - 1) - removed.get(0);
+                }
             }
         }
-        System.out.println(minDiff);
+        System.out.println(res);
     }
 }
 
 
+// {annotation: "modified variable names to my style ,avoided implicit methods"}

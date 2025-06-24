@@ -104,21 +104,27 @@ atcoder
 
 def solve():
   s = input()
-  n = len(s)
-  for i in range(n - 1):
-    for j in range(i + 1, n):
-      sub = s[i:j+1]
+  len(s)
+  for i in range(0, len(s) - 1):
+    for j in range(i + 1, len(s)):
+      sub = s[i:j + 1]
       if len(sub) >= 2:
         counts = {}
         for char in sub:
-          counts[char] = counts.get(char, 0) + 1
+          if char not in counts:
+            counts[char] = 0
+          else:
+            counts[char] += 1
         
         for char in counts:
-          if counts[char] * 2 > len(sub):
+          if counts[char] > len(sub) // 2:
             print(i + 1, j + 1)
             return
+          
   print("-1 -1")
+
 
 solve()
 
 
+# {annotation: "replaced n with len(s), which is less confusing, also avoided using .get() method for dictionary, an if-else will make it explicit"}

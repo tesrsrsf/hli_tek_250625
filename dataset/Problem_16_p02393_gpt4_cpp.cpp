@@ -32,15 +32,18 @@ Sample Output 1
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 int main() {
     int a, b, c;
-    std::cin >> a >> b >> c;
+    cin >> a >> b >> c;
     
-    int numbers[3] = {a, b, c};
-    std::sort(numbers, numbers + 3);
+    int data[3] = {a, b, c};
+    sort(data, data + 3);
     
-    std::cout << numbers[0] << ' ' << numbers[1] << ' ' << numbers[2] << std::endl;
+    cout << data[0] << ' ' << data[1] << ' ' << data[2] << endl;
     return 0;
 }
 
 
+// {annotation: "using namespace std to improve code readability"}

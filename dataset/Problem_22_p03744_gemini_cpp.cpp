@@ -174,17 +174,17 @@ int main() {
     cin >> n >> l;
 
     vector<int> t(n), v(n);
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         cin >> t[i] >> v[i];
     }
 
     cout << fixed << setprecision(7);
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         double max_temp = 0.0;
-        for (int j = 0; j <= i; ++j) {
-            double current_temp = 0.0;
-            double current_volume = 0.0;
+        for (int j = 0; j <= i; j++) {
+            double cur_temp = 0.0;
+            double cur_vol = 0.0;
             
             vector<pair<double, double>> water;
 
@@ -192,18 +192,18 @@ int main() {
                 water.push_back({(double)t[k], (double)v[k]});
             }
 
-            double total_volume = 0.0;
-            for(int k = 0; k <= i; ++k){
-                total_volume += v[k];
+            double ttl_vol = 0.0;
+            for(int k = 0; k <= i; k++){
+                ttl_vol += v[k];
             }
 
-            double discharge = total_volume - l;
+            double discharge = ttl_vol - l;
             if(discharge < 0) discharge = 0;
 
             double temp_sum = 0.0;
             double total_v = 0.0;
 
-            for (int k = 0; k <=i; k++) {
+            for (int k = 0; k <= i; k++) {
                 double volume_to_use = v[k];
                 if (discharge > 0) {
                     if(volume_to_use >= discharge) {
@@ -220,13 +220,16 @@ int main() {
                
             }
              if (total_v > 0) {
-                current_temp = temp_sum / total_v;
+                cur_temp = temp_sum / total_v;
             } else {
-                current_temp = 0.0;
+                cur_temp = 0.0;
             }
          
-
-            max_temp = max(max_temp, current_temp);
+            if (max_temp < cur_temp)
+            {
+                max_temp = cur_temp;
+            }
+            
         }
         cout << max_temp << endl;
     }
@@ -235,3 +238,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables to simplify variable names"}

@@ -87,15 +87,16 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 import java.util.*;
 
-public class Main {
-    private static int time = 1;
-    private static int[] discover, finish;
-    private static boolean[] visited;
+public class Problem_21_p02238_gpt4_java {
+    public static int time = 1;
+    public static int[] discoTimes, finTimes;
+    public static boolean[] visitedNodes;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        List<List<Integer>> graph = new ArrayList<>(n + 1);
+
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>(n + 1);
 
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
@@ -110,36 +111,39 @@ public class Main {
             }
         }
 
-        discover = new int[n + 1];
-        finish = new int[n + 1];
-        visited = new boolean[n + 1];
+        discoTimes = new int[n + 1];
+        finTimes = new int[n + 1];
+        visitedNodes = new boolean[n + 1];
 
         for (int i = 1; i <= n; i++) {
-            if (!visited[i]) {
+            if (!visitedNodes[i]) {
                 dfs(graph, i);
             }
         }
 
         for (int i = 1; i <= n; i++) {
-            System.out.println(i + " " + discover[i] + " " + finish[i]);
+            System.out.println(i + " " + discoTimes[i] + " " + finTimes[i]);
         }
+
+        scanner.close();
     }
 
-    private static void dfs(List<List<Integer>> graph, int u) {
-        visited[u] = true;
-        discover[u] = time++;
+    public static void dfs(ArrayList<ArrayList<Integer>> graph, int u) {
+        visitedNodes[u] = true;
+        discoTimes[u] = time++;
         
-        List<Integer> neighbors = graph.get(u);
+        ArrayList<Integer> neighbors = graph.get(u);
         Collections.sort(neighbors);
         
         for (int v : neighbors) {
-            if (!visited[v]) {
+            if (!visitedNodes[v]) {
                 dfs(graph, v);
             }
         }
         
-        finish[u] = time++;
+        finTimes[u] = time++;
     }
 }
 
 
+// {annotation: "simplified variable names without affecting understanding, closed scanner, made all attributes and methods public"}

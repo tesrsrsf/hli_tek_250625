@@ -196,48 +196,56 @@ Sample Output 2
 
 
 
-import sys
 from itertools import product
 
-input = sys.stdin.read
-data = input().strip().splitlines()
+nc_line = input().split()
 
-N = int(data[0])
-C = int(data[1])
-
+N = int(nc_line[0])
+C = int(nc_line[1])
 D = []
-for i in range(C):
-    row = list(map(int, data[2+i].split()))
+c = []
+
+for i in range(0, C):
+    row = input().split()
+    for j in range(0, len(row)):
+        row[j] = int(row[j])
+
     D.append(row)
 
-c = []
-for i in range(N):
-    row = list(map(int, data[2+C+i].split()))
+for i in range(0, N):
+    row = input().split()
+    for j in range(0, len(row)):
+        row[j] = int(row[j])
+
     c.append(row)
 
-# Calculate costs for each color type per (i+j) % 3 group
-cost = [[[0] * C for _ in range(3)] for _ in range(3)]
+cost = []
+for mod in range(0, 3):
+    temp = []
+    for color in range(0, C):
+        temp.append(0)
+
+    cost.append(temp)
 
 for i in range(N):
     for j in range(N):
         mod = (i + j) % 3
-        original_color = c[i][j] - 1  # Convert 1-based to 0-based
+        original_color = c[i][j] - 1
         for color in range(C):
             cost[mod][color] += D[original_color][color]
 
-# We now want to minimize the total cost by choosing one color for each mod class
 min_total_cost = float('inf')
 
-# The colors we can assign to mod classes are from the available colors
-for color_assignment in product(range(C), repeat=3):
+for color_asgn in product(range(0, C), repeat=3):
     total_cost = 0
     
     for mod in range(3):
-        assigned_color = color_assignment[mod]
-        total_cost += cost[mod][assigned_color]
+        asgn_color = color_asgn[mod]
+        total_cost += cost[mod][asgn_color]
 
     min_total_cost = min(min_total_cost, total_cost)
 
 print(min_total_cost)
 
 
+# {annotation: "rewrote the logic to receive input to avoid using stdin, renamed variables to be less verbose"}

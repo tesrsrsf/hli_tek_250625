@@ -86,39 +86,37 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-
-    private static int time;
-    private static int[] discoverTime;
-    private static int[] finishTime;
-    private static boolean[] visited;
-    private static List<List<Integer>> adjacencyList;
+public class Problem_21_p02238_gemini_java {
+    public static ArrayList<ArrayList<Integer>> adjList;
+    public static int time;
+    public static int[] discoTime;
+    public static int[] finTime;
+    public static boolean[] visited;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
 
-        adjacencyList = new ArrayList<>();
+        discoTime = new int[n + 1];
+        finTime = new int[n + 1];
+        visited = new boolean[n + 1];
+        adjList = new ArrayList<>();
+
         for (int i = 0; i <= n; i++) {
-            adjacencyList.add(new ArrayList<>());
+            adjList.add(new ArrayList<>());
         }
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i < n + 1; i++) {
             int u = scanner.nextInt();
             int k = scanner.nextInt();
             for (int j = 0; j < k; j++) {
                 int v = scanner.nextInt();
-                adjacencyList.get(u).add(v);
+                adjList.get(u).add(v);
             }
         }
 
-        discoverTime = new int[n + 1];
-        finishTime = new int[n + 1];
-        visited = new boolean[n + 1];
         time = 0;
 
         for (int i = 1; i <= n; i++) {
@@ -128,22 +126,25 @@ public class Main {
         }
 
         for (int i = 1; i <= n; i++) {
-            System.out.println(i + " " + discoverTime[i] + " " + finishTime[i]);
+            System.out.println(i + " " + discoTime[i] + " " + finTime[i]);
         }
+
+        scanner.close();
     }
 
-    private static void dfsVisit(int u) {
+    public static void dfsVisit(int u) {
         visited[u] = true;
-        discoverTime[u] = ++time;
+        discoTime[u] = ++time;
 
-        for (int v : adjacencyList.get(u)) {
+        for (int v : adjList.get(u)) {
             if (!visited[v]) {
                 dfsVisit(v);
             }
         }
 
-        finishTime[u] = ++time;
+        finTime[u] = ++time;
     }
 }
 
 
+// {annotation: "removed not used imports, switched all attributes in the class to public"}

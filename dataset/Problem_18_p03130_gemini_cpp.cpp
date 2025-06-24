@@ -98,24 +98,24 @@ using namespace std;
 
 int main() {
     vector<pair<int, int>> edges(3);
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; i++) {
         cin >> edges[i].first >> edges[i].second;
     }
 
-    vector<int> degree(5, 0);
-    for (const auto& edge : edges) {
-        degree[edge.first]++;
-        degree[edge.second]++;
+    vector<int> degrees(5, 0);
+    for (auto edge : edges) {
+        degrees[edge.first]++;
+        degrees[edge.second]++;
     }
 
-    int odd_degree_count = 0;
-    for (int i = 1; i <= 4; ++i) {
-        if (degree[i] % 2 != 0) {
-            odd_degree_count++;
+    int odd_degrees = 0;
+    for (int i = 1; i < 5; i++) {
+        if (degrees[i] % 2 == 1) {
+            odd_degrees++;
         }
     }
 
-    if (odd_degree_count == 0 || odd_degree_count == 2) {
+    if (odd_degrees == 0 || odd_degrees == 2) {
         cout << "YES" << endl;
     } else {
         cout << "NO" << endl;
@@ -125,3 +125,4 @@ int main() {
 }
 
 
+// {annotation: "used odd == 1 to simplify the logic, also easier to understand, renamed variables for clarity"}

@@ -92,7 +92,7 @@ YES
 
 import java.util.*;
 
-public class Main {
+public class Problem_18_p03130_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int[][] edges = new int[3][2];
@@ -101,25 +101,28 @@ public class Main {
             edges[i][1] = scanner.nextInt();
         }
 
-        int[] degrees = new int[5];
+        int[] degrees = {0, 0, 0, 0, 0};
         for (int i = 0; i < 3; i++) {
             degrees[edges[i][0]]++;
             degrees[edges[i][1]]++;
         }
 
-        int oddDegreeCount = 0;
-        for (int i = 1; i <= 4; i++) {
-            if (degrees[i] % 2 != 0) {
-                oddDegreeCount++;
+        int oddDegrees = 0;
+        for (int i = 1; i < 5; i++) {
+            if (degrees[i] % 2 == 1) {
+                oddDegrees++;
             }
         }
 
-        if (oddDegreeCount == 0 || oddDegreeCount == 2) {
+        if (oddDegrees == 0 || oddDegrees == 2) {
             System.out.println("YES");
         } else {
             System.out.println("NO");
         }
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "added scanner.close(), simplified variable names"}

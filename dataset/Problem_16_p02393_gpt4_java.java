@@ -32,10 +32,10 @@ Sample Output 1
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_16_p02393_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int[] numbers = new int[3];
+        int[] numbers = {0, 0, 0};
         
         for (int i = 0; i < 3; i++) {
             numbers[i] = scanner.nextInt();
@@ -44,7 +44,10 @@ public class Main {
         Arrays.sort(numbers);
         
         System.out.println(numbers[0] + " " + numbers[1] + " " + numbers[2]);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "I dont like using new int[3], so replaced it with an array literal"}

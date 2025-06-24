@@ -95,30 +95,35 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_11_p03430_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String S = scanner.next();
-        int K = scanner.nextInt();
+        String s = scanner.next();
+        int k = scanner.nextInt();
         
-        int n = S.length();
+        int n = s.length();
         int[][] dp = new int[n + 1][n + 1];
         
-        // Calculate the length of the longest palindromic subsequence
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
-                if (S.charAt(i - 1) == S.charAt(n - j)) {
+                if (s.charAt(i - 1) == s.charAt(n - j)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    if (dp[i - 1][j] > dp[i][j - 1]) {
+                        dp[i][j] = dp[i - 1][j];
+                    } else {
+                        dp[i][j] = dp[i][j - 1];
+                    }
                 }
             }
         }
         
-        int lcsLength = dp[n][n];
-        // Maximum achievable value with at most K changes
-        System.out.println(lcsLength + Math.min(K, (n - lcsLength)));
+        int res = dp[n][n];
+        System.out.println(res + Math.min(k, (n - res)));
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "made some adjustments to make the code explicitly to fit my style"}

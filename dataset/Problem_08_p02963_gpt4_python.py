@@ -83,10 +83,14 @@ Sample Output 3
 
 S = int(input().strip())
 
-X1, Y1 = 0, 0
-X2, Y2 = S // 2, 0
-X3, Y3 = 0, S // 2
+X1 = 0
+Y1 = 0
+X2 = S // 2
+Y2 = 0
+X3 = 0
+Y3 = S // 2
 
 print(X1, Y1, X2, Y2, X3, Y3)
 
 
+# {annotation: "reformatted the code to match my style"}

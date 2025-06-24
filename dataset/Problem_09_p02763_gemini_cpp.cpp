@@ -195,15 +195,16 @@ using namespace std;
 
 int main() {
     int n;
-    cin >> n;
     string s;
-    cin >> s;
     int q;
+
+    cin >> n;
+    cin >> s;
     cin >> q;
 
-    for (int i = 0; i < q; ++i) {
-        int type;
-        cin >> type;
+    for (int i = 0; i < q; i++) {
+        int type, l, r;
+        cin >> type >> l >> r;
         if (type == 1) {
             int index;
             char c;
@@ -212,13 +213,11 @@ int main() {
                 s[index - 1] = c;
             }
         } else {
-            int l, r;
-            cin >> l >> r;
-            unordered_set<char> distinct_chars;
+            unordered_set<char> characters;
             for (int j = l - 1; j < r; ++j) {
-                distinct_chars.insert(s[j]);
+                characters.insert(s[j]);
             }
-            cout << distinct_chars.size() << endl;
+            cout << characters.size() << endl;
         }
     }
 
@@ -226,3 +225,4 @@ int main() {
 }
 
 
+// {annotation: "reformatted the code to match my style"}

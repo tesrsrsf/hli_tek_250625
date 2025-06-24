@@ -92,14 +92,15 @@ YES
 
 def solve():
     edges = []
-    for _ in range(3):
-        u, v = map(int, input().split())
-        edges.append((u, v))
+    for i in range(0, 3):
+        line = input().split()
+        x, y = int(line[0]), int(line[1])
+        edges.append((x, y))
     
-    degrees = [0] * 5
-    for u, v in edges:
-        degrees[u] += 1
-        degrees[v] += 1
+    degrees = [0, 0, 0, 0, 0]
+    for x, y in edges:
+        degrees[x] += 1
+        degrees[y] += 1
     
     odd_degree_count = 0
     for i in range(1, 5):
@@ -114,3 +115,4 @@ def solve():
 solve()
 
 
+# {annotation: "modified input to be more explicit, renamed variable names for clarity"}

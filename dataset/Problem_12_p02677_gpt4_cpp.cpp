@@ -80,37 +80,35 @@ The two hands will be in the positions shown in the figure below. Note that each
 #include <iostream>
 #include <cmath>
 
+using namespace std;
+
 int main() {
     double A, B;
     int H, M;
-    std::cin >> A >> B >> H >> M;
+    cin >> A >> B >> H >> M;
 
-    // Total minutes from 0 o'clock
-    double totalMinutes = H * 60 + M;
+    double totalMinutes = (double)H * 60 + M;
 
-    // Angle of hour hand (degrees)
     double hourAngle = (360.0 / 12) * (totalMinutes / 60);
-    // Angle of minute hand (degrees)
     double minuteAngle = (360.0 / 60) * totalMinutes;
 
-    // Convert angles to radians
     double hourRad = hourAngle * M_PI / 180.0;
     double minuteRad = minuteAngle * M_PI / 180.0;
 
-    // Get the coordinates of the endpoints of both hands
     double xHour = A * cos(hourRad);
     double yHour = A * sin(hourRad);
     double xMinute = B * cos(minuteRad);
     double yMinute = B * sin(minuteRad);
 
-    // Calculate the distance between the two endpoints
-    double distance = sqrt(pow(xHour - xMinute, 2) + pow(yHour - yMinute, 2));
+    // pythagorean theorem
+    double a = xHour - xMinute;
+    double b = yHour - yMinute;
+    double res = sqrt(pow(a, 2) + pow(b, 2));
 
-    // Output the result with required precision
-    std::cout.precision(20);
-    std::cout << distance << std::endl;
+    printf("%.20f\n", res);
 
     return 0;
 }
 
 
+// {annotation: "reformatted the code to match my style"}

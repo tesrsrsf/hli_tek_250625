@@ -80,7 +80,7 @@ The two hands will be in the positions shown in the figure below. Note that each
 import java.util.Scanner;
 import java.lang.Math;
 
-class Main {
+class Problem_12_p02677_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         double A = scanner.nextDouble();
@@ -88,15 +88,30 @@ class Main {
         int H = scanner.nextInt();
         int M = scanner.nextInt();
 
-        double hourAngle = ((H % 12 + (double)M / 60) / 12) * 2 * Math.PI;
+        double hourAngle = ((H % 12 + (double) M / 60) / 12) * 2 * Math.PI;
         double minuteAngle = (M / 60.0) * 2 * Math.PI;
 
-        double angleDiff = Math.abs(hourAngle - minuteAngle);
-        angleDiff = Math.min(angleDiff, 2 * Math.PI - angleDiff);
+        double angleDiff = hourAngle - minuteAngle;
 
-        double distance = Math.sqrt(A*A + B*B - 2 * A * B * Math.cos(angleDiff));
-        System.out.println(distance);
+        if (hourAngle - minuteAngle < 0) {
+            angleDiff = -angleDiff;
+        }
+
+        if (2 * Math.PI - angleDiff < angleDiff) {
+            angleDiff = 2 * Math.PI - angleDiff;
+            
+        }
+        
+        double P1 = A * A;
+        double P2 = B * B;
+        double P3 = 2 * A * B * Math.cos(angleDiff);
+        double res = Math.sqrt(P1 + P2 - P3);
+
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "formula calculation reorganized for better readability and easier understanding, also minor changes in changing the code to explicitly"}

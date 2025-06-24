@@ -78,27 +78,28 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_07_p02891_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String S = scanner.nextLine();
         long K = scanner.nextLong();
         scanner.close();
 
-        long operations = 0;
+        long res = 0;
         int n = S.length();
 
-        for (int i = 1; i < n; i++) {
-            if (S.charAt(i) == S.charAt(i - 1)) {
-                operations++;
+        for (int i = 0; i < n - 1; i++) {
+            if (S.charAt(i) == S.charAt(i + 1)) {
+                res++;
             }
         }
 
         long totalPairs = (K - 1) * n;
-        operations += totalPairs;
+        res += totalPairs;
 
-        System.out.println(operations);
+        System.out.println(res);
     }
 }
 
 
+// {annotation: "renamed the variables to match my style"}

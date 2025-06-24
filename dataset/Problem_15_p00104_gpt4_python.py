@@ -93,24 +93,28 @@ LOOP
 
 
 
-def simulate_magic_tiles():
+def walker():
     import sys
     
     directions = {
-        '>': (0, 1),     # move east
-        '<': (0, -1),    # move west
-        'v': (1, 0),     # move south
-        '^': (-1, 0)     # move north
+        '>': (0, 1),     # move right
+        '<': (0, -1),    # move left
+        'v': (1, 0),     # move down
+        '^': (-1, 0)     # move up
     }
     
     results = []
     
-    for line in sys.stdin:
-        H, W = map(int, line.split())
-        if H == 0 and W == 0:
+    h, w = -1, -1
+    while h != 0 and w != 0:
+        hw_line = input().split()
+        h, w = int(hw_line[0]), int(hw_line[1])
+        if h == 0 and w == 0:
             break
         
-        room = [sys.stdin.readline().strip() for _ in range(H)]
+        space = []
+        for i in range(0, h):
+            space.append(input())
         
         x, y = 0, 0
         visited = set()
@@ -121,17 +125,21 @@ def simulate_magic_tiles():
                 break
             visited.add((x, y))
             
-            tile = room[y][x]
-            if tile == '.':
+            cell = space[y][x]
+            if cell == '.':
                 results.append(f"{x} {y}")
                 break
-            if tile in directions:
-                dx, dy = directions[tile]
+
+            if cell in directions:
+                dx, dy = directions[cell]
                 x += dx
                 y += dy
     
-    print("\n".join(results))
+    for result in results:
+        print(result)
 
-simulate_magic_tiles()
+
+walker()
 
 
+# {annotation: "renamed variable names for clarity, avoiding using uppercase names"}

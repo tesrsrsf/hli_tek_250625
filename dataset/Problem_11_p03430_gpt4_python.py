@@ -93,35 +93,44 @@ Sample Output 2
 
 
 
-def longest_palindrome_with_changes(S, K):
-    n = len(S)
-    dp = [[0] * (n + 1) for _ in range(n + 1)]
-    
+def main(s, k):
+    n = len(s)
+    dp = []
+    res = 0
+
+    for i in range(0, n):
+        temp = []
+        for j in range(0, n):
+            temp.append(0)
+        dp.append(temp)
+
     for i in range(n):
         dp[i][i] = 1
     
     for length in range(2, n + 1):
         for i in range(n - length + 1):
             j = i + length - 1
-            if S[i] == S[j]:
+            if s[i] == s[j]:
                 dp[i][j] = dp[i + 1][j - 1] + 2
             else:
                 dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
     
-    max_value = 0
-    for change in range(K + 1):
+    for change in range(k + 1):
         for i in range(n):
             for j in range(i, n):
                 if j - i + 1 <= change:
-                    current_length = dp[0][i - 1] + (j - i + 1) + dp[j + 1][n - 1]
-                    max_value = max(max_value, current_length)
+                    current_length = dp[0][i - 1] + (j - i + 1) + dp[j][n - 1]
+                    if current_length > res:
+                        res = current_length
                     
-    return max_value
+    return res
 
-S = input().strip()
-K = int(input().strip())
 
-result = longest_palindrome_with_changes(S, K)
+s = input()
+k = int(input())
+
+result = main(s, k)
 print(result)
 
 
+# {annotation: "modified some variable names to fit my style, also changed the way to initialize the dp array in my way"}

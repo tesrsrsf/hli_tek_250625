@@ -165,7 +165,7 @@ Although the temperature of water may exceed
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_22_p03744_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -181,57 +181,61 @@ public class Main {
         for (int i = 0; i < n; i++) {
             double maxTemp = 0.0;
             for (int j = 0; j <= i; j++) {
-                double currentTemp = 0.0;
-                long totalVolume = 0;
+                double curTemp = 0.0;
+                long ttlVol = 0;
                 for (int k = 0; k <= i; k++) {
                     if (k <= j) {
-                        totalVolume += v[k];
+                        ttlVol += v[k];
                     }
                 }
-                if (totalVolume >= l) {
+                if (ttlVol >= l) {
                     double tempSum = 0.0;
-                    long volumeSum = 0;
+                    long volSum = 0;
 
                     for (int k = 0; k <= i; k++) {
                         if (k <= j) {
-                           if(totalVolume - l >= 0){
+                           if(ttlVol - l >= 0){
                                if(k == 0 &&  v[k] == l) {
                                     tempSum += (double)t[k] * v[k];
-                                    volumeSum += v[k];
+                                    volSum += v[k];
                                 } else if (k == 0 && v[k] < l){
                                     tempSum += (double)t[k] * v[k];
-                                    volumeSum += v[k];
+                                    volSum += v[k];
                                 }
                                   else if (k == 0 && v[k] > l){
                                     tempSum += (double)t[k] * l;
-                                    volumeSum += l;
+                                    volSum += l;
                                 }                                
-                                else if (k > 0 && totalVolume - l >= v[k]) {
+                                else if (k > 0 && ttlVol - l >= v[k]) {
                                      tempSum += (double)t[k] * v[k];
-                                     volumeSum += v[k];
-                                } else if (k > 0 && totalVolume - l < v[k]){
-                                    tempSum += (double)t[k] * Math.max(0, v[k] - (totalVolume - l));                                   
-                                     volumeSum += Math.max(0, v[k] - (totalVolume - l));                                    
+                                     volSum += v[k];
+                                } else if (k > 0 && ttlVol - l < v[k]){
+                                    tempSum += (double)t[k] * Math.max(0, v[k] - (ttlVol - l));                                   
+                                     volSum += Math.max(0, v[k] - (ttlVol - l));                                    
                                 }
                            }
                            else{
                                tempSum += (double)t[k] * v[k];
-                               volumeSum += v[k];
+                               volSum += v[k];
                            }
 
                         }
                     }
-                    if (volumeSum > 0) {
-                         currentTemp = tempSum / volumeSum;
+                    if (volSum > 0) {
+                         curTemp = tempSum / volSum;
                     }
                     
 
-                    maxTemp = Math.max(maxTemp, currentTemp);
+                    maxTemp = Math.max(maxTemp, curTemp);
                 }
             }
             System.out.printf("%.7f%n", maxTemp);
         }
+
+        scanner.close();
     }
 }
 
 
+
+// {annotation: "renamed variables to simplify variable names"}

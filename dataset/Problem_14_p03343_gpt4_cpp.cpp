@@ -132,19 +132,21 @@ using namespace std;
 int main() {
     int N, K, Q;
     cin >> N >> K >> Q;
-    vector<int> A(N);
+    vector<int> data;
     
     for (int i = 0; i < N; ++i) {
-        cin >> A[i];
+        int temp;
+        cin >> temp;
+        data.push_back(temp);
     }
 
-    multiset<int> smallestElements;
+    multiset<int> min_eles;
     for (int i = 0; i <= N - K; ++i) {
-        smallestElements.insert(*min_element(A.begin() + i, A.begin() + i + K));
+        min_eles.insert(*min_element(data.begin() + i, data.begin() + i + K));
     }
 
     vector<int> smallRemoved;
-    for (auto it = smallestElements.begin(); it != smallestElements.end() && smallRemoved.size() < Q; ++it) {
+    for (auto it = min_eles.begin(); it != min_eles.end() && smallRemoved.size() < Q; ++it) {
         smallRemoved.push_back(*it);
     }
 
@@ -157,3 +159,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables with my style"}

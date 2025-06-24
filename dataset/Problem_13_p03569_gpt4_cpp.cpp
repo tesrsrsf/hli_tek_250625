@@ -123,39 +123,40 @@ xxoxxx
 
 using namespace std;
 
-int minInsertionsToPalindrome(const string &s) {
+int minInsert2Palin(string s) {
     int n = s.size();
-    vector<vector<int>> dp(n, vector<int>(n, 0));
+    vector<vector<int>> df(n, vector<int>(n, 0));
     
     for (int len = 2; len <= n; len++) {
         for (int i = 0; i <= n - len; i++) {
             int j = i + len - 1;
             if (s[i] == s[j]) {
-                dp[i][j] = dp[i + 1][j - 1];
+                df[i][j] = df[i + 1][j - 1];
             } else {
-                dp[i][j] = min(dp[i + 1][j], dp[i][j - 1]) + 1;
+                df[i][j] = min(df[i + 1][j], df[i][j - 1]) + 1;
             }
         }
     }
     
-    return dp[0][n - 1];
+    return df[0][n - 1];
 }
 
 int main() {
     string s;
     cin >> s;
 
-    int totalInsertions = minInsertionsToPalindrome(s);
+    int res = minInsert2Palin(s);
     
-    if (totalInsertions > 1) {
-        cout << totalInsertions << endl;
-    } else if (totalInsertions == 1) {
-        cout << totalInsertions + 1 << endl;
+    if (res > 1) {
+        cout << res << endl;
+    } else if (res == 1) {
+        cout << res + 1 << endl;
     } else {
-        cout << totalInsertions << endl;
+        cout << res << endl;
     }
     
     return 0;
 }
 
 
+// {annotation: "modified the variable names to be less verbose, also simplified parameter definition"}

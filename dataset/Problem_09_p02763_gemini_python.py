@@ -188,26 +188,31 @@ z
 
 
 def solve():
+    ress = []
     n = int(input())
     s = list(input())
     q = int(input())
     
-    for _ in range(q):
-        query = list(map(str, input().split()))
-        query_type = int(query[0])
+    for i in range(0, q):
+        line = input().split()
+        query_type = int(line[0])
         
         if query_type == 1:
-            index = int(query[1]) - 1
-            char = query[2]
+            index = int(line[1]) - 1
+            char = line[2]
             if s[index] != char:
                 s[index] = char
         else:
-            l = int(query[1]) - 1
-            r = int(query[2]) - 1
-            substring = s[l:r+1]
+            l = int(line[1]) - 1
+            r = int(line[2]) - 1
+            substring = s[l:r + 1]
             distinct_chars = set(substring)
-            print(len(distinct_chars))
+            ress.append(len(distinct_chars))
+
+    for res in ress:
+        print(res)
             
 solve()
 
 
+# {annotation: "let the output print in the end of the program, also made program more like my style"}

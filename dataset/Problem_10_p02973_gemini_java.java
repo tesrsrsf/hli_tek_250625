@@ -87,24 +87,24 @@ We have to paint all the integers with distinct colors.
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_10_p02973_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        List<Integer> a = new ArrayList<>();
+        ArrayList<Integer> array = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            a.add(scanner.nextInt());
+            int temp = scanner.nextInt();
+            array.add(temp);
         }
+
         scanner.close();
 
-        List<Integer> lastPainted = new ArrayList<>();
+        ArrayList<Integer> lastPainted = new ArrayList<>();
         int colors = 0;
-        for (int num : a) {
+        for (int num : array) {
             boolean painted = false;
             for (int i = 0; i < lastPainted.size(); i++) {
                 if (lastPainted.get(i) < num) {
@@ -113,7 +113,7 @@ public class Main {
                     break;
                 }
             }
-            if (!painted) {
+            if (painted == false) {
                 lastPainted.add(num);
                 colors++;
             }
@@ -123,3 +123,4 @@ public class Main {
 }
 
 
+// {annotation: "redefined some implicit types to explicit types, list to arraylist"}

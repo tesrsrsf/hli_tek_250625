@@ -198,51 +198,64 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_19_p03330_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
         int C = scanner.nextInt();
-        int[][] D = new int[C + 1][C + 1];
+        int[][] space = new int[C + 1][C + 1];
+
         for (int i = 1; i <= C; i++) {
             for (int j = 1; j <= C; j++) {
-                D[i][j] = scanner.nextInt();
+                space[i][j] = scanner.nextInt();
             }
+
         }
+
         int[][] c = new int[N + 1][N + 1];
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
                 c[i][j] = scanner.nextInt();
             }
+            
         }
 
-        long minWrongness = Long.MAX_VALUE;
+        long minWrong = Long.MAX_VALUE;
         for (int color0 = 1; color0 <= C; color0++) {
             for (int color1 = 1; color1 <= C; color1++) {
                 for (int color2 = 1; color2 <= C; color2++) {
-                    long currentWrongness = 0;
+                    long curWrong = 0;
                     for (int i = 1; i <= N; i++) {
                         for (int j = 1; j <= N; j++) {
                             int group = (i + j) % 3;
-                            int targetColor = 0;
+                            int tgtColor = 0;
+
                             if (group == 0) {
-                                targetColor = color0;
+                                tgtColor = color0;
                             } else if (group == 1) {
-                                targetColor = color1;
+                                tgtColor = color1;
                             } else {
-                                targetColor = color2;
+                                tgtColor = color2;
                             }
-                            currentWrongness += D[c[i][j]][targetColor];
+
+                            curWrong += space[c[i][j]][tgtColor];
                         }
                     }
-                    minWrongness = Math.min(minWrongness, currentWrongness);
+
+                    if (curWrong < minWrong) {
+                        minWrong = curWrong;
+                    }
+
                 }
             }
         }
-        System.out.println(minWrongness);
+
+
+        System.out.println(minWrong);
         scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables to make it less verbose, replacing use of max with if-statement to keep it explicit"}

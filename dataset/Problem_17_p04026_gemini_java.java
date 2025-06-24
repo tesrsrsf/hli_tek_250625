@@ -106,42 +106,48 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_17_p04026_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.next();
         int n = s.length();
-        int start = -1, end = -1;
+        int leftt = -1, right = -1;
 
         for (int i = 0; i < n - 1; i++) {
             for (int j = i + 1; j < n; j++) {
                 String sub = s.substring(i, j + 1);
                 int len = sub.length();
                 if (len >= 2) {
-                    Map<Character, Integer> counts = new HashMap<>();
+                    Map<Character, Integer> chars = new HashMap<>();
                     for (char c : sub.toCharArray()) {
-                        counts.put(c, counts.getOrDefault(c, 0) + 1);
+                        chars.put(c, chars.getOrDefault(c, 0) + 1);
                     }
-                    for (int count : counts.values()) {
+
+                    for (int count : chars.values()) {
                         if (count * 2 > len) {
-                            start = i + 1;
-                            end = j + 1;
+                            leftt = i + 1;
+                            right = j + 1;
                             break;
                         }
                     }
                 }
-                if (start != -1) {
+
+                if (leftt != -1) {
                     break;
                 }
             }
-            if (start != -1) {
+
+            if (leftt != -1) {
                 break;
             }
         }
 
-        System.out.println(start + " " + end);
+        System.out.println(leftt + " " + right);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed some varuables for understandability, also closed the scanner at the end"}

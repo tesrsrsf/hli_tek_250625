@@ -94,15 +94,17 @@ using namespace std;
 
 int main() {
     int n;
-    cin >> n;
+    vector<int> data;
 
-    vector<int> a(n);
+    cin >> n;
     for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+        int temp;
+        cin >> temp;
+        data.push_back(temp);
     }
 
     vector<int> dp;
-    for (int x : a) {
+    for (int x : data) {
         auto it = lower_bound(dp.begin(), dp.end(), x);
         if (it == dp.end()) {
             dp.push_back(x);
@@ -117,3 +119,4 @@ int main() {
 }
 
 
+// {annotation: "changed the input method to use cin and vector for better readability"}

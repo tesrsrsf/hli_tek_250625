@@ -187,31 +187,31 @@ z
 
 
 
-import sys
-from collections import defaultdict
+lines = []
+N = int(input())
+S = input()
+Q = int(input())
 
-input = sys.stdin.read
-data = input().splitlines()
-
-N = int(data[0])
-S = list(data[1])
-Q = int(data[2])
+for i in range(0, Q):
+    lines.append(input())
 
 results = []
 
-for idx in range(3, 3 + Q):
-    query = data[idx].split()
-    if query[0] == '1':
-        i_q = int(query[1]) - 1
-        c_q = query[2]
-        if S[i_q] != c_q:
-            S[i_q] = c_q
-    elif query[0] == '2':
-        l_q = int(query[1]) - 1
-        r_q = int(query[2]) - 1
-        unique_chars = set(S[l_q:r_q + 1])
-        results.append(len(unique_chars))
+for line in lines:
+    cmd = line.split()
+    if cmd[0] == '1':
+        i = int(cmd[1]) - 1
+        c = cmd[2]
+        if S[i] != c:
+            S[i] = c
+    elif cmd[0] == '2':
+        l = int(cmd[1]) - 1
+        r = int(cmd[2]) - 1
+        chars = set(S[l:r + 1])
+        results.append(len(chars))
 
-print('\n'.join(map(str, results)))
+for result in results:
+    print(result)
 
 
+# {annotation: "simplified the program for readability to match my style"}

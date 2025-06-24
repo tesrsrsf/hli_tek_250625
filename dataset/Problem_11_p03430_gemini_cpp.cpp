@@ -100,7 +100,7 @@ Sample Output 2
 
 using namespace std;
 
-int longestCommonSubsequence(const string& s1, const string& s2) {
+int longCommonSeq(const string& s1, const string& s2) {
     int n = s1.length();
     int m = s2.length();
     vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
@@ -122,32 +122,35 @@ int main() {
     cin >> s >> k;
 
     int n = s.length();
-    int max_lcs = 0;
-    for (int i = 0; i < (1 << (n * 5)); ++i) {
+    int res = 0;
+    for (int i = 0; i < (1 << (n * 5)); i++) {
         if (__builtin_popcount(i) > k * 5) continue;
         string temp_s = s;
         int changes = 0;
         int temp = i;
-        for (int j = 0; j < n; ++j) {
+        for (int j = 0; j < n; j++) {
             int char_val = temp % 32;
             temp /= 32;
             if (char_val != (s[j] - 'a')) {
                 changes++;
-                if (changes >k) break;
+                if (changes > k) {
+                    break;
+                }
                 temp_s[j] = 'a' + char_val;
             }
         }
             if (changes <= k) {
                 string reversed_s = temp_s;
                 reverse(reversed_s.begin(), reversed_s.end());
-                max_lcs = max(max_lcs, longestCommonSubsequence(temp_s, reversed_s));
+                res = max(res, longCommonSeq(temp_s, reversed_s));
 
             }
     }
 
-    cout << max_lcs << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "modified the program as my style"}

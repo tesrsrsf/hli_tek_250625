@@ -199,15 +199,15 @@ int main() {
     cin.tie(nullptr);
     
     int N, Q;
-    cin >> N;
     string S;
+    cin >> N;
     cin >> S;
     cin >> Q;
 
-    vector<string> queries(Q);
+    vector<string> lines(Q);
     for (int i = 0; i < Q; ++i) {
-        cin >> queries[i];
-        if (queries[i] == "1") {
+        cin >> lines[i];
+        if (lines[i] == "1") {
             int idx;
             char c;
             cin >> idx >> c;
@@ -215,8 +215,8 @@ int main() {
         } else {
             int l, r;
             cin >> l >> r;
-            unordered_set<char> unique_chars(S.begin() + l - 1, S.begin() + r);
-            cout << unique_chars.size() << "\n"; // count unique characters
+            unordered_set<char> chars(S.begin() + l - 1, S.begin() + r);
+            cout << chars.size() << endl; // count unique characters
         }
     }
     
@@ -224,3 +224,4 @@ int main() {
 }
 
 
+// {annotation: "rearranged the code to fit my style, also changed some strange statements"}

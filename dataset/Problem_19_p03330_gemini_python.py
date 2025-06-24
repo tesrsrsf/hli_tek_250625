@@ -199,17 +199,28 @@ Sample Output 2
 def solve():
     n = int(input())
     c = int(input())
-    d = []
-    for _ in range(c):
-        d.append(list(map(int, input().split())))
+    space = []
     grid = []
-    for _ in range(n):
-        grid.append(list(map(int, input().split())))
-    
-    groups = [[] for _ in range(3)]
-    for i in range(n):
-        for j in range(n):
-            groups[(i+j) % 3].append((i,j))
+    groups = []
+
+    for i in range(0, c):
+        input_line = input().split()
+        for j in range(0, len(input_line)):
+            input_line[j] = int(input_line[j])
+        space.append(input_line)
+
+    for i in range(0, n):
+        input_line = input().split()
+        for j in range(0, len(input_line)):
+            input_line[j] = int(input_line[j])
+        grid.append(input_line)
+        
+    for i in range(0, 3):
+        groups.append([])
+
+    for i in range(0, n):
+        for j in range(0, n):
+            groups[(i + j) % 3].append((i, j))
     
     min_cost = float('inf')
     for i in range(c):
@@ -217,16 +228,18 @@ def solve():
             for k in range(c):
                 if i != j and i != k and j != k:
                     cost = 0
-                    for r,c_ in groups[0]:
-                        cost += d[grid[r][c_]-1][i]
-                    for r,c_ in groups[1]:
-                        cost += d[grid[r][c_]-1][j]
-                    for r,c_ in groups[2]:
-                        cost += d[grid[r][c_]-1][k]
+                    for r, c_ in groups[0]:
+                        cost += space[grid[r][c_] - 1][i]
+                    for r, c_ in groups[1]:
+                        cost += space[grid[r][c_] - 1][j]
+                    for r, c_ in groups[2]:
+                        cost += space[grid[r][c_] - 1][k]
                     min_cost = min(min_cost, cost)
                 
     print(min_cost)
 
+
 solve()
 
 
+# {annotation: "changed the way to get input, keeping it explicit and simple, also reformatted the code and renamed variables for better readability"}

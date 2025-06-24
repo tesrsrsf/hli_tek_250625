@@ -36,16 +36,19 @@ Sample Output 1
 using namespace std;
 
 int main() {
-  vector<int> nums(3);
-  for (int i = 0; i < 3; ++i) {
-    cin >> nums[i];
+  vector<int> nums;
+  for (int i = 0; i < 3; i++) {
+    int num;
+    cin >> num;
+    nums.push_back(num);
   }
   sort(nums.begin(), nums.end());
-  for (int i = 0; i < 3; ++i) {
-    cout << nums[i] << (i == 2 ? "" : " ");
+  for (int i = 0; i < 3; i++) {
+    cout << nums[i] << " ";
   }
   cout << endl;
   return 0;
 }
 
 
+// {annotation: "avoid using vector as a fixed-size array, make it as a dynamic list, matches my habit of using vector"}

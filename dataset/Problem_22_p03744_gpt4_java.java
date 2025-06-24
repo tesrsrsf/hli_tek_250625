@@ -165,41 +165,48 @@ Although the temperature of water may exceed
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_22_p03744_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
         long L = scanner.nextLong();
         
-        long[] volumes = new long[N];
-        long[] temperatures = new long[N];
+        long[] vols = new long[N];
+        long[] tmps = new long[N];
 
         for (int i = 0; i < N; i++) {
-            temperatures[i] = scanner.nextLong();
-            volumes[i] = scanner.nextLong();
+            tmps[i] = scanner.nextLong();
+            vols[i] = scanner.nextLong();
         }
         
-        double[] results = new double[N];
-        long totalVolume = 0;
+        double[] ress = new double[N];
+        long ttlVols = 0;
         
         for (int i = 0; i < N; i++) {
-            totalVolume += volumes[i];
-            if (totalVolume < L) {
-                results[i] = totalVolume == 0 ? 0.0 : (double) totalVolume * temperatures[i] / totalVolume;
+            ttlVols += vols[i];
+            if (ttlVols < L) {
+                if (ttlVols == 0) {
+                    ress[i] = 0.0;
+                } else {
+                    ress[i] = (double) ttlVols * tmps[i] / ttlVols;
+                }
+
             } else {
-                double maxTemp = 0;
+                double maxTmp = 0;
                 for (int j = 0; j <= i; j++) {
-                    if (volumes[j] > 0) {
-                        maxTemp = Math.max(maxTemp, temperatures[j]);
+                    if (vols[j] > 0) {
+                        maxTmp = Math.max(maxTmp, tmps[j]);
                     }
-                    double currentWater = 0;
-                    double currentTemp = 0;
+                    double curWater = 0;
+                    double curTmp = 0;
                     
                     for (int k = j; k <= i; k++) {
-                        currentWater += volumes[k];
-                        currentTemp += volumes[k] * temperatures[k];
-                        if (currentWater >= L) {
-                            results[i] = Math.max(results[i], currentTemp / currentWater);
+                        curWater += vols[k];
+                        curTmp += vols[k] * tmps[k];
+                        if (curWater >= L) {
+                            if (ress[i] < curTmp/curWater) {
+                                ress[i] = curTmp/curWater;
+                            }
                             break;
                         }
                     }
@@ -207,7 +214,7 @@ public class Main {
             }
         }
 
-        for (double result : results) {
+        for (double result : ress) {
             System.out.printf("%.7f%n", result);
         }
         scanner.close();
@@ -215,3 +222,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed variables for readability"}

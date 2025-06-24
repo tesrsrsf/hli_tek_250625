@@ -8,6 +8,7 @@
 P.S. I tried to make these broken cases looks human-like, without fixing it
 
 
+Note: I give up on maintaining broken list, but not broken instead. 
 NOT BROKEN PROBLEMS
 [python]
 p02411 gemini
@@ -16,6 +17,20 @@ p02802 gemini
 p02802 gpt4
 p00768 gemini
 p00768 gpt4
+p02963 gemini
+p02963 gpt4
+p02763 gemini
+p02763 gpt4
+p02677 gemini
+p00104 gemini
+p00104 gpt4
+p02393 gemini
+p02393 gpt4
+p04026 gemini
+p03130 gemini
+p03130 gpt4
+p02238 gemini
+p02238 gpt4
 
 [cpp]
 p02411 gemini
@@ -24,6 +39,24 @@ p02802 gemini
 p02802 gpt4
 p00768 gemini
 p00768 gpt4
+p02963 gemini
+p02963 gpt4
+p02763 gemini
+p02763 gpt4
+p02677 gemini
+p03569 gpt4
+p03343 gemini
+p00104 gemini
+p00104 gpt4
+p02393 gemini
+p02393 gpt4
+p04026 gemini
+p03130 gemini
+p03130 gpt4
+p03330 gpt4
+p02238 gemini
+p02238 gpt4
+p03744 gemini
 
 [java]
 p02411 gemini
@@ -32,7 +65,25 @@ p02802 gemini
 p02802 gpt4
 p00768 gemini
 p00768 gpt4
+p02963 gemini
+p02963 gpt4
+p02763 gemini
+p02763 gpt4
+p02973 gemini
+p02677 gemini
+p03569 gemini
+p03343 gemini
+p00104 gemini
+p00104 gpt4
+p02393 gemini
+p02393 gpt4
+p04026 gemini
+p03130 gemini
+p03130 gpt4
+p03330 gpt4
+p02238 gemini
+p02238 gpt4
 
 
 
-P.S. I tried to make these broken cases looks human-like, without fixing it
+P.S. These LLM generated codes were originally correct, or I fixed them with minor adjustments

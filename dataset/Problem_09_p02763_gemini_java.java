@@ -187,14 +187,16 @@ z
 
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Main {
+public class Problem_09_p02763_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> output = new ArrayList<>();
         int n = scanner.nextInt();
         String s = scanner.next();
         int q = scanner.nextInt();
@@ -202,11 +204,11 @@ public class Main {
         for (int i = 0; i < q; i++) {
             int type = scanner.nextInt();
             if (type == 1) {
-                int index = scanner.nextInt();
+                int idx = scanner.nextInt();
                 char c = scanner.next().charAt(0);
-                if (s.charAt(index - 1) != c) {
+                if (s.charAt(idx - 1) != c) {
                     StringBuilder sb = new StringBuilder(s);
-                    sb.setCharAt(index - 1, c);
+                    sb.setCharAt(idx - 1, c);
                     s = sb.toString();
                 }
             } else {
@@ -216,11 +218,16 @@ public class Main {
                 for (int j = l - 1; j < r; j++) {
                     chars.add(s.charAt(j));
                 }
-                System.out.println(chars.size());
+                output.add(String.valueOf(chars.size()));
             }
+        }
+
+        for (String res : output) {
+            System.out.println(res);
         }
         scanner.close();
     }
 }
 
 
+// {annotation: "changed the output to use ArrayList"}

@@ -78,38 +78,31 @@ The two hands will be in the positions shown in the figure below. Note that each
 
 
 import math
-import sys
 
-# Read input
-A = int(sys.stdin.readline().strip())
-B = int(sys.stdin.readline().strip())
-H = int(sys.stdin.readline().strip())
-M = int(sys.stdin.readline().strip())
+line = input().split()
+A = int(line[0])
+B = int(line[1])
+H = int(line[2])
+M = int(line[3])
 
-# Calculate angles
 total_minutes = H * 60 + M
 
-# Angle moved by the hour hand (360 degrees = 12 hours = 720 minutes)
 hour_angle = (total_minutes / 720) * 360
 
-# Angle moved by the minute hand (360 degrees = 1 hour = 60 minutes)
 minute_angle = (total_minutes / 60) * 360
 
-# Convert angles to radians
 hour_angle_rad = math.radians(hour_angle)
 minute_angle_rad = math.radians(minute_angle)
 
-# Calculate the position of the tips of the hands
 x_hour = A * math.cos(hour_angle_rad)
 y_hour = A * math.sin(hour_angle_rad)
 
 x_minute = B * math.cos(minute_angle_rad)
 y_minute = B * math.sin(minute_angle_rad)
 
-# Calculate the distance between the two tips
-distance = math.sqrt((x_hour - x_minute) ** 2 + (y_hour - y_minute) ** 2)
+res = math.sqrt((x_hour - x_minute) ** 2 + (y_hour - y_minute) ** 2)
 
-# Print the result
-print(f"{distance:.20f}")
+print(f"{res:.20f}")
 
 
+# {annotation: "removed redundant comments, also changed the way input is read to match my style"}

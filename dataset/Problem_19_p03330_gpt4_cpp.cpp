@@ -206,9 +206,12 @@ using namespace std;
 int main() {
     int N, C;
     
-    // Read input values
     cin >> N >> C;
+
     vector<vector<int>> D(C + 1, vector<int>(C + 1));
+    vector<vector<int>> c(N + 1, vector<int>(N + 1));
+    vector<vector<long long>> minWrong(3, vector<long long>(C + 1, 0));
+    long long result = numeric_limits<long long>::max();
     
     for (int i = 1; i <= C; i++) {
         for (int j = 1; j <= C; j++) {
@@ -216,44 +219,36 @@ int main() {
         }
     }
     
-    vector<vector<int>> c(N + 1, vector<int>(N + 1));
-    
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= N; j++) {
             cin >> c[i][j];
         }
     }
     
-    // Sum of wrongness for each color
-    vector<vector<long long>> minWrongness(3, vector<long long>(C + 1, 0));
-    
     for (int i = 1; i <= N; i++) {
         for (int j = 1; j <= N; j++) {
             int group = (i + j) % 3;
-            int currentColor = c[i][j];
+            int curColor = c[i][j];
             
             for (int newColor = 1; newColor <= C; newColor++) {
-                if (newColor != currentColor) {
-                    minWrongness[group][newColor] += D[currentColor][newColor];
+                if (newColor != curColor) {
+                    minWrong[group][newColor] += D[curColor][newColor];
                 }
             }
         }
     }
     
-    long long result = numeric_limits<long long>::max();
-    
-    // Try all possible combinations of assigning colors to the three groups
     for (int color1 = 1; color1 <= C; color1++) {
         for (int color2 = 1; color2 <= C; color2++) {
             if (color2 == color1) continue;
             for (int color3 = 1; color3 <= C; color3++) {
-                if (color3 == color1 || color3 == color2) continue;
+                if (color3 == color1 || color3 == color2) {
+                    continue;
+                }
 
-                long long totalWrongness = minWrongness[0][color1] + 
-                                           minWrongness[1][color2] + 
-                                           minWrongness[2][color3];
+                long long ttlWrong = minWrong[0][color1] + minWrong[1][color2] + minWrong[2][color3];
                 
-                result = min(result, totalWrongness);
+                result = min(result, ttlWrong);
             }
         }
     }
@@ -263,3 +258,4 @@ int main() {
 }
 
 
+// {annotation: "moving all data structures to the top for better readability, renaming vars for clarity"}

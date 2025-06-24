@@ -131,21 +131,27 @@ using namespace std;
 
 int main() {
   int n, k, q;
+  vector<int> a;
+  
   cin >> n >> k >> q;
 
-  vector<int> a(n);
-  for (int i = 0; i < n; ++i) {
-    cin >> a[i];
+  for (int i = 0; i < n; i++) {
+    int temp;
+    cin >> temp;
+    a.push_back(temp);
   }
 
-  int min_diff = INT_MAX;
-  for (int i = 0; i < (1 << (n - k + 1)); ++i) {
-    if (__builtin_popcount(i) != q) continue;
+  int res = INT_MAX;
+  for (int i = 0; i < (1 << (n - k + 1)); i++) {
+    if (__builtin_popcount(i) != q) {
+      continue;
+    }
 
     vector<int> removed;
     vector<int> b = a;
     vector<int> indices;
-    for (int j = 0; j < n - k + 1; ++j) {
+
+    for (int j = 0; j < n - k + 1; j++) {
       if ((i >> j) & 1) {
         indices.push_back(j);
       }
@@ -154,7 +160,7 @@ int main() {
     for (int index : indices) {
       int min_val = INT_MAX;
       int min_idx = -1;
-      for (int j = index; j < index + k; ++j) {
+      for (int j = index; j < index + k; j++) {
         if (b[j] < min_val) {
           min_val = b[j];
           min_idx = j;
@@ -164,15 +170,21 @@ int main() {
       b[min_idx] = INT_MAX;
     }
     
-    if (removed.size() != q) continue;
+    if (removed.size() != q) {
+      continue;
+    }
 
     sort(removed.begin(), removed.end());
-    min_diff = min(min_diff, removed[q - 1] - removed[0]);
+
+    if (res > removed[q - 1] - removed[0]) {
+      res = removed[q - 1] - removed[0];
+    }
   }
 
-  cout << min_diff << endl;
+  cout << res << endl;
 
   return 0;
 }
 
 
+// {annotation: "used more explicitly way to refactor the code, also changed the way to initialize the vector"}

@@ -86,9 +86,8 @@ We have to paint all the integers with distinct colors.
 
 
 
+from collections import defaultdict
 def min_colors_required(N, A):
-    from collections import defaultdict
-    
     count = defaultdict(int)
     
     for num in A:
@@ -96,14 +95,16 @@ def min_colors_required(N, A):
     
     return max(count.values())
 
+
 if __name__ == "__main__":
-    import sys
-    input = sys.stdin.read
-    data = input().split()
+    N = int(input())
+    data = []
+    for i in range(0, N):
+        temp = input()
+        data.append(temp)
+
     
-    N = int(data[0])
-    A = list(map(int, data[1:N + 1]))
-    
-    print(min_colors_required(N, A))
+    print(min_colors_required(N, data))
 
 
+# {annotation: "changed the way to get input to my style, removed useless import"}

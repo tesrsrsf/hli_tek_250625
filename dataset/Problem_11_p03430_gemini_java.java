@@ -96,23 +96,23 @@ Sample Output 2
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_11_p03430_gemini_java {
 
-    public static int longestCommonSubsequence(String s1, String s2) {
+    public static int longCommonSeq(String s1, String s2) {
         int n = s1.length();
         int m = s2.length();
-        int[][] dp = new int[n + 1][m + 1];
+        int[][] dpp = new int[n + 1][m + 1];
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
                 if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    dpp[i][j] = dpp[i - 1][j - 1] + 1;
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    dpp[i][j] = Math.max(dpp[i - 1][j], dpp[i][j - 1]);
                 }
             }
         }
-        return dp[n][m];
+        return dpp[n][m];
     }
 
     public static void main(String[] args) {
@@ -122,7 +122,7 @@ public class Main {
         scanner.close();
 
         int n = s.length();
-        int maxVal = 0;
+        int res = 0;
 
         for (int i = 0; i < (1 << (n * 5)); i++) {
             if (Integer.bitCount(i) > k * 5) {
@@ -132,26 +132,27 @@ public class Main {
             int changes = 0;
 
             for (int j = 0; j < n; j++) {
-                int charIndex = (i >> (j * 5)) & 31;
-                if (charIndex != (s.charAt(j) - 'a')) {
+                int charIdx = (i >> (j * 5)) & 31;
+                if (charIdx != (s.charAt(j) - 'a')) {
                     changes++;
                 }
                 if (changes <= k) {
-                    temp += (char) ('a' + charIndex);
+                    temp += (char) ('a' + charIdx);
                 } else {
                     break;
                 }
             }
-            if (changes <=k) {
-                String reversedTemp = new StringBuilder(temp).reverse().toString();
-                maxVal = Math.max(maxVal, longestCommonSubsequence(temp, reversedTemp));
+            if (changes <= k) {
+                String tempRev = new StringBuilder(temp).reverse().toString();
+                res = Math.max(res, longCommonSeq(temp, tempRev));
             }
 
 
         }
 
-        System.out.println(maxVal);
+        System.out.println(res);
     }
 }
 
 
+// {annotation: "renamed some variables to fit my style"}

@@ -101,36 +101,35 @@ LOOP
 using namespace std;
 
 int main() {
-    int H, W;
-    while (cin >> H >> W, H != 0 || W != 0) {
-        vector<string> room(H);
-        for (int i = 0; i < H; ++i) {
-            cin >> room[i];
+    int h, w;
+    while (cin >> h >> w, h != 0 || w != 0) {
+        vector<string> space(h);
+        for (int i = 0; i < h; i++) {
+            cin >> space[i];
         }
         int x = 0, y = 0;
         set<pair<int, int>> visited;
-        bool loop_detected = false;
+        bool is_loop = false;
 
         while (true) {
             if (visited.count({x, y}) > 0) {
-                loop_detected = true;
+                is_loop = true;
                 break;
             }
             visited.insert({x, y});
 
-            char tile = room[y][x];
+            char cell = space[y][x];
 
-            if (tile == '>') x++;
-            else if (tile == '<') x--;
-            else if (tile == 'v') y++;
-            else if (tile == '^') y--;
-            else break; // Empty tile
+            if (cell == '>') x++;
+            else if (cell == '<') x--;
+            else if (cell == 'v') y++;
+            else if (cell == '^') y--;
+            else if (cell == '.') break;
+            else break;
 
-            // Bound check
-            if (x < 0 || x >= W || y < 0 || y >= H) break;
         }
 
-        if (loop_detected) {
+        if (is_loop) {
             cout << "LOOP" << endl;
         } else {
             cout << x << " " << y << endl;
@@ -140,3 +139,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables to be more descriptive"}

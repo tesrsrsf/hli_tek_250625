@@ -113,18 +113,18 @@ int main() {
     cin >> s;
     int n = s.size();
 
-    for (int i = 0; i < n - 1; ++i) {
+    for (int i = 0; i < n - 1; i++) {
         if (s[i] == s[i + 1]) {
             cout << i + 1 << " " << i + 2 << endl;
             return 0;
         }
     }
 
-    for (int i = 0; i < n - 2; ++i) {
-        unordered_map<char, int> count;
-        count[s[i]]++;
-        count[s[i + 1]]++;
-        if (count[s[i]] > 1 || count[s[i + 1]] > 1) {
+    for (int i = 0; i < n - 2; i++) {
+        unordered_map<char, int> char_count;
+        char_count[s[i]]++;
+        char_count[s[i + 1]]++;
+        if (char_count[s[i]] > 1 || char_count[s[i + 1]] > 1) {
             cout << i + 1 << " " << i + 3 << endl;
             return 0;
         }
@@ -135,3 +135,4 @@ int main() {
 }
 
 
+// {anntattion: "logic confusing, renamed variables for understanding"}

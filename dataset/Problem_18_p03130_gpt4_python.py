@@ -90,30 +90,30 @@ YES
 
 
 
-from sys import stdin
+roads = []
 
-def can_visit_all_towns(roads):
-    town_degrees = [0] * 5  # Index 0 is unused since towns are 1 to 4
+def walker():
+    global roads
+
+    town_degrees = [0, 0, 0, 0, 0]
     for a, b in roads:
         town_degrees[a] += 1
         town_degrees[b] += 1
     
-    odd_degree_count = sum(1 for degree in town_degrees[1:] if degree % 2 != 0)
+    odd_degree = sum(1 for degree in town_degrees[1:] if degree % 2 == 1)
     
-    # To have an Eulerian path (traverse each road exactly once):
-    # There should be exactly 0 or 2 towns with odd degree.
-    if odd_degree_count in {0, 2}:
+    if odd_degree == 0 or odd_degree == 2:
         return "YES"
     else:
         return "NO"
 
-# Read input
-roads = []
-for _ in range(3):
-    a, b = map(int, stdin.readline().strip().split())
+
+for i in range(0, 3):
+    line_str = input().split()
+    a, b = int(line_str[0]), int(line_str[1])
     roads.append((a, b))
 
-# Output the result
-print(can_visit_all_towns(roads))
+print(walker())
 
 
+# {annotation: "replaced stdin with input() for readability, used global variable for roads for simplicity, renamed the main function to walker for clarity"}

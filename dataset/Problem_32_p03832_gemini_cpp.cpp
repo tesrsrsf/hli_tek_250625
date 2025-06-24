@@ -121,7 +121,7 @@ The answer can be
 
 using namespace std;
 
-const int MOD = 1e9 + 7;
+const int mod = 1e9 + 7;
 const int MAXN = 1005;
 
 long long dp[MAXN][MAXN];
@@ -130,18 +130,18 @@ long long inv[MAXN];
 
 long long power(long long x, long long y) {
     long long ret = 1;
-    x %= MOD;
+    x %= mod;
     while (y) {
-        if (y & 1) ret = (ret * x) % MOD;
+        if (y & 1) ret = (ret * x) % mod;
         y >>= 1;
-        x = (x * x) % MOD;
+        x = (x * x) % mod;
     }
     return ret;
 }
 
 long long C(int n, int k) {
     if (k < 0 || k > n) return 0;
-    return (((fact[n] * inv[k]) % MOD) * inv[n - k]) % MOD;
+    return (((fact[n] * inv[k]) % mod) * inv[n - k]) % mod;
 }
 
 int main() {
@@ -150,11 +150,11 @@ int main() {
 
     fact[0] = 1;
     for (int i = 1; i <= n; i++) {
-        fact[i] = (fact[i - 1] * i) % MOD;
+        fact[i] = (fact[i - 1] * i) % mod;
     }
-    inv[n] = power(fact[n], MOD - 2);
+    inv[n] = power(fact[n], mod - 2);
     for (int i = n - 1; i >= 0; i--) {
-        inv[i] = (inv[i + 1] * (i + 1)) % MOD;
+        inv[i] = (inv[i + 1] * (i + 1)) % mod;
     }
 
     dp[0][0] = 1;
@@ -162,7 +162,7 @@ int main() {
         for (int j = 0; j * i <= n; j++) {
             for (int k = c; k <= d; k++) {
                 if (j + k * i <= n) {
-                    dp[i][j + k * i] = (dp[i][j + k * i] + (dp[i - 1][j] * C(n - j, k * i) % MOD) * fact[k] % MOD * inv[k]) % MOD;
+                    dp[i][j + k * i] = (dp[i][j + k * i] + (dp[i - 1][j] * C(n - j, k * i) % mod) * fact[k] % mod * inv[k]) % mod;
                 }
             }
         }
@@ -170,7 +170,7 @@ int main() {
 
     long long ans = 0;
     for(int j = 0; j <= n; ++j) {
-            ans = (ans + dp[b][j]) % MOD;
+            ans = (ans + dp[b][j]) % mod;
     }
     
     cout << ans << endl;

@@ -121,17 +121,18 @@ Be sure to print the number of strings modulo
 
 using namespace std;
 
-const int MOD = 1e9 + 7;
+const int mod = 1e9 + 7;
 
 int main() {
     int n;
+
     cin >> n;
 
     vector<vector<vector<vector<int>>>> dp(n + 1, vector<vector<vector<int>>>(4, vector<vector<int>>(4, vector<int>(4, 0))));
 
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 0; k < 4; ++k) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 4; k++) {
                 if (!(i == 0 && j == 2 && k == 1)) {
                     dp[3][i][j][k] = 1;
                 }
@@ -139,13 +140,13 @@ int main() {
         }
     }
 
-    for (int len = 4; len <= n; ++len) {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                for (int k = 0; k < 4; ++k) {
-                    for (int l = 0; l < 4; ++l) {
+    for (int len = 4; len <= n; len++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                for (int k = 0; k < 4; k++) {
+                    for (int l = 0; l < 4; l++) {
                         if (!(j == 0 && k == 2 && l == 1) && !(i == 0 && j == 2 && k == 1)) {
-                            dp[len][j][k][l] = (dp[len][j][k][l] + dp[len - 1][i][j][k]) % MOD;
+                            dp[len][j][k][l] = (dp[len][j][k][l] + dp[len - 1][i][j][k]) % mod;
                         }
                     }
                 }
@@ -154,10 +155,10 @@ int main() {
     }
 
     long long ans = 0;
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 0; k < 4; ++k) {
-                ans = (ans + dp[n][i][j][k]) % MOD;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            for (int k = 0; k < 4; k++) {
+                ans = (ans + dp[n][i][j][k]) % mod;
             }
         }
     }
@@ -168,3 +169,4 @@ int main() {
 }
 
 
+// {annotation: "changed for-loop to my style, using i++ instead of ++i"}

@@ -175,40 +175,39 @@ int main() {
 
     vector<long long> v(N);
     vector<long long> t(N);
+    vector<double> res(N);
 
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; i++) {
         cin >> t[i] >> v[i];
     }
-
-    vector<double> result(N);
     
-    long long totalVolume = 0;
-    double totalTemperature = 0.0;
+    long long ttlVol = 0;
+    double ttlTmp = 0.0;
 
-    for (int i = 0; i < N; ++i) {
-        totalVolume += v[i];
-        totalTemperature += t[i] * v[i];
+    for (int i = 0; i < N; i++) {
+        ttlVol += v[i];
+        ttlTmp += t[i] * v[i];
 
-        if (totalVolume >= L) {
-            double maxTemperature = (totalTemperature + (L - totalVolume + v[i]) * t[i]) / L;
-            result[i] = maxTemperature;
+        if (ttlVol >= L) {
+            double maxTmp = (ttlTmp + (L - ttlVol + v[i]) * t[i]) / L;
+            res[i] = maxTmp;
         } else {
-            result[i] = static_cast<double>(totalTemperature) / totalVolume;
+            res[i] = (double) (ttlTmp) / ttlVol;
         }
 
-        // Prepare for the next day
-        if (totalVolume > L) {
-            totalTemperature -= (totalVolume - L) * (totalTemperature / totalVolume);
-            totalVolume = L;
+        if (ttlVol > L) {
+            ttlTmp -= (ttlVol - L) * (ttlTmp / ttlVol);
+            ttlVol = L;
         }
     }
 
     cout << fixed << setprecision(7);
-    for (int i = 0; i < N; ++i) {
-        cout << result[i] << endl;
+    for (int i = 0; i < N; i++) {
+        cout << res[i] << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "simplified variable names for better readability"}

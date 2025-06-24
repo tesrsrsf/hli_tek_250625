@@ -168,65 +168,51 @@ def solve():
   l = int(input())
   t = []
   v = []
-  for _ in range(n):
-    ti, vi = map(int, input().split())
+  for i in range(0, n):
+    line_str = input().split()
+    ti, vi = int(line_str[0]), int(line_str[1])
     t.append(ti)
     v.append(vi)
   
-  for i in range(n):
+  for i in range(0, n):
     max_temp = 0.0
-    for j in range(i + 1):
-        current_volume = 0
-        current_temp = 0.0
-        
-        
+    for j in range(0, i + 1):
         volumes = []
-        temperatures = []
-        for k in range(i+1):
+        tempers = []
+        for k in range(0, i + 1):
             volumes.append(v[k])
-            temperatures.append(t[k])
+            tempers.append(t[k])
         
+        ttl_volume = sum(volumes)
         
-        total_volume = sum(volumes)
-        
-        if total_volume < l:
+        if ttl_volume < l:
             continue
             
-        
-        
-        
         temp = 0.0
-        remaining_volume = l
-
-        
-        temp_volumes = []
-        temp_temps = []
+        remain_volume = l
         
         temp_volumes_list = []
         temp_temps_list = []
         
-        total_volume = 0
+        ttl_volume = 0
         
-        for k in range(i+1):
+        for k in range(0, i + 1):
            
-           if volumes[k] >= remaining_volume:
-               temp_volumes_list.append(remaining_volume)
-               temp_temps_list.append(temperatures[k])
+           if volumes[k] >= remain_volume:
+               temp_volumes_list.append(remain_volume)
+               temp_temps_list.append(tempers[k])
                break;
            
            temp_volumes_list.append(volumes[k])
-           temp_temps_list.append(temperatures[k])
-           remaining_volume -= volumes[k]
+           temp_temps_list.append(tempers[k])
+           remain_volume -= volumes[k]
            
         
         if len(temp_volumes_list) > 0:
-          total_vol = sum(temp_volumes_list)
-          
           temp = 0.0
           for k in range(len(temp_volumes_list)):
               temp += temp_temps_list[k] *  temp_volumes_list[k]
               
-          
           temp /= l
           max_temp = max(max_temp,temp)
 
@@ -235,3 +221,5 @@ def solve():
 solve()
 
 
+
+# {annotation: "renamed variables and reformatted variables to simplify variable names"}

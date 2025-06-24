@@ -89,7 +89,8 @@ int main() {
     cin >> S;
 
     // Use the formula for vertices of the triangle
-    long long x1 = 0, y1 = 0;
+    long long x1 = 0;
+    long long y1 = 0;
     long long x2 = S; 
     long long y2 = 0;
     long long x3 = S / 2; 
@@ -101,3 +102,4 @@ int main() {
 }
 
 
+// {annotation: "reformatted the code to follow my coding style"}

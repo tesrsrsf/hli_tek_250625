@@ -102,20 +102,21 @@ atcoder
 
 
 
-def find_unbalanced_substring(s):
-    n = len(s)
-    
-    for i in range(n - 1):
+def find_unbala_seq(s):    
+    for i in range(0, len(s) - 1):
         if s[i] == s[i + 1]:
             print(i + 1, i + 2)
             return
-        if i < n - 2 and s[i] == s[i + 2]:
+        
+        if i < len(s) - 2 and s[i] == s[i + 2]:
             print(i + 1, i + 3)
             return
             
     print(-1, -1)
 
-s = input().strip()
-find_unbalanced_substring(s)
+
+s = input()
+find_unbala_seq(s)
 
 
+# {annotation: "simplified identifiers names and reformatted code"}

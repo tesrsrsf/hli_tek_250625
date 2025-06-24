@@ -90,28 +90,35 @@ We have to paint all the integers with distinct colors.
 #include <vector>
 #include <set>
 
+using namespace std;
+
 int main() {
     int N;
-    std::cin >> N;
-    std::vector<int> A(N);
+    vector<int> data;
+
+    cin >> N;
     for (int i = 0; i < N; ++i) {
-        std::cin >> A[i];
+        int temp;
+        cin >> temp;
+        data.push_back(temp);
     }
 
-    std::set<int> colors;
-    std::vector<int> counts(1, 0);
-    for (int i = 0; i < N; ++i) {
-        if (colors.count(A[i]) == 0) {
-            colors.insert(A[i]);
+    set<int> colors;
+    vector<int> counts(1, 0);
+
+    for (int i = 0; i < N; i++) {
+        if (colors.count(data[i]) == 0) {
+            colors.insert(data[i]);
             counts.push_back(1);
         } else {
-            counts[colors.size()]++;
+            counts[colors.size()] += 1;
         }
     }
 
-    std::cout << colors.size() << std::endl;
+    cout << colors.size() << endl;
 
     return 0;
 }
 
 
+// {annotation: "changed ++i to i++, changed the way to use vector to my style"}

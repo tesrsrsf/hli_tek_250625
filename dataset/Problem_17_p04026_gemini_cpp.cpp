@@ -109,29 +109,34 @@ atcoder
 
 using namespace std;
 
-bool is_unbalanced(const string& s) {
-    if (s.length() < 2) {
+bool str_is_unbalance(string str) {
+    map<char, int> counts;
+
+    if (str.length() < 2) {
         return false;
     }
-    map<char, int> counts;
-    for (char c : s) {
+
+    for (char c : str) {
         counts[c]++;
     }
+
     int max_count = 0;
-    for (auto const& [key, val] : counts) {
+    for (auto [key, val] : counts) {
         max_count = max(max_count, val);
     }
-    return max_count > s.length() / 2;
+
+    return max_count > str.length() / 2;
 }
+
 
 int main() {
     string s;
     cin >> s;
 
-    for (int i = 0; i < s.length(); ++i) {
-        for (int j = i + 1; j < s.length(); ++j) {
-            string sub = s.substr(i, j - i + 1);
-            if (is_unbalanced(sub)) {
+    for (int i = 0; i < s.length(); i++) {
+        for (int j = i + 1; j < s.length(); j++) {
+            string str = s.substr(i, j - i + 1);
+            if (str_is_unbalance(str)) {
                 cout << i + 1 << " " << j + 1 << endl;
                 return 0;
             }
@@ -143,3 +148,4 @@ int main() {
 }
 
 
+// {annotation: "using i++ instead of ++i, which matches human coding style, reformatted the code for better readability"}

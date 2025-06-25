@@ -58,23 +58,31 @@ int main() {
 
   int n = s.length();
   int m = p.length();
+  bool is_found;
 
-  for (int i = 0; i < n; ++i) {
-    bool found = true;
-    for (int j = 0; j < m; ++j) {
+  for (int i = 0; i < n; i++) {
+    is_found = true;
+    for (int j = 0; j < m; j++) {
       if (s[(i + j) % n] != p[j]) {
-        found = false;
+        is_found = false;
         break;
       }
     }
-    if (found) {
-      cout << "Yes" << endl;
-      return 0;
+    if (is_found) {
+      break;
     }
   }
 
-  cout << "No" << endl;
+  if (is_found)
+  {
+    cout << "Yes" << endl;
+  } else {
+    cout << "No" << endl;
+  }
+  
+  
   return 0;
 }
 
 
+// {annotation: "avoid using capital letters for variable names, also unified the place to print the result"}

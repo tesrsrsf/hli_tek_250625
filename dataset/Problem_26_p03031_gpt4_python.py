@@ -187,15 +187,15 @@ Sample Output 3
 
 
 
-def count_valid_combinations(N, M, bulbs_info, parity):
+def solve(N, M, bulbs, parity):
     from itertools import product
 
     valid_combinations = 0
     for switches in product(range(2), repeat=N):
         all_lit = True
         for i in range(M):
-            k_i = bulbs_info[i][0]
-            connected_switches = bulbs_info[i][1:k_i + 1]
+            k_i = bulbs[i][0]
+            connected_switches = bulbs[i][1:k_i + 1]
             required_parity = parity[i]
             
             on_count = sum(switches[j - 1] for j in connected_switches)
@@ -208,22 +208,24 @@ def count_valid_combinations(N, M, bulbs_info, parity):
 
     return valid_combinations
 
+
 import sys
 input = sys.stdin.read
 
 data = input().splitlines()
-N = int(data[0])
-M = int(data[1])
+n = int(data[0])
+m = int(data[1])
 bulbs_info = []
 parity = []
 
-for i in range(M):
+for i in range(0, m):
     line = list(map(int, data[2 + i].split()))
     bulbs_info.append(line)
     
-parity = list(map(int, data[2 + M].split()))
+parity = list(map(int, data[2 + m].split()))
 
-result = count_valid_combinations(N, M, bulbs_info, parity)
+result = solve(n, m, bulbs_info, parity)
 print(result)
 
 
+# {annotation: "renamed variable names for better readability"}

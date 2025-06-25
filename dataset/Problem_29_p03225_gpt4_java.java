@@ -127,29 +127,32 @@ Sample Output 2
 
 import java.util.*;
 
-public class Main {
+public class Problem_29_p03225_gpt4_java {
+    public static int calcManhattanDistance(int[] coinA, int[] coinB) {
+        return Math.abs(coinA[0] - coinB[0]) + Math.abs(coinA[1] - coinB[1]);
+    }
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int H = scanner.nextInt();
-        int W = scanner.nextInt();
+        int h = scanner.nextInt();
+        int w = scanner.nextInt();
         scanner.nextLine(); // consume the newline
 
         List<int[]> coins = new ArrayList<>();
         
-        for (int i = 0; i < H; i++) {
+        for (int i = 0; i < h; i++) {
             String row = scanner.nextLine();
-            for (int j = 0; j < W; j++) {
+            for (int j = 0; j < w; j++) {
                 if (row.charAt(j) == '#') {
-                    coins.add(new int[]{i + 1, j + 1});
+                    int[] coin = new int[]{i + 1, j + 1};
+                    coins.add(coin);
                 }
             }
         }
 
         int count = 0;
         int n = coins.size();
-
-        // Map to store the distances
-        Map<Integer, List<int[]>> distanceMap = new HashMap<>();
         
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
@@ -158,9 +161,9 @@ public class Main {
                     int[] coin2 = coins.get(j);
                     int[] coin3 = coins.get(k);
                     
-                    int dist1 = manhattanDistance(coin1, coin2);
-                    int dist2 = manhattanDistance(coin1, coin3);
-                    int dist3 = manhattanDistance(coin2, coin3);
+                    int dist1 = calcManhattanDistance(coin1, coin2);
+                    int dist2 = calcManhattanDistance(coin1, coin3);
+                    int dist3 = calcManhattanDistance(coin2, coin3);
 
                     if (dist1 == dist2 && dist2 == dist3) {
                         count++;
@@ -170,11 +173,10 @@ public class Main {
         }
 
         System.out.println(count);
-    }
 
-    private static int manhattanDistance(int[] coinA, int[] coinB) {
-        return Math.abs(coinA[0] - coinB[0]) + Math.abs(coinA[1] - coinB[1]);
+        scanner.close();
     }
 }
 
 
+// {annotation: "moved the manhattan distance function to the top for better readability, made commands explicit for better understanding"}

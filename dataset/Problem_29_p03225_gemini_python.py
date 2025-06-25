@@ -125,29 +125,36 @@ Sample Output 2
 
 
 
-def manhattan_distance(p1, p2):
+def calc_manhattan_distance(p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
 def solve():
     h, w = map(int, input().split())
-    grid = [input() for _ in range(h)]
+    space = []
     coins = []
-    for r in range(h):
-        for c in range(w):
-            if grid[r][c] == '#':
+
+    for i in range(0, h):
+        space.append(input())
+
+    for r in range(0, h):
+        for c in range(0, w):
+            if space[r][c] == '#':
                 coins.append((r, c))
 
-    count = 0
-    for i in range(len(coins)):
+    res = 0
+    for i in range(0, len(coins)):
         for j in range(i + 1, len(coins)):
             for k in range(j + 1, len(coins)):
-                d1 = manhattan_distance(coins[i], coins[j])
-                d2 = manhattan_distance(coins[i], coins[k])
-                d3 = manhattan_distance(coins[j], coins[k])
+                d1 = calc_manhattan_distance(coins[i], coins[j])
+                d2 = calc_manhattan_distance(coins[i], coins[k])
+                d3 = calc_manhattan_distance(coins[j], coins[k])
                 if d1 == d2 and d2 == d3:
-                    count += 1
-    print(count)
+                    res += 1
+
+    print(res)
+
 
 solve()
 
 
+# {annotation: "renamed function to calculate manhattan distance for better readability, used explicit method to initialize data"}

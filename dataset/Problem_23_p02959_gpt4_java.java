@@ -98,36 +98,44 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_23_p02959_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        int N = scanner.nextInt();
-        int[] A = new int[N + 1];
-        int[] B = new int[N];
+        int n = scanner.nextInt();
+        int[] monsNum = new int[n + 1];
+        int[] heroNum = new int[n];
         
-        for (int i = 0; i <= N; i++) {
-            A[i] = scanner.nextInt();
+        for (int i = 0; i < n + 1; i++) {
+            monsNum[i] = scanner.nextInt();
         }
         
-        for (int i = 0; i < N; i++) {
-            B[i] = scanner.nextInt();
+        for (int i = 0; i < n; i++) {
+            heroNum[i] = scanner.nextInt();
         }
         
-        long totalDefeated = 0;
+        int res = 0;
         
-        for (int i = 0; i < N; i++) {
-            int defeatMonsters = Math.min(B[i], A[i]) + Math.min(B[i], A[i + 1]);
-            totalDefeated += defeatMonsters;
-            A[i] = Math.max(0, A[i] - B[i]);
-            A[i + 1] = Math.max(0, A[i + 1] - B[i]);
+        for (int i = 0; i < n; i++) {
+            int p1 = heroNum[i];
+            if (p1 > monsNum[i]) p1 = monsNum[i];
+
+            int p2 = heroNum[i];
+            if (p2 > monsNum[i + 1]) p2 = monsNum[i];
+
+            int defeatMonsters = p1 + p2;
+
+            res += defeatMonsters;
+            monsNum[i] = Math.max(0, monsNum[i] - heroNum[i]);
+            monsNum[i + 1] = Math.max(0, monsNum[i + 1] - heroNum[i]);
         }
         
-        totalDefeated += A[N]; // Last town monsters can be defeated if any left
+        res += monsNum[n]; // defeat last town monsters if left
         
-        System.out.println(totalDefeated);
+        System.out.println(res);
         scanner.close();
     }
 }
 
 
+// {annotation: "made defeatMonsterss calculation become explicit, also renamed variables for better readability"}

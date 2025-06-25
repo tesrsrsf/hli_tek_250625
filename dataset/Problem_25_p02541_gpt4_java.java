@@ -64,22 +64,25 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_25_p02541_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long N = scanner.nextLong();
-        long k = 1;
+        long res = 1;
         long sum = 0;
 
         while (true) {
-            sum += k;
+            sum += res;
             if (sum % N == 0) {
-                System.out.println(k);
+                System.out.println(res);
                 break;
             }
-            k++;
+            res++;
         }
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables for better readability"}

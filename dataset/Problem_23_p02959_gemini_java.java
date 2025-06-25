@@ -98,34 +98,47 @@ Sample Output 3
 
 import java.util.*;
 
-public class Main {
+public class Problem_23_p02959_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int[] a = new int[n + 1];
+        int[] b = new int[n];
+
         for (int i = 0; i <= n; i++) {
             a[i] = scanner.nextInt();
         }
-        int[] b = new int[n];
+        
         for (int i = 0; i < n; i++) {
             b[i] = scanner.nextInt();
         }
 
-        long totalDefeated = 0;
+        long res = 0;
         for (int i = 0; i < n; i++) {
-            int defeat1 = Math.min(a[i], b[i]);
+            int defeat1 = a[i];
+            if (defeat1 > b[i]) {
+                defeat1 = b[i];
+            }
+
             a[i] -= defeat1;
             b[i] -= defeat1;
-            totalDefeated += defeat1;
+            res += defeat1;
+            
+            int defeat2 = a[i + 1];
+            if (defeat2 > b[i]) {
+                defeat2 = b[i];
+            }
 
-            int defeat2 = Math.min(a[i + 1], b[i]);
             a[i + 1] -= defeat2;
             b[i] -= defeat2;
-            totalDefeated += defeat2;
+            res += defeat2;
         }
 
-        System.out.println(totalDefeated);
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "reformatted the program as my style, also closed the scanner"}

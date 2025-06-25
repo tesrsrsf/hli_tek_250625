@@ -138,18 +138,19 @@ using namespace std;
 
 int main() {
     int N;
-    long long W;
+    int W;
     cin >> N >> W;
     
-    vector<long long> weights(N), values(N);
-    for (int i = 0; i < N; ++i) {
+    vector<int> weights(N), values(N);
+    vector<int> dp(W + 1, 0);
+
+    for (int i = 0; i < N; i++) {
         cin >> weights[i] >> values[i];
     }
     
-    vector<long long> dp(W + 1, 0);
     
-    for (int i = 0; i < N; ++i) {
-        for (long long j = W; j >= weights[i]; --j) {
+    for (int i = 0; i < N; i++) {
+        for (int j = W; j >= weights[i]; j--) {
             dp[j] = max(dp[j], dp[j - weights[i]] + values[i]);
         }
     }
@@ -159,3 +160,4 @@ int main() {
 }
 
 
+// {annotation: "reformatted the program to fit my style"}

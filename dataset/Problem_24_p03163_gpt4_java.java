@@ -132,27 +132,29 @@ Then, the sum of the weights is
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_24_p03163_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
         int N = scanner.nextInt();
         int W = scanner.nextInt();
         int[] weights = new int[N];
-        long[] values = new long[N];
+        int[] vals = new int[N];
         
         for (int i = 0; i < N; i++) {
             weights[i] = scanner.nextInt();
-            values[i] = scanner.nextLong();
+            vals[i] = scanner.nextInt();
         }
         
-        long[][] dp = new long[N + 1][W + 1];
+        int[][] dp = new int[N + 1][W + 1];
         
-        for (int i = 1; i <= N; i++) {
-            for (int w = 0; w <= W; w++) {
-                dp[i][w] = dp[i - 1][w]; // Not taking the item
+        for (int i = 1; i < N + 1; i++) {
+            for (int w = 0; w < W + 1; w++) {
+                dp[i][w] = dp[i - 1][w];
                 if (weights[i - 1] <= w) {
-                    dp[i][w] = Math.max(dp[i][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]);
+                    if (dp[i][w] < dp[i - 1][w - weights[i - 1]] + vals[i - 1]) {
+                        dp[i][w] = dp[i - 1][w - weights[i - 1]] + vals[i - 1];
+                    }
                 }
             }
         }
@@ -163,3 +165,4 @@ public class Main {
 }
 
 
+// {annotation: "used int to replace long dadatype which is unnecessary, also used explicit way to replace implicit Math.max"}

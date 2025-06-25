@@ -137,30 +137,31 @@ Then, the sum of the weights is
 using namespace std;
 
 int main() {
-    int N, W;
-    cin >> N >> W;
+    int n, W;
+    cin >> n >> W;
 
-    vector<int> w(N), v(N);
-    for (int i = 0; i < N; ++i) {
+    vector<int> w(n), v(n);
+    for (int i = 0; i < n; i++) {
         cin >> w[i] >> v[i];
     }
 
-    vector<long long> dp(W + 1, 0);
+    vector<int> dp(W + 1, 0);
 
-    for (int i = 0; i < N; ++i) {
-        for (int j = W; j >= w[i]; --j) {
+    for (int i = 0; i < n; i++) {
+        for (int j = W; j >= w[i]; j--) {
             dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
         }
     }
 
-    long long max_value = 0;
-    for (int i = 0; i <= W; ++i) {
-        max_value = max(max_value, dp[i]);
+    int res = 0;
+    for (int i = 0; i <= W; i++) {
+        res = max(res, dp[i]);
     }
 
-    cout << max_value << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variables for better readability"}

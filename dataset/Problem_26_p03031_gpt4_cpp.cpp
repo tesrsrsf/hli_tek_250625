@@ -193,44 +193,48 @@ Sample Output 3
 using namespace std;
 
 int main() {
-    int N, M;
-    cin >> N >> M;
+    int n, m;
+    int res = 0;
+    cin >> n >> m;
 
-    vector<vector<int>> bulbs(M);
-    vector<int> p(M);
+    vector<vector<int>> bulbs(m);
+    vector<int> p(m);
     
-    for (int i = 0; i < M; ++i) {
+    for (int i = 0; i < m; i++) {
         int k;
         cin >> k;
         bulbs[i].resize(k);
-        for (int j = 0; j < k; ++j) {
+        for (int j = 0; j < k; j++) {
             cin >> bulbs[i][j];
         }
         cin >> p[i];
     }
 
-    int count = 0;
-    for (int i = 0; i < (1 << N); ++i) {
+    for (int i = 0; i < (1 << n); i++) {
         bool valid = true;
-        for (int j = 0; j < M; ++j) {
+        for (int j = 0; j < m; j++) {
             int onCount = 0;
+            
             for (int switchIndex : bulbs[j]) {
                 if (i & (1 << (switchIndex - 1))) {
                     onCount++;
                 }
             }
+
             if (onCount % 2 != p[j]) {
                 valid = false;
                 break;
             }
         }
+
         if (valid) {
-            count++;
+            res++;
         }
     }
 
-    cout << count << endl;
+    cout << res << endl;
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted the program for better readability"}

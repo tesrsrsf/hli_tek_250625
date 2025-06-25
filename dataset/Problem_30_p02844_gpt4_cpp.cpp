@@ -113,25 +113,28 @@ Sample Output 3
 #include <set>
 #include <string>
 
+using namespace std;
+
 int main() {
     int N;
-    std::string S;
-    std::cin >> N >> S;
+    string S;
+    cin >> N >> S;
 
-    std::set<std::string> pinCodes;
+    set<string> pos_nums;
 
-    for (int i = 0; i < N - 2; ++i) {
-        for (int j = i + 1; j < N - 1; ++j) {
-            for (int k = j + 1; k < N; ++k) {
-                std::string pin = { S[i], S[j], S[k] };
-                pinCodes.insert(pin);
+    for (int i = 0; i < N - 2; i++) {
+        for (int j = i + 1; j < N - 1; j++) {
+            for (int k = j + 1; k < N; k++) {
+                string pos_num = { S[i], S[j], S[k] };
+                pos_nums.insert(pos_num);
             }
         }
     }
 
-    std::cout << pinCodes.size() << std::endl;
+    cout << pos_nums.size() << endl;
 
     return 0;
 }
 
 
+// {annotation: "added using namespace std to avoid std:: prefix, improves readability, also replaced ++i to i++ to fit my style"}

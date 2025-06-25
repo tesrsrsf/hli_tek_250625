@@ -132,35 +132,41 @@ Then, the sum of the weights is
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_24_p03163_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int w = scanner.nextInt();
         int[] weights = new int[n];
-        long[] values = new long[n];
+        int[] values = new int[n];
+
         for (int i = 0; i < n; i++) {
             weights[i] = scanner.nextInt();
-            values[i] = scanner.nextLong();
+            values[i] = scanner.nextInt();
         }
 
-        long[][] dp = new long[n + 1][w + 1];
+        int[][] dp = new int[n + 1][w + 1];
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= w; j++) {
                 dp[i][j] = dp[i - 1][j];
                 if (j >= weights[i - 1]) {
                     dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - weights[i - 1]] + values[i - 1]);
                 }
+
             }
+
         }
 
-        long max_value = 0;
-        for (int j = 0; j <= w; j++) {
-            max_value = Math.max(max_value, dp[n][j]);
+        int max_val = 0;
+        for (int j = 0; j < w + 1; j++) {
+            max_val = Math.max(max_val, dp[n][j]);
         }
 
-        System.out.println(max_value);
+        System.out.println(max_val);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "closed scanner, replaced unnecessary long with int"}

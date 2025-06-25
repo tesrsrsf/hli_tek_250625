@@ -98,8 +98,15 @@ Sample Output 3
 
 def solve():
     n = int(input())
-    a = [int(input()) for _ in range(n + 1)]
-    b = [int(input()) for _ in range(n)]
+    a_str = input().split()
+    a = []
+    for wrd in a_str:
+        a.append(int(wrd))
+
+    b = []
+    b_str = input().split()
+    for wrd in b_str:
+        b.append(int(wrd))
     
     ans = 0
     for i in range(n):
@@ -107,12 +114,14 @@ def solve():
         ans += take
         a[i] -= take
         b[i] -= take
-        take = min(a[i+1], b[i])
+        take = min(a[i + 1], b[i])
         ans += take
-        a[i+1] -= take
+        a[i + 1] -= take
         
     print(ans)
     
+
 solve()
 
 
+# {annotation: "fixed logic, used another way to get input, an explicit way"}

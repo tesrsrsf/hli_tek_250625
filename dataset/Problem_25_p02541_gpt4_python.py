@@ -62,17 +62,17 @@ Sample Output 2
 
 
 
-import sys
-
-N = int(sys.stdin.read().strip())
-k = 1
-total_sum = 0
+N = int(input())
+res = 1
+ttl_sum = 0
 
 while True:
-    total_sum += k
-    if total_sum % N == 0:
-        print(k)
+    ttl_sum += res
+    if ttl_sum % N == 0:
+        print(res)
         break
-    k += 1
+
+    res += 1
 
 
+# {annotation: "renamed variable names for better readability"}

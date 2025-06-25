@@ -134,16 +134,27 @@ def solve():
     n = int(input())
     w = int(input())
     items = []
-    for _ in range(n):
-        items.append(list(map(int, input().split())))
+    for i in range(0, n):
+        input_str = input().split()
+        line = []
+        
+        for wrd in input_str:
+            line.append(int(wrd))
+
+        items.append(line)
     
-    dp = [0] * (w + 1)
-    for i in range(n):
+    dp = []
+    for i in range(0, w + 1):
+        dp.append(0)
+
+    for i in range(0, n):
         weight, value = items[i]
         for j in range(w, weight - 1, -1):
             dp[j] = max(dp[j], dp[j - weight] + value)
+
     print(max(dp))
 
 solve()
 
 
+# {annotation: "simplified the way to get input, also reformatted the program to match my style"}

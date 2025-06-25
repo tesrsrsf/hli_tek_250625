@@ -74,20 +74,21 @@ long long gcd(long long a, long long b) {
 }
 
 int main() {
-    long long n;
-    cin >> n;
+    long long N;
+    cin >> N;
 
-    if (n % 2 == 1) {
-        cout << n << endl;
+    if (N % 2 == 1) {
+        cout << N << endl;
     } else {
-        long long temp = n;
-        while (temp % 2 == 0) {
-            temp /= 2;
+        long long res = N;
+        while (res % 2 == 0) {
+            res /= 2;
         }
-        cout << temp << endl;
+        cout << res << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed variables for better clarity"}

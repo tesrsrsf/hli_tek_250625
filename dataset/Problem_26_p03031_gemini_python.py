@@ -188,25 +188,33 @@ Sample Output 3
 
 
 def solve():
-    n, m = map(int, input().split())
+    nm_line = input().split()
+    n, m = int(nm_line[0]), int(nm_line[1])
     switches = []
-    for _ in range(m):
-        line = list(map(int, input().split()))
-        switches.append(line[1:])
+    for i in range(0, m):
+        line_str = input().split()
+        line = []
+        for wrd in line_str:
+            line.append(int(wrd))
+
+        switches.append(line)
     
-    p = list(map(int, input().split()))
+    p = []
+    p_str = input().split()
+    for wrd in p_str:
+        p.append(int(wrd))
     
-    count = 0
-    for i in range(2**n):
+    res = 0
+    for i in range(0, 2**n):
         states = []
-        for j in range(n):
+        for j in range(0, n):
             if (i >> j) & 1:
                 states.append(1)
             else:
                 states.append(0)
         
         lit = True
-        for bulb_idx in range(m):
+        for bulb_idx in range(0, m):
             on_count = 0
             for switch_idx in switches[bulb_idx]:
                 if states[switch_idx - 1] == 1:
@@ -217,10 +225,12 @@ def solve():
                 break
         
         if lit:
-            count += 1
+            res += 1
     
-    print(count)
+    print(res)
     
+
 solve()
 
 
+# {annotation: "renamed variables and changed the way to get input to make the code explicit"}

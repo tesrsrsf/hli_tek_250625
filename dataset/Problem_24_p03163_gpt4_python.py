@@ -130,24 +130,32 @@ Then, the sum of the weights is
 
 
 
-def knapsack(N, W, items):
-    dp = [0] * (W + 1)
+def kinter(W, data):
+    dp = []
+
+    for i in range(0, W + 1):
+        dp.append(0)
     
-    for w, v in items:
+    for w, v in data:
         for j in range(W, w - 1, -1):
             dp[j] = max(dp[j], dp[j - w] + v)
     
     return dp[W]
 
+
 import sys
 input = sys.stdin.read
 
-data = input().splitlines()
-N = int(data[0])
-W = int(data[1])
-items = [tuple(map(int, line.split())) for line in data[2:2 + N]]
+nw_line = input().split()
+N, W = int(nw_line[0]), int(nw_line[1])
+data = []
+for i in range(0, N):
+    item_line = input().split()
+    temp = (int(item_line[0]), int(item_line[1]))
+    data.append(temp)
 
-result = knapsack(N, W, items)
+result = kinter(W, data)
 print(result)
 
 
+# {annotation: "reformatted the program, and rewrote the input and init logic to make it easier to understand"}

@@ -113,13 +113,15 @@ def solve():
     n = int(input())
     s = input()
     
-    pin_codes = set()
+    pos_nums = set()
     
-    for i in range(n - 2):
-        pin_codes.add(s[i:i+3])
+    for i in range(0, n - 2):
+        pos_nums.add(s[i : i + 3])
     
-    print(len(pin_codes))
+    print(len(pos_nums))
+
 
 solve()
 
 
+# {annotation: "reformatted the code to match my style"}

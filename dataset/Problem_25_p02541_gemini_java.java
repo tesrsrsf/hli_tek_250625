@@ -64,7 +64,7 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_25_p02541_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long n = scanner.nextLong();
@@ -72,18 +72,23 @@ public class Main {
             long temp = n;
             for (long k = 1; k <= Math.sqrt(n); k++) {
                 if (n % k == 0) {
-                    long k1 = k;
-                    long k2 = n / k;
-                    if ((k1 + 1) / 2 % temp == 0) {
-                        System.out.println(k1);
+                    long res_1 = k;
+                    long res_2 = n / k;
+                    
+                    if ((res_1 + 1) / 2 % temp == 0) {
+                        System.out.println(res_1);
+                        scanner.close();
                         return;
                     }
-                     if ((k2 + 1) / 2 % temp == 0) {
-                        System.out.println(k2);
+
+                    if ((res_2 + 1) / 2 % temp == 0) {
+                        System.out.println(res_2);
+                        scanner.close();
                         return;
                     }
                 }
             }
+
             System.out.println(n * 2);
         } else {
             if (n % 4 != 0) {
@@ -95,20 +100,27 @@ public class Main {
                         long k1 = k;
                         long k2 = temp / k;
 
-                        if ((k1 + 1) % (n/2) == 0) {
+                        if ((k1 + 1) % (n / 2) == 0) {
                             System.out.println(k1 * 2);
+                            scanner.close();
                             return;
                         }
-                        if ((k2 + 1) % (n/2) == 0) {
+
+                        if ((k2 + 1) % (n / 2) == 0) {
                             System.out.println(k2 * 2);
+                            scanner.close();
                             return;
                         }
                     }
                 }
+
                 System.out.println(n + 1);
             }
         }
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables for better readability"}

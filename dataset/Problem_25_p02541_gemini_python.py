@@ -63,24 +63,26 @@ Sample Output 2
 
 
 def solve():
-    n = int(input())
-    if n % 2 == 1:
-        k = n
-        while (k * (k + 1) // 2) % n != 0:
-            k += n
-        print(k)
+    N = int(input())
+    if N % 2 == 1:
+        res = N
+        while (res * (res + 1) // 2) % N != 0:
+            res += N
+        print(res)
     else:
-        if (n // 2) % 2 == 1:
-            k = n // 2
-            while (k * (k + 1) // 2) % n != 0:
-                k += n // 2
-            print(k)
+        if (N // 2) % 2 == 1:
+            res = N // 2
+            while (res * (res + 1) // 2) % N != 0:
+                res += N // 2
+            print(res)
         else:
-            k = n // 2
-            while (k * (k+1) // 2) % n != 0:
-                k += n // 2
-            print(k)
+            res = N // 2
+            while (res * (res+1) // 2) % N != 0:
+                res += N // 2
+            print(res)
             
+
 solve()
 
 
+# {annotation: "renamed varibles for better readability"}

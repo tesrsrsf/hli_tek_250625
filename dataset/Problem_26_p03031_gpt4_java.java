@@ -189,16 +189,16 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_26_p03031_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int M = scanner.nextInt();
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
         
-        boolean[][] bulbs = new boolean[M][N];
-        int[] p = new int[M];
+        boolean[][] bulbs = new boolean[m][n];
+        int[] p = new int[m];
         
-        for (int i = 0; i < M; i++) {
+        for (int i = 0; i < m; i++) {
             int k = scanner.nextInt();
             for (int j = 0; j < k; j++) {
                 bulbs[i][scanner.nextInt() - 1] = true;
@@ -206,13 +206,13 @@ public class Main {
             p[i] = scanner.nextInt();
         }
         
-        int validCombinations = 0;
-        for (int mask = 0; mask < (1 << N); mask++) {
+        int res = 0;
+        for (int msk = 0; msk < (1 << n); msk++) {
             boolean isValid = true;
-            for (int i = 0; i < M; i++) {
+            for (int i = 0; i < m; i++) {
                 int count = 0;
-                for (int j = 0; j < N; j++) {
-                    if (bulbs[i][j] && ((mask >> j) & 1) == 1) {
+                for (int j = 0; j < n; j++) {
+                    if (bulbs[i][j] && ((msk >> j) & 1) == 1) {
                         count++;
                     }
                 }
@@ -222,13 +222,14 @@ public class Main {
                 }
             }
             if (isValid) {
-                validCombinations++;
+                res++;
             }
         }
         
-        System.out.println(validCombinations);
+        System.out.println(res);
         scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables and reformatted structure for better readability"}

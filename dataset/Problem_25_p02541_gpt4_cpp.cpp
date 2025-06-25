@@ -64,19 +64,21 @@ Sample Output 2
 
 #include <iostream>
 
+using namespace std;
+
 int main() {
     long long N;
-    std::cin >> N;
+    cin >> N;
     
-    long long k = 1, sum = 0;
+    long long res = 1, sum = 0;
     
     while (true) {
-        sum += k;
+        sum += res;
         if (sum % N == 0) {
-            std::cout << k << std::endl;
+            cout << res << endl;
             break;
         }
-        k++;
+        res++;
     }
     
     return 0;

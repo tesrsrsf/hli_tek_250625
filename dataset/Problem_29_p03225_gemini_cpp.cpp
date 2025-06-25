@@ -132,45 +132,46 @@ Sample Output 2
 
 using namespace std;
 
-int manhattanDistance(int x1, int y1, int x2, int y2) {
+int calc_manhattan_distance(int x1, int y1, int x2, int y2) {
     return abs(x1 - x2) + abs(y1 - y2);
 }
 
 int main() {
-    int H, W;
-    cin >> H >> W;
+    int h, w;
+    cin >> h >> w;
 
     vector<pair<int, int>> coins;
-    for (int i = 0; i < H; ++i) {
+    for (int i = 0; i < h; i++) {
         string row;
         cin >> row;
-        for (int j = 0; j < W; ++j) {
+        for (int j = 0; j < w; j++) {
             if (row[j] == '#') {
                 coins.push_back({i, j});
             }
         }
     }
 
-    int coinCount = coins.size();
-    int count = 0;
+    int coin_count = coins.size();
+    int res = 0;
 
-    for (int i = 0; i < coinCount; ++i) {
-        for (int j = i + 1; j < coinCount; ++j) {
-            for (int k = j + 1; k < coinCount; ++k) {
-                int d1 = manhattanDistance(coins[i].first, coins[i].second, coins[j].first, coins[j].second);
-                int d2 = manhattanDistance(coins[i].first, coins[i].second, coins[k].first, coins[k].second);
-                int d3 = manhattanDistance(coins[j].first, coins[j].second, coins[k].first, coins[k].second);
+    for (int i = 0; i < coin_count; i++) {
+        for (int j = i + 1; j < coin_count; j++) {
+            for (int k = j + 1; k < coin_count; k++) {
+                int d1 = calc_manhattan_distance(coins[i].first, coins[i].second, coins[j].first, coins[j].second);
+                int d2 = calc_manhattan_distance(coins[i].first, coins[i].second, coins[k].first, coins[k].second);
+                int d3 = calc_manhattan_distance(coins[j].first, coins[j].second, coins[k].first, coins[k].second);
 
                 if (d1 == d2 && d2 == d3) {
-                    count++;
+                    res++;
                 }
             }
         }
     }
 
-    cout << count << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed identifiers into my style, also using i++ instead of ++i"}

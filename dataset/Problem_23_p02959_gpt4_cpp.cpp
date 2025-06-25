@@ -103,43 +103,44 @@ Sample Output 3
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
+    int n;
+    cin >> n;
 
-    vector<long long> A(N + 1), B(N);
-    for (int i = 0; i < N + 1; i++) {
-        cin >> A[i];
+    vector<int> mons_num(n + 1), hero_num(n);
+    for (int i = 0; i < n + 1; i++) {
+        cin >> mons_num[i];
     }
-    for (int i = 0; i < N; i++) {
-        cin >> B[i];
+    for (int i = 0; i < n; i++) {
+        cin >> hero_num[i];
     }
 
-    long long totalDefeated = 0;
+    int res = 0;
 
-    for (int i = 0; i < N; i++) {
-        long long defeat = min(B[i], A[i] + A[i + 1]);
-        totalDefeated += defeat;
+    for (int i = 0; i < n; i++) {
+        int defeat = min(hero_num[i], mons_num[i] + mons_num[i + 1]);
+        res += defeat;
 
-        long long remaining = B[i] - defeat;
+        int remaining = hero_num[i] - defeat;
 
         if (remaining > 0) {
-            if (defeat <= A[i]) {
-                A[i] -= defeat;
+            if (defeat <= mons_num[i]) {
+                mons_num[i] -= defeat;
             } else {
-                remaining -= A[i];
-                A[i] = 0;
-                A[i + 1] -= min(remaining, A[i + 1]);
+                remaining -= mons_num[i];
+                mons_num[i] = 0;
+                mons_num[i + 1] -= min(remaining, mons_num[i + 1]);
             }
         } else {
-            A[i] -= defeat;
+            mons_num[i] -= defeat;
         }
     }
     
-    totalDefeated += min(A[N], B[N - 1]);
+    res += min(mons_num[n], hero_num[n - 1]);
 
-    cout << totalDefeated << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variables to improve readabilities"}

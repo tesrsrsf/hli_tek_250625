@@ -1,5 +1,5 @@
 Result of C++:
-20.0000000
-20.0000000
-14.5333333
+Considering substring: 022
+Considering substring: 224
+2
 

@@ -189,45 +189,54 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_26_p03031_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int M = scanner.nextInt();
-        int[][] connections = new int[M][];
-        for (int i = 0; i < M; i++) {
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        int[][] connections = new int[m][];
+        for (int i = 0; i < m; i++) {
             int k = scanner.nextInt();
             connections[i] = new int[k];
             for (int j = 0; j < k; j++) {
                 connections[i][j] = scanner.nextInt() - 1;
             }
         }
-        int[] parity = new int[M];
-        for (int i = 0; i < M; i++) {
+
+        int[] parity = new int[m];
+        for (int i = 0; i < m; i++) {
             parity[i] = scanner.nextInt();
         }
-        int count = 0;
-        for (int i = 0; i < (1 << N); i++) {
+
+        int res = 0;
+        for (int i = 0; i < (1 << n); i++) {
             boolean allLit = true;
-            for (int j = 0; j < M; j++) {
+            for (int j = 0; j < m; j++) {
                 int onCount = 0;
+
                 for (int switchIndex : connections[j]) {
                     if ((i >> switchIndex & 1) == 1) {
                         onCount++;
                     }
                 }
+
                 if (onCount % 2 != parity[j]) {
                     allLit = false;
                     break;
                 }
             }
+
             if (allLit) {
-                count++;
+                res++;
             }
         }
-        System.out.println(count);
+
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "avoid using upper case for variable names"}

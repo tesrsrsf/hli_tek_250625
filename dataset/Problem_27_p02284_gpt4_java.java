@@ -84,95 +84,95 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 import java.util.*;
 import java.io.*;
 
-class TreeNode {
+class Node {
     int key;
-    TreeNode left, right;
+    Node left, right;
 
-    public TreeNode(int item) {
+    public Node(int item) {
         key = item;
         left = right = null;
     }
 }
 
-class BinarySearchTree {
-    TreeNode root;
+class BST {
+    Node root;
 
     void insert(int key) {
-        root = insertRec(root, key);
+        root = insertExe(root, key);
     }
 
-    TreeNode insertRec(TreeNode root, int key) {
+    Node insertExe(Node root, int key) {
         if (root == null) {
-            root = new TreeNode(key);
+            root = new Node(key);
             return root;
         }
 
         if (key < root.key)
-            root.left = insertRec(root.left, key);
+            root.left = insertExe(root.left, key);
         else if (key > root.key)
-            root.right = insertRec(root.right, key);
+            root.right = insertExe(root.right, key);
 
         return root;
     }
 
     boolean find(int key) {
-        return findRec(root, key);
+        return findExe(root, key);
     }
 
-    boolean findRec(TreeNode root, int key) {
+    boolean findExe(Node root, int key) {
         if (root == null) {
             return false;
         }
         if (root.key == key) {
             return true;
         }
-        return key < root.key ? findRec(root.left, key) : findRec(root.right, key);
+        return key < root.key ? findExe(root.left, key) : findExe(root.right, key);
     }
 
     void print() {
         List<Integer> inorderList = new ArrayList<>();
         List<Integer> preorderList = new ArrayList<>();
-        inorderRec(root, inorderList);
-        preorderRec(root, preorderList);
+        inorder(root, inorderList);
+        preorder(root, preorderList);
         System.out.print(" " + String.join(" ", inorderList.stream().map(String::valueOf).toArray(String[]::new)));
         System.out.println();
         System.out.print(" " + String.join(" ", preorderList.stream().map(String::valueOf).toArray(String[]::new)));
         System.out.println();
     }
 
-    void inorderRec(TreeNode root, List<Integer> inorderList) {
+    void inorder(Node root, List<Integer> inorderList) {
         if (root != null) {
-            inorderRec(root.left, inorderList);
+            inorder(root.left, inorderList);
             inorderList.add(root.key);
-            inorderRec(root.right, inorderList);
+            inorder(root.right, inorderList);
         }
     }
 
-    void preorderRec(TreeNode root, List<Integer> preorderList) {
+    void preorder(Node root, List<Integer> preorderList) {
         if (root != null) {
             preorderList.add(root.key);
-            preorderRec(root.left, preorderList);
-            preorderRec(root.right, preorderList);
+            preorder(root.left, preorderList);
+            preorder(root.right, preorderList);
         }
     }
 }
 
-public class Main {
+public class Problem_27_p02284_gpt4_java {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int m = Integer.parseInt(reader.readLine());
-        BinarySearchTree bst = new BinarySearchTree();
+        BST bst = new BST();
 
         for (int i = 0; i < m; i++) {
             String[] input = reader.readLine().split(" ");
-            String command = input[0];
-            if (command.equals("insert")) {
+            String cmd = input[0];
+            if (cmd.equals("insert")) {
                 int k = Integer.parseInt(input[1]);
                 bst.insert(k);
-            } else if (command.equals("find")) {
+            } else if (cmd.equals("find")) {
                 int k = Integer.parseInt(input[1]);
                 System.out.println(bst.find(k) ? "yes" : "no");
-            } else if (command.equals("print")) {
+            } else if (cmd.equals("print")) {
                 bst.print();
             }
         }
@@ -180,3 +180,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed identifiers for better understanding"}

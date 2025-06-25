@@ -109,17 +109,18 @@ Sample Output 3
 
 
 
-N = int(input())
-S = input().strip()
+n = int(input())
+s = input()
 
-pin_codes = set()
+pos_nums = set()
 
-for i in range(N - 2):
-    for j in range(i + 1, N - 1):
-        for k in range(j + 1, N):
-            pin_code = S[i] + S[j] + S[k]
-            pin_codes.add(pin_code)
+for i in range(0, n - 2):
+    for j in range(i + 1, n - 1):
+        for k in range(j + 1, n):
+            num = s[i] + s[j] + s[k]
+            pos_nums.add(num)
 
-print(len(pin_codes))
+res = len(pos_nums)
+print(res)
 
-
+# {annotation: "renamed variables to fit my style, removed unnecessary statement"}

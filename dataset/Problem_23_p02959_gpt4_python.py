@@ -116,15 +116,20 @@ def max_defeated_monsters(N, A, B):
 
 
 if __name__ == "__main__":
-    import sys
-    input = sys.stdin.read
-    data = input().split()
+    N = int(input())
+    mons_num = []
+    hero_num = []
+    mons_num_str = input().split()
+    hero_num_str = input().split()
+
+    for mons in mons_num_str:
+        mons_num.append(int(mons))
+
+    for hero in hero_num_str:
+        hero_num.append(int(hero))
     
-    N = int(data[0])
-    A = list(map(int, data[1:N + 2]))
-    B = list(map(int, data[N + 2:2 * N + 2]))
-    
-    result = max_defeated_monsters(N, A, B)
+    result = max_defeated_monsters(N, mons_num, hero_num)
     print(result)
 
 
+# {annotation: "changed the way to get input, renamed variables for better readability"}

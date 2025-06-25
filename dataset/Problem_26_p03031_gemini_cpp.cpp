@@ -198,43 +198,49 @@ int main() {
 
     vector<vector<int>> bulbs(m);
     vector<int> k(m);
-    for (int i = 0; i < m; ++i) {
+    for (int i = 0; i < m; i++) {
         cin >> k[i];
         bulbs[i].resize(k[i]);
-        for (int j = 0; j < k[i]; ++j) {
+
+        for (int j = 0; j < k[i]; j++) {
             cin >> bulbs[i][j];
             bulbs[i][j]--;
+
         }
+
     }
 
     vector<int> p(m);
-    for (int i = 0; i < m; ++i) {
+    for (int i = 0; i < m; i++) {
         cin >> p[i];
     }
 
-    int count = 0;
-    for (int i = 0; i < (1 << n); ++i) {
+    int res = 0;
+    for (int i = 0; i < (1 << n); i++) {
         bool all_lit = true;
-        for (int j = 0; j < m; ++j) {
+        for (int j = 0; j < m; j++) {
             int on_count = 0;
             for (int switch_index : bulbs[j]) {
                 if ((i >> switch_index) & 1) {
                     on_count++;
                 }
             }
+
             if (on_count % 2 != p[j]) {
                 all_lit = false;
                 break;
             }
         }
+
         if (all_lit) {
-            count++;
+            res++;
         }
     }
 
-    cout << count << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variable names for better readability"}

@@ -112,24 +112,27 @@ Sample Output 3
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_30_p02844_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
-        String S = scanner.next();
-        HashSet<String> pinCodes = new HashSet<>();
+        String s = scanner.next();
+        HashSet<String> pos_nums = new HashSet<>();
 
         for (int i = 0; i < N; i++) {
             for (int j = i + 1; j < N; j++) {
                 for (int k = j + 1; k < N; k++) {
-                    String pinCode = "" + S.charAt(i) + S.charAt(j) + S.charAt(k);
-                    pinCodes.add(pinCode);
+                    String num = "" + s.charAt(i) + s.charAt(j) + s.charAt(k);
+                    pos_nums.add(num);
                 }
             }
         }
 
-        System.out.println(pinCodes.size());
+        System.out.println(pos_nums.size());
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "reformatted the code to improve readability, renamed variables to fit my style"}

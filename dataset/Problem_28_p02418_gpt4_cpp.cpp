@@ -50,21 +50,22 @@ No
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 int main() {
-    std::string s, p;
-    std::cin >> s >> p;
+    string s, p;
+    cin >> s >> p;
 
-    // Create a new string that simulates the ring
-    std::string ring_text = s + s;
+    string temp_str = s + s;
 
-    // Check if pattern p is in the ring_text
-    if (ring_text.find(p) != std::string::npos) {
-        std::cout << "Yes" << std::endl;
+    if (temp_str.find(p) != string::npos) {
+        cout << "Yes" << endl;
     } else {
-        std::cout << "No" << std::endl;
+        cout << "No" << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed variables to fit my style, also removed unnecessary comments and added namespace std for better readability"}

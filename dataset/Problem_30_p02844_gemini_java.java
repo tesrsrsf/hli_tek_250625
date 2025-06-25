@@ -111,20 +111,20 @@ Sample Output 3
 
 import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
-public class Main {
+public class Problem_30_p02844_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         String s = scanner.next();
-        Set<String> pinCodes = new HashSet<>();
-        for (int i = 0; i <= n - 3; i++) {
-            pinCodes.add(s.substring(i, i + 3));
+        HashSet<String> pos_nums = new HashSet<>();
+        for (int i = 0; i < n - 2; i++) {
+            pos_nums.add(s.substring(i, i + 3));
         }
-        System.out.println(pinCodes.size());
+        System.out.println(pos_nums.size());
         scanner.close();
     }
 }
 
 
+// {annotation: "reformatted the code to fit my style, avoid using set, using hashset instead to be more explicit"}

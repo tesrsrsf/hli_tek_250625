@@ -31,6 +31,16 @@ p03130 gemini
 p03130 gpt4
 p02238 gemini
 p02238 gpt4
+p02959 gemini
+p02959 gpt4
+p02541 gpt4
+p03031 gemini
+p02284 gemini
+p02284 gpt4
+p02418 gemini
+p02418 gpt4
+p03225 gemini
+p02844 gpt4
 
 [cpp]
 p02411 gemini
@@ -57,6 +67,16 @@ p03330 gpt4
 p02238 gemini
 p02238 gpt4
 p03744 gemini
+p02959 gemini
+p02959 gpt4
+p02541 gpt4
+p03031 gemini
+p02284 gemini
+p02284 gpt4
+p02418 gemini
+p02418 gpt4
+p03225 gemini
+p02844 gpt4
 
 [java]
 p02411 gemini
@@ -83,6 +103,17 @@ p03130 gpt4
 p03330 gpt4
 p02238 gemini
 p02238 gpt4
+p02959 gemini
+p02959 gpt4
+p02541 gpt4
+p03031 gemini
+p02284 gemini
+p02284 gpt4
+p02418 gemini
+p02418 gpt4
+p03225 gemini
+p03225 gpt4
+p02844 gpt4
 
 
 

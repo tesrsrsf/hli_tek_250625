@@ -131,16 +131,20 @@ Sample Output 2
 
 using namespace std;
 
+int calc_manhattan_distance(pair<int, int> a, pair<int, int> b) {
+    return abs(a.first - b.first) + abs(a.second - b.second);
+}  
+
+
 int main() {
-    int H, W;
-    cin >> H >> W;
+    int h, w;
+    cin >> h >> w;
     vector<pair<int, int>> coins;
 
-    // Reading the grid and storing coin positions
-    for (int i = 1; i <= H; ++i) {
+    for (int i = 1; i < h + 1; i++) {
         string line;
         cin >> line;
-        for (int j = 1; j <= W; ++j) {
+        for (int j = 1; j < w + 1; j++) {
             if (line[j - 1] == '#') {
                 coins.emplace_back(i, j);
             }
@@ -150,25 +154,24 @@ int main() {
     int n = coins.size();
     unordered_map<int, int> distanceCount;
 
-    // Calculate distances and count triple candidate distances
-    for (int i = 0; i < n; ++i) {
-        for (int j = i + 1; j < n; ++j) {
-            int dist = abs(coins[i].first - coins[j].first) + abs(coins[i].second - coins[j].second);
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            int dist = calc_manhattan_distance(coins[i], coins[j]);
             distanceCount[dist]++;
         }
     }
 
-    long long result = 0;
+    long long res = 0;
 
-    // Calculate valid triples for each unique distance
     for (auto& [dist, count] : distanceCount) {
         if (count >= 2) {
-            result += (count * (count - 1)) / 2; // Combinations of 2 coins from count
+            res += (count * (count - 1)) / 2;
         }
     }
 
-    cout << result << endl;
+    cout << res << endl;
     return 0;
 }
 
 
+// {annotation: "reorganized the code for clarity, created a new function to calculate Manhattan distance"}

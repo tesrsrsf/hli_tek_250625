@@ -106,32 +106,33 @@ int main() {
     int n;
     cin >> n;
 
-    vector<long long> a(n + 1);
-    for (int i = 0; i <= n; ++i) {
+    vector<int> a(n + 1);
+    for (int i = 0; i < n + 1; i++) {
         cin >> a[i];
     }
 
-    vector<long long> b(n);
-    for (int i = 0; i < n; ++i) {
+    vector<int> b(n);
+    for (int i = 0; i < n; i++) {
         cin >> b[i];
     }
 
-    long long total_defeated = 0;
-    for (int i = 0; i < n; ++i) {
-        long long defeated_in_i = min(a[i], b[i]);
+    int res = 0;
+    for (int i = 0; i < n; i++) {
+        int defeated_in_i = min(a[i], b[i]);
         a[i] -= defeated_in_i;
         b[i] -= defeated_in_i;
-        total_defeated += defeated_in_i;
+        res += defeated_in_i;
 
-        long long defeated_in_i_plus_1 = min(a[i + 1], b[i]);
+        int defeated_in_i_plus_1 = min(a[i + 1], b[i]);
         a[i + 1] -= defeated_in_i_plus_1;
         b[i] -= defeated_in_i_plus_1;
-        total_defeated += defeated_in_i_plus_1;
+        res += defeated_in_i_plus_1;
     }
 
-    cout << total_defeated << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "replaced long long with int since its unnecessary at all, reformatted the program with my style"}

@@ -103,28 +103,28 @@ class BST {
     }
 
     void insert(int key) {
-        root = insertRec(root, key);
+        root = insertExe(root, key);
     }
 
-    Node insertRec(Node root, int key) {
+    Node insertExe(Node root, int key) {
         if (root == null) {
             root = new Node(key);
             return root;
         }
 
         if (key < root.key)
-            root.left = insertRec(root.left, key);
+            root.left = insertExe(root.left, key);
         else if (key > root.key)
-            root.right = insertRec(root.right, key);
+            root.right = insertExe(root.right, key);
 
         return root;
     }
 
     boolean find(int key) {
-        return findRec(root, key);
+        return findeXE(root, key);
     }
 
-    boolean findRec(Node root, int key) {
+    boolean findeXE(Node root, int key) {
         if (root == null)
             return false;
 
@@ -132,45 +132,45 @@ class BST {
             return true;
 
         if (key < root.key)
-            return findRec(root.left, key);
+            return findeXE(root.left, key);
         else
-            return findRec(root.right, key);
+            return findeXE(root.right, key);
     }
 
-    List<Integer> inorder() {
-        List<Integer> result = new ArrayList<>();
-        inorderRec(root, result);
+    ArrayList<Integer> inorder() {
+        ArrayList<Integer> result = new ArrayList<>();
+        inorderExe(root, result);
         return result;
     }
 
-    void inorderRec(Node root, List<Integer> result) {
+    void inorderExe(Node root, List<Integer> result) {
         if (root != null) {
-            inorderRec(root.left, result);
+            inorderExe(root.left, result);
             result.add(root.key);
-            inorderRec(root.right, result);
+            inorderExe(root.right, result);
         }
     }
 
-    List<Integer> preorder() {
-        List<Integer> result = new ArrayList<>();
-        preorderRec(root, result);
+    ArrayList<Integer> preorder() {
+        ArrayList<Integer> result = new ArrayList<>();
+        preorderExe(root, result);
         return result;
     }
 
-    void preorderRec(Node root, List<Integer> result) {
+    void preorderExe(Node root, List<Integer> result) {
         if (root != null) {
             result.add(root.key);
-            preorderRec(root.left, result);
-            preorderRec(root.right, result);
+            preorderExe(root.left, result);
+            preorderExe(root.right, result);
         }
     }
 }
 
-public class Main {
+public class Problem_27_p02284_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int m = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         BST bst = new BST();
 
@@ -190,9 +190,10 @@ public class Main {
                 } else {
                     System.out.println("no");
                 }
+
             } else if (operation.equals("print")) {
-                List<Integer> inorderList = bst.inorder();
-                List<Integer> preorderList = bst.preorder();
+                ArrayList<Integer> inorderList = bst.inorder();
+                ArrayList<Integer> preorderList = bst.preorder();
 
                 for (int key : inorderList) {
                     System.out.print(" " + key);
@@ -210,3 +211,4 @@ public class Main {
 }
 
 
+// {annotation: "replaced list with more certain arraylist, also renamed identifiers to fit my style"}

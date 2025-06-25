@@ -94,22 +94,27 @@ struct Node {
     Node(int k) : key(k), left(nullptr), right(nullptr) {}
 };
 
+
 Node* insert(Node* root, int k) {
     if (root == nullptr) {
         return new Node(k);
     }
+
     if (k < root->key) {
         root->left = insert(root->left, k);
     } else if (k > root->key) {
         root->right = insert(root->right, k);
     }
+
     return root;
 }
+
 
 bool find(Node* root, int k) {
     if (root == nullptr) {
         return false;
     }
+
     if (k == root->key) {
         return true;
     } else if (k < root->key) {
@@ -119,6 +124,7 @@ bool find(Node* root, int k) {
     }
 }
 
+
 void inorder(Node* root, vector<int>& result) {
     if (root != nullptr) {
         inorder(root->left, result);
@@ -126,6 +132,7 @@ void inorder(Node* root, vector<int>& result) {
         inorder(root->right, result);
     }
 }
+
 
 void preorder(Node* root, vector<int>& result) {
     if (root != nullptr) {
@@ -135,13 +142,15 @@ void preorder(Node* root, vector<int>& result) {
     }
 }
 
-void deleteTree(Node* root) {
+
+void nuke(Node* root) {
     if (root != nullptr) {
-        deleteTree(root->left);
-        deleteTree(root->right);
+        nuke(root->left);
+        nuke(root->right);
         delete root;
     }
 }
+
 
 int main() {
     int m;
@@ -149,15 +158,15 @@ int main() {
 
     Node* root = nullptr;
 
-    for (int i = 0; i < m; ++i) {
-        string command;
-        cin >> command;
+    for (int i = 0; i < m; i++) {
+        string cmd;
+        cin >> cmd;
 
-        if (command == "insert") {
+        if (cmd == "insert") {
             int k;
             cin >> k;
             root = insert(root, k);
-        } else if (command == "find") {
+        } else if (cmd == "find") {
             int k;
             cin >> k;
             if (find(root, k)) {
@@ -165,24 +174,27 @@ int main() {
             } else {
                 cout << "no" << endl;
             }
-        } else if (command == "print") {
-            vector<int> inorderResult;
-            inorder(root, inorderResult);
-            for (int key : inorderResult) {
-                cout << " " << key;
+        } else if (cmd == "print") {
+            vector<int> inoRes;
+            inorder(root, inoRes);
+            cout << " ";
+            for (int key : inoRes) {
+                cout << key << " ";
             }
             cout << endl;
 
-            vector<int> preorderResult;
-            preorder(root, preorderResult);
-            for (int key : preorderResult) {
-                cout << " " << key;
+            vector<int> proRes;
+            preorder(root, proRes);
+            cout << " ";
+            for (int key : proRes) {
+                cout << key << " ";
             }
             cout << endl;
         }
     }
-    deleteTree(root);
+    nuke(root);
     return 0;
 }
 
 
+// {annotation: "renamed variables and modified output structure to fit my style"}

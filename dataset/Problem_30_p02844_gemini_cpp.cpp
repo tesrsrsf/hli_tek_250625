@@ -121,14 +121,16 @@ int main() {
   string s;
   cin >> s;
 
-  set<string> pin_codes;
-  for (int i = 0; i <= n - 3; ++i) {
-    pin_codes.insert(s.substr(i, 3));
+  set<string> pos_strs;
+  for (int i = 0; i < n - 2; i++) {
+    string temp = s.substr(i, 3);
+    pos_strs.insert(temp);
   }
 
-  cout << pin_codes.size() << endl;
+  cout << pos_strs.size() << endl;
 
   return 0;
 }
 
 
+// {annotation: "reformatted the code to fit my style"}

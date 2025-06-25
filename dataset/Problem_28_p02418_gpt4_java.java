@@ -49,18 +49,17 @@ No
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_28_p02418_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
         String p = scanner.nextLine();
+
         scanner.close();
 
-        // Create a new string by concatenating s with itself
-        String doubledS = s + s;
+        String temp_str = s + s;
 
-        // Check if pattern p is in the doubled string
-        if (doubledS.contains(p)) {
+        if (temp_str.contains(p)) { // if subseq p in temp_str
             System.out.println("Yes");
         } else {
             System.out.println("No");
@@ -69,3 +68,4 @@ public class Main {
 }
 
 
+// {annotation: "added comment for clarity, also reformatted code for better readability"}

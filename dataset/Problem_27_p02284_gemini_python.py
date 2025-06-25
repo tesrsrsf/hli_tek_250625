@@ -87,9 +87,11 @@ class Node:
         self.left = None
         self.right = None
 
+
 class BST:
     def __init__(self):
         self.root = None
+
 
     def insert(self, key):
         node = Node(key)
@@ -114,6 +116,7 @@ class BST:
             else:
                 return
 
+
     def find(self, key):
         curr = self.root
         while curr:
@@ -125,41 +128,54 @@ class BST:
                 curr = curr.right
         return "no"
 
+
     def inorder(self):
         result = []
-        def inorder_recursive(node):
+        def inorderExe(node):
             if node:
-                inorder_recursive(node.left)
+                inorderExe(node.left)
                 result.append(node.key)
-                inorder_recursive(node.right)
-        inorder_recursive(self.root)
+                inorderExe(node.right)
+        inorderExe(self.root)
         return result
+
 
     def preorder(self):
         result = []
-        def preorder_recursive(node):
+        def preorderExe(node):
             if node:
                 result.append(node.key)
-                preorder_recursive(node.left)
-                preorder_recursive(node.right)
-        preorder_recursive(self.root)
+                preorderExe(node.left)
+                preorderExe(node.right)
+        preorderExe(self.root)
         return result
+
 
 m = int(input())
 bst = BST()
-for _ in range(m):
+for i in range(0, m):
     line = input().split()
-    operation = line[0]
-    if operation == "insert":
+    cmd = line[0]
+    if cmd == "insert":
         key = int(line[1])
         bst.insert(key)
-    elif operation == "find":
+    elif cmd == "find":
         key = int(line[1])
         print(bst.find(key))
-    elif operation == "print":
+    elif cmd == "print":
         inorder_result = bst.inorder()
         preorder_result = bst.preorder()
-        print(" " + " ".join(map(str, inorder_result)))
-        print(" " + " ".join(map(str, preorder_result)))
+        
+        ino_res = " "
+        pro_res = " "
+        for wrd in inorder_result:
+            ino_res = ino_res + str(wrd) + " "
+
+        for wrd in preorder_result:
+            pro_res = pro_res + str(wrd) + " "
+
+        print(ino_res)
+        print(pro_res)
 
 
+# {annotation: "modified the way to output, also renamed some methods in my style"}

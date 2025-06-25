@@ -125,8 +125,8 @@ Sample Output 2
 
 
 
-def count_triples(H, W, grid):
-    coins = [(i + 1, j + 1) for i in range(H) for j in range(W) if grid[i][j] == '#']
+def counters(h, w, grid):
+    coins = [(i + 1, j + 1) for i in range(h) for j in range(w) if grid[i][j] == '#']
     n = len(coins)
     distance_map = {}
     
@@ -142,23 +142,22 @@ def count_triples(H, W, grid):
     count = 0
     
     for dist, pairs in distance_map.items():
-        pair_count = len(pairs)
-        if pair_count >= 2:  # We need at least two pairs to form a triple
-            count += pair_count * (pair_count - 1) // 2
+        pair_num = len(pairs)
+        if pair_num >= 2:  # need at least two pairs
+            count += pair_num * (pair_num - 1) // 2
             
     return count
 
-import sys
-input = sys.stdin.read
-data = input().splitlines()
 
-# Read input
-H = int(data[0])
-W = int(data[1])
-grid = data[2:H + 2]
+hw_line = input().split()
+h = int(hw_line[0])
+w = int(hw_line[1])
+space = []
+for i in range(0, h):
+    space.append(input())
 
-# Solve the problem
-result = count_triples(H, W, grid)
-print(result)
+res = counters(h, w, space)
+print(res)
 
 
+# {annotation: "renamed identifiers to fit my style, used more explicit method to initialize data"}

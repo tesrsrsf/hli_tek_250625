@@ -87,12 +87,12 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 using namespace std;
 
-struct TreeNode {
+struct Node {
     int key;
-    TreeNode* left;
-    TreeNode* right;
+    Node* left;
+    Node* right;
 
-    TreeNode(int k) : key(k), left(nullptr), right(nullptr) {}
+    Node(int k) : key(k), left(nullptr), right(nullptr) {}
 };
 
 class BST {
@@ -110,8 +110,8 @@ public:
     void print() {
         vector<int> inorder_result;
         vector<int> preorder_result;
-        inorderTraversal(root, inorder_result);
-        preorderTraversal(root, preorder_result);
+        inorder(root, inorder_result);
+        preorder(root, preorder_result);
 
         for (int key : inorder_result) {
             cout << " " << key;
@@ -124,11 +124,11 @@ public:
     }
 
 private:
-    TreeNode* root;
+    Node* root;
 
-    TreeNode* insertRec(TreeNode* node, int k) {
+    Node* insertRec(Node* node, int k) {
         if (!node) {
-            return new TreeNode(k);
+            return new Node(k);
         }
         if (k < node->key) {
             node->left = insertRec(node->left, k);
@@ -138,7 +138,7 @@ private:
         return node;
     }
 
-    bool findRec(TreeNode* node, int k) {
+    bool findRec(Node* node, int k) {
         if (!node) {
             return false;
         }
@@ -148,18 +148,18 @@ private:
         return k < node->key ? findRec(node->left, k) : findRec(node->right, k);
     }
 
-    void inorderTraversal(TreeNode* node, vector<int>& result) {
+    void inorder(Node* node, vector<int>& result) {
         if (!node) return;
-        inorderTraversal(node->left, result);
+        inorder(node->left, result);
         result.push_back(node->key);
-        inorderTraversal(node->right, result);
+        inorder(node->right, result);
     }
 
-    void preorderTraversal(TreeNode* node, vector<int>& result) {
+    void preorder(Node* node, vector<int>& result) {
         if (!node) return;
         result.push_back(node->key);
-        preorderTraversal(node->left, result);
-        preorderTraversal(node->right, result);
+        preorder(node->left, result);
+        preorder(node->right, result);
     }
 };
 
@@ -167,18 +167,18 @@ int main() {
     int m;
     cin >> m;
     BST bst;
-    string command;
+    string cmd;
     int k;
 
-    for (int i = 0; i < m; ++i) {
-        cin >> command;
-        if (command == "insert") {
+    for (int i = 0; i < m; i++) {
+        cin >> cmd;
+        if (cmd == "insert") {
             cin >> k;
             bst.insert(k);
-        } else if (command == "find") {
+        } else if (cmd == "find") {
             cin >> k;
             cout << (bst.find(k) ? "yes" : "no") << endl;
-        } else if (command == "print") {
+        } else if (cmd == "print") {
             bst.print();
         }
     }
@@ -187,3 +187,4 @@ int main() {
 }
 
 
+// {annotation: "renamed identifiers for better understanding"}

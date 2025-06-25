@@ -47,16 +47,15 @@ No
 
 
 
-s = input().strip()
-p = input().strip()
+s = input()
+p = input()
 
-# Create the ring by concatenating the string to itself
-ring_s = s + s
+repeat_str = s + s
 
-# Check if the pattern p exists in the ring string
-if p in ring_s:
+if p in repeat_str:
     print("Yes")
 else:
     print("No")
 
 
+# {annotation: "renamed variable for better clarity"}

@@ -81,58 +81,68 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 
 
-class TreeNode:
+class Node:
     def __init__(self, key):
         self.left = None
         self.right = None
         self.val = key
 
-class BinarySearchTree:
+
+class BST:
     def __init__(self):
         self.root = None
 
+
     def insert(self, key):
         if self.root is None:
-            self.root = TreeNode(key)
+            self.root = Node(key)
         else:
-            self._insert_rec(self.root, key)
+            self.insert_next(self.root, key)
 
-    def _insert_rec(self, node, key):
+
+    def insert_next(self, node, key):
         if key < node.val:
             if node.left is None:
-                node.left = TreeNode(key)
+                node.left = Node(key)
             else:
-                self._insert_rec(node.left, key)
+                self.insert_next(node.left, key)
         else:
             if node.right is None:
-                node.right = TreeNode(key)
+                node.right = Node(key)
             else:
-                self._insert_rec(node.right, key)
+                self.insert_next(node.right, key)
+
 
     def find(self, key):
-        return self._find_rec(self.root, key)
+        return self.find_exe(self.root, key)
 
-    def _find_rec(self, node, key):
+
+    def find_exe(self, node, key):
         if node is None:
             return False
         if key == node.val:
             return True
         elif key < node.val:
-            return self._find_rec(node.left, key)
+            return self.find_exe(node.left, key)
         else:
-            return self._find_rec(node.right, key)
+            return self.find_exe(node.right, key)
+
 
     def inorder(self):
-        return self._inorder_rec(self.root)
+        return self.inorder_exe(self.root)
 
-    def _inorder_rec(self, node):
-        return self._inorder_rec(node.left) + [node.val] + self._inorder_rec(node.right) if node else []
+
+    def inorder_exe(self, node):
+        return self.inorder_exe(node.left) + [node.val] + self.inorder_exe(node.right) if node else []
+
 
     def preorder(self):
-        return self._preorder_rec(self.root)
+        return self.preorder_exe(self.root)
 
-    def _preorder_rec(self, node):
-        return [node.val] + self._preorder_rec(node.left) + self._preorder_rec(node.right) if node else []
+
+    def preorder_exe(self, node):
+        return [node.val] + self.preorder_exe(node.left) + self.preorder_exe(node.right) if node else []
+
 
 import sys
 
@@ -140,7 +150,7 @@ input = sys.stdin.read
 data = input().splitlines()
 
 m = int(data[0])
-bst = BinarySearchTree()
+bst = BST()
 output = []
 
 for i in range(1, m + 1):
@@ -165,3 +175,4 @@ for i in range(1, m + 1):
 sys.stdout.write("\n".join(output) + "\n")
 
 
+# {annotation: "renamed identifiers for better understanding and simplicity"}

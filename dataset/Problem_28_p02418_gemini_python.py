@@ -51,15 +51,18 @@ s = input()
 p = input()
 n = len(s)
 m = len(p)
-found = False
-for i in range(n):
+
+is_found = False
+for i in range(0, n):
     temp = s[i:] + s[:i]
     if p in temp:
-        found = True
+        is_found = True
         break
-if found:
+    
+if is_found:
     print("Yes")
 else:
     print("No")
 
 
+# {annotation: "renamed variable and reformatted the program to fit my style"}

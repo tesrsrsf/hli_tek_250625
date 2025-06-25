@@ -126,28 +126,32 @@ Sample Output 2
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_29_p03225_gemini_java {
+    public static int calcManhattanDistance(int[] coin1, int[] coin2) {
+        return Math.abs(coin1[0] - coin2[0]) + Math.abs(coin1[1] - coin2[1]);
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int H = scanner.nextInt();
-        int W = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int h = scanner.nextInt();
+        int w = scanner.nextInt();
+        
+        scanner.nextLine();
 
-        char[][] grid = new char[H][W];
-        for (int i = 0; i < H; i++) {
+        char[][] space = new char[h][w];
+        for (int i = 0; i < h; i++) {
             String row = scanner.nextLine();
-            grid[i] = row.toCharArray();
+            space[i] = row.toCharArray();
         }
 
-        List<int[]> coins = new ArrayList<>();
-        for (int i = 0; i < H; i++) {
-            for (int j = 0; j < W; j++) {
-                if (grid[i][j] == '#') {
-                    coins.add(new int[]{i, j});
+        ArrayList<int[]> coins = new ArrayList<>();
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                if (space[i][j] == '#') {
+                    int[] temp = {i, j};
+                    coins.add(temp);
                 }
             }
         }
@@ -160,9 +164,9 @@ public class Main {
                     int[] coin2 = coins.get(j);
                     int[] coin3 = coins.get(k);
 
-                    int dist12 = Math.abs(coin1[0] - coin2[0]) + Math.abs(coin1[1] - coin2[1]);
-                    int dist13 = Math.abs(coin1[0] - coin3[0]) + Math.abs(coin1[1] - coin3[1]);
-                    int dist23 = Math.abs(coin2[0] - coin3[0]) + Math.abs(coin2[1] - coin3[1]);
+                    int dist12 = calcManhattanDistance(coin1, coin2);
+                    int dist13 = calcManhattanDistance(coin1, coin3);
+                    int dist23 = calcManhattanDistance(coin2, coin3);
 
                     if (dist12 == dist13 && dist12 == dist23) {
                         count++;
@@ -172,7 +176,10 @@ public class Main {
         }
 
         System.out.println(count);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "used calcManhattanDistance to calculate the manhattan distance between two coins, improving readability and modularity of the code, also replaced list with arraylist, renamed variables to fit my style"}

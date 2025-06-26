@@ -119,31 +119,32 @@ The answer can be
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
-const int mod = 1e9 + 7;
+int mod = 1e9 + 7;
 
 int main() {
-    int N, A, B, C, D;
-    cin >> N >> A >> B >> C >> D;
+    int n, a, b, c, d;
+    cin >> n >> a >> b >> c >> d;
 
-    vector<vector<int>> dp(N + 1, vector<int>(N + 1, 0));
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
     dp[0][0] = 1;
 
-    for (int i = 1; i <= N; ++i) {
-        for (int j = C; j <= D; ++j) {
-            for (int k = A; k <= B && k <= i; ++k) {
+    for (int i = 1; i < n + 1; i++) {
+        for (int j = c; j < d + 1; j++) {
+            for (int k = a; k <= b && k <= i; ++k) {
                 dp[i][j] = (dp[i][j] + dp[i - k][j - 1]) % mod;
             }
         }
     }
 
-    int result = 0;
-    for (int j = C; j <= D; ++j) {
-        result = (result + dp[N][j]) % mod;
+    int res = 0;
+    for (int l = c; l < d + 1; l++) {
+        res = (res + dp[n][l]) % mod;
     }
 
-    cout << result << endl;
+    cout << res << endl;
     return 0;
 }
 

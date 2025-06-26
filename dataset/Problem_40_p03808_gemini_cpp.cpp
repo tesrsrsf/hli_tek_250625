@@ -97,31 +97,31 @@ int main() {
     int n;
     cin >> n;
 
-    vector<long long> a(n);
-    for (int i = 0; i < n; ++i) {
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-    for (int start_box = 0; start_box < n; ++start_box) {
-        vector<long long> b = a;
-        bool possible = true;
-        for (int j = 1; j <= n; ++j) {
+    for (int start_box = 0; start_box < n; start_box++) {
+        vector<int> b = a;
+        bool is_possible = true;
+        for (int j = 1; j <= n; j++) {
             int box_index = (start_box + j) % n;
             if (b[box_index] < j) {
-                possible = false;
+                is_possible = false;
                 break;
             }
             b[box_index] -= j;
         }
-        if (possible) {
-            bool all_zero = true;
-            for (int i = 0; i < n; ++i) {
+        if (is_possible) {
+            bool is_all_zero = true;
+            for (int i = 0; i < n; i++) {
                 if (b[i] != 0) {
-                    all_zero = false;
+                    is_all_zero = false;
                     break;
                 }
             }
-            if (all_zero) {
+            if (is_all_zero) {
                 cout << "YES" << endl;
                 return 0;
             }
@@ -133,3 +133,4 @@ int main() {
 }
 
 
+// {annotation: "used int to replace long long since its not necessary, renamed variables for better readability"}

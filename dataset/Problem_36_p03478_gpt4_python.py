@@ -84,22 +84,23 @@ Sample Output 3
 
 
 
-def sum_of_integers_with_digit_sum_in_range(N, A, B):
-    total_sum = 0
-    
-    for i in range(1, N + 1):
+def summing(n, a, b):
+    res = 0
+
+    for i in range(1, n + 1):
         digit_sum = sum(int(d) for d in str(i))
-        if A <= digit_sum <= B:
-            total_sum += i
+        if a <= digit_sum <= b:
+            res += i
     
-    return total_sum
-
-# Reading input
-N = int(input().strip())
-A = int(input().strip())
-B = int(input().strip())
-
-# Printing the result
-print(sum_of_integers_with_digit_sum_in_range(N, A, B))
+    return res
 
 
+nab_line = input().split()
+n = int(nab_line[0])
+a = int(nab_line[1])
+b = int(nab_line[2])
+
+print(summing(n, a, b))
+
+
+# {annotation: "renamed the function to fit my style, also fixed problem with input of the program"}

@@ -99,20 +99,21 @@ int sum_digits(int n) {
 }
 
 int main() {
-    int N, A, B;
-    cin >> N >> A >> B;
+    int n, a, b;
+    cin >> n >> a >> b;
 
-    int total_sum = 0;
-    for (int i = 1; i <= N; i++) {
+    int res = 0;
+    for (int i = 1; i < n + 1; i++) {
         int digit_sum = sum_digits(i);
-        if (digit_sum >= A && digit_sum <= B) {
-            total_sum += i;
+        if (digit_sum >= a && digit_sum <= b) {
+            res += i;
         }
     }
 
-    cout << total_sum << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "avoiding using capital letters in variable names, also renamed variables in my style"}

@@ -77,24 +77,8 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
-        int n = s.length();
-        int maxK = 0;
-
-        for (int k = 1; k <= n; k++) {
-            if (canPartition(s, k)) {
-                maxK = k;
-            }
-        }
-
-        System.out.println(maxK);
-    }
-
-    private static boolean canPartition(String s, int k) {
+public class Problem_37_p02939_gemini_java {
+    public static boolean canPartition(String s, int k) {
         if (k == 1) {
             return true;
         }
@@ -106,7 +90,7 @@ public class Main {
         return canPartitionHelper(s, k, partitionPoints, 0, 0);
     }
 
-    private static boolean canPartitionHelper(String s, int k, int[] partitionPoints, int index, int start) {
+    public static boolean canPartitionHelper(String s, int k, int[] partitionPoints, int index, int start) {
         if (index == k - 1) {
             if (start < s.length()) {
                 if (s.substring(partitionPoints[k - 2] + 1, s.length()).equals(s.substring(0, 0))) {
@@ -132,41 +116,53 @@ public class Main {
                         else{
                             continue;
                         }
-
                     }
-                   
                   
                     if (!s.substring(0, partitionPoints[0] + 1).equals(s.substring(partitionPoints[0] + 1, partitionPoints[1] + 1))) {
                         return true;
                     }
-
-
                 }
             } else {
                 if (index > 0 && index < k-1) {
-                  
-                        if(canPartitionHelper(s,k,partitionPoints,index+1,i+1))
-                        {
-                            if(index == 1){
-                                if(!s.substring(partitionPoints[0]+1,partitionPoints[1]+1).equals(s.substring(partitionPoints[1]+1,s.length()))){
-                                    return true;
-                                }
-                                else{
-                                    continue;
-                                }
-
-                            }
-                            if(!s.substring(partitionPoints[index-1]+1,partitionPoints[index]+1).equals(s.substring(partitionPoints[index]+1,partitionPoints[index+1]+1))){
+                    if(canPartitionHelper(s,k,partitionPoints,index+1,i+1))
+                    {
+                        if(index == 1){
+                            if(!s.substring(partitionPoints[0]+1,partitionPoints[1]+1).equals(s.substring(partitionPoints[1]+1,s.length()))){
                                 return true;
+                            } else {
+                                continue;
                             }
 
                         }
+                        if(!s.substring(partitionPoints[index-1]+1,partitionPoints[index]+1).equals(s.substring(partitionPoints[index]+1,partitionPoints[index+1]+1))){
+                            return true;
+                        }
 
                     }
+                }
             }
-            }
-            return false;
         }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+
+        int n = s.length();
+        int res = 0;
+
+        for (int k = 1; k < n + 1; k++) {
+            if (canPartition(s, k)) {
+                res = k;
+            }
+        }
+
+        System.out.println(res);
+
+        scanner.close();
+    }
 }
 
 
+// {annotation: "scanner closed, moved tool methods to the top for readability, reformatted the code and removed blank lines"}

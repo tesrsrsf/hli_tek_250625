@@ -51,27 +51,30 @@ Sample Output
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 int main() {
     int n;
-    std::cin >> n;
+    cin >> n;
     int taroScore = 0, hanakoScore = 0;
 
-    for (int i = 0; i < n; ++i) {
-        std::string taroCard, hanakoCard;
-        std::cin >> taroCard >> hanakoCard;
-        
+    for (int i = 0; i < n; i++) {
+        string taroCard, hanakoCard;
+        cin >> taroCard >> hanakoCard;
+
         if (taroCard > hanakoCard) {
-            taroScore += 3;
+            taroScore = taroScore + 3;
         } else if (taroCard < hanakoCard) {
-            hanakoScore += 3;
+            hanakoScore = hanakoScore + 3;
         } else {
-            taroScore += 1;
-            hanakoScore += 1;
+            taroScore = taroScore + 1;
+            hanakoScore = hanakoScore + 1;
         }
     }
 
-    std::cout << taroScore << " " << hanakoScore << std::endl;
+    cout << taroScore << " " << hanakoScore << endl;
     return 0;
 }
 
 
+// {annotation: "reformatted code for better readability, renamed variables for matching my style"}

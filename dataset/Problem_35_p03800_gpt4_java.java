@@ -178,58 +178,52 @@ SSWWSSSWWS
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_35_p03800_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
         String s = scanner.next();
         
         char[] t = new char[N];
-        int[] species = new int[N]; // 0 for unassigned, 1 for sheep (S), 2 for wolf (W)
+        int[] species = new int[N];
         
-        // We can assume the first animal is a sheep (1)
         species[0] = 1;
-        
-        // Fill the species array based on the given responses
         for (int i = 0; i < N; i++) {
             if (species[i] == 0) {
-                species[i] = 1; // Assume sheep first for the unassigned ones
+                species[i] = 1;
             }
             if (s.charAt(i) == 'o') {
                 species[(i + 1) % N] = species[i]; // Neighbors are same
-                species[(i + N - 1) % N] = species[i]; // Neighbors are same
+                species[(i + N - 1) % N] = species[i];
             } else {
                 species[(i + 1) % N] = 3 - species[i]; // Neighbors are different
-                species[(i + N - 1) % N] = 3 - species[i]; // Neighbors are different
+                species[(i + N - 1) % N] = 3 - species[i];
             }
         }
         
-        // Check and fill the character array for output
-        boolean valid = true;
+        boolean is_valid = true;
         for (int i = 0; i < N; i++) {
             if (species[i] == 1) {
                 t[i] = 'S';
-            } else if (species[i] == 2) {
-                t[i] = 'W';
             } else {
-                valid = false; // Invalid assignment
+                t[i] = 'W';
             }
         }
         
-        // Verify the answers
         for (int i = 0; i < N; i++) {
             if (s.charAt(i) == 'o' && (t[i] != t[(i + 1) % N] || t[i] != t[(i + N - 1) % N])) {
-                valid = false;
+                is_valid = false;
                 break;
             }
             if (s.charAt(i) == 'x' && (t[i] == t[(i + 1) % N] || t[i] == t[(i + N - 1) % N])) {
-                valid = false;
+                is_valid = false;
                 break;
             }
         }
         
-        if (valid) {
-            System.out.println(new String(t));
+        if (is_valid) {
+            String res = new String(t);
+            System.out.println(res);
         } else {
             System.out.println(-1);
         }
@@ -239,3 +233,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed variables in my style, reorganized code for readability"}

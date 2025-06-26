@@ -195,10 +195,15 @@ int main() {
             if (s[i - 1] == 'o') {
                 t[i] = t[i - 1]; // Same species
             } else {
-                t[i] = (t[i - 1] == 'S') ? 'W' : 'S'; // Different species
+                if (t[i - 1] == 'S') { // Different species
+                    t[i] = 'W';
+                } else { 
+                    t[i] = 'S';
+                }
+                
             }
         }
-        // Check circular condition
+        
         if (s[N - 1] == 'o') {
             return (t[0] == t[N - 1]);
         } else {
@@ -207,16 +212,25 @@ int main() {
     };
 
     if (check('S')) {
-        for (auto c : t) cout << c;
+        for (auto c : t) {
+            cout << c;
+        }
+        
         return 0;
     }
+
     if (check('W')) {
-        for (auto c : t) cout << c;
+        for (auto c : t) {
+            cout << c;
+        }
+
         return 0;
     }
     
     cout << -1;
+
     return 0;
 }
 
 
+// {annotation: "renamed variables in my style, reorganized code for readability"}

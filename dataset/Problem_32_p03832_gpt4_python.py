@@ -118,30 +118,32 @@ The answer can be
 
 MOD = 10**9 + 7
 
-def count_ways(N, A, B, C, D):
-    dp = [[0] * (N + 1) for _ in range(N + 1)]
+def coundeus(n, a, b, c, d):
+    dp = [[0] * (n + 1) for _ in range(n + 1)]
     dp[0][0] = 1
-    
-    for n in range(1, N + 1):
-        for size in range(A, B + 1):
-            for groups in range(n + 1):
-                if groups + size <= N:
-                    dp[n][groups + size] = (dp[n][groups + size] + dp[n - size][groups]) % MOD
-    
-    total_ways = 0
-    
-    for groups in range(N + 1):
-        if C <= groups <= D:
-            total_ways = (total_ways + dp[N][groups]) % MOD
-            
-    return total_ways
 
-N = int(input().strip())
-A = int(input().strip())
-B = int(input().strip())
-C = int(input().strip())
-D = int(input().strip())
+    for i in range(1, n + 1):
+        for size in range(a, b + 1):
+            for groups in range(0, i + 1):
+                if groups + size <= n:
+                    dp[i][groups + size] = (dp[i][groups + size] + dp[i - size][groups]) % MOD
 
-print(count_ways(N, A, B, C, D))
+    res = 0
+
+    for groups in range(0, n + 1):
+        if c <= groups <= d:
+            res = (res + dp[n][groups]) % MOD
+
+    return res
 
 
+n = int(input())
+a = int(input())
+b = int(input())
+c = int(input())
+d = int(input())
+
+print(coundeus(n, a, b, c, d))
+
+
+# {annotation: "reformatted this program to fit my style, avoid using capital letters in variable names"}

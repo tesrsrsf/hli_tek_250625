@@ -86,33 +86,37 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
+public class Problem_36_p03478_gpt4_java {
+    public static int sumOfDigits(int n) {
         int sum = 0;
-
-        for (int i = 1; i <= N; i++) {
-            int digitSum = sumOfDigits(i);
-            if (digitSum >= A && digitSum <= B) {
-                sum += i;
-            }
-        }
-        
-        System.out.println(sum);
-        scanner.close();
-    }
-
-    private static int sumOfDigits(int number) {
-        int sum = 0;
-        while (number > 0) {
-            sum += number % 10;
-            number /= 10;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
         }
         return sum;
+    }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+
+        int res = 0;
+
+        for (int i = 1; i <= n; i++) {
+            int digitSum = sumOfDigits(i);
+            if (digitSum >= a && digitSum <= b) {
+                res += i;
+            }
+        }
+
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "avoid using capital letters in variable names, also moved sumofDigits to the top for readability"}

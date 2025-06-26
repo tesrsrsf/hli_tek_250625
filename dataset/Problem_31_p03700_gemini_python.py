@@ -124,276 +124,37 @@ Sample Output 3
 
 
 def solve():
-  n = int(input())
-  a = int(input())
-  b = int(input())
-  h = []
-  for _ in range(n):
-    h.append(int(input()))
+
+  nab_line = input().split()
+  n = int(nab_line[0])
+  a = int(nab_line[1])
+  b = int(nab_line[2])
+
+  data = []
+
+  for i in range(0, n):
+    data.append(int(input()))
   
   ans = 0
-  
-  h.sort(reverse=True)
 
-  for i in range(n):
-    if h[i] > 0:
-      if h[i] <= a:
-        
-        
-        if (h[i] + b -1)//b -1>0 :
-          
-          ans += (h[i] + b -1)//b -1
+  data = sorted(data, reverse=True)
+
+  for i in range(0, n):
+    if data[i] > 0:
+      if data[i] <= a:
+        if (data[i] + b - 1) // b - 1 > 0:
+          ans += (data[i] + b - 1) // b - 1
       else:
-        
-        k = (h[i] - a) // (a - b)
-        if (h[i]-a) % (a-b) >0:
-          k+=1
-        
+        k = (data[i] - a) // (a - b)
+        if (data[i] - a) % (a - b) > 0:
+          k += 1
+
         ans += k
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-   
-  
-  
-  
-  
-  
-  
-   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
   print(ans)
+
 
 solve()
 
 
+# {annnotation: "reformatted the program to fit my style, removed blank lines, modified the input method"}

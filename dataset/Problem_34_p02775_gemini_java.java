@@ -85,28 +85,35 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_34_p02775_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String n = scanner.next();
         int len = n.length();
-        int ans = len;
+        int res = len;
         int carry = 0;
+
         for (int i = len - 1; i >= 0; i--) {
             int digit = n.charAt(i) - '0' + carry;
+
             if (digit >= 5) {
-                ans += 10 - digit;
+                res += 10 - digit;
                 carry = 1;
             } else {
-                ans += digit;
+                res += digit;
                 carry = 0;
             }
         }
+
         if (carry == 1) {
-            ans++;
+            res++;
         }
-        System.out.println(ans);
+
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "rearranged the code and renamed variables to fit my style"}

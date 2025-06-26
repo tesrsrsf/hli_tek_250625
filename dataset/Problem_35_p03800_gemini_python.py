@@ -186,7 +186,7 @@ def solve():
       t[0] = start1
       
       
-      valid = True
+      is_possible = True
       
       if s[0] == 'o':
         if start1 == start2:
@@ -200,54 +200,50 @@ def solve():
           t[1] = 'W' if start1 == 'S' else 'S'
         
       for i in range(2, n):
-        if s[i-1] == 'o':
-          if t[i-1] == t[i-2]:
-            t[i] = t[i-1]
+        if s[i - 1] == 'o':
+          if t[i - 1] == t[i - 2]:
+            t[i] = t[i - 1]
           else:
-            t[i] = 'W' if t[i-1] == 'S' else 'S'
+            t[i] = 'W' if t[i - 1] == 'S' else 'S'
         else:
-          if t[i-1] != t[i-2]:
-            t[i] = t[i-2]
+          if t[i - 1] != t[i - 2]:
+            t[i] = t[i - 2]
           else:
-            t[i] = 'W' if t[i-1] == 'S' else 'S'
-      
-      if s[n-1] == 'o':
-        if t[n-1] != t[0]:
-          valid = False
-      else:
-        if t[n-1] == t[0]:
-          valid = False
+            t[i] = 'W' if t[i - 1] == 'S' else 'S'
 
-      if valid:
+      if s[n - 1] == 'o':
+        if t[n - 1] != t[0]:
+          is_possible = False
+      else:
+        if t[n - 1] == t[0]:
+          is_possible = False
+
+      if is_possible:
+        res = "".join(t)
         
-        ans = "".join(t)
-        
-        
-        
-        
-        
-        
-        consistent = True
+        is_consistent = True
         for i in range(n):
           neighbors = []
-          neighbors.append(t[(i-1)%n])
-          neighbors.append(t[(i+1)%n])
-          
+          neighbors.append(t[(i - 1) % n])
+          neighbors.append(t[(i + 1) % n])
+
           if t[i] == 'S':
             if (neighbors[0] == neighbors[1] and s[i] != 'o') or (neighbors[0] != neighbors[1] and s[i] != 'x'):
-              consistent = False
+              is_consistent = False
               break
           else:
             if (neighbors[0] == neighbors[1] and s[i] != 'x') or (neighbors[0] != neighbors[1] and s[i] != 'o'):
-              consistent = False
+              is_consistent = False
               break
         
-        if consistent:
-          print(ans)
+        if is_consistent:
+          print(res)
           return
   
   print("-1")
 
+
 solve()
 
 
+# {annotation: "renamed variables in my style, reorganized code for readability"}

@@ -176,41 +176,42 @@ SSWWSSSWWS
 
 
 
-def solve_zoo_problem(N, s):
-    t = [''] * N
+def sheeps_n_wolves(n, s):
+    t = [''] * n
     
     # Try to assign species based on the answers
     for start in ['S', 'W']:
         t[0] = start
-        valid = True
+        is_valid = True
         
-        for i in range(N):
+        for i in range(0, n):
             if s[i] == 'o':
-                t[(i + 1) % N] = t[i]  # same species
+                t[(i + 1) % n] = t[i]  # same species
             else:
-                t[(i + 1) % N] = 'W' if t[i] == 'S' else 'S'  # different species
+                t[(i + 1) % n] = 'W' if t[i] == 'S' else 'S'  # different species
             
-            # Check for consistency
-            if i > 0 and ((s[i - 1] == 'o' and t[i] != t[(i + 1) % N]) or 
-                          (s[i - 1] == 'x' and t[i] == t[(i + 1) % N])):
-                valid = False
+            if i > 0 and ((s[i - 1] == 'o' and t[i] != t[(i + 1) % n]) or (s[i - 1] == 'x' and t[i] == t[(i + 1) % n])):
+                is_valid = False
                 break
         
-        # Check last connection (circular)
-        if valid and not ((s[N - 1] == 'o' and t[N - 1] == t[0]) or 
-                          (s[N - 1] == 'x' and t[N - 1] != t[0])):
-            valid = False
+        if is_valid and not ((s[n - 1] == 'o' and t[n - 1] == t[0]) or (s[n - 1] == 'x' and t[n - 1] != t[0])):
+            is_valid = False
             
-        if valid:
-            print(''.join(t))
+        if is_valid:
+            res_str = ""
+            for char in t:
+                res_str += char
+
+            print(res_str)
+            
             return
     
     print(-1)
 
-# Sample inputs
-N = int(input().strip())
-s = input().strip()
 
-solve_zoo_problem(N, s)
+n = int(input())
+s = input()
+
+sheeps_n_wolves(n, s)
 
 

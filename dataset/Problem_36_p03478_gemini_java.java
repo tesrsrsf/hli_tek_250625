@@ -86,9 +86,9 @@ Sample Output 3
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_36_p03478_gemini_java {
 
-    public static int sumOfDigits(int n) {
+    public static int sumOfDigits(int n) {  // it works, don't change it
         int sum = 0;
         while (n > 0) {
             sum += n % 10;
@@ -99,21 +99,22 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
+        int n = scanner.nextInt();
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
         scanner.close();
 
-        int totalSum = 0;
-        for (int i = 1; i <= N; i++) {
+        int res = 0;
+        for (int i = 1; i <= n; i++) {
             int sum = sumOfDigits(i);
-            if (sum >= A && sum <= B) {
-                totalSum += i;
+            if (sum >= a && sum <= b) {
+                res += i;
             }
         }
 
-        System.out.println(totalSum);
+        System.out.println(res);
     }
 }
 
 
+// {annotation: "avoiding using capital letters variable names, added a comment to indicate this works even I have no idea how"}

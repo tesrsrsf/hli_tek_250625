@@ -124,9 +124,9 @@ using namespace std;
 const int mod = 1e9 + 7;
 const int MAXN = 1005;
 
-long long dp[MAXN][MAXN];
+long long dp_mat[MAXN][MAXN];
 long long fact[MAXN];
-long long inv[MAXN];
+long long inv_kd[MAXN];
 
 long long power(long long x, long long y) {
     long long ret = 1;
@@ -141,7 +141,7 @@ long long power(long long x, long long y) {
 
 long long C(int n, int k) {
     if (k < 0 || k > n) return 0;
-    return (((fact[n] * inv[k]) % mod) * inv[n - k]) % mod;
+    return (((fact[n] * inv_kd[k]) % mod) * inv_kd[n - k]) % mod;
 }
 
 int main() {
@@ -149,33 +149,34 @@ int main() {
     cin >> n >> a >> b >> c >> d;
 
     fact[0] = 1;
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; i < n + 1; i++) {
         fact[i] = (fact[i - 1] * i) % mod;
     }
-    inv[n] = power(fact[n], mod - 2);
+    inv_kd[n] = power(fact[n], mod - 2);
     for (int i = n - 1; i >= 0; i--) {
-        inv[i] = (inv[i + 1] * (i + 1)) % mod;
+        inv_kd[i] = (inv_kd[i + 1] * (i + 1)) % mod;
     }
 
-    dp[0][0] = 1;
+    dp_mat[0][0] = 1;
     for (int i = a; i <= b; i++) {
-        for (int j = 0; j * i <= n; j++) {
-            for (int k = c; k <= d; k++) {
-                if (j + k * i <= n) {
-                    dp[i][j + k * i] = (dp[i][j + k * i] + (dp[i - 1][j] * C(n - j, k * i) % mod) * fact[k] % mod * inv[k]) % mod;
+        for (int j = 0; j * i < n + 1; j++) {
+            for (int k = c; k < d + 1; k++) {
+                if (j + k * i < n + 1) {
+                    dp_mat[i][j + k * i] = (dp_mat[i][j + k * i] + (dp_mat[i - 1][j] * C(n - j, k * i) % mod) * fact[k] % mod * inv_kd[k]) % mod;
                 }
             }
         }
     }
 
-    long long ans = 0;
-    for(int j = 0; j <= n; ++j) {
-            ans = (ans + dp[b][j]) % mod;
+    long long res = 0;
+    for(int j = 0; j < n + 1; j++) {
+            res = (res + dp_mat[b][j]) % mod;
     }
     
-    cout << ans << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variables in my style, reformatted code"}

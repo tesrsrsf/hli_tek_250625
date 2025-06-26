@@ -44,23 +44,8 @@ No
 
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            int n = Integer.parseInt(scanner.nextLine().trim());
-            String[] dominoes = scanner.nextLine().trim().split(" ");
-            List<int[]> dominoList = new ArrayList<>();
-            for (String domino : dominoes) {
-                int num = Integer.parseInt(domino);
-                dominoList.add(new int[]{num / 10, num % 10});
-            }
-            System.out.println(canArrange(dominoList) ? "Yes" : "No");
-        }
-        scanner.close();
-    }
-
-    private static boolean canArrange(List<int[]> dominoes) {
+public class Problem_33_p00596_gpt4_java {
+    public static boolean canArrange(List<int[]> dominoes) {
         Map<Integer, Integer> degree = new HashMap<>();
         for (int[] domino : dominoes) {
             degree.put(domino[0], degree.getOrDefault(domino[0], 0) + 1);
@@ -76,6 +61,30 @@ public class Main {
 
         return oddCount <= 2;
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextLine()) {
+            int n = Integer.parseInt(scanner.nextLine().trim());
+            String[] cards = scanner.nextLine().trim().split(" ");
+            
+            ArrayList<int[]> cardList = new ArrayList<>();
+
+            for (String card : cards) {
+                int num = Integer.parseInt(card);
+                cardList.add(new int[]{num / 10, num % 10});
+            }
+
+            if (canArrange(cardList)) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+        }
+        scanner.close();
+    }
 }
 
 
+// {annotation: "moved canArrange function to the top of the class for better readability, also setted it to public which matches my style, additionally, variables are also renamed to fit my style"}

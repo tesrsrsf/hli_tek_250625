@@ -42,13 +42,15 @@ No
 
 
 
-def can_arrange_dominoes(dominoes):
-    from collections import defaultdict
 
+from collections import defaultdict
+import sys
+
+def can_arrange(cards):
     degree = defaultdict(int)
     
-    for d in dominoes:
-        a, b = divmod(d, 10)
+    for card in cards:
+        a, b = divmod(card, 10)
         degree[a] += 1
         degree[b] += 1
     
@@ -56,21 +58,22 @@ def can_arrange_dominoes(dominoes):
     
     return odd_count <= 2
 
-import sys
 
 input_data = sys.stdin.read().strip().splitlines()
 i = 0
-results = []
+ress = []
 
 while i < len(input_data):
     n = int(input_data[i].strip())
-    dominoes = list(map(int, input_data[i + 1].strip().split()))
-    if can_arrange_dominoes(dominoes):
-        results.append("Yes")
+    cards = list(map(int, input_data[i + 1].strip().split()))
+    if can_arrange(cards):
+        ress.append("Yes")
     else:
-        results.append("No")
+        ress.append("No")
     i += 2
 
-print("\n".join(results))
+for res in ress:
+    print(res)
 
 
+# {annotation: "renamed variables to fit my style, rearranged the code, keeping import statements at the top"}

@@ -123,21 +123,17 @@ Sample Output 3
 
 
 
-def calculate_min_explosions(N, A, B, healths):
-    import math
+import math
+def calculate_min_explosions(N, A, B, hps):
+    res = 0
 
-    max_health = max(healths)
-    total_explosions = 0
-
-    # Calculation of the number of explosions needed for each monster
-    for h in healths:
+    for h in hps:
         if h > 0:
-            # Monsters health after i explosions when the monstor is centered
-            # Explosions count for this monster
-            explosions = math.ceil((h - A) / (A - B))
-            total_explosions += explosions
+            explos = math.ceil((h - A) / (A - B))
+            res += explos
 
-    return total_explosions
+    return res
+
 
 if __name__ == "__main__":
     import sys
@@ -147,9 +143,11 @@ if __name__ == "__main__":
     N = int(data[0])
     A = int(data[1])
     B = int(data[2])
-    healths = list(map(int, data[3:N+3]))
+    hps = list(map(int, data[3:N + 3]))
 
-    result = calculate_min_explosions(N, A, B, healths)
+    result = calculate_min_explosions(N, A, B, hps)
     print(result)
 
 
+
+# {annotation: "removed not used variable, renamed variables in my style, reformatted code"}

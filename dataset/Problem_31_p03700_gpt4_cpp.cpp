@@ -134,27 +134,27 @@ int main() {
     long long A, B;
     cin >> N >> A >> B;
 
-    vector<long long> health(N);
-    for (int i = 0; i < N; ++i) {
-        cin >> health[i];
+    vector<long long> hps(N);
+    for (int i = 0; i < N; i++) {
+        cin >> hps[i];
     }
 
-    long long total_explosions = 0;
+    long long ttl_explo = 0;
     
     while (true) {
-        long long max_health = *max_element(health.begin(), health.end());
-        if (max_health <= 0) break;
+        long long max_hp = *max_element(hps.begin(), hps.end());
+        if (max_hp <= 0) break;
 
-        long long explosions = (max_health + A - 1) / A; // ceil(max_health / A)
-        total_explosions += explosions;
+        long long explosions = (max_hp + A - 1) / A; // ceil(max_health / A)
+        ttl_explo += explosions;
 
-        for (int i = 0; i < N; ++i) {
-            health[i] -= explosions * B;
+        for (int i = 0; i < N; i++) {
+            hps[i] -= explosions * B;
         }
-        health[distance(health.begin(), max_element(health.begin(), health.end()))] -= explosions * A;
+        hps[distance(hps.begin(), max_element(hps.begin(), hps.end()))] -= explosions * A;
     }
 
-    cout << total_explosions << endl;
+    cout << ttl_explo << endl;
 
     return 0;
 }

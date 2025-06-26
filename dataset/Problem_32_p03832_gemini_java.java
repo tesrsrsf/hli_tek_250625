@@ -116,14 +116,13 @@ The answer can be
 
 
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_32_p03832_gemini_java {
 
     private static final int MOD = 1000000007;
 
-    private static long[][] combinations(int n, int k) {
+    private static long[][] getCombinations(int n, int k) {
         long[][] dp = new long[n + 1][k + 1];
         for (int i = 0; i <= n; i++) {
             dp[i][0] = 1;
@@ -145,7 +144,7 @@ public class Main {
         int d = scanner.nextInt();
         scanner.close();
 
-        long[][] comb = combinations(n, n);
+        long[][] comb = getCombinations(n, n);
         long ans = 0;
 
         for (int groupsA = 0; groupsA <= n / a; groupsA++) {
@@ -153,36 +152,48 @@ public class Main {
                 if (groupsA * a + groupsB * b > n) continue;
                 for (int i = a; i <= b; i++) {
                     for (int f = 0; f <= n; f++) {
-                        if (f < 0) continue;
-                        if (i * f > n) break;
-                        int remaining = n - i * f;
+                        if (f < 0) {
+                            continue;
+                        }
+
+                        if (i * f > n) {
+                            break;
+                        }
 
                         if (f != 0 && (f < c || f > d)) {
                             continue;
                         }
+
                         if (f == 0) {
                             continue;
                         }
 
-                        long ways = 0;
-                        if (remaining == 0) {
-                            ways = 1;
-                        }
                         else {
-                            for (int groupsSize = a; groupsSize <= b; groupsSize++) {
-                                if(groupsSize * (n - i*f)/(groupsSize) < n - i*f) continue;
-                                if(groupsSize > n -i *f) continue;
-                                if((n - i * f) % groupsSize != 0) continue;
-                                if(groupsSize * (n - i*f)/groupsSize != n-i*f) continue;
+                            for (int j = a; j <= b; j++) {
+                                if(j * (n - i*f)/(j) < n - i*f) { 
+                                    continue;
+                                }
 
-                                long numGroups = (n - i * f) /groupsSize;
+                                if(j > n -i *f) {
+                                    continue;
+                                }
+
+                                if((n - i * f) % j != 0) {
+                                    continue;
+                                }
+
+                                if(j * (n - i*f)/j != n-i*f) {
+                                    continue;
+                                }
+
+                                long numGroups = (n - i * f) /j;
 
                                 if (numGroups < c || numGroups > d) continue;
                                 long tempWays = 1;
 
                                 tempWays = (tempWays * comb[n][i * f]) % MOD;
-                                n -= i*f;
-                                for(int x = 0; x <f; x++){
+                                n -= i * f;
+                                for(int x = 0; x < f; x++){
                                     long combValue = 1;
                                     if(i <= n){
                                         combValue = comb[n][i];
@@ -191,12 +202,12 @@ public class Main {
                                     }
 
                                     tempWays = (tempWays * combValue) % MOD;
-                                    n -=i;
+                                    n -= i;
                                 }
                                 
 
                                 ans = (ans + tempWays) % MOD;
-                                n +=i*f;
+                                n += i * f;
 
                                 break;
                             }
@@ -212,3 +223,4 @@ public class Main {
 }
 
 
+// {annotation: "removed unused variables, renamed variables in my style, reformatted code for better readability"}

@@ -138,25 +138,26 @@ DIFFERENT
 import sys
 import re
 
-def analyze_programs(s1, s2):
+def ta(s1, s2):
     if s1 == s2:
         return "IDENTICAL"
     
-    literals1 = re.findall(r'"(.*?)"', s1)
-    literals2 = re.findall(r'"(.*?)"', s2)
+    lit1 = re.findall(r'"(.*?)"', s1)
+    lit2 = re.findall(r'"(.*?)"', s2)
     
-    if len(literals1) != len(literals2):
+    if len(lit1) != len(lit2):
         return "DIFFERENT"
     
-    close_count = 0
-    for lit1, lit2 in zip(literals1, literals2):
+    close_num = 0
+    for lit1, lit2 in zip(lit1, lit2):
         if lit1 != lit2:
-            close_count += 1
+            close_num += 1
     
-    if close_count == 1:
+    if close_num == 1:
         return "CLOSE"
     
     return "DIFFERENT"
+
 
 def main():
     input_lines = sys.stdin.read().strip().splitlines()
@@ -165,13 +166,16 @@ def main():
     for i in range(0, len(input_lines) - 1, 2):
         s1 = input_lines[i]
         s2 = input_lines[i + 1]
-        result = analyze_programs(s1, s2)
+
+        result = ta(s1, s2)
         results.append(result)
     
     for result in results:
         print(result)
 
+
 if __name__ == "__main__":
     main()
 
 
+# {annotation: "renamed identifiers in my style"}

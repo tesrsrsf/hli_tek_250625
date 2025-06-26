@@ -89,38 +89,45 @@ NO
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_40_p03808_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        int N = scanner.nextInt();
-        long[] A = new long[N];
+        int n = scanner.nextInt();
+        long[] a = new long[n];
         
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextLong();
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextLong();
         }
 
-        boolean possible = true;
+        boolean isPossible = true;
 
-        for (int i = 0; i < N; i++) {
-            long required = (long)(i + 1) * (N + 1);
+        for (int i = 0; i < n; i++) {
+            long req = (long)(i + 1) * (n + 1);
             long sum = 0;
-            for (int j = 0; j < N; j++) {
-                int index = (i + j) % N;
-                sum += A[index];
-                if (sum < required) {
-                    possible = false;
+            for (int j = 0; j < n; j++) {
+                int index = (i + j) % n;
+                sum += a[index];
+                if (sum < req) {
+                    isPossible = false;
                     break;
                 }
-                required -= (j + 1);
+                req -= (j + 1);
             }
-            if (!possible) {
+            if (!isPossible) {
                 break;
             }
         }
 
-        System.out.println(possible ? "YES" : "NO");
+        if (isPossible) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables for better readability, changed implicit statement to explicit statements"}

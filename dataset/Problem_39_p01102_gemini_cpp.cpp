@@ -142,7 +142,7 @@ DIFFERENT
 
 using namespace std;
 
-string remove_string_literals(const string& s) {
+string remove_str_lit(string s) {
     string result = "";
     bool in_string = false;
     for (char c : s) {
@@ -156,22 +156,25 @@ string remove_string_literals(const string& s) {
     return result;
 }
 
-vector<string> extract_string_literals(const string& s) {
-    vector<string> literals;
+vector<string> extract_str_lit(string s) {
+    vector<string> res;
     string current_literal = "";
+
     bool in_string = false;
+
     for (char c : s) {
         if (c == '\"') {
             if (in_string) {
-                literals.push_back(current_literal);
+                res.push_back(current_literal);
                 current_literal = "";
             }
+
             in_string = !in_string;
         } else if (in_string) {
             current_literal += c;
         }
     }
-    return literals;
+    return res;
 }
 
 int main() {
@@ -182,31 +185,32 @@ int main() {
         if (s1 == s2) {
             cout << "IDENTICAL" << endl;
         } else {
-            string s1_no_literals = remove_string_literals(s1);
-            string s2_no_literals = remove_string_literals(s2);
+            string s1_no_literals = remove_str_lit(s1);
+            string s2_no_literals = remove_str_lit(s2);
 
             if (s1_no_literals == s2_no_literals) {
-                vector<string> literals1 = extract_string_literals(s1);
-                vector<string> literals2 = extract_string_literals(s2);
+                vector<string> literals1 = extract_str_lit(s1);
+                vector<string> literals2 = extract_str_lit(s2);
 
                 if (literals1.size() == literals2.size()) {
-                     if(literals1.size()==0){
-                        cout<<"DIFFERENT"<<endl;
-                     }else{
-                         int diff_count = 0;
-                         for(size_t i=0; i<literals1.size(); ++i){
-                            if(literals1[i]!=literals2[i]){
+                    if (literals1.size() == 0) {
+                        cout << "DIFFERENT" << endl;
+                    } else {
+                        int diff_count = 0;
+                        for (size_t i = 0; i < literals1.size(); i++) {
+                            if (literals1[i] != literals2[i]) {
                                 diff_count++;
                             }
                          }
-                         if(diff_count==1){
-                            cout<<"CLOSE"<<endl;
-                         }else{
-                            cout<<"DIFFERENT"<<endl;
-                         }
-                     }
-                }else{
-                    cout<<"DIFFERENT"<<endl;
+
+                        if (diff_count == 1) {
+                            cout << "CLOSE" << endl;
+                        } else {
+                            cout << "DIFFERENT" << endl;
+                        }
+                    }
+                } else {
+                    cout << "DIFFERENT" << endl;
                 }
             } else {
                 cout << "DIFFERENT" << endl;
@@ -218,3 +222,4 @@ int main() {
 }
 
 
+// {annotation: "reformatted the program to improve readability, also renamed some identifiers for clarity"}

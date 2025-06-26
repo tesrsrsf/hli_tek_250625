@@ -50,32 +50,35 @@ Sample Output
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_38_p02421_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
 
         int taroScore = 0;
         int hanakoScore = 0;
 
         for (int i = 0; i < n; i++) {
             String[] cards = scanner.nextLine().split(" ");
-            String taroCard = cards[0];
-            String hanakoCard = cards[1];
+            String taroCrd = cards[0];
+            String hanakoCrd = cards[1];
 
-            if (taroCard.compareTo(hanakoCard) > 0) {
-                taroScore += 3;
-            } else if (taroCard.compareTo(hanakoCard) < 0) {
-                hanakoScore += 3;
+            if (taroCrd.compareTo(hanakoCrd) > 0) {
+                taroScore = taroScore + 3;
+            } else if (taroCrd.compareTo(hanakoCrd) < 0) {
+                hanakoScore = hanakoScore + 3;
             } else {
-                taroScore += 1;
-                hanakoScore += 1;
+                taroScore = taroScore + 1;
+                hanakoScore = hanakoScore + 1;
             }
         }
 
         System.out.println(taroScore + " " + hanakoScore);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables to fit my style, reformatted code for better readability"}

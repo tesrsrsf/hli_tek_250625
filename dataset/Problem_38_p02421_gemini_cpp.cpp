@@ -60,23 +60,25 @@ int main() {
     int taro_score = 0;
     int hanako_score = 0;
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         string taro_card, hanako_card;
         cin >> taro_card >> hanako_card;
 
         if (taro_card > hanako_card) {
-            taro_score += 3;
-        } else if (hanako_card > taro_card) {
-            hanako_score += 3;
+            taro_score = taro_score + 3;
+        } else if (taro_card < hanako_card) {
+            hanako_score = hanako_score + 3;
         } else {
-            taro_score += 1;
-            hanako_score += 1;
+            taro_score = taro_score + 1;
+            hanako_score = hanako_score + 1;
         }
     }
 
-    cout << taro_score << " " << hanako_score << endl;
+    string res = to_string(taro_score) + " " + to_string(hanako_score);
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "reformatted code for better readability, used string concatenation for output, renamed variables for matching my style"}

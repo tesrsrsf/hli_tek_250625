@@ -44,12 +44,15 @@ No
 
 def solve():
     n = int(input())
-    dominoes = list(map(int, input().split()))
+    cards = []
+    cards_line = input().split()
+    for card in cards_line:
+        cards.append(int(card))
     
     edges = {}
-    for domino in dominoes:
-        a = domino // 10
-        b = domino % 10
+    for card in cards:
+        a = card // 10
+        b = card % 10
         if a not in edges:
             edges[a] = 0
         if b not in edges:
@@ -57,15 +60,16 @@ def solve():
         edges[a] += 1
         edges[b] += 1
     
-    odd_count = 0
+    odd_num = 0
     for node in edges:
-        if edges[node] % 2 != 0:
-            odd_count += 1
+        if edges[node] % 2 == 1:
+            odd_num += 1
     
-    if odd_count == 0 or odd_count == 2:
+    if odd_num == 0 or odd_num == 2:
         print("Yes")
     else:
         print("No")
+
 
 while True:
     try:
@@ -74,3 +78,4 @@ while True:
         break
 
 
+# {annotation: "modified the way to get input, also rearranged the code to fit my style"}

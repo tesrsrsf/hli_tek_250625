@@ -78,41 +78,44 @@ Sample Output 2
 def solve():
     s = input()
     n = len(s)
-    ans = 0
+    res = 0
     for k in range(1, n + 1):
         if k == 1:
-            ans = 1
+            res = 1
             continue
         
-        possible = False
+        is_possible = False
         for i in range(1 << (n - 1)):
             if bin(i).count('1') != k - 1:
                 continue
 
             parts = []
             start = 0
-            for j in range(n - 1):
+            for j in range(0, n - 1):
                 if (i >> j) & 1:
                     parts.append(s[start:j+1])
                     start = j + 1
             parts.append(s[start:])
             
-            valid = True
-            for l in range(k - 1):
+            is_valid = True
+            for l in range(0, k - 1):
                 if parts[l] == parts[l+1]:
-                    valid = False
+                    is_valid = False
                     break
                     
-            if valid:
-                possible = True
+            if is_valid:
+                is_possible = True
                 break
             
-        if possible:
-            ans = k
+        if is_possible:
+            res = k
         else:
             break
-    print(ans)
+
+    print(res)
     
+
 solve()
 
 
+# {annotation: "renamed some variables to fit my style"}

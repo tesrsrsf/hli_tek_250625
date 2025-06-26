@@ -84,25 +84,31 @@ Sample Output 3
 
 
 n = input()
-length = len(n)
-ans = 0
+res = 0
 carry = 0
-for i in range(length - 1, -1, -1):
+
+for i in range(len(n) - 1, -1, -1):
   digit = int(n[i])
+
   if carry == 1:
     digit += 1
-  if digit == 10:
-    ans += 2
-    carry = 1
-  elif digit >= 5:
-    ans += 10 - digit
-    carry = 1
-  else:
-    ans += digit
-    carry = 0
+
+  match digit:
+    case 10:
+      res += 2
+      carry = 1
+    case d if digit >= 5:
+      res += 10 - digit
+      carry = 1
+    case _:
+      res += digit
+      carry = 0
+
 if carry == 1:
-  ans += 1
-print(ans)
+  res += 1
+
+print(res)
 
 
 
+# {annotation: "used switch case for digit handling since it has better readability and performance in latest python"}

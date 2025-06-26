@@ -118,44 +118,9 @@ The answer can be
 
 import java.util.*;
 
-public class Main {
+public class Problem_32_p03832_gpt4_java {
     static final int MOD = 1000000007;
     
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
-        int C = scanner.nextInt();
-        int D = scanner.nextInt();
-        scanner.close();
-
-        long[][] dp = new long[N + 1][N + 1];
-        dp[0][0] = 1;
-
-        for (int people = 1; people <= N; people++) {
-            for (int groups = 1; groups <= people; groups++) {
-                for (int size = A; size <= B; size++) {
-                    if (people >= size) {
-                        for (int f = C; f <= D; f++) {
-                            if (groups > f) {
-                                continue;
-                            }
-                            dp[people][groups] = (dp[people][groups] + (dp[people - size][groups - 1] * comb(groups - 1, f - 1)) % MOD) % MOD;
-                        }
-                    }
-                }
-            }
-        }
-
-        long result = 0;
-        for (int groups = C; groups <= D; groups++) {
-            result = (result + dp[N][groups]) % MOD;
-        }
-
-        System.out.println(result);
-    }
-
     static long comb(int n, int k) {
         if (k > n || k < 0) {
             return 0;
@@ -168,9 +133,11 @@ public class Main {
         return (num * modInverse(denom)) % MOD;
     }
 
+
     static long modInverse(long a) {
         return pow(a, MOD - 2);
     }
+
 
     static long pow(long base, long exp) {
         long result = 1;
@@ -183,6 +150,44 @@ public class Main {
         }
         return result;
     }
+    
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        int d = scanner.nextInt();
+        scanner.close();
+
+        long[][] dp = new long[n + 1][n + 1];
+        dp[0][0] = 1;
+
+        for (int people = 1; people < n + 1; people++) {
+            for (int groups = 1; groups < people + 1; groups++) {
+                for (int size = a; size < b + 1; size++) {
+                    if (people >= size) {
+                        for (int f = c; f < d + 1; f++) {
+                            if (groups > f) {
+                                continue;
+                            }
+                            
+                            dp[people][groups] = (dp[people][groups] + (dp[people - size][groups - 1] * comb(groups - 1, f - 1)) % MOD) % MOD;
+                        }
+                    }
+                }
+            }
+        }
+
+        long res = 0;
+        for (int groups = c; groups < d + 1; groups++) {
+            res = (res + dp[n][groups]) % MOD;
+        }
+
+        System.out.println(res);
+    }
 }
 
 
+// {annotation: "moved tool functions to the top for better readability, avoiding use of capital letters in variables, refactored the program to fit my style"}

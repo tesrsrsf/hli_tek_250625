@@ -178,62 +178,66 @@ SSWWSSSWWS
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_35_p03800_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         String s = scanner.next();
 
-        for (int start1 = 0; start1 <= 1; start1++) {
-            for (int start2 = 0; start2 <= 1; start2++) {
-                char[] ans = new char[n];
-                ans[0] = (start1 == 0) ? 'S' : 'W';
-                ans[1] = (start2 == 0) ? 'S' : 'W';
+        for (int start1 = 0; start1 < 2; start1++) {
+            for (int start2 = 0; start2 < 2; start2++) {
+                char[] res = new char[n];
+                res[0] = (start1 == 0) ? 'S' : 'W';
+                res[1] = (start2 == 0) ? 'S' : 'W';
 
-                boolean possible = true;
+                boolean is_possible = true;
                 for (int i = 2; i < n; i++) {
                     if (s.charAt(i - 1) == 'o') {
-                        ans[i] = ans[i - 2];
+                        res[i] = res[i - 2];
                     } else {
-                        ans[i] = (ans[i - 2] == 'S') ? 'W' : 'S';
+                        res[i] = (res[i - 2] == 'S') ? 'W' : 'S';
                     }
                 }
 
                 if (n > 2) {
                     if (s.charAt(0) == 'o') {
-                        if (ans[0] != ans[n - 2]) {
-                            possible = false;
+                        if (res[0] != res[n - 2]) {
+                            is_possible = false;
                         }
                     } else {
-                        if (ans[0] == ans[n - 2]) {
-                            possible = false;
+                        if (res[0] == res[n - 2]) {
+                            is_possible = false;
                         }
                     }
                 }
                 if (n > 2) {
                     if (s.charAt(n - 1) == 'o') {
-                        if (ans[n - 1] != ans[1])
+                        if (res[n - 1] != res[1])
                         {
-                            possible = false;
+                            is_possible = false;
                         }
                     }
                     else{
-                        if (ans[n-1] == ans[1]){
-                            possible = false;
+                        if (res[n - 1] == res[1]){
+                            is_possible = false;
                         }
                     }
 
                 }
 
-                if (possible) {
-                    System.out.println(new String(ans));
+                if (is_possible) {
+                    System.out.println(new String(res));
+                    scanner.close();
                     return;
                 }
             }
         }
 
         System.out.println("-1");
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables in my style, reorganized code for clarity and readability"}

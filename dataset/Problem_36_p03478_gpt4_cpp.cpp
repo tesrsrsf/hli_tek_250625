@@ -86,31 +86,34 @@ Sample Output 3
 
 #include <iostream>
 
-int sumOfDigits(int num) {
+using namespace std;
+
+int sumOfDigits(int n) {
     int sum = 0;
-    while (num > 0) {
-        sum += num % 10;
-        num /= 10;
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
     }
     return sum;
 }
 
 int main() {
-    int N, A, B;
-    std::cin >> N >> A >> B;
+    int n, a, b;
+    cin >> n >> a >> b;
 
-    int resultSum = 0;
+    int res = 0;
 
-    for (int i = 1; i <= N; ++i) {
+    for (int i = 1; i < n + 1; i++) {
         int digitSum = sumOfDigits(i);
-        if (digitSum >= A && digitSum <= B) {
-            resultSum += i;
+        if (digitSum >= a && digitSum <= b) {
+            res += i;
         }
     }
 
-    std::cout << resultSum << std::endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "reformatted the code and renamed variables to fit my style"}

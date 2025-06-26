@@ -83,22 +83,24 @@ Sample Output 3
 
 
 
-N = int(input().strip())
+N = int(input())
 
-def count_banknotes(x):
+def statistician(data):
     count = 0
-    while x > 0:
-        count += x % 10
-        x //= 10
+    while data > 0:
+        count += data % 10
+        data //= 10
     return count
+
 
 give_amount = 10 ** (len(str(N)) - 1)
 while give_amount < N:
     give_amount *= 10
 
 clerk_change = give_amount - N
-total_banknotes = count_banknotes(give_amount) + count_banknotes(clerk_change)
+res = statistician(give_amount) + statistician(clerk_change)
 
-print(total_banknotes)
+print(res)
 
 
+# {annotation: "renamed identifiers with more descriptive names"}

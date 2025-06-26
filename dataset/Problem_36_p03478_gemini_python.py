@@ -91,16 +91,19 @@ def sum_digits(n):
     n //= 10
   return sum
 
-N = int(input())
-A = int(input())
-B = int(input())
 
-total_sum = 0
+nab_line = input().split()
+N = int(nab_line[0])
+A = int(nab_line[1])
+B = int(nab_line[2])
+
+res = 0
 for i in range(1, N + 1):
   digit_sum = sum_digits(i)
   if A <= digit_sum <= B:
-    total_sum += i
+    res += i
 
-print(total_sum)
+print(res)
 
 
+# {annotation: "solved problem with input format existed in the original code, also rearranged the code in my style"}

@@ -116,22 +116,27 @@ The answer can be
 
 
 
+fact = []
+mod = 10**9 + 7
+
+def nCr(n, r):
+    if r < 0 or r > n:
+        return 0
+    num = fact[n]
+    den = (fact[r] * fact[n-r]) % mod
+    return (num * pow(den, mod-2, mod)) % mod
+
 def solve():
+    global fact
+    global mod
+
     n, a, b, c, d = map(int, input().split())
-    mod = 10**9 + 7
+    res = 0
     
     fact = [1] * (n + 1)
     for i in range(2, n + 1):
         fact[i] = (fact[i-1] * i) % mod
     
-    def nCr(n, r):
-        if r < 0 or r > n:
-            return 0
-        num = fact[n]
-        den = (fact[r] * fact[n-r]) % mod
-        return (num * pow(den, mod-2, mod)) % mod
-
-    ans = 0
     for groups_a in range(c, d + 1):
         for groups_b in range(c, d + 1):
             rem = n - groups_a * a - groups_b * b
@@ -142,7 +147,6 @@ def solve():
                 ways = (ways * nCr(n, groups_a * a)) % mod
                 
                 temp_n = n
-                temp_groups_a = groups_a * a
                 for i in range(groups_a):
                     ways = (ways * nCr(temp_n, a)) % mod
                     temp_n -= a
@@ -153,7 +157,7 @@ def solve():
                     ways = (ways * nCr(temp_n, b)) % mod
                     temp_n -= b
                     
-                ans = (ans + ways) % mod
+                res = (res + ways) % mod
 
             elif a <= rem <= b and rem % (rem) == 0 and (c <= 1 <= d):
                 ways = nCr(groups_a + groups_b+1, groups_a)
@@ -172,38 +176,38 @@ def solve():
                     temp_n -= b
                 
                 ways = (ways * nCr(temp_n, rem)) % mod
-                ans = (ans + ways) % mod
+                res = (res + ways) % mod
 
     for groups_a in range(c, d + 1):
         for groups_b in range(c, d + 1):
             for groups_rem in range(c, d + 1):
-                rem = n - groups_a * a - groups_b * b - groups_rem * (a+1)
-                if rem < 0:
+                rem = n - groups_a * a - groups_b * b - groups_rem * (a + 1)
+                if rem < 0 or rem != 0:
                     continue
-                if rem != 0:
-                    continue
+
                 ways = nCr(groups_a + groups_b + groups_rem, groups_a)
                 ways = (ways * nCr(n, groups_a * a)) % mod
-
                 temp_n = n
-                temp_groups_a = groups_a * a
-                for i in range(groups_a):
+
+                for i in range(0, groups_a):
                     ways = (ways * nCr(temp_n, a)) % mod
                     temp_n -= a
 
                 temp_n = n - groups_a * a
-                for i in range(groups_b):
+                for i in range(0, groups_b):
                     ways = (ways * nCr(temp_n, b)) % mod
                     temp_n -= b
                 
-                temp_n = n-groups_a*a-groups_b*b
-                for i in range(groups_rem):
-                    ways = (ways*nCr(temp_n,a+1))%mod
-                    temp_n -= a+1
-                ans = (ans + ways) % mod
+                temp_n = n - groups_a * a - groups_b * b
+                for i in range(0, groups_rem):
+                    ways = (ways * nCr(temp_n, a + 1)) % mod
+                    temp_n -= a + 1
+                res = (res + ways) % mod
     
-    print(ans)
+    print(res)
+
 
 solve()
 
 
+# {annotation: "moved nCr function outside for better modularity and readability, refactored the program to fit my style"}

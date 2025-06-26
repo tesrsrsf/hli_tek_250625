@@ -137,44 +137,50 @@ DIFFERENT
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_39_p01102_gpt4_java {
+    public static String[] extractLit(String line) {
+        return line.split("\"(.*?)\"");
+    }
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String line1, line2;
         
         while (true) {
             line1 = scanner.nextLine();
-            if (line1.equals(".")) break;
+            if (line1.equals(".")) {
+                break;
+            }
+
             line2 = scanner.nextLine();
             
             if (line1.equals(line2)) {
                 System.out.println("IDENTICAL");
             } else {
-                String[] parts1 = extractLiterals(line1);
-                String[] parts2 = extractLiterals(line2);
-                if (parts1.length != parts2.length) {
+                String[] p1 = extractLit(line1);
+                String[] p2 = extractLit(line2);
+                if (p1.length != p2.length) {
                     System.out.println("DIFFERENT");
                 } else {
-                    int diffCount = 0;
-                    for (int i = 0; i < parts1.length; i++) {
-                        if (!parts1[i].equals(parts2[i])) {
-                            diffCount++;
+                    int diffNum = 0;
+                    for (int i = 0; i < p1.length; i++) {
+                        if (!p1[i].equals(p2[i])) {
+                            diffNum++;
                         }
                     }
-                    if (diffCount == 1) {
-                        System.out.println("CLOSE");
-                    } else {
+
+                    if (diffNum > 1) {
                         System.out.println("DIFFERENT");
+                    } else {
+                        System.out.println("CLOSE");
                     }
                 }
             }
         }
         scanner.close();
     }
-
-    private static String[] extractLiterals(String line) {
-        return line.split("\"(.*?)\"");
-    }
 }
 
 
+// {annotation: "renamed variables in my way to make it more readable, also moved tool function to the top for better readability"}

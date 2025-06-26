@@ -89,48 +89,57 @@ NO
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_40_p03808_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
-        int[] A = new int[N];
+        int[] a = new int[N];
+
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            a[i] = scanner.nextInt();
         }
 
         for (int startBox = 0; startBox < N; startBox++) {
             int[] tempA = new int[N];
-            System.arraycopy(A, 0, tempA, 0, N);
-            boolean possible = true;
-            for (int j = 1; j <= N; j++) {
+            System.arraycopy(a, 0, tempA, 0, N);
+            boolean isPossible = true;
+
+            for (int j = 1; j < N + 1; j++) {
                 int boxIndex = (startBox + j) % N;
                 if (tempA[boxIndex] < j) {
-                    possible = false;
+                    isPossible = false;
                     break;
                 }
             }
-            if (possible) {
-                for (int j = 1; j <= N; j++) {
+
+            if (isPossible) {
+                for (int j = 1; j < N + 1; j++) {
                     int boxIndex = (startBox + j) % N;
                     tempA[boxIndex] -= j;
                 }
-                boolean allZero = true;
+
+                boolean areAllZero = true;
                 for (int i = 0; i < N; i++) {
                     if (tempA[i] != 0) {
-                        allZero = false;
+                        areAllZero = false;
                         break;
                     }
                 }
-                if (allZero) {
+
+                if (areAllZero) {
                     System.out.println("YES");
+                    scanner.close();
                     return;
                 }
             }
         }
 
         System.out.println("NO");
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables for better readability, reformatted code structure for clarity"}

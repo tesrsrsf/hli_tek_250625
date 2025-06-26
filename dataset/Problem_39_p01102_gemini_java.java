@@ -136,52 +136,11 @@ DIFFERENT
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            String program1 = scanner.nextLine();
-            if (program1.equals(".")) {
-                break;
-            }
-            String program2 = scanner.nextLine();
-
-            if (program1.equals(program2)) {
-                System.out.println("IDENTICAL");
-            } else {
-                List<String> literals1 = extractLiterals(program1);
-                List<String> literals2 = extractLiterals(program2);
-
-                if (literals1.size() != literals2.size()) {
-                    System.out.println("DIFFERENT");
-                    continue;
-                }
-
-                int diffCount = 0;
-                for (int i = 0; i < literals1.size(); i++) {
-                    if (!literals1.get(i).equals(literals2.get(i))) {
-                        diffCount++;
-                    }
-                }
-
-                if (diffCount == 0) {
-                    System.out.println("IDENTICAL");
-                } else if (diffCount == 1 && replaceLiterals(program1, literals1, literals2)) {
-                    System.out.println("CLOSE");
-                } else {
-                    System.out.println("DIFFERENT");
-                }
-            }
-        }
-        scanner.close();
-    }
-
-    private static List<String> extractLiterals(String program) {
-        List<String> literals = new ArrayList<>();
+public class Problem_39_p01102_gemini_java {
+    public static ArrayList<String> extractLit(String program) {
+        ArrayList<String> literals = new ArrayList<>();
         boolean inLiteral = false;
         StringBuilder literalBuilder = new StringBuilder();
         for (char c : program.toCharArray()) {
@@ -200,18 +159,20 @@ public class Main {
         return literals;
     }
 
-    private static boolean replaceLiterals(String program1, List<String> literals1, List<String> literals2) {
-        String replacedProgram1 = program1;
+
+    public static boolean replaceLit(String program1, ArrayList<String> literals1, ArrayList<String> literals2) {
         int literalIndex = -1;
-        for(int i = 0; i < literals1.size(); i++) {
-            if(!literals1.get(i).equals(literals2.get(i))) {
+        for (int i = 0; i < literals1.size(); i++) {
+            if (!literals1.get(i).equals(literals2.get(i))) {
                 literalIndex = i;
                 break;
             }
         }
 
 
-        if(literalIndex == -1) return false;
+        if (literalIndex == -1) {
+            return false;
+        }
 
         String temp = program1;
 
@@ -222,29 +183,73 @@ public class Main {
         for (int i = 0; i < temp.length(); i++) {
             if (temp.charAt(i) == '"') {
                 if (inLiteral) {
-                    if(literalCount == literalIndex) {
+                    if (literalCount == literalIndex) {
                         sb.append(literals2.get(literalIndex));
                     } else {
                         sb.append(temp.substring(start, i+1));
                     }
 
-                    start = i+1;
+                    start = i + 1;
                     inLiteral = false;
                     literalCount++;
 
                 } else {
-                    sb.append(temp.substring(start, i+1));
+                    sb.append(temp.substring(start, i + 1));
                     start = i + 1;
                     inLiteral = true;
                 }
             }
         }
-        if(start < temp.length()) sb.append(temp.substring(start));
+        if (start < temp.length()) {
+            sb.append(temp.substring(start));
+        }
 
         String modifiedProgram = sb.toString();
 
         return modifiedProgram.equals(program1) && literals1.size() == literals2.size();
     }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            String program1 = scanner.nextLine();
+            if (program1.equals(".")) {
+                break;
+            }
+            String program2 = scanner.nextLine();
+
+            if (program1.equals(program2)) {
+                System.out.println("IDENTICAL");
+            } else {
+                ArrayList<String> literals1 = extractLit(program1);
+                ArrayList<String> literals2 = extractLit(program2);
+
+                if (literals1.size() != literals2.size()) {
+                    System.out.println("DIFFERENT");
+                    continue;
+                }
+
+                int diffCount = 0;
+                for (int i = 0; i < literals1.size(); i++) {
+                    if (!literals1.get(i).equals(literals2.get(i))) {
+                        diffCount++;
+                    }
+                }
+
+                if (diffCount == 0) {
+                    System.out.println("IDENTICAL");
+                } else if (diffCount == 1 && replaceLit(program1, literals1, literals2)) {
+                    System.out.println("CLOSE");
+                } else {
+                    System.out.println("DIFFERENT");
+                }
+            }
+        }
+        scanner.close();
+    }
 }
 
 
+// {annotation: "moved tool functions to the top, rearranged program structure for better readability, setted tool functions to public just in case"}

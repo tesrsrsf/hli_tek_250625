@@ -44,48 +44,19 @@ No
 
 import java.util.*;
 
-public class Main {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextInt()) {
-            int n = scanner.nextInt();
-            int[][] dominoes = new int[n][2];
-            for (int i = 0; i < n; i++) {
-                String domino = scanner.next();
-                dominoes[i][0] = domino.charAt(0) - '0';
-                dominoes[i][1] = domino.charAt(1) - '0';
-            }
-
-            boolean possible = false;
-            int[] permutation = new int[n];
-            for (int i = 0; i < n; i++) {
-                permutation[i] = i;
-            }
-
-            do {
-                if (canArrange(dominoes, permutation)) {
-                    possible = true;
-                    break;
-                }
-            } while (nextPermutation(permutation));
-
-            System.out.println(possible ? "Yes" : "No");
-        }
-        scanner.close();
-    }
-
-    static boolean canArrange(int[][] dominoes, int[] permutation) {
+public class Problem_33_p00596_gemini_java {
+    static boolean canArrange(int[][] cards, int[] permutation) {
         for (int startSide = 0; startSide <= 1; startSide++) {
-            int prevSide = startSide == 0 ? dominoes[permutation[0]][0] : dominoes[permutation[0]][1];
+            int prevSide = startSide == 0 ? cards[permutation[0]][0] : cards[permutation[0]][1];
             boolean valid = true;
+
             for (int i = 1; i < permutation.length; i++) {
-                int dominoIndex = permutation[i];
+                int cardIndex = permutation[i];
                 int nextSide;
-                if (dominoes[dominoIndex][0] == prevSide) {
-                    nextSide = dominoes[dominoIndex][1];
-                } else if (dominoes[dominoIndex][1] == prevSide) {
-                    nextSide = dominoes[dominoIndex][0];
+                if (cards[cardIndex][0] == prevSide) {
+                    nextSide = cards[cardIndex][1];
+                } else if (cards[cardIndex][1] == prevSide) {
+                    nextSide = cards[cardIndex][0];
                 } else {
                     valid = false;
                     break;
@@ -99,6 +70,7 @@ public class Main {
         return false;
     }
     
+
     static boolean nextPermutation(int[] arr) {
         int n = arr.length;
         int i = n - 2;
@@ -117,12 +89,14 @@ public class Main {
         return true;
     }
 
+
     static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
+    
     static void reverse(int[] arr, int start, int end) {
         while (start < end) {
             swap(arr, start, end);
@@ -130,6 +104,43 @@ public class Main {
             end--;
         }
     }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextInt()) {
+            int n = scanner.nextInt();
+            int[][] cards = new int[n][2];
+            for (int i = 0; i < n; i++) {
+                String domino = scanner.next();
+                cards[i][0] = domino.charAt(0) - '0';
+                cards[i][1] = domino.charAt(1) - '0';
+            }
+
+            boolean is_possible = false;
+            int[] permutation = new int[n];
+            for (int i = 0; i < n; i++) {
+                permutation[i] = i;
+            }
+
+            do {
+                if (canArrange(cards, permutation)) {
+                    is_possible = true;
+                    break;
+                }
+            } while (nextPermutation(permutation));
+
+            if (is_possible) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+        }
+
+        scanner.close();
+    }
 }
 
 
+// {annotation: "moved tool function to the top, reformatted code to fit my style"}

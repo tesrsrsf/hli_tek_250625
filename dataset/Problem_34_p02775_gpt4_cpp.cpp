@@ -87,28 +87,26 @@ Sample Output 3
 #include <string>
 #include <algorithm>
 
-int main() {
-    std::string N;
-    std::cin >> N;
+using namespace std;
 
-    int total_banknotes = 0;
+int main() {
+    string N;
+    cin >> N;
+
+    int res = 0;
     
-    // Count the number of digits in N
     int len = N.length();
 
-    // Count banknotes used by you
-    total_banknotes += len; // Each digit in N corresponds to one banknote of value 10^i for each position i
+    res += len;
 
-    // Count banknotes used by clerk for change
-    // If the most significant digit is not 0, we need to round up to the next power of 10
     if (N[0] != '0') {
-        total_banknotes += 1; // one additional banknote for the next power of 10
+        res += 1;
     }
     
-    // Total banknotes is the sum from you and the clerk
-    std::cout << total_banknotes << std::endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "removed unnecessary comments which were longer than the code itself, used namespace to improve readability"}

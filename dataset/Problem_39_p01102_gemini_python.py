@@ -135,59 +135,60 @@ DIFFERENT
 
 
 
-def extract_string_literals(program):
+def extract_str_lit(prog):
     string_literals = []
     in_string = False
     start_index = -1
-    for i, char in enumerate(program):
+    for i, char in enumerate(prog):
         if char == '"':
             if not in_string:
                 in_string = True
                 start_index = i
             else:
                 in_string = False
-                string_literals.append(program[start_index+1:i])
+                string_literals.append(prog[start_index+1:i])
 
     return string_literals
 
-def solve():
-    program1 = input()
-    if program1 == ".":
-        return False
-    program2 = input()
 
-    if program1 == program2:
+def titanic():
+    prog1 = input()
+    if prog1 == ".":
+        return False
+    
+    prog2 = input()
+
+    if prog1 == prog2:
         print("IDENTICAL")
     else:
-        literals1 = extract_string_literals(program1)
-        literals2 = extract_string_literals(program2)
+        lit1 = extract_str_lit(prog1)
+        lit2 = extract_str_lit(prog2)
         
-        if len(literals1) != len(literals2):
+        if len(lit1) != len(lit2):
           print("DIFFERENT")
           return True
 
         diff_count = 0
-        for i in range(len(literals1)):
-            if literals1[i] != literals2[i]:
+        for i in range(len(lit1)):
+            if lit1[i] != lit2[i]:
                 diff_count += 1
 
         if diff_count == 0:
-          if program1.replace('"','').replace(';','') == program2.replace('"','').replace(';',''):
+          if prog1.replace('"','').replace(';','') == prog2.replace('"','').replace(';',''):
             print("IDENTICAL")
           else:
             print("DIFFERENT")
-        elif diff_count == 0 and program1 == program2:
+        elif diff_count == 0 and prog1 == prog2:
             print("IDENTICAL")
-        elif diff_count ==1 and program1.replace('"','').replace(';','') == program2.replace('"','').replace(';',''):
+        elif diff_count ==1 and prog1.replace('"','').replace(';','') == prog2.replace('"','').replace(';',''):
             print("CLOSE")
         elif diff_count == 1:
-            
-            p1_no_literals = program1
-            p2_no_literals = program2
-            for literal in literals1:
+            p1_no_literals = prog1
+            p2_no_literals = prog2
+            for literal in lit1:
                 p1_no_literals = p1_no_literals.replace('"' + literal + '"', '""', 1)
                 
-            for literal in literals2:
+            for literal in lit2:
                 p2_no_literals = p2_no_literals.replace('"' + literal + '"', '""',1)
             
             if p1_no_literals == p2_no_literals:
@@ -196,9 +197,12 @@ def solve():
               print("DIFFERENT")
         else:
             print("DIFFERENT")
+
     return True
 
-while solve():
+
+while titanic():
     pass
 
 
+# {annotation: "renamed variables to match my style, shortened variable names for readability"}

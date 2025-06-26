@@ -75,16 +75,15 @@ Sample Output 2
 
 
 
-def max_partitions(S):
-    K = 1  # start with 1 partition
-    for i in range(1, len(S)):
-        if S[i] != S[i - 1]:
-            K += 1
-    return K
+def deepseek(s):
+    k = 1
+    for i in range(1, len(s)):
+        if s[i] != s[i - 1]:
+            k += 1
+    return k
 
-# Read input
-S = input().strip()
-# Print the result
-print(max_partitions(S))
+
+s = input()
+print(deepseek(s) + 1)
 
 

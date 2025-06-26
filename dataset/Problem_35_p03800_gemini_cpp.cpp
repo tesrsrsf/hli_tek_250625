@@ -184,17 +184,19 @@ using namespace std;
 
 int main() {
     int n;
-    cin >> n;
     string s;
+
+    cin >> n;
     cin >> s;
 
-    for (int first1 = 0; first1 <= 1; ++first1) {
-        for (int first2 = 0; first2 <= 1; ++first2) {
+    for (int first1 = 0; first1 < 2; first1++) {
+        for (int first2 = 0; first2 < 2; first2++) {
             vector<int> species(n);
+
             species[0] = first1;
             species[1] = first2;
 
-            bool possible = true;
+            bool is_possible = true;
             for (int i = 2; i < n; ++i) {
                 if (s[i - 1] == 'o') {
                     species[i] = species[i - 2];
@@ -204,28 +206,41 @@ int main() {
             }
 
             if (n > 2) {
-            if (s[0] == 'o') {
-                    if (species[0] != species[1] && species[0] == species[n-1] ) possible =false;
+                if (s[0] == 'o') {
+                    if (species[0] != species[1] && species[0] == species[n - 1] ) {
+                        is_possible = false;
+                    }
                
                 } else {
-                 if (species[0] == species[1] && species[0] != species[n-1]) possible =false;
+                    if (species[0] == species[1] && species[0] != species[n - 1]) {
+                        is_possible = false;
+                    }
                 }
 
 
-            if (s[n-1] == 'o') {
-               if(species[n-1] != species[n-2] && species[n-1] == species[0]) possible =false;
-            } else{
-                if(species[n-1] == species[n-2] && species[n-1]!=species[0]) possible=false;
-            }
-
-            }
-
-            if (possible) {
-                string result = "";
-                for (int i = 0; i < n; ++i) {
-                    result += (species[i] == 0) ? 'S' : 'W';
+                if (s[n - 1] == 'o') {
+                    if (species[n - 1] != species[n - 2] && species[n - 1] == species[0]) {
+                        is_possible = false;
+                    }
+                } else {
+                    if (species[n - 1] == species[n - 2] && species[n - 1] != species[0]) {
+                        is_possible = false;
+                    }
                 }
-                cout << result << endl;
+            }
+
+            if (is_possible) {
+                string res = "";
+                for (int i = 0; i < n; i++) {
+                    if (species[i] == 0)
+                    {
+                        res += 'S';
+                    } else {
+                        res += 'W';
+                    }
+                }
+
+                cout << res << endl;
                 return 0;
             }
         }
@@ -237,3 +252,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables in my style, reorganized code for clarity and readability"}

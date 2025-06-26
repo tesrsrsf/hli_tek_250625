@@ -89,27 +89,28 @@ NO
 
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
-    vector<long long> A(N);
-    for (int i = 0; i < N; ++i) {
-        cin >> A[i];
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
 
-    long long total_stones = 0;
-    for (int i = 0; i < N; ++i) {
-        total_stones += A[i];
+    int ttl_stones = 0;
+    for (int i = 0; i < n; i++) {
+        ttl_stones += a[i];
     }
 
-    long long required_stones = 0;
-    for (int i = 1; i <= N; ++i) {
-        required_stones += i;
+    int req_stones = 0;
+    for (int i = 1; i < n + 1; i++) {
+        req_stones += i;
     }
 
-    if (total_stones % required_stones == 0) {
+    if (ttl_stones % req_stones == 0) {
         cout << "YES" << endl;
     } else {
         cout << "NO" << endl;
@@ -119,3 +120,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables for better readability, also avoided use of capital letters in variable names"}

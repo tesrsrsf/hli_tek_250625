@@ -139,20 +139,22 @@ DIFFERENT
 #include <string>
 #include <vector>
 
-bool areIdentical(const std::string &s1, const std::string &s2) {
+using namespace std;
+
+bool areIdentical(string s1, string s2) {
     return s1 == s2;
 }
 
-bool areClose(const std::string &s1, const std::string &s2) {
-    std::vector<std::string> literals1, literals2;
+bool areClose(string &s1, string &s2) {
+    vector<string> lit1, lit2;
     size_t start1 = s1.find('"'), start2 = s2.find('"');
-    
-    while (start1 != std::string::npos && start2 != std::string::npos) {
+
+    while (start1 != string::npos && start2 != string::npos) {
         size_t end1 = s1.find('"', start1 + 1);
         size_t end2 = s2.find('"', start2 + 1);
-        if (end1 != std::string::npos && end2 != std::string::npos) {
-            literals1.push_back(s1.substr(start1 + 1, end1 - start1 - 1));
-            literals2.push_back(s2.substr(start2 + 1, end2 - start2 - 1));
+        if (end1 != string::npos && end2 != string::npos) {
+            lit1.push_back(s1.substr(start1 + 1, end1 - start1 - 1));
+            lit2.push_back(s2.substr(start2 + 1, end2 - start2 - 1));
             start1 = s1.find('"', end1 + 1);
             start2 = s2.find('"', end2 + 1);
         } else {
@@ -162,12 +164,12 @@ bool areClose(const std::string &s1, const std::string &s2) {
 
     int diffCount = 0;
     
-    if (literals1.size() != literals2.size()) {
+    if (lit1.size() != lit2.size()) {
         return false;
     }
     
-    for (size_t i = 0; i < literals1.size(); i++) {
-        if (literals1[i] != literals2[i]) {
+    for (size_t i = 0; i < lit1.size(); i++) {
+        if (lit1[i] != lit2[i]) {
             diffCount++;
             if (diffCount > 1) {
                 return false;
@@ -179,17 +181,17 @@ bool areClose(const std::string &s1, const std::string &s2) {
 }
 
 int main() {
-    std::string s1, s2;
+    string s1, s2;
 
-    while (std::getline(std::cin, s1) && s1 != ".") {
-        std::getline(std::cin, s2);
-        
+    while (getline(cin, s1) && s1 != ".") {
+        getline(cin, s2);
+
         if (areIdentical(s1, s2)) {
-            std::cout << "IDENTICAL" << std::endl;
+            cout << "IDENTICAL" << endl;
         } else if (areClose(s1, s2)) {
-            std::cout << "CLOSE" << std::endl;
+            cout << "CLOSE" << endl;
         } else {
-            std::cout << "DIFFERENT" << std::endl;
+            cout << "DIFFERENT" << endl;
         }
     }
 
@@ -197,3 +199,4 @@ int main() {
 }
 
 
+// {annotation: "used namespace std to simplify code and improve readability, also shortened variable names in my style for convienience"}

@@ -125,49 +125,47 @@ Sample Output 3
 
 import java.util.*;
 
-public class Main {
+public class Problem_31_p03700_gpt4_java {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         
-        int N = sc.nextInt();
-        long A = sc.nextLong();
-        long B = sc.nextLong();
+        int N = scanner.nextInt();
+        long A = scanner.nextLong();
+        long B = scanner.nextLong();
         
-        long[] healths = new long[N];
+        long[] hps = new long[N];
         for (int i = 0; i < N; i++) {
-            healths[i] = sc.nextLong();
+            hps[i] = scanner.nextLong();
         }
         
-        long totalExplosions = 0;
+        long res = 0;
         
-        Arrays.sort(healths);
+        Arrays.sort(hps);
         
         while (N > 0) {
-            // Center the explosion at the monster with maximum health
-            long maxHealth = healths[N - 1];
+            long maxHp = hps[N - 1];
             
-            // Calculate the number of explosions needed for the max health monster
-            long requiredExplosions = (maxHealth + A - 1) / A; // rounds up
-            totalExplosions += requiredExplosions;
+            long requiredExplosions = (maxHp + A - 1) / A; // rounds up
+            res += requiredExplosions;
             
-            // Damage all monsters in this explosion
             for (int i = 0; i < N; i++) {
-                healths[i] -= requiredExplosions * B;
+                hps[i] -= requiredExplosions * B;
             }
             
-            // Remove all monsters that are dead (health <= 0)
             int newN = 0;
             for (int i = 0; i < N; i++) {
-                if (healths[i] > 0) {
-                    healths[newN++] = healths[i];
+                if (hps[i] > 0) {
+                    hps[newN++] = hps[i];
                 }
             }
             N = newN; // Update the count of alive monsters
         }
         
-        System.out.println(totalExplosions);
-        sc.close();
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "removed unnecessary comments, simplified variable names"}

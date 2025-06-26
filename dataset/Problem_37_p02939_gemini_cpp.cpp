@@ -86,19 +86,19 @@ int main() {
     cin >> s;
 
     int n = s.length();
-    int max_k = 0;
+    int res = 0;
 
-    for (int k = 1; k <= n; ++k) {
+    for (int k = 1; k < n + 1; k++) {
         if (n < k) {
             break;
         }
         
-        for (int i = 0; i < (1 << (n - 1)); ++i) {
+        for (int i = 0; i < (1 << (n - 1)); i++) {
             vector<string> parts;
             string current_part = "";
             int part_count = 0;
-            
-            for (int j = 0; j < n; ++j) {
+
+            for (int j = 0; j < n; j++) {
                 current_part += s[j];
                 if (j < n - 1 && (i & (1 << j))) {
                     parts.push_back(current_part);
@@ -110,22 +110,27 @@ int main() {
             part_count++;
 
             if (part_count == k) {
-                bool ok = true;
-                for (int l = 0; l < k - 1; ++l) {
+                bool is_possible = true;
+                for (int l = 0; l < k - 1; l++) {
                     if (parts[l] == parts[l + 1]) {
-                        ok = false;
+                        is_possible = false;
                         break;
                     }
                 }
-                if (ok) {
-                    max_k = max(max_k, k);
+                if (is_possible) {
+                    if (res < k) {
+                        res = k;
+                    }
+                    
                 }
             }
         }
     }
-    cout << max_k << endl;
+
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed the variable for clarity, also reformatted the code to fit my style"}

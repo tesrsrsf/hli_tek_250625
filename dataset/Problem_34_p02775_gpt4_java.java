@@ -86,23 +86,22 @@ Sample Output 3
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_34_p02775_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BigInteger N = new BigInteger(scanner.nextLine());
         scanner.close();
 
-        int totalBanknotes = 0;
+        int ttl_banknotes = 0;
 
-        // Calculate the number of banknotes given by the buyer
         while (N.compareTo(BigInteger.ZERO) > 0) {
-            totalBanknotes += N.toString().length();
+            ttl_banknotes += N.toString().length();
             N = N.divide(BigInteger.TEN);
         }
 
-        // Print the total minimum banknotes used
-        System.out.println(totalBanknotes);
+        System.out.println(ttl_banknotes);
     }
 }
 
 
+// {annotation: "used more descriptive variable names for clarity"}

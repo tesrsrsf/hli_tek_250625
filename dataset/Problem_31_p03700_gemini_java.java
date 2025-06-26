@@ -126,35 +126,39 @@ Sample Output 3
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_31_p03700_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         int n = scanner.nextInt();
         long a = scanner.nextLong();
         long b = scanner.nextLong();
-        long[] h = new long[n];
+        long[] data = new long[n];
+
         for (int i = 0; i < n; i++) {
-            h[i] = scanner.nextLong();
+            data[i] = scanner.nextLong();
         }
+
         scanner.close();
 
-        long explosions = 0;
-        Arrays.sort(h);
+        long explo = 0;
+        Arrays.sort(data);
 
         for (int i = n - 1; i >= 0; i--) {
-            if (h[i] > 0) {
-                long centerExplosions = (long) Math.ceil((double) h[i] / (a - b));
-                explosions += centerExplosions;
+            if (data[i] > 0) {
+                long centerExplo = (long) Math.ceil((double) data[i] / (a - b));
+                explo += centerExplo;
                 for (int j = 0; j < n; j++) {
                     if (i != j) {
-                        h[j] -= centerExplosions * b;
+                        data[j] -= centerExplo * b;
                     }
-                    h[i] -= centerExplosions * a;
+                    data[i] -= centerExplo * a;
                 }
             }
         }
 
-        System.out.println(explosions);
+        long res = explo;
+        System.out.println(res);
     }
 }
 

@@ -134,31 +134,31 @@ int main() {
   cin >> n >> a >> b;
 
   vector<long long> h(n);
-  for (int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; i++) {
     cin >> h[i];
   }
 
-  long long explosions = 0;
-  bool all_vanished = false;
+  long long explo = 0;
+  bool all_van = false;
 
-  while (!all_vanished) {
-    all_vanished = true;
-    for (int i = 0; i < n; ++i) {
+  while (all_van == false) {
+    all_van = true;
+    for (int i = 0; i < n; i++) {
       if (h[i] > 0) {
-        all_vanished = false;
-        int center_monster_index = -1;
-        long long max_health = -1;
-        for(int j = 0; j < n; ++j){
-            if(h[j] > 0 && h[j] > max_health){
-                max_health = h[j];
-                center_monster_index = j;
+        all_van = false;
+        int center_mons_idx = -1;
+        long long max_heal = -1;
+        for(int j = 0; j < n; j++){
+            if(h[j] > 0 && h[j] > max_heal){
+                max_heal = h[j];
+                center_mons_idx = j;
             }
         }
-        if(center_monster_index != -1){
-          explosions++;
-          h[center_monster_index] -= a;
-          for (int j = 0; j < n; ++j) {
-            if (j != center_monster_index) {
+        if(center_mons_idx != -1){
+          explo++;
+          h[center_mons_idx] -= a;
+          for (int j = 0; j < n; j++) {
+            if (j != center_mons_idx) {
               h[j] -= b;
             }
           }
@@ -168,9 +168,10 @@ int main() {
     }
   }
 
-  cout << explosions << endl;
+  cout << explo << endl;
 
   return 0;
 }
 
 
+// {annotation: "renamed variables to fit my style"}

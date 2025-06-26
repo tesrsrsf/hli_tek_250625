@@ -94,9 +94,8 @@ int main() {
     cin >> n_str;
 
     int n = n_str.length();
-    int ans = n;
-    int carry = 0;
-    for (int i = 0; i < n; ++i) {
+    int res = n;
+    for (int i = 0; i < n; i++) {
         int digit = n_str[i] - '0';
         if (digit == 0) {
             continue;
@@ -104,13 +103,18 @@ int main() {
         if (digit == 1) {
             continue;
         }
-        ans = min(ans, n - i - 1 + (digit == 9 ? 1 : 1) + i);
+
+        if (res > n - i - 1 + 1 + i) 
+        {
+            res = n - i - 1 + 1 + i;
+        }
         
     }
 
-    cout << ans << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "used more explicit method to replace min, also renamed variables in my style"}

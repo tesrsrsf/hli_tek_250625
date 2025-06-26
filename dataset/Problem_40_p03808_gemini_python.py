@@ -90,23 +90,23 @@ NO
 def solve():
     n = int(input())
     a = []
-    for _ in range(n):
+    for i in range(0, n):
         a.append(int(input()))
     
-    for start_box in range(n):
+    for start_box in range(0, n):
         b = a[:]
-        possible = True
+        is_possible = True
         for j in range(1, n + 1):
-            box_index = (start_box + j) % n
-            if b[box_index] < j:
-                possible = False
+            box_idx = (start_box + j) % n
+            if b[box_idx] < j:
+                is_possible = False
                 break
-        if not possible:
+        if not is_possible:
             continue
         
         for j in range(1, n + 1):
-            box_index = (start_box + j) % n
-            b[box_index] -= j
+            box_idx = (start_box + j) % n
+            b[box_idx] -= j
             
         if all(x == 0 for x in b):
             print("YES")
@@ -114,6 +114,8 @@ def solve():
     
     print("NO")
 
+
 solve()
 
 
+# {annotation: "renamed variables for better readability"}

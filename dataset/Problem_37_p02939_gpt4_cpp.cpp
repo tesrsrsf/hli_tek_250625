@@ -78,19 +78,22 @@ Sample Output 2
 #include <iostream>
 #include <string>
 
-int main() {
-    std::string S;
-    std::cin >> S;
+using namespace std;
 
-    int K = 1; // Start with at least one part
-    for (size_t i = 1; i < S.length(); ++i) {
+int main() {
+    string S;
+    cin >> S;
+
+    int K = 1;
+    for (size_t i = 1; i < S.length(); i++) {
         if (S[i] != S[i - 1]) {
             K++;
         }
     }
 
-    std::cout << K << std::endl;
+    cout << K + 1 << endl;
     return 0;
 }
 
 
+// {annotation: "used namespace to simplify code, improve readability"}

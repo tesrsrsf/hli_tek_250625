@@ -87,14 +87,14 @@ NO
 
 
 
-def can_remove_stones(N, A):
-    total_stones = sum(A)
-    required_stones = N * (N + 1) // 2
-    return total_stones >= required_stones and all(a >= (i + 1) for i, a in enumerate(A))
-
-N = int(input())
-A = list(map(int, input().split()))
-
-print("YES" if can_remove_stones(N, A) else "NO")
+def revolver(n, a):
+    return (n * (n + 1) // 2) <= sum(a) and all(a >= (i + 1) for i, a in enumerate(a))
 
 
+n = int(input())
+a = list(map(int, input().split()))
+
+print("YES" if revolver(n, a) else "NO")
+
+
+# {annotation: "renamed variables in my style for better readability"}

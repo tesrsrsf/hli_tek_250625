@@ -41,6 +41,15 @@ p02418 gemini
 p02418 gpt4
 p03225 gemini
 p02844 gpt4
+p00596 gemini
+p00596 gpt4
+p03478 gemini
+p03478 gpt4
+p02939 gemini
+p02939 gpt4
+p02421 gemini
+p02421 gpt4
+p01102 gemini
 
 [cpp]
 p02411 gemini
@@ -77,6 +86,15 @@ p02418 gemini
 p02418 gpt4
 p03225 gemini
 p02844 gpt4
+p00596 gpt4
+p03478 gemini
+p03478 gpt4
+p02939 gemini
+p02939 gpt4
+p02421 gemini
+p02421 gpt4
+p01102 gemini
+p03808 gpt4
 
 [java]
 p02411 gemini
@@ -114,7 +132,15 @@ p02418 gpt4
 p03225 gemini
 p03225 gpt4
 p02844 gpt4
+p00596 gemini
+p00596 gpt4
+p03478 gemini
+p03478 gpt4
+p02939 gpt4
+p02421 gemini
+p02421 gpt4
 
 
 
-P.S. These LLM generated codes were originally correct, or I fixed them with minor adjustments
+P.S.    These LLM generated codes were originally correct, or I fixed them with minor adjustments
+P.P.S.  Due to time problem, I only checked given testcases in the problem

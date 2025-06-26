@@ -50,11 +50,11 @@ Sample Output
 
 import java.util.Scanner;
 
-class CardGame {
+class Problem_38_p02421_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
 
         int taroScore = 0;
         int hanakoScore = 0;
@@ -64,19 +64,22 @@ class CardGame {
             String taroCard = cards[0];
             String hanakoCard = cards[1];
 
-            int comparison = taroCard.compareTo(hanakoCard);
-            if (comparison > 0) {
-                taroScore += 3;
-            } else if (comparison < 0) {
-                hanakoScore += 3;
+            int compare_res = taroCard.compareTo(hanakoCard);
+            if (compare_res > 0) {
+                taroScore = taroScore + 3;
+            } else if (compare_res < 0) {
+                hanakoScore = hanakoScore + 3;
             } else {
-                taroScore += 1;
-                hanakoScore += 1;
+                taroScore = taroScore + 1;
+                hanakoScore = hanakoScore + 1;
             }
         }
 
         System.out.println(taroScore + " " + hanakoScore);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables to fit my style"}

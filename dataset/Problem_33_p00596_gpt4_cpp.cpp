@@ -48,15 +48,15 @@ No
 
 using namespace std;
 
-bool canArrangeDominoes(const vector<int>& dominoes) {
+bool canArrange(vector<int> cards) {
     unordered_map<int, int> counts;
-    for (int d : dominoes) {
+    for (int d : cards) {
         counts[d / 10]++;
         counts[d % 10]++;
     }
     
     int oddCount = 0;
-    for (const auto& entry : counts) {
+    for (auto entry : counts) {
         if (entry.second % 2 != 0) {
             oddCount++;
         }
@@ -68,14 +68,26 @@ bool canArrangeDominoes(const vector<int>& dominoes) {
 int main() {
     int N;
     while (cin >> N) {
-        vector<int> dominoes(N);
-        for (int i = 0; i < N; ++i) {
-            cin >> dominoes[i];
+        vector<int> cards;
+        for (int i = 0; i < N; i++) {
+            int temp;
+            cin >> temp;
+            cards.push_back(temp);
         }
-        
-        cout << (canArrangeDominoes(dominoes) ? "Yes" : "No") << endl;
+
+        if (canArrange(cards))
+        {
+            cout << "Yes" << endl;
+        }
+        else
+        {
+            cout << "No" << endl;
+        }
+
     }
+
     return 0;
 }
 
 
+// {annotation： "changed the way to initialize the vector in the way I familiar with, also reformatted the code to fit my style"}

@@ -77,28 +77,33 @@ Sample Output 2
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String S = scanner.nextLine();
-        int K = findMaxK(S);
-        System.out.println(K);
-    }
-    
-    private static int findMaxK(String S) {
+public class Problem_37_p02939_gpt4_java {
+    public static int deepseek(String S) {
         int count = 1;
-        char previousChar = S.charAt(0);
+        char pre_char = S.charAt(0);
         
         for (int i = 1; i < S.length(); i++) {
-            char currentChar = S.charAt(i);
-            if (currentChar != previousChar) {
+            char cur_char = S.charAt(i);
+            if (cur_char != pre_char) {
                 count++;
-                previousChar = currentChar;
+                pre_char = cur_char;
             }
         }
         
         return count;
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String S = scanner.nextLine();
+
+        int k = deepseek(S);
+
+        System.out.println(k + 1);
+
+        scanner.close();
+    }
 }
 
 
+// {annotation: "renamed some variables to fit my style, moved main method to the top, improved readability"}

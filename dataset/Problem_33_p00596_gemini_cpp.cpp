@@ -49,64 +49,70 @@ No
 
 using namespace std;
 
-bool can_arrange(const vector<pair<int, int>>& dominoes) {
-    if (dominoes.empty()) {
+bool can_arrange(vector<pair<int, int>> cards_p) {
+    if (cards_p.empty()) {
         return true;
     }
     
-    vector<pair<int, int>> p = dominoes;
-    sort(p.begin(), p.end());
+    vector<pair<int, int>> cards = cards_p;
+    sort(cards.begin(), cards.end());
 
     do {
-        bool possible = true;
-        for (int i = 0; i < p.size() - 1; ++i) {
-            if (p[i].second != p[i + 1].first) {
-                possible = false;
+        bool is_possible = true;
+        for (int i = 0; i < cards.size() - 1; i++) {
+            if (cards[i].second != cards[i + 1].first) {
+                is_possible = false;
                 break;
             }
         }
-        if (possible) {
+
+        if (is_possible) {
             return true;
         }
-    } while (next_permutation(p.begin(), p.end()));
+
+    } while (next_permutation(cards.begin(), cards.end()));
     
     
-    p = dominoes;
-     for (int i = 0; i < p.size(); ++i) {
-        if (p[i].first > p[i].second) {
-            swap(p[i].first, p[i].second);
+    cards = cards_p;
+    for (int i = 0; i < cards.size(); i++) {
+        if (cards[i].first > cards[i].second) {
+            swap(cards[i].first, cards[i].second);
         }
     }
-    sort(p.begin(), p.end());
+
+    sort(cards.begin(), cards.end());
 
     do {
-        bool possible = true;
-        for (int i = 0; i < p.size() - 1; ++i) {
-            if (p[i].second != p[i + 1].first) {
-                possible = false;
+        bool is_possible = true;
+        for (int i = 0; i < cards.size() - 1; i++) {
+            if (cards[i].second != cards[i + 1].first) {
+                is_possible = false;
                 break;
             }
         }
-        if (possible) {
+
+        if (is_possible) {
             return true;
         }
-    } while (next_permutation(p.begin(), p.end()));
+
+    } while (next_permutation(cards.begin(), cards.end()));
     
     return false;
 }
 
+
 int main() {
     int n;
     while (cin >> n) {
-        vector<pair<int, int>> dominoes(n);
-        for (int i = 0; i < n; ++i) {
+        vector<pair<int, int>> cards(n);
+        for (int i = 0; i < n; i++) {
             string s;
             cin >> s;
-            dominoes[i].first = s[0] - '0';
-            dominoes[i].second = s[1] - '0';
+            cards[i].first = s[0] - '0';
+            cards[i].second = s[1] - '0';
         }
 
-        if (can_arrange(dominoes)) {
+        if (can_arrange(cards)) {
             cout << "Yes" << endl;
         } else {
             cout << "No" << endl;
@@ -117,3 +123,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables for better readability, refactored the program to fit my style"}

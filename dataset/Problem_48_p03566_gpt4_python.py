@@ -290,38 +290,33 @@ Sample Output 5
 
 def max_distance(N, t, v):
     distance = 0.0
-    current_velocity = 0.0
+    cur_v = 0.0
 
     for i in range(N):
         time_segment = t[i]
-        max_velocity_segment = v[i]
+        max_v_seg = v[i]
 
-        if current_velocity < max_velocity_segment:
-            # Accelerate up to max_velocity_segment
-            time_to_max_velocity = max_velocity_segment - current_velocity
-            if time_to_max_velocity <= time_segment:
-                # Can reach max_velocity_segment
-                distance += (current_velocity * time_to_max_velocity) + (0.5 * time_to_max_velocity ** 2)
-                distance += (max_velocity_segment * (time_segment - time_to_max_velocity))
-                current_velocity = max_velocity_segment
+        if cur_v < max_v_seg:
+            time_2_max_v = max_v_seg - cur_v
+            if time_2_max_v <= time_segment:
+                distance += (cur_v * time_2_max_v) + (0.5 * time_2_max_v ** 2)
+                distance += (max_v_seg * (time_segment - time_2_max_v))
+                cur_v = max_v_seg
             else:
-                # Cannot reach max_velocity_segment, just accelerate for the full time
-                distance += (current_velocity * time_segment) + (0.5 * time_segment ** 2)
-                current_velocity += time_segment
+                distance += (cur_v * time_segment) + (0.5 * time_segment ** 2)
+                cur_v += time_segment
         else:
-            # Current velocity is greater than or equal to max_velocity_segment, need to decelerate
-            time_to_decelerate = current_velocity - max_velocity_segment
-            if time_to_decelerate <= time_segment:
-                # Can decelerate to max_velocity_segment
-                distance += (current_velocity * time_to_decelerate) - (0.5 * time_to_decelerate ** 2)
-                distance += (max_velocity_segment * (time_segment - time_to_decelerate))
-                current_velocity = max_velocity_segment
+            time_2_dec = cur_v - max_v_seg
+            if time_2_dec <= time_segment:
+                distance += (cur_v * time_2_dec) - (0.5 * time_2_dec ** 2)
+                distance += (max_v_seg * (time_segment - time_2_dec))
+                cur_v = max_v_seg
             else:
-                # Cannot decelerate to max_velocity_segment, just decelerate for full time
-                distance += (current_velocity * time_segment) - (0.5 * time_segment ** 2)
-                current_velocity -= time_segment
+                distance += (cur_v * time_segment) - (0.5 * time_segment ** 2)
+                cur_v -= time_segment
 
     return distance
+
 
 import sys
 input = sys.stdin.read
@@ -334,3 +329,4 @@ v = list(map(int, data[N+1:2*N+1]))
 print(f"{max_distance(N, t, v):.12f}")
 
 
+# {annotation: "renamed variables and reformatted structures in my style, also removed unnecessary comments"}

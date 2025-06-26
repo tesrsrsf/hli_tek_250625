@@ -136,33 +136,36 @@ The answer may not fit into a
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_43_p04013_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int A = scanner.nextInt();
-        int[] x = new int[N];
-        for (int i = 0; i < N; i++) {
+        int n = scanner.nextInt();
+        int a = scanner.nextInt();
+        int[] x = new int[n];
+        for (int i = 0; i < n; i++) {
             x[i] = scanner.nextInt();
         }
 
-        long count = 0;
-        for (int i = 1; i < (1 << N); i++) {
+        long res = 0;
+        for (int i = 1; i < (1 << n); i++) {
             int sum = 0;
             int numCards = 0;
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < n; j++) {
                 if ((i & (1 << j)) != 0) {
                     sum += x[j];
                     numCards++;
                 }
             }
-            if (numCards > 0 && sum == A * numCards) {
-                count++;
+            if (numCards > 0 && sum == a * numCards) {
+                res++;
             }
         }
-        System.out.println(count);
+        System.out.println(res);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "closed scanner, renamed variables for understanding"}

@@ -78,15 +78,15 @@ while True:
     b = int(line[2])
     if op == '?':
       break
-    if op == '+':
-      print(a + b)
-    elif op == '-':
-      print(a - b)
-    elif op == '*':
-      print(a * b)
-    elif op == '/':
-      print(a // b)
+
+    match op:
+      case '+':
+        print(a + b) 
+      case '-':
+        print(a - b)
+      case '*':
+        print(a * b)
+      case '/':
+        print(a // b)
   except EOFError:
     break
-
-

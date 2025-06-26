@@ -113,30 +113,31 @@ def solve():
     t = input()
     n = len(s_prime)
     m = len(t)
-    ans = "UNRESTORABLE"
+    res = "UNRESTORABLE"
     
     for i in range(n - m + 1):
         temp = list(s_prime)
-        valid = True
+        is_valid = True
         for j in range(m):
-            if temp[i+j] == '?' or temp[i+j] == t[j]:
-                temp[i+j] = t[j]
+            if temp[i + j] == '?' or temp[i + j] == t[j]:
+                temp[i + j] = t[j]
             else:
-                valid = False
+                is_valid = False
                 break
-        if valid:
+        if is_valid:
             s = "".join(temp)
             
-            for k in range(n):
+            for k in range(0, n):
                 if s[k] == '?':
-                    s = s[:k] + 'a' + s[k+1:]
+                    s = s[:k] + 'a' + s[k + 1:]
             
-            
-            if ans == "UNRESTORABLE" or s < ans:
-                ans = s
+            if res == "UNRESTORABLE" or s < res:
+                res = s
                 
-    print(ans)
+    print(res)
+
 
 solve()
 
 
+# {annotation: "removed unnecessary comments and cleaned up the code for clarity, renamed variables in my style"}

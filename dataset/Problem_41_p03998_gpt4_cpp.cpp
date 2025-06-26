@@ -140,12 +140,12 @@ C
 using namespace std;
 
 int main() {
-    string S_A, S_B, S_C;
-    cin >> S_A >> S_B >> S_C;
+    string S1, S2, S3;
+    cin >> S1 >> S2 >> S3;
 
-    deque<char> a(S_A.begin(), S_A.end());
-    deque<char> b(S_B.begin(), S_B.end());
-    deque<char> c(S_C.begin(), S_C.end());
+    deque<char> a(S1.begin(), S1.end());
+    deque<char> b(S2.begin(), S2.end());
+    deque<char> c(S3.begin(), S3.end());
 
     char turn = 'a'; // Alice starts
 
@@ -155,25 +155,31 @@ int main() {
                 cout << 'A' << endl;
                 break;
             }
+
             char card = a.front();
+
             a.pop_front();
-            turn = card; // Next turn based on the card
+            turn = card; // Next turn
         } else if (turn == 'b') {
             if (b.empty()) {
                 cout << 'B' << endl;
                 break;
             }
+
             char card = b.front();
+
             b.pop_front();
-            turn = card; // Next turn based on the card
+            turn = card; // Next turn 
         } else if (turn == 'c') {
             if (c.empty()) {
                 cout << 'C' << endl;
                 break;
             }
+
             char card = c.front();
+
             c.pop_front();
-            turn = card; // Next turn based on the card
+            turn = card; // Next turn
         }
     }
     
@@ -181,3 +187,4 @@ int main() {
 }
 
 
+// {annotations: "renamed variables and reformatted the program with my style"}

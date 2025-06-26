@@ -135,64 +135,68 @@ C
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_41_p03998_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String sa = scanner.next();
         String sb = scanner.next();
         String sc = scanner.next();
 
-        int aIndex = 0;
-        int bIndex = 0;
-        int cIndex = 0;
-        String currentPlayer = "A";
+        int aIdx = 0;
+        int bIdx = 0;
+        int cIdx = 0;
+        
+        String curPlayer = "A";
 
         while (true) {
-            if (currentPlayer.equals("A")) {
-                if (aIndex >= sa.length()) {
+            if (curPlayer.equals("A")) {
+                if (aIdx >= sa.length()) {
                     System.out.println("A");
                     break;
                 }
-                char card = sa.charAt(aIndex);
-                aIndex++;
+                char card = sa.charAt(aIdx);
+                aIdx++;
                 if (card == 'a') {
-                    currentPlayer = "A";
+                    curPlayer = "A";
                 } else if (card == 'b') {
-                    currentPlayer = "B";
+                    curPlayer = "B";
                 } else {
-                    currentPlayer = "C";
+                    curPlayer = "C";
                 }
-            } else if (currentPlayer.equals("B")) {
-                if (bIndex >= sb.length()) {
+            } else if (curPlayer.equals("B")) {
+                if (bIdx >= sb.length()) {
                     System.out.println("B");
                     break;
                 }
-                char card = sb.charAt(bIndex);
-                bIndex++;
+                char card = sb.charAt(bIdx);
+                bIdx++;
                 if (card == 'a') {
-                    currentPlayer = "A";
+                    curPlayer = "A";
                 } else if (card == 'b') {
-                    currentPlayer = "B";
+                    curPlayer = "B";
                 } else {
-                    currentPlayer = "C";
+                    curPlayer = "C";
                 }
             } else {
-                if (cIndex >= sc.length()) {
+                if (cIdx >= sc.length()) {
                     System.out.println("C");
                     break;
                 }
-                char card = sc.charAt(cIndex);
-                cIndex++;
+                char card = sc.charAt(cIdx);
+                cIdx++;
                 if (card == 'a') {
-                    currentPlayer = "A";
+                    curPlayer = "A";
                 } else if (card == 'b') {
-                    currentPlayer = "B";
+                    curPlayer = "B";
                 } else {
-                    currentPlayer = "C";
+                    curPlayer = "C";
                 }
             }
         }
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables with my style"}

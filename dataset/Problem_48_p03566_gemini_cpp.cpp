@@ -297,74 +297,73 @@ using namespace std;
 
 int main() {
     int N;
+    double cur_v = 0.0;
+    double time_elapsed = 0.0;
+    double ttl_distance = 0.0;
+
     cin >> N;
 
     vector<int> t(N);
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; i++) {
         cin >> t[i];
     }
 
     vector<int> v(N);
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; i++) {
         cin >> v[i];
     }
 
-    double total_distance = 0.0;
     vector<double> max_v(N);
 
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; i++) {
         max_v[i] = min((double)v[i], (double)t[i] / 2.0);
     }
     
-    double current_v = 0.0;
-    double time_elapsed = 0.0;
-    
-    for(int i = 0; i < N; ++i) {
+
+    for(int i = 0; i < N; i++) {
         double acc_time = 0.0;
-        if(max_v[i] >= current_v) {
-            acc_time = min((double)t[i], max_v[i] - current_v);
-            total_distance += current_v * acc_time + 0.5 * acc_time * acc_time;
-            current_v += acc_time;
+        if(max_v[i] >= cur_v) {
+            acc_time = min((double)t[i], max_v[i] - cur_v);
+            ttl_distance += cur_v * acc_time + 0.5 * acc_time * acc_time;
+            cur_v += acc_time;
             
-            if (current_v > v[i]) {
-                current_v = v[i];
+            if (cur_v > v[i]) {
+                cur_v = v[i];
             }
             
-            if (current_v < max_v[i]) {
-                double const_time = min((double)t[i] - acc_time, max_v[i] - current_v);
-                total_distance += current_v * const_time;
-                current_v += 0.0;
+            if (cur_v < max_v[i]) {
+                double const_time = min((double)t[i] - acc_time, max_v[i] - cur_v);
+                ttl_distance += cur_v * const_time;
+                cur_v += 0.0;
                 
             }
             
             
-            if(current_v >= v[i] && (t[i]- acc_time - (current_v - v[i])) > 0)
-            {
+            if(cur_v >= v[i] && (t[i]- acc_time - (cur_v - v[i])) > 0){
                  
-                    if(current_v > v[i]) {
-                        current_v = v[i];
-                    }
+                if(cur_v > v[i]) {
+                    cur_v = v[i];
+                }
                     
-                    if((t[i] - acc_time) > 0)
-                    {
-                        double dec_time = (current_v - (current_v - v[i])) > 0? (current_v):0.0;
-                        total_distance += (current_v) * (t[i] - acc_time ) - 0.5 * (t[i]-acc_time) *(t[i]-acc_time);
-                        current_v = 0.0;
-                    }
+                if((t[i] - acc_time) > 0){
+                    double dec_time = (cur_v - (cur_v - v[i])) > 0? (cur_v):0.0;
+                    ttl_distance += (cur_v) * (t[i] - acc_time ) - 0.5 * (t[i]-acc_time) *(t[i]-acc_time);
+                    cur_v = 0.0;
+                }
             }
             
         }
-        else
-        {
-            double dec_time = min((double)t[i], current_v);
-            total_distance +=  current_v * dec_time - 0.5 * dec_time * dec_time;
-            current_v -= dec_time;
+        else{
+            double dec_time = min((double)t[i], cur_v);
+            ttl_distance +=  cur_v * dec_time - 0.5 * dec_time * dec_time;
+            cur_v -= dec_time;
         }
     }
     
-    cout << fixed << setprecision(20) << total_distance << endl;
+    printf("%.12f\n", ttl_distance);
 
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

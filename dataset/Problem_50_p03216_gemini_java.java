@@ -186,37 +186,39 @@ Sample Output 4
 
 import java.util.Scanner;
 
-public class Main {
-
+public class Problem_50_p03216_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         String s = scanner.next();
         int q = scanner.nextInt();
-        int[] kValues = new int[q];
+
+        int[] kVs = new int[q];
+
         for (int i = 0; i < q; i++) {
-            kValues[i] = scanner.nextInt();
+            kVs[i] = scanner.nextInt();
         }
 
-        for (int k : kValues) {
-            long count = 0;
+        for (int k : kVs) {
+            long res = 0;
             for (int a = 0; a < n - 2; a++) {
                 if (s.charAt(a) == 'D') {
                     for (int b = a + 1; b < n - 1; b++) {
                         if (s.charAt(b) == 'M') {
                             for (int c = b + 1; c < n; c++) {
                                 if (s.charAt(c) == 'C' && c - a < k) {
-                                    count++;
+                                    res++;
                                 }
                             }
                         }
                     }
                 }
             }
-            System.out.println(count);
+            System.out.println(res);
         }
         scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

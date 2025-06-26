@@ -57,34 +57,37 @@ Sample Output 3
 
 def solve():
   k = int(input())
-  ans = float('inf')
+  res = float('inf')
   for i in range(1, k + 1):
     q = [i % k]
-    seen = {i % k}
-    prev = {i % k: -1}
+    saw = {i % k}
+    old = {i % k: -1}
     while q:
       u = q.pop(0)
       if u == 0:
         path = []
         curr = 0
-        while prev[curr] != -1:
+        while old[curr] != -1:
           path.append(curr % 10)
-          curr = (curr - (curr % 10)) // 10 if curr >= 10 else prev[curr]
+          curr = (curr - (curr % 10)) // 10 if curr >= 10 else old[curr]
         path.append(curr % 10)
-        ans = min(ans, sum(path))
+        res = min(res, sum(path))
         break
       
       for d in [0, 1]:
           v = (u * 10 + d) % k
-          if v not in seen:
-              seen.add(v)
-              prev[v] = u
+          if v not in saw:
+              saw.add(v)
+              old[v] = u
               q.append(v)
   
-  if ans == float('inf'):
-    ans = 1
-  print(ans)
+  if res == float('inf'):
+    res = 1
+
+  print(res)
+
 
 solve()
 
 
+# {annotation: "renamed variables and reformatted structures in my style"}

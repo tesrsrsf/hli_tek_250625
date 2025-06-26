@@ -57,25 +57,8 @@ Sample Output 3
 
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int K = scanner.nextInt();
-        
-        int minSum = Integer.MAX_VALUE;
-        
-        for (int i = 1; i <= 100000; i++) {
-            int multiple = K * i;
-            int digitSum = getDigitSum(multiple);
-            if (digitSum < minSum) {
-                minSum = digitSum;
-            }
-        }
-        
-        System.out.println(minSum);
-    }
-    
-    private static int getDigitSum(int number) {
+public class Problem_47_p03558_gpt4_java {
+    public static int getDigitSum(int number) {
         int sum = 0;
         while (number > 0) {
             sum += number % 10;
@@ -83,6 +66,25 @@ public class Main {
         }
         return sum;
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+
+        int minSum = Integer.MAX_VALUE;
+        
+        for (int i = 1; i < 100000 + 1; i++) {
+            int multiple = k * i;
+            int digitSum = getDigitSum(multiple);
+            if (digitSum < minSum) {
+                minSum = digitSum;
+            }
+        }
+        
+        System.out.println(minSum);
+        scanner.close();
+    }
 }
 
 
+// {annotation: "moved tool function to the top, renamed variables and reformatted structures in my style"}

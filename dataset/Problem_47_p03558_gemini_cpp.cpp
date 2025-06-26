@@ -77,9 +77,9 @@ int main() {
         int u = q.front();
         q.pop();
 
-        int next_nodes[] = {(u * 10) % k, (u + 1) % k};
+        int next_node_list[] = {(u * 10) % k, (u + 1) % k};
         for (int i = 0; i < 2; ++i) {
-            int v = next_nodes[i];
+            int v = next_node_list[i];
             if (dist[v] == -1) {
                 dist[v] = dist[u] + 1;
                 prev[v] = u;
@@ -88,63 +88,61 @@ int main() {
         }
     }
 
-    int min_sum = 1e9;
-    for (int i = 1; i < 10; ++i) {
+    int res = 1e9;
+    for (int i = 1; i < 10; i++) {
     if (dist[(i * 1) % k] != -1) {
         if ((i * 1) % k == 0) {
-          min_sum = min(min_sum, i);
+          res = min(res, i);
         }
     }
     }
 
     if (dist[0] != -1) {
-        int current_digit_sum = 0;
+        int cur_digit_sum = 0;
         int current = 0;
-        
-        if (dist[0] == 1){
-            min_sum = min(min_sum, 0);
-        }
-        else{
-        queue<int> q2;
-        q2.push(0);
-        vector<int> digit_sum(k, -1);
-        digit_sum[0] = 0;
 
-        while(!q2.empty()){
-            int u = q2.front();
-            q2.pop();
+        if (dist[0] == 1) {
+            res = min(res, 0);
+        } else {
+            queue<int> q2;
+            q2.push(0);
+            vector<int> digit_sum(k, -1);
+            digit_sum[0] = 0;
 
-            int next_nodes[] = {u * 10 % k, (u+1) % k};
-            int next_digit[] = {0,1};
-            
-            for(int i = 0; i<2; ++i){
-                int v = next_nodes[i];
-                int next_digit_sum = digit_sum[u] + next_digit[i];
-                if(digit_sum[v] == -1 ){
-                    digit_sum[v] = next_digit_sum;
+            while (!q2.empty()) {
+                int u = q2.front();
+                q2.pop();
 
-                   if (v == 0) {
-                      min_sum = min(min_sum, next_digit_sum);
+                int next_node_list[] = {u * 10 % k, (u + 1) % k};
+                int next_digit[] = {0, 1};
+
+                for (int i = 0; i < 2; i++) {
+                    int v = next_node_list[i];
+                    int next_digit_sum = digit_sum[u] + next_digit[i];
+                    if (digit_sum[v] == -1) {
+                        digit_sum[v] = next_digit_sum;
+
+                        if (v == 0) {
+                            res = min(res, next_digit_sum);
+                        }
+
+                        q2.push(v);
+                    } else if (next_digit_sum < digit_sum[v]) {
+                        digit_sum[v] = next_digit_sum;
+                        if (v == 0) {
+                            res = min(res, next_digit_sum);
+                        }
+                        q2.push(v);
                     }
-                    
-                    q2.push(v);
-                }
-                 else if (next_digit_sum < digit_sum[v]){
-                      digit_sum[v] = next_digit_sum;
-                   if (v == 0) {
-                        min_sum = min(min_sum, next_digit_sum);
-                    }
-                    q2.push(v);
                 }
             }
         }
-        }
-        
     }
 
-    cout << min_sum << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

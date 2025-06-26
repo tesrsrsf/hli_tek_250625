@@ -133,24 +133,23 @@ C
 
 
 
-def card_game(S_A, S_B, S_C):
-    decks = {'A': list(S_A), 'B': list(S_B), 'C': list(S_C)}
-    current_player = 'A'
+def uno(s1, s2, s3):
+    decks = {'A': list(s1), 'B': list(s2), 'C': list(s3)}
+    cur_player = 'A'
 
     while True:
-        if not decks[current_player]:
-            return current_player
+        if not decks[cur_player]:
+            return cur_player
         
-        card = decks[current_player].pop(0)
-        current_player = card.upper()
+        card = decks[cur_player].pop(0)
+        cur_player = card.upper()
 
-# Read input
-S_A = input().strip()
-S_B = input().strip()
-S_C = input().strip()
+s1 = input()
+s2 = input()
+s3 = input()
 
-# Determine the winner
-winner = card_game(S_A, S_B, S_C)
+winner = uno(s1, s2, s3)
 print(winner)
 
 
+# {annotation: "renamed variables and reformatted the program with my style"}

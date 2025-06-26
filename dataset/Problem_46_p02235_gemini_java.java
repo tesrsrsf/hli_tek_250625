@@ -49,31 +49,17 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 import java.util.Scanner;
 
-public class Main {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int q = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
-
-        for (int i = 0; i < q; i++) {
-            String X = scanner.nextLine();
-            String Y = scanner.nextLine();
-            System.out.println(lcsLength(X, Y));
-        }
-        scanner.close();
-    }
-
-    public static int lcsLength(String X, String Y) {
-        int m = X.length();
-        int n = Y.length();
+public class Problem_46_p02235_gemini_java {
+    public static int lcsLength(String x, String y) {
+        int m = x.length();
+        int n = y.length();
         int[][] dp = new int[m + 1][n + 1];
 
-        for (int i = 0; i <= m; i++) {
-            for (int j = 0; j <= n; j++) {
+        for (int i = 0; i < m + 1; i++) {
+            for (int j = 0; j < n + 1; j++) {
                 if (i == 0 || j == 0) {
                     dp[i][j] = 0;
-                } else if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+                } else if (x.charAt(i - 1) == y.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
@@ -82,6 +68,21 @@ public class Main {
         }
         return dp[m][n];
     }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int q = scanner.nextInt();
+        scanner.nextLine();
+
+        for (int i = 0; i < q; i++) {
+            String x = scanner.nextLine();
+            String y = scanner.nextLine();
+            System.out.println(lcsLength(x, y));
+        }
+
+        scanner.close();
+    }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, moved the tool function to the top, improves readability and maintainability"}

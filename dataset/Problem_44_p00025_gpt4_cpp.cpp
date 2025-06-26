@@ -118,35 +118,40 @@ Output for the Sample Input
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 int main() {
     int a[4], b[4];
-    while (std::cin >> a[0] >> a[1] >> a[2] >> a[3] >> b[0] >> b[1] >> b[2] >> b[3]) {
+    while (cin >> a[0] >> a[1] >> a[2] >> a[3] >> b[0] >> b[1] >> b[2] >> b[3]) {
         int hit = 0, blow = 0;
-        std::vector<bool> used(4, false);
+        vector<bool> used(4, false);
 
-        // Count Hits
         for (int i = 0; i < 4; i++) {
             if (a[i] == b[i]) {
                 hit++;
-                used[i] = true; // Mark this index as used for hits
+                used[i] = true;
             }
         }
 
-        // Count Blows
         for (int i = 0; i < 4; i++) {
-            if (used[i]) continue; // Skip hits
+            if (used[i]) {
+                continue;
+            }
+
             for (int j = 0; j < 4; j++) {
                 if (!used[j] && a[i] == b[j]) {
                     blow++;
-                    used[j] = true; // Mark this index as used for blows
-                    break; // Stop searching after finding a match
+                    used[j] = true;
+                    break;
                 }
             }
         }
 
-        std::cout << hit << " " << blow << std::endl;
+        string res = to_string(hit) + " " + to_string(blow);
+        cout << res << endl;
     }
     return 0;
 }
 
 
+// {annotation: "removed unnecessary comments and cleaned up the code for clarity, renamed variables in my style"}

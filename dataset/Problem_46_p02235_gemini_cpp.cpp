@@ -65,22 +65,23 @@ int main() {
         int n = x.length();
         int m = y.length();
 
-        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+        vector<vector<int>> dynamicProgrammingTable(n + 1, vector<int>(m + 1, 0));
 
-        for (int i = 1; i <= n; ++i) {
-            for (int j = 1; j <= m; ++j) {
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < m + 1; j++) {
                 if (x[i - 1] == y[j - 1]) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    dynamicProgrammingTable[i][j] = dynamicProgrammingTable[i - 1][j - 1] + 1;
                 } else {
-                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                    dynamicProgrammingTable[i][j] = max(dynamicProgrammingTable[i - 1][j], dynamicProgrammingTable[i][j - 1]);
                 }
             }
         }
-
-        cout << dp[n][m] << endl;
+        
+        cout << dynamicProgrammingTable[n][m] << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

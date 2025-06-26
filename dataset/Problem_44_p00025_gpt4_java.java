@@ -116,7 +116,7 @@ Output for the Sample Input
 
 import java.util.*;
 
-public class Main {
+public class Problem_44_p00025_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
@@ -126,25 +126,24 @@ public class Main {
 
             int hits = 0;
             int blows = 0;
-            boolean[] aUsed = new boolean[4];
-            boolean[] bUsed = new boolean[4];
-            
+            ArrayList<Boolean> aUsed = new ArrayList<>(Arrays.asList(false, false, false, false));
+            ArrayList<Boolean> bUsed = new ArrayList<>(Arrays.asList(false, false, false, false));
+
             // Calculate hits
             for (int i = 0; i < 4; i++) {
                 if (aNumbers[i].equals(bNumbers[i])) {
                     hits++;
-                    aUsed[i] = true;
-                    bUsed[i] = true;
+                    aUsed.set(i, true);
+                    bUsed.set(i, true);
                 }
             }
 
-            // Calculate blows
             for (int i = 0; i < 4; i++) {
-                if (!aUsed[i]) {
+                if (!aUsed.get(i)) {
                     for (int j = 0; j < 4; j++) {
-                        if (!bUsed[j] && aNumbers[i].equals(bNumbers[j])) {
+                        if (!bUsed.get(j) && aNumbers[i].equals(bNumbers[j])) {
                             blows++;
-                            bUsed[j] = true;
+                            bUsed.set(j, true);
                             break;
                         }
                     }
@@ -159,3 +158,4 @@ public class Main {
 }
 
 
+// {annotation: "used arraylist to replace arrays to match my style"}

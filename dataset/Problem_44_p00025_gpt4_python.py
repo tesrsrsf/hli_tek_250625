@@ -116,15 +116,24 @@ Output for the Sample Input
 
 import sys
 
-def calculate_hits_and_blows(a, b):
+def fox2(a, b):
     hits = sum(1 for i in range(4) if a[i] == b[i])
     blows = sum(1 for x in b if x in a) - hits
     return hits, blows
 
+
 for line in sys.stdin:
-    a = list(map(int, line.split()))
-    b = list(map(int, next(sys.stdin).split()))
-    hits, blows = calculate_hits_and_blows(a, b)
+    ab_line = line.split()
+    a = []
+    for i in range(0, 4):
+        a.append(int(ab_line[i]))
+
+    b = []
+    for i in range(4, 8):
+        b.append(int(ab_line[i]))
+        
+    hits, blows = fox2(a, b)
     print(hits, blows)
 
 
+# {annotation: "changed how input is read with a more explict way"}

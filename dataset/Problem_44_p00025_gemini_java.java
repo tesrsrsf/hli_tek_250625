@@ -114,37 +114,41 @@ Output for the Sample Input
 
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_44_p00025_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextInt()) {
-            int[] a = new int[4];
-            int[] b = new int[4];
+            ArrayList<Integer> a = new ArrayList<>();
+            ArrayList<Integer> b = new ArrayList<>();
+
             for (int i = 0; i < 4; i++) {
-                a[i] = scanner.nextInt();
+                a.add(scanner.nextInt());
             }
+
             for (int i = 0; i < 4; i++) {
-                b[i] = scanner.nextInt();
+                b.add(scanner.nextInt());
             }
 
             int hit = 0;
             int blow = 0;
 
             for (int i = 0; i < 4; i++) {
-                if (a[i] == b[i]) {
+                if (a.get(i).equals(b.get(i))) {
                     hit++;
                 }
             }
 
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    if (i != j && a[i] == b[j]) {
+                    if (i != j && a.get(i).equals(b.get(j))) {
                         blow++;
                     }
                 }
             }
+
             System.out.println(hit + " " + blow);
         }
         scanner.close();
@@ -152,3 +156,4 @@ public class Main {
 }
 
 
+// {annotation: "used arraylist to replace arrays to match my style"}

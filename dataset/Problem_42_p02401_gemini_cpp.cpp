@@ -79,14 +79,22 @@ int main() {
     char op;
 
     while (cin >> a >> op >> b && op != '?') {
-        if (op == '+') {
+        switch (op)
+        {
+        case '+':
             cout << a + b << endl;
-        } else if (op == '-') {
+            break;
+        case '-':
             cout << a - b << endl;
-        } else if (op == '*') {
+            break;
+        case '*':
             cout << a * b << endl;
-        } else if (op == '/') {
+            break;
+        case '/':
             cout << a / b << endl;
+            break;
+        default:
+            break;
         }
     }
 
@@ -94,3 +102,4 @@ int main() {
 }
 
 
+// {annotation: "used switch-case for operator handling"}

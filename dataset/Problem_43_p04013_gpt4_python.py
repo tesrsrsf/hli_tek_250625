@@ -136,23 +136,23 @@ The answer may not fit into a
 
 from itertools import combinations
 
-def count_averages(N, A, cards):
-    count = 0
-    for r in range(1, N + 1):
+def solve(n, a, cards):
+    res = 0
+    for r in range(1, n + 1):
         for combination in combinations(cards, r):
-            if sum(combination) / len(combination) == A:
-                count += 1
-    return count
+            if sum(combination) / len(combination) == a:
+                res += 1
+    return res
 
-# Input reading
+
 import sys
 input = sys.stdin.read
 data = input().split()
-N = int(data[0])
-A = int(data[1])
-cards = list(map(int, data[2:N + 2]))
+n = int(data[0])
+a = int(data[1])
+cards = list(map(int, data[2:n + 2]))
 
-# Output the result
-print(count_averages(N, A, cards))
+print(solve(n, a, cards))
 
 
+# {annotation: "renamed variables to fit my style"}

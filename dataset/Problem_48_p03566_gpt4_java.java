@@ -290,56 +290,52 @@ Sample Output 5
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_48_p03566_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        int N = scanner.nextInt();
-        double[] t = new double[N];
-        double[] v = new double[N];
+        int n = scanner.nextInt();
+        double[] t = new double[n];
+        double[] v = new double[n];
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             t[i] = scanner.nextDouble();
         }
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             v[i] = scanner.nextDouble();
         }
         
-        double totalDistance = 0.0;
+        double res = 0.0;
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             double time = t[i];
-            double maxSpeed = v[i];
+            double maxV = v[i];
             
-            // The potential maximum speed during the segment
-            double initialSpeed = (i == 0) ? 0 : v[i - 1];
+            double initV = (i == 0) ? 0 : v[i - 1];
             
-            // Here we calculate the segments of acceleration, constant speed, and deceleration
-            // Accelerate up to the speed limit
-            double accelerationTime = Math.min(time, (maxSpeed - initialSpeed));
-            double distanceAccelerate = (initialSpeed * accelerationTime) + (0.5 * accelerationTime * accelerationTime);
-            time -= accelerationTime;
-            initialSpeed += accelerationTime;
+            double accT = Math.min(time, (maxV - initV));
+            double disAcc = (initV * accT) + (0.5 * accT * accT);
+            time -= accT;
+            initV += accT;
 
-            // Maintain constant speed if there's time left
-            double distanceConstant = 0;
+            double distConst = 0;
             if (time > 0) {
-                distanceConstant = initialSpeed * time;
+                distConst = initV * time;
                 time = 0;
             }
-            initialSpeed = maxSpeed; // speed at the end of constant speed phase
+            initV = maxV;
 
-            // Decelerate to stop
-            double decelerationTime = Math.min(maxSpeed, (initialSpeed));
-            double distanceDecelerate = (initialSpeed * decelerationTime) - (0.5 * decelerationTime * decelerationTime);
-            time -= decelerationTime;
+            double decT = Math.min(maxV, (initV));
+            double disDec = (initV * decT) - (0.5 * decT * decT);
+            time -= decT;
 
-            totalDistance += distanceAccelerate + distanceConstant + distanceDecelerate;
+            res += disAcc + distConst + disDec;
         }
         
-        System.out.printf("%.12f\n", totalDistance);
+        System.out.printf("%.12f\n", res);
         scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, also removed unnecessary comments"}

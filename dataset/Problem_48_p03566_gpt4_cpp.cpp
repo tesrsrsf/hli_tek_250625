@@ -296,48 +296,46 @@ Sample Output 5
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
+    int n;
+    cin >> n;
 
-    vector<int> t(N), v(N);
-    for (int i = 0; i < N; i++) {
+    vector<int> t(n), v(n);
+
+    for (int i = 0; i < n; i++) {
         cin >> t[i];
     }
-    for (int i = 0; i < N; i++) {
+
+    for (int i = 0; i < n; i++) {
         cin >> v[i];
     }
 
-    double total_distance = 0.0;
-    double current_speed = 0.0;
+    double ttl_dis = 0.0;
+    double cur_v = 0.0;
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < n; i++) {
         double max_speed = static_cast<double>(v[i]);
         double time = static_cast<double>(t[i]);
         
-        // Calculate section parameters
-        double acceleration_time = min(time, (max_speed - current_speed));
+        double acceleration_time = min(time, (max_speed - cur_v));
         double deceleration_time = min(time - acceleration_time, (max_speed));
         
-        // Accelerate
-        total_distance += current_speed * acceleration_time + 0.5 * acceleration_time * acceleration_time;
-        current_speed += acceleration_time;
+        ttl_dis += cur_v * acceleration_time + 0.5 * acceleration_time * acceleration_time;
+        cur_v += acceleration_time;
         
-        // Constant speed
         if (time > acceleration_time + deceleration_time) {
             double constant_time = time - acceleration_time - deceleration_time;
-            total_distance += current_speed * constant_time;
+            ttl_dis += cur_v * constant_time;
         }
         
-        // Decelerate
-        total_distance += current_speed * deceleration_time - 0.5 * deceleration_time * deceleration_time;
-        current_speed -= deceleration_time;
+        ttl_dis += cur_v * deceleration_time - 0.5 * deceleration_time * deceleration_time;
+        cur_v -= deceleration_time;
         
-        // End current segment speed update
-        current_speed = min(current_speed, max_speed);
+        cur_v = min(cur_v, max_speed);
     }
 
-    cout << fixed << setprecision(12) << total_distance << endl;
+    printf("%.12f\n", ttl_dis);
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, also removed unnecessary comments"}

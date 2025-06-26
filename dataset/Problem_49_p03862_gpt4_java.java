@@ -101,25 +101,23 @@ All the candies need to be eaten.
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_49_p03862_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
+        int n = scanner.nextInt();
         long x = scanner.nextLong();
+        long res = 0;
         
-        long[] a = new long[N];
-        for (int i = 0; i < N; i++) {
+        long[] a = new long[n];
+        for (int i = 0; i < n; i++) {
             a[i] = scanner.nextLong();
         }
 
-        long operations = 0;
-
-        for (int i = 0; i < N - 1; i++) {
+        for (int i = 0; i < n - 1; i++) {
             long total = a[i] + a[i + 1];
             if (total > x) {
                 long excess = total - x;
-                operations += excess;
-                // Adjust the next box to reflect the candies eaten
+                res += excess;
                 a[i + 1] -= excess;
                 if (a[i + 1] < 0) {
                     a[i + 1] = 0;
@@ -127,8 +125,12 @@ public class Main {
             }
         }
 
-        System.out.println(operations);
+        System.out.println(res);
+
+        scanner.close();
     }
+
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

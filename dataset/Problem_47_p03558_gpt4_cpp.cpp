@@ -72,27 +72,28 @@ int digitSum(int n) {
 }
 
 int main() {
-    int K;
-    cin >> K;
+    int k;
+    cin >> k;
 
-    queue<pair<long long, int>> q; // pair<current multiple, digit sum>
-    set<long long> visited; // to track visited multiples
+    queue<pair<int, int>> q;
+    set<int> saw;
+    
     q.push({0, 0}); // start with 0 multiples
     
     while (!q.empty()) {
         auto [current, sum] = q.front();
         q.pop();
 
-        for (int i = 1; i <= 9; i++) {
-            long long next = current * 10 + i;
-            if (next % K == 0) {
+        for (int i = 1; i < 10; i++) {
+            int nxt = current * 10 + i;
+            if (nxt % k == 0) {
                 cout << sum + digitSum(i) << endl;
                 return 0;
             }
 
-            if (visited.count(next) == 0) {
-                visited.insert(next);
-                q.push({next, sum + digitSum(i)});
+            if (saw.count(nxt) == 0) {
+                saw.insert(nxt);
+                q.push({nxt, sum + digitSum(i)});
             }
         }
     }
@@ -100,3 +101,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

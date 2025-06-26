@@ -289,52 +289,42 @@ Sample Output 5
 
 
 def solve():
-    N = int(input())
+    n = int(input())
     t = []
-    for _ in range(N):
+    for i in range(0, n):
         t.append(int(input()))
+
     v = []
-    for _ in range(N):
+    for i in range(0, n):
         v.append(int(input()))
     
-    ans = 0.0
+    res = 0.0
     
-    for i in range(N):
-        
+    for i in range(0, n):
         acc_time = min(t[i], v[i])
-        
-        
         if acc_time <= t[i]:
-           
             dist_acc = 0.5 * acc_time * acc_time
             rem_time = t[i] - acc_time
             dist_const = acc_time * rem_time
             dist_dec = 0.5 * acc_time * acc_time
             
-            ans += dist_acc + dist_const + dist_dec
+            res += dist_acc + dist_const + dist_dec
             
-            
-            
-            
-    
-    
-    
     total_time = sum(t)
     
+    dp = [[0.0 for _ in range(total_time + 1)] for _ in range(n + 1)]
     
+    for i in range(1, n + 1):
+        for j in range(0, total_time + 1):
+            for k in range(0, min(t[i - 1], j) + 1):
+                max_speed = min(v[i - 1], k)
+                dp[i][j] = max(dp[i][j], dp[i - 1][j - k] + max_speed * k + 0.5 * k * k)
+
+
+    print(dp[n][total_time])
     
-    dp = [[0.0 for _ in range(total_time + 1)] for _ in range(N + 1)]
-    
-    
-    for i in range(1, N + 1):
-        for j in range(total_time + 1):
-            for k in range(min(t[i-1],j) + 1):
-                max_speed = min(v[i-1],k)
-                dp[i][j] = max(dp[i][j], dp[i-1][j-k] + max_speed * k + 0.5*k*k)
-                
-    
-    print(dp[N][total_time])
-    
+
 solve()
 
 
+# {annotation: "renamed variables and reformatted structures in my style"}

@@ -108,37 +108,32 @@ S
 
 
 
-def restore_string(S_prime, T):
+def rstr_str(S_prime, T):
     n = len(S_prime)
     m = len(T)
     
-    # Loop through possible starting positions to insert T into S_prime
-    for i in range(n - m + 1):
-        # Check if T can fit into S' at position i
+    for i in range(0, n - m + 1):
         if all(S_prime[j] in (T[j - i], '?') for j in range(i, i + m)):
-            # Create a candidate for S by filling S' with T
             candidate = list(S_prime)
-            for j in range(m):
+            for j in range(0, m):
                 candidate[i + j] = T[j]
                 
-            # Fill the remaining '?' with the smallest possible character 'a'
-            for k in range(n):
+            for k in range(0, n):
                 if candidate[k] == '?':
                     candidate[k] = 'a'
                     
-            # Check if the candidate is valid
             candidate_str = ''.join(candidate)
             if all(S_prime[j] == candidate_str[j] or S_prime[j] == '?' for j in range(n)):
                 return candidate_str
     
     return "UNRESTORABLE"
 
-# Read input
+
 S_prime = input().strip()
 T = input().strip()
 
-# Get the result and print it
-result = restore_string(S_prime, T)
-print(result)
+res = rstr_str(S_prime, T)
+print(res)
 
 
+# {annotation: "renamed identifiers in my style for better understanding"}

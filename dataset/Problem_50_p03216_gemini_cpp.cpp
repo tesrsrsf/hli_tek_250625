@@ -198,31 +198,32 @@ int main() {
     int q;
     cin >> q;
 
-    vector<int> k_values(q);
-    for (int i = 0; i < q; ++i) {
-        cin >> k_values[i];
+    vector<int> k_vs(q);
+    for (int i = 0; i < q; i++) {
+        cin >> k_vs[i];
     }
 
-    for (int i = 0; i < q; ++i) {
-        int k = k_values[i];
-        int count = 0;
-        for (int a = 0; a < n; ++a) {
+    for (int i = 0; i < q; i++) {
+        int k = k_vs[i];
+        int res = 0;
+        for (int a = 0; a < n; a++) {
             if (s[a] == 'D') {
-                for (int b = a + 1; b < n; ++b) {
+                for (int b = a + 1; b < n; b++) {
                     if (s[b] == 'M') {
-                        for (int c = b + 1; c < n; ++c) {
+                        for (int c = b + 1; c < n; c++) {
                             if (s[c] == 'C' && c - a < k) {
-                                count++;
+                                res++;
                             }
                         }
                     }
                 }
             }
         }
-        cout << count << endl;
+        cout << res << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

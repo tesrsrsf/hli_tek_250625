@@ -110,21 +110,22 @@ int main() {
     cin >> n >> x;
 
     vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-    long long operations = 0;
-    for (int i = 0; i < n - 1; ++i) {
+    int res = 0;
+    for (int i = 0; i < n - 1; i++) {
         if (a[i] + a[i + 1] > x) {
-            operations += (long long)(a[i] + a[i + 1] - x);
+            res += (a[i] + a[i + 1] - x);
             a[i + 1] = max(0, a[i + 1] - (a[i] + a[i + 1] - x));
         }
     }
 
-    cout << operations << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

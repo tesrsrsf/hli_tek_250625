@@ -139,18 +139,22 @@ def solve():
     a = int(input())
     x = list(map(int, input().split()))
     
-    count = 0
+    res = 0
     for i in range(1, 1 << n):
         subset_sum = 0
-        subset_count = 0
+        subset_num = 0
         for j in range(n):
             if (i >> j) & 1:
                 subset_sum += x[j]
-                subset_count += 1
-        if subset_count > 0 and subset_sum / subset_count == a:
-            count += 1
-    print(count)
+                subset_num += 1
+        
+        if subset_num > 0 and subset_sum / subset_num == a:
+            res += 1
+    
+    print(res)
+
     
 solve()
 
 
+# {annotation: "renamed variables for clarity"}

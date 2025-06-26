@@ -290,53 +290,52 @@ Sample Output 5
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_48_p03566_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int[] t = new int[n];
         int[] v = new int[n];
+
         for (int i = 0; i < n; i++) {
             t[i] = scanner.nextInt();
         }
+
         for (int i = 0; i < n; i++) {
             v[i] = scanner.nextInt();
         }
+
         scanner.close();
 
-        double totalDistance = 0;
-        double currentVelocity = 0;
-        int currentTime = 0;
+        double ttl_dis = 0;
+        double cur_v = 0;
 
         for (int i = 0; i < n; i++) {
-            double timeToReachMaxVelocity = Math.min(v[i] - currentVelocity, t[i]) ;
+            double time2ReachMaxV = Math.min(v[i] - cur_v, t[i]) ;
             
-            double distanceWhileAccelerating=0;
-            if(timeToReachMaxVelocity > 0){
-                distanceWhileAccelerating = (currentVelocity + currentVelocity + timeToReachMaxVelocity ) / 2.0 * timeToReachMaxVelocity;
+            double disWhileAcc=0;
+            if(time2ReachMaxV > 0){
+                disWhileAcc = (cur_v + cur_v + time2ReachMaxV ) / 2.0 * time2ReachMaxV;
             }
             
             
-            double remainingTime = t[i]-timeToReachMaxVelocity;
+            double remainTime = t[i]-time2ReachMaxV;
              
-            double distanceAtMaxVelocity = 0;
-            if(remainingTime > 0){
-                  distanceAtMaxVelocity = v[i] * remainingTime;
+            double disAtMaxV = 0;
+            if(remainTime > 0){
+                  disAtMaxV = v[i] * remainTime;
             }
            
             
-            totalDistance += distanceWhileAccelerating + distanceAtMaxVelocity;
+            ttl_dis += disWhileAcc + disAtMaxV;
 
-            currentVelocity = Math.min(v[i], currentVelocity + timeToReachMaxVelocity / 1.0);
-            
-            
-           
-            currentTime += t[i];
+            cur_v = Math.min(v[i], cur_v + time2ReachMaxV / 1.0);
         }
 
-        System.out.printf("%.15f%n", totalDistance);
+        System.out.printf("%.15f%n", ttl_dis);
     }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

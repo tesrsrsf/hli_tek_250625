@@ -120,45 +120,41 @@ int main() {
 
     int lenS = S_prime.size();
     int lenT = T.size();
-    string result = S_prime;
+    string res = S_prime;
 
-    bool found = false;
+    bool is_found = false;
 
-    for (int i = 0; i <= lenS - lenT; i++) {
+    for (int i = 0; i < lenS - lenT + 1; i++) {
         string temp = S_prime;
 
-        // Check if the segment can be replaced with T
-        bool canPlace = true;
+        bool canReplace = true;
         for (int j = 0; j < lenT; j++) {
             if (temp[i + j] != '?' && temp[i + j] != T[j]) {
-                canPlace = false;
+                canReplace = false;
                 break;
             }
         }
 
-        if (canPlace) {
-            // Place T in temp string
+        if (canReplace) {
             for (int j = 0; j < lenT; j++) {
                 temp[i + j] = T[j];
             }
 
-            // Replace remaining '?' with 'a'
             for (char &c : temp) {
                 if (c == '?') {
                     c = 'a';
                 }
             }
 
-            // Check if it is lexicographically smaller
-            if (!found || temp < result) {
-                result = temp;
-                found = true;
+            if (!is_found || temp < res) {
+                res = temp;
+                is_found = true;
             }
         }
     }
 
-    if (found) {
-        cout << result << endl;
+    if (is_found) {
+        cout << res << endl;
     } else {
         cout << "UNRESTORABLE" << endl;
     }
@@ -167,3 +163,4 @@ int main() {
 }
 
 
+// {annotation: "removed unnecessary comments and cleaned up the code for clarity, renamed variables in my style"}

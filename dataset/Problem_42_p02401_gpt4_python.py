@@ -76,16 +76,13 @@ while True:
         break
     a, op, b = line.split()
     a, b = int(a), int(b)
-    
-    if op == '+':
-        result = a + b
-    elif op == '-':
-        result = a - b
-    elif op == '*':
-        result = a * b
-    elif op == '/':
-        result = a // b
-    
-    print(result)
 
-
+    match op:
+        case '+':
+            print(a + b)
+        case '-':
+            print(a - b)
+        case '*':
+            print(a * b)
+        case '/':
+            print(a // b)

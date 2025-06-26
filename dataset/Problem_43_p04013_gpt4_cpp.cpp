@@ -134,48 +134,51 @@ The answer may not fit into a
 
 
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cstring>
 using namespace std;
 
-long long countWays(vector<int>& cards, int N, int A) {
-    long long dp[1 << N];
+long long countWays(vector<int> cards, int n, int a) {
+    long long dp[1 << n];
     memset(dp, 0, sizeof(dp));
     dp[0] = 1; // base case
 
-    for (int i = 0; i < N; ++i) {
-        for (int mask = (1 << i) - 1; mask >= 0; --mask) {
+    for (int i = 0; i < n; i++) {
+        for (int mask = (1 << i) - 1; mask >= 0; mask--) {
             dp[mask | (1 << i)] += dp[mask];
         }
     }
 
-    long long totalWays = 0;
+    long long res = 0;
 
-    for (int mask = 1; mask < (1 << N); ++mask) {
+    for (int mask = 1; mask < (1 << n); mask++) {
         int sum = 0, count = 0;
-        for (int j = 0; j < N; ++j) {
+        for (int j = 0; j < n; j++) {
             if (mask & (1 << j)) {
                 sum += cards[j];
                 count++;
             }
         }
-        if (count > 0 && sum == count * A) {
-            totalWays += dp[mask];
+        if (count > 0 && sum == count * a) {
+            res += dp[mask];
         }
     }
 
-    return totalWays;
+    return res;
 }
 
 int main() {
-    int N, A;
-    cin >> N >> A;
-    vector<int> cards(N);
-    for (int i = 0; i < N; i++) {
+    int n, a;
+    cin >> n >> a;
+    vector<int> cards(n);
+    for (int i = 0; i < n; i++) {
         cin >> cards[i];
     }
 
-    cout << countWays(cards, N, A) << endl;
+    cout << countWays(cards, n, a) << endl;
     return 0;
 }
 
 
+// {annotation: "renamed variables for clarity"}

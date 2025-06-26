@@ -136,22 +136,22 @@ The answer may not fit into a
 
 import java.util.*;
 
-public class Main {
+public class Problem_43_p04013_gpt4_java {
     static long countWays(int[] cards, int target, int n) {
         long[][] dp = new long[n + 1][target * n + 1];
         dp[0][0] = 1; // There's one way to pick nothing (0 cards) to get sum 0.
 
-        for (int i = 1; i <= n; i++) {
-            int cardValue = cards[i - 1];
-            for (int j = i; j >= 1; j--) {
-                for (int k = cardValue; k <= target * j; k++) {
-                    dp[j][k] += dp[j - 1][k - cardValue];
+        for (int i = 1; i < n + 1; i++) {
+            int cardVal = cards[i - 1];
+            for (int j = i; j > 0; j--) {
+                for (int k = cardVal; k < target * j + 1; k++) {
+                    dp[j][k] += dp[j - 1][k - cardVal];
                 }
             }
         }
 
         long ways = 0;
-        for (int j = 1; j <= n; j++) {
+        for (int j = 1; j < n + 1; j++) {
             if (j * target <= target * n) {
                 ways += dp[j][j * target];
             }
@@ -161,17 +161,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int A = scanner.nextInt();
-        int[] cards = new int[N];
+        int n = scanner.nextInt();
+        int a = scanner.nextInt();
+        int[] cards = new int[n];
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             cards[i] = scanner.nextInt();
         }
 
-        long result = countWays(cards, A, N);
+        long result = countWays(cards, a, n);
         System.out.println(result);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables for clarity, rearranged the structure to fit my style"}

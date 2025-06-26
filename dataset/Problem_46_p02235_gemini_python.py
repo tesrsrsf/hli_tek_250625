@@ -47,23 +47,11 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 
 
-def longest_common_subsequence_length(x, y):
-  """
-  Calculates the length of the longest common subsequence (LCS) of two sequences.
-
-  Args:
-    x: The first sequence (string).
-    y: The second sequence (string).
-
-  Returns:
-    The length of the LCS.
-  """
+def lcs_length(x, y):
   n = len(x)
   m = len(y)
-  # Initialize a 2D array to store lengths of LCSs
   dp = [[0 for _ in range(m + 1)] for _ in range(n + 1)]
 
-  # Iterate through the sequences to build the dp table
   for i in range(1, n + 1):
     for j in range(1, m + 1):
       if x[i - 1] == y[j - 1]:
@@ -76,10 +64,11 @@ def longest_common_subsequence_length(x, y):
 
 if __name__ == "__main__":
   q = int(input())
-  for _ in range(q):
+  for i in range(0, q):
     x = input()
     y = input()
-    result = longest_common_subsequence_length(x, y)
+    result = lcs_length(x, y)
     print(result)
 
 
+# {annotation: "renamed variables and reformatted structures in my style, also removed unnecessary comments"}

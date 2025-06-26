@@ -116,17 +116,27 @@ Output for the Sample Input
 
 while True:
     try:
-        a = list(map(int, input().split()))
-        b = list(map(int, input().split()))
+        ab_line = input().split()
+        
+        a = ab_line[:4]
+        for i in range(0, 4):
+            a[i] = int(a[i])
+
+        b = ab_line[4:]
+        for i in range(0, 4):
+            b[i] = int(b[i])
         hit = 0
         blow = 0
-        for i in range(4):
+        for i in range(0, 4):
             if a[i] == b[i]:
                 hit += 1
             elif b[i] in a:
                 blow += 1
+
         print(hit, blow)
+
     except EOFError:
         break
 
 
+# {annotation: "changed how input is read with a more explict way"}

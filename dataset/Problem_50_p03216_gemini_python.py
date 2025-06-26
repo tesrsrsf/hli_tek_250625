@@ -184,21 +184,22 @@ Sample Output 4
 
 
 
-def solve():
+def nestomb():
     n = int(input())
     s = input()
     q = int(input())
-    ks = [int(input()) for _ in range(q)]
+    kvs = [int(input()) for _ in range(q)]
 
-    for k in ks:
-        count = 0
-        for a in range(n):
+    for k in kvs:
+        res = 0
+        for a in range(0, n):
             for b in range(a + 1, n):
                 for c in range(b + 1, n):
                     if s[a] == 'D' and s[b] == 'M' and s[c] == 'C' and c - a < k:
-                        count += 1
-        print(count)
+                        res += 1
+        print(res)
 
-solve()
+nestomb()
 
 
+# {annotation: "renamed variables and reformatted structures in my style"}

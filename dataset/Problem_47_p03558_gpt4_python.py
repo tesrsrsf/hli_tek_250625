@@ -55,14 +55,16 @@ Sample Output 3
 
 
 
-def smallest_digit_sum(k):
-    from collections import deque
+from collections import deque
+
+
+def sds(k):
     
     visited = set()
-    queue = deque([(0, 0)])  # (current_number, sum_of_digits)
+    q = deque([(0, 0)])  # (current_number, sum_of_digits)
 
-    while queue:
-        mod, digit_sum = queue.popleft()
+    while q:
+        mod, digit_sum = q.popleft()
         for digit in range(1, 10):
             new_mod = (mod * 10 + digit) % k
             new_digit_sum = digit_sum + digit
@@ -72,9 +74,11 @@ def smallest_digit_sum(k):
             
             if new_mod not in visited:
                 visited.add(new_mod)
-                queue.append((new_mod, new_digit_sum))
-
-K = int(input().strip())
-print(smallest_digit_sum(K))
+                q.append((new_mod, new_digit_sum))
 
 
+k = int(input())
+print(sds(k))
+
+
+# {annotation: "renamed variables and reformatted structures in my style"}

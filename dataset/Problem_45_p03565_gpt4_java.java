@@ -110,30 +110,19 @@ S
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        String sPrime = scanner.nextLine();
-        String t = scanner.nextLine();
-        
-        String result = findSmallestString(sPrime, t);
-        System.out.println(result);
-        
-        scanner.close();
-    }
+public class Problem_45_p03565_gpt4_java {
     
-    private static String findSmallestString(String sPrime, String t) {
+    public static String findSmallStr(String sPrime, String t) {
         int sLen = sPrime.length();
         int tLen = t.length();
         
         String bestResult = null;
 
         for (int i = 0; i <= sLen - tLen; i++) {
-            String candidate = sPrime.substring(0, i) + t + sPrime.substring(i + tLen);
-            if (canFormCandidate(candidate, sPrime)) {
-                if (bestResult == null || candidate.compareTo(bestResult) < 0) {
-                    bestResult = candidate;
+            String candidates = sPrime.substring(0, i) + t + sPrime.substring(i + tLen);
+            if (canForm(candidates, sPrime)) {
+                if (bestResult == null || candidates.compareTo(bestResult) < 0) {
+                    bestResult = candidates;
                 }
             }
         }
@@ -141,7 +130,8 @@ public class Main {
         return bestResult != null ? bestResult : "UNRESTORABLE";
     }
 
-    private static boolean canFormCandidate(String candidate, String sPrime) {
+
+    public static boolean canForm(String candidate, String sPrime) {
         for (int i = 0; i < candidate.length(); i++) {
             char c1 = candidate.charAt(i);
             char c2 = sPrime.charAt(i);
@@ -151,6 +141,20 @@ public class Main {
         }
         return true;
     }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        String sPrime = scanner.nextLine();
+        String t = scanner.nextLine();
+        
+        String result = findSmallStr(sPrime, t);
+        System.out.println(result);
+        
+        scanner.close();
+    }
 }
 
 
+// {annotation: "moved tool functions to the top, renamed variables for clarity"}

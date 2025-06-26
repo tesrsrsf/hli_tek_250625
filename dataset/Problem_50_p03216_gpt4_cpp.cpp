@@ -191,25 +191,38 @@ Sample Output 4
 
 using namespace std;
 
-int countDMC(const string &S, int k) {
+int stylishCount(string S, int k) {
     int N = S.size();
     int count = 0;
     vector<int> D_indices, M_indices, C_indices;
 
-    for (int i = 0; i < N; ++i) {
-        if (S[i] == 'D') D_indices.push_back(i);
-        else if (S[i] == 'M') M_indices.push_back(i);
-        else if (S[i] == 'C') C_indices.push_back(i);
+    for (int i = 0; i < N; i++) {
+        switch (S[i]) {
+            case 'D':
+                D_indices.push_back(i);
+                break;
+            case 'M':
+                M_indices.push_back(i);
+                break;
+            case 'C':
+                C_indices.push_back(i);
+                break;
+        }
     }
 
     for (int b : M_indices) {
         int valid_a_count = 0;
         for (int a : D_indices) {
-            if (a < b) valid_a_count++;
+            if (a < b) {
+                valid_a_count++;
+            }
         }
+
         int valid_c_count = 0;
         for (int c : C_indices) {
-            if (c > b && c - D_indices[0] < k) valid_c_count++;
+            if (c > b && c - D_indices[0] < k) {
+                valid_c_count++;
+            }
         }
         count += valid_a_count * valid_c_count;
     }
@@ -225,15 +238,16 @@ int main() {
     int Q;
     cin >> Q;
     vector<int> K(Q);
-    for (int i = 0; i < Q; ++i) {
+    for (int i = 0; i < Q; i++) {
         cin >> K[i];
     }
 
     for (int k : K) {
-        cout << countDMC(S, k) << endl;
+        cout << stylishCount(S, k) << endl;
     }
 
     return 0;
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, used switch-case for character handling"}

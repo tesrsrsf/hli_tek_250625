@@ -144,28 +144,29 @@ int main() {
     cin >> N >> A;
 
     vector<int> x(N);
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; i++) {
         cin >> x[i];
     }
 
-    long long count = 0;
-    for (int i = 1; i < (1 << N); ++i) {
+    long long res = 0;
+    for (int i = 1; i < (1 << N); i++) {
         int sum = 0;
-        int cards_selected = 0;
-        for (int j = 0; j < N; ++j) {
+        int cards_sel = 0;
+        for (int j = 0; j < N; j++) {
             if ((i >> j) & 1) {
                 sum += x[j];
-                cards_selected++;
+                cards_sel++;
             }
         }
-        if (cards_selected > 0 && sum == A * cards_selected) {
-            count++;
+        if (cards_sel > 0 && sum == A * cards_sel) {
+            res++;
         }
     }
 
-    cout << count << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "renamed variables for clarity"}

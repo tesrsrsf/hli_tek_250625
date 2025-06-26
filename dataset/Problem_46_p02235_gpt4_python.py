@@ -47,23 +47,25 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 
 
-def lcs_length(X, Y):
-    m, n = len(X), len(Y)
+def lcs_length(x, y):
+    m, n = len(x), len(y)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     
     for i in range(1, m + 1):
         for j in range(1, n + 1):
-            if X[i - 1] == Y[j - 1]:
+            if x[i - 1] == y[j - 1]:
                 dp[i][j] = dp[i - 1][j - 1] + 1
             else:
                 dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
     
     return dp[m][n]
 
+
 q = int(input())
-for _ in range(q):
-    X = input().strip()
-    Y = input().strip()
-    print(lcs_length(X, Y))
+for _ in range(0, q):
+    x = input()
+    y = input()
+    print(lcs_length(x, y))
 
 
+# {annotation: "renamed variables and reformatted structures in my style"}

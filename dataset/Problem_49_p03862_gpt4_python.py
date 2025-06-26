@@ -99,28 +99,30 @@ All the candies need to be eaten.
 
 
 
-def min_operations(N, x, candies):
-    operations = 0
-    for i in range(N - 1):
+import sys
+
+
+def optimizer(n, x, candies):
+    res = 0
+    for i in range(n - 1):
         total = candies[i] + candies[i + 1]
         if total > x:
             excess = total - x
-            operations += excess
-            # We can assume we take candies from the box i+1
+            res += excess
             candies[i + 1] -= excess
-    return operations
 
-# Read input
-import sys
+    return res
+
+
 input = sys.stdin.read
 data = input().split()
 
-N = int(data[0])
+n = int(data[0])
 x = int(data[1])
-candies = list(map(int, data[2:2 + N]))
+candies = list(map(int, data[2:2 + n]))
 
-# Get the result and print it
-result = min_operations(N, x, candies)
-print(result)
+res = optimizer(n, x, candies)
+print(res)
 
 
+# {annotation: "renamed variables and reformatted structures in my style, also placed import statements at the top for better readability"}

@@ -72,7 +72,7 @@ Sample Output 1
 
 import java.util.Scanner;
 
-class SimpleCalculator {
+class Problem_42_p02401_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -82,25 +82,25 @@ class SimpleCalculator {
             if (op == '?') {
                 break;
             }
-            int result = 0;
+
             switch (op) {
                 case '+':
-                    result = a + b;
+                    System.out.println(a + b);
                     break;
                 case '-':
-                    result = a - b;
+                    System.out.println(a - b);
                     break;
                 case '*':
-                    result = a * b;
+                    System.out.println(a * b);
                     break;
                 case '/':
-                    result = a / b;
+                    System.out.println(a / b);
                     break;
             }
-            System.out.println(result);
         }
         scanner.close();
     }
 }
 
 
+// {annotation: "now it prints the result directly without storing it in a variable"}

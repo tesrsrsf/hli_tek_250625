@@ -49,29 +49,15 @@ Introduction to Algorithms, Thomas H. Cormen, Charles E. Leiserson, Ronald L. Ri
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int q = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline
-        
-        for (int i = 0; i < q; i++) {
-            String X = scanner.nextLine();
-            String Y = scanner.nextLine();
-            System.out.println(lcs(X, Y));
-        }
-        
-        scanner.close();
-    }
-
-    private static int lcs(String X, String Y) {
-        int m = X.length();
-        int n = Y.length();
+public class Problem_46_p02235_gpt4_java {
+    public static int lcs(String x, String y) {
+        int m = x.length();
+        int n = y.length();
         int[][] dp = new int[m + 1][n + 1];
-        
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                if (x.charAt(i - 1) == y.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
@@ -81,6 +67,22 @@ public class Main {
         
         return dp[m][n];
     }
+
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int q = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+        
+        for (int i = 0; i < q; i++) {
+            String x = scanner.nextLine();
+            String y = scanner.nextLine();
+            System.out.println(lcs(x, y));
+        }
+        
+        scanner.close();
+    }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, moved the tool function to the top, improves readability and maintainability"}

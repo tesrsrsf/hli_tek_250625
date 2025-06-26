@@ -119,36 +119,36 @@ int main() {
     string s_prime, t;
     cin >> s_prime >> t;
 
-    string ans = "UNRESTORABLE";
+    string res = "UNRESTORABLE";
     int n = s_prime.length();
     int m = t.length();
 
-    for (int i = 0; i <= n - m; ++i) {
+    for (int i = 0; i <= n - m; i++) {
         string temp = s_prime;
-        bool possible = true;
+        bool is_possible = true;
 
-        for (int j = 0; j < m; ++j) {
+        for (int j = 0; j < m; j++) {
             if (i + j < n) {
                 if (temp[i + j] == '?') {
                     temp[i + j] = t[j];
                 } else if (temp[i + j] != t[j]) {
-                    possible = false;
+                    is_possible = false;
                     break;
                 }
             }
         }
 
-        if (possible) {
-            string current_s = temp;
+        if (is_possible) {
+            string cue_s = temp;
             for (int k = 0; k < n; ++k) {
-                if (current_s[k] == '?') {
-                    current_s[k] = 'a';
+                if (cue_s[k] == '?') {
+                    cue_s[k] = 'a';
                 }
             }
             
             bool contains_t = false;
             for(int k = 0; k <= n-m; ++k){
-                if(current_s.substr(k, m) == t){
+                if(cue_s.substr(k, m) == t){
                     contains_t = true;
                     break;
                 }
@@ -156,25 +156,26 @@ int main() {
 
             if(contains_t){
                 
-                bool valid_s = true;
+                bool is_valid_s = true;
                 for(int k = 0; k < n; ++k){
-                    if(s_prime[k] != '?' && s_prime[k] != current_s[k]){
-                        valid_s = false;
+                    if(s_prime[k] != '?' && s_prime[k] != cue_s[k]){
+                        is_valid_s = false;
                         break;
                     }
                 }
-                if(valid_s){
-                    if (ans == "UNRESTORABLE" || current_s < ans) {
-                        ans = current_s;
+                if(is_valid_s){
+                    if (res == "UNRESTORABLE" || cue_s < res) {
+                        res = cue_s;
                     }
                 }
             }
         }
     }
 
-    cout << ans << endl;
+    cout << res << endl;
 
     return 0;
 }
 
 
+// {annotation: "removed unnecessary comments and cleaned up the code for clarity, renamed variables in my style"}

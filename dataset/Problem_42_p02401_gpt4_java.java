@@ -72,7 +72,7 @@ Sample Output 1
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_42_p02401_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -85,22 +85,20 @@ public class Main {
                 break;
             }
 
-            int result = 0;
             switch (op) {
                 case '+':
-                    result = a + b;
+                    System.out.println(a + b);
                     break;
                 case '-':
-                    result = a - b;
+                    System.out.println(a - b);
                     break;
                 case '*':
-                    result = a * b;
+                    System.out.println(a * b);
                     break;
                 case '/':
-                    result = a / b;
+                    System.out.println(a / b);
                     break;
             }
-            System.out.println(result);
         }
 
         scanner.close();
@@ -108,3 +106,4 @@ public class Main {
 }
 
 
+// {annotation: "now it prints the result directly without storing it in a variable"}

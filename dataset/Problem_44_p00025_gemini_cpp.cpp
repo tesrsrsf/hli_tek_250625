@@ -121,27 +121,30 @@ using namespace std;
 
 int main() {
     int a1, a2, a3, a4, b1, b2, b3, b4;
+
     while (cin >> a1 >> a2 >> a3 >> a4 >> b1 >> b2 >> b3 >> b4) {
         vector<int> a = {a1, a2, a3, a4};
         vector<int> b = {b1, b2, b3, b4};
         int hit = 0, blow = 0;
 
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 4; i++) {
             if (a[i] == b[i]) {
                 hit++;
             }
         }
 
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 if (i != j && a[i] == b[j]) {
                     blow++;
                 }
             }
         }
-        cout << hit << " " << blow << endl;
+        string res = to_string(hit) + " " + to_string(blow);
+        cout << res << endl;
     }
     return 0;
 }
 
 
+// {annotation: "output message generation is done in a separate variable, improving readability"}

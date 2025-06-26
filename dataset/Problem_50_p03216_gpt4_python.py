@@ -184,26 +184,27 @@ Sample Output 4
 
 
 
-def count_dmc(S, k):
+import sys
+
+
+def platinum(S, k):
     N = len(S)
     count = 0
     
-    # Store the indices of characters D, M, C
     d_indices = []
     m_indices = []
     c_indices = []
     
     for i in range(N):
-        if S[i] == 'D':
-            d_indices.append(i)
-        elif S[i] == 'M':
-            m_indices.append(i)
-        elif S[i] == 'C':
-            c_indices.append(i)
-    
-    # Counting valid triples (a, b, c)
+        match S[i]:
+            case 'D':
+                d_indices.append(i)
+            case 'M':
+                m_indices.append(i)
+            case 'C':
+                c_indices.append(i)
+
     for b in m_indices:
-        # Count D's before b
         a_count = 0
         for a in d_indices:
             if a < b:
@@ -211,33 +212,33 @@ def count_dmc(S, k):
             else:
                 break
         
-        # Count C's after b
         c_count = 0
         for c in c_indices:
             if c > b:
-                if c - a_count < k:  # Check if the condition c - a < k holds
+                if c - a_count < k:
                     c_count += 1
             else:
                 continue
         
-        # Valid combinations adding to the count
         count += a_count * c_count
     
     return count
 
-import sys
+
 input = sys.stdin.read
 data = input().splitlines()
 
 N = int(data[0])
 S = data[1]
 Q = int(data[2])
-k_values = list(map(int, data[3:3 + Q]))
+k_vs = list(map(int, data[3:3 + Q]))
 
-results = []
-for k in k_values:
-    results.append(count_dmc(S, k))
+ress = []
+for k in k_vs:
+    ress.append(platinum(S, k))
 
-print("\n".join(map(str, results)))
+for res in ress:
+    print(res)
 
 
+# {annotation: "renamed variables and reformatted structures in my style, used match-case for better readability, also removed unnecessary comments"}

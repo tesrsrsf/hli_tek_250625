@@ -134,32 +134,32 @@ C
 
 
 def solve():
-    sa = input()
-    sb = input()
-    sc = input()
+    s1 = input()
+    s2 = input()
+    s3 = input()
     
     turn = 'A'
     
     while True:
         if turn == 'A':
-            if not sa:
+            if not s1:
                 print('A')
                 return
-            card = sa[0]
-            sa = sa[1:]
+            card = s1[0]
+            s1 = s1[1:]
         elif turn == 'B':
-            if not sb:
+            if not s2:
                 print('B')
                 return
-            card = sb[0]
-            sb = sb[1:]
+            card = s2[0]
+            s2 = s2[1:]
         else:
-            if not sc:
+            if not s3:
                 print('C')
                 return
-            card = sc[0]
-            sc = sc[1:]
-        
+            card = s3[0]
+            s3 = s3[1:]
+
         if card == 'a':
             turn = 'A'
         elif card == 'b':
@@ -167,6 +167,8 @@ def solve():
         else:
             turn = 'C'
 
+
 solve()
 
 
+# {annotations: "renamed variables with my style"}

@@ -101,26 +101,28 @@ All the candies need to be eaten.
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_49_p03862_gemini_java {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int x = scanner.nextInt();
+
         int[] a = new int[n];
+
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
 
-        long operations = 0;
+        int operations = 0;
         for (int i = 0; i < n - 1; i++) {
             if (a[i] + a[i + 1] > x) {
-                long diff = (long) a[i] + a[i + 1] - x;
-                if (a[i+1] >= diff) {
-                    a[i+1] -= diff;
+                int diff = a[i] + a[i + 1] - x;
+                if (a[i + 1] >= diff) {
+                    a[i + 1] -= diff;
                 } else {
-                    operations += diff - a[i+1];
-                    a[i+1] = 0;
+                    operations += diff - a[i + 1];
+                    a[i + 1] = 0;
                 }
                 operations += diff;
 
@@ -128,7 +130,9 @@ public class Main {
         }
 
         System.out.println(operations);
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, scanner closed"}

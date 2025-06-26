@@ -139,54 +139,54 @@ C
 using namespace std;
 
 int main() {
-    string sa, sb, sc;
-    cin >> sa >> sb >> sc;
+    string s1, s2, s3;
+    cin >> s1 >> s2 >> s3;
 
     int a_idx = 0, b_idx = 0, c_idx = 0;
-    char current_player = 'a';
+    char cur_player = 'a';
 
     while (true) {
-        if (current_player == 'a') {
-            if (a_idx >= sa.length()) {
+        if (cur_player == 'a') {
+            if (a_idx >= s1.length()) {
                 cout << "A" << endl;
                 break;
             }
-            char card = sa[a_idx];
+            char card = s1[a_idx];
             a_idx++;
             if (card == 'a') {
-                current_player = 'a';
+                cur_player = 'a';
             } else if (card == 'b') {
-                current_player = 'b';
+                cur_player = 'b';
             } else {
-                current_player = 'c';
+                cur_player = 'c';
             }
-        } else if (current_player == 'b') {
-            if (b_idx >= sb.length()) {
+        } else if (cur_player == 'b') {
+            if (b_idx >= s2.length()) {
                 cout << "B" << endl;
                 break;
             }
-            char card = sb[b_idx];
+            char card = s2[b_idx];
             b_idx++;
             if (card == 'a') {
-                current_player = 'a';
+                cur_player = 'a';
             } else if (card == 'b') {
-                current_player = 'b';
+                cur_player = 'b';
             } else {
-                current_player = 'c';
+                cur_player = 'c';
             }
         } else {
-            if (c_idx >= sc.length()) {
+            if (c_idx >= s3.length()) {
                 cout << "C" << endl;
                 break;
             }
-            char card = sc[c_idx];
+            char card = s3[c_idx];
             c_idx++;
             if (card == 'a') {
-                current_player = 'a';
+                cur_player = 'a';
             } else if (card == 'b') {
-                current_player = 'b';
+                cur_player = 'b';
             } else {
-                current_player = 'c';
+                cur_player = 'c';
             }
         }
     }
@@ -195,3 +195,4 @@ int main() {
 }
 
 
+// {annotation: "renamed variables with my style"}

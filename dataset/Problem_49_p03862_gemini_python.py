@@ -103,17 +103,20 @@ def solve():
     n = int(input())
     x = int(input())
     a = []
-    for _ in range(n):
+    for i in range(0, n):
         a.append(int(input()))
     
-    ans = 0
-    for i in range(n - 1):
-        if a[i] + a[i+1] > x:
-            diff = a[i] + a[i+1] - x
-            ans += diff
-            a[i+1] = max(0, a[i+1] - diff)
-    print(ans)
+    res = 0
+    for i in range(0, n - 1):
+        if a[i] + a[i + 1] > x:
+            diff = a[i] + a[i + 1] - x
+            res += diff
+            a[i + 1] = max(0, a[i + 1] - diff)
+
+    print(res)
+
 
 solve()
 
 
+# {annotation: "renamed variables and reformatted structures in my style"}

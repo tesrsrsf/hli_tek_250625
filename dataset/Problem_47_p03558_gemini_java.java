@@ -56,29 +56,28 @@ Sample Output 3
 
 
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Main {
+class Problem_47_p03558_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt();
 
         int[] dist = new int[k];
         Arrays.fill(dist, -1);
-        Queue<Integer> queue = new LinkedList<>();
+        LinkedList<Integer> q = new LinkedList<>();
 
         dist[0] = 0;
-        queue.offer(0);
+        q.offer(0);
 
-        while (!queue.isEmpty()) {
-            int rem = queue.poll();
+        while (!q.isEmpty()) {
+            int rem = q.poll();
             for (int digit = 0; digit <= 9; digit++) {
                 int nextRem = (rem * 10 + digit) % k;
                 if (dist[nextRem] == -1) {
                     dist[nextRem] = dist[rem] + digit;
-                    queue.offer(nextRem);
+                    q.offer(nextRem);
                 }
             }
         }
@@ -91,7 +90,10 @@ class Main {
         }
 
         System.out.println(minSum + 1);
+
+        scanner.close();
     }
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style"}

@@ -186,23 +186,22 @@ Sample Output 4
 
 import java.util.*;
 
-public class Main {
+public class Problem_50_p03216_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
         int N = scanner.nextInt();
         String S = scanner.next();
         int Q = scanner.nextInt();
-        int[] kValues = new int[Q];
+        int[] kVs = new int[Q];
 
         for (int i = 0; i < Q; i++) {
-            kValues[i] = scanner.nextInt();
+            kVs[i] = scanner.nextInt();
         }
         
-        // Precomputation of the D, M, C positions
-        List<Integer> dIndices = new ArrayList<>();
-        List<Integer> mIndices = new ArrayList<>();
-        List<Integer> cIndices = new ArrayList<>();
+        ArrayList<Integer> dIndices = new ArrayList<>();
+        ArrayList<Integer> mIndices = new ArrayList<>();
+        ArrayList<Integer> cIndices = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             if (S.charAt(i) == 'D') {
@@ -214,28 +213,23 @@ public class Main {
             }
         }
 
-        // For each k, calculate the k-DMC number
-        for (int k : kValues) {
-            long count = 0;
-            int dCount = dIndices.size();
-            int mCount = mIndices.size();
-            int cCount = cIndices.size();
+        for (int k : kVs) {
+            long res = 0;
 
             for (int b : mIndices) {
-                // Count valid a's for current b
                 int aCount = 0;
                 for (int d : dIndices) {
                     if (d < b) aCount++;
                 }
                 
-                // Count valid c's for current b
                 for (int c : cIndices) {
                     if (c > b && c - dIndices.get(0) < k) {
-                        count += aCount;
+                        res += aCount;
                     }
                 }
             }
-            System.out.println(count);
+
+            System.out.println(res);
         }
 
         scanner.close();
@@ -243,3 +237,4 @@ public class Main {
 }
 
 
+// {annotation: "renamed variables and reformatted structures in my style, removed unused variables, avoid using List to declare indices, used ArrayList instead with the same logic"}

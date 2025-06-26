@@ -110,7 +110,7 @@ S
 
 import java.util.Scanner;
 
-public class Main {
+public class Problem_45_p03565_gemini_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
@@ -119,16 +119,16 @@ public class Main {
         int m = t.length();
         String result = "UNRESTORABLE";
 
-        for (int i = 0; i <= n - m; i++) {
+        for (int i = 0; i < n - m + 1; i++) {
             StringBuilder sb = new StringBuilder(s);
-            boolean possible = true;
+            boolean is_possible = true;
             for (int j = 0; j < m; j++) {
                 if (sb.charAt(i + j) != '?' && sb.charAt(i + j) != t.charAt(j)) {
-                    possible = false;
+                    is_possible = false;
                     break;
                 }
             }
-            if (possible) {
+            if (is_possible) {
                 StringBuilder tempSb = new StringBuilder(s);
                 for (int j = 0; j < m; j++) {
                     tempSb.setCharAt(i + j, t.charAt(j));
@@ -139,21 +139,21 @@ public class Main {
                     }
                 }
                 
-                boolean valid = false;
-                for(int k = 0; k <= n - m; k++){
-                    boolean subStringFound = true;
+                boolean is_valid = false;
+                for(int k = 0; k < n - m + 1; k++){
+                    boolean seqFound = true;
                     for(int l = 0; l < m; l++){
                         if(tempSb.charAt(k+l) != t.charAt(l)){
-                            subStringFound = false;
+                            seqFound = false;
                             break;
                         }
                     }
-                    if(subStringFound){
-                        valid = true;
+                    if(seqFound){
+                        is_valid = true;
                         break;
                     }
                 }
-                if(valid){
+                if(is_valid){
                    if (result.equals("UNRESTORABLE") || tempSb.toString().compareTo(result) < 0) {
                        result = tempSb.toString();
                    }
@@ -162,7 +162,9 @@ public class Main {
         }
 
         System.out.println(result);
+        scanner.close();
     }
 }
 
 
+// {annotation: "removed unnecessary comments and cleaned up the code for clarity, renamed variables in my style"}

@@ -137,45 +137,48 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main {
+public class Problem_41_p03998_gpt4_java {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String S_A = scanner.nextLine();
-        String S_B = scanner.nextLine();
-        String S_C = scanner.nextLine();
-        
+        String S1 = scanner.nextLine();
+        String S2 = scanner.nextLine();
+        String S3 = scanner.nextLine();
+
         Queue<Character> alice = new LinkedList<>();
         Queue<Character> bob = new LinkedList<>();
         Queue<Character> charlie = new LinkedList<>();
-        
-        for (char c : S_A.toCharArray()) alice.offer(c);
-        for (char c : S_B.toCharArray()) bob.offer(c);
-        for (char c : S_C.toCharArray()) charlie.offer(c);
-        
-        char currentPlayer = 'A';
+
+        for (char c : S1.toCharArray()) alice.offer(c);
+        for (char c : S2.toCharArray()) bob.offer(c);
+        for (char c : S3.toCharArray()) charlie.offer(c);
+
+        char curPlayer = 'A';
         
         while (true) {
-            switch (currentPlayer) {
+            switch (curPlayer) {
                 case 'A':
                     if (alice.isEmpty()) {
                         System.out.println("A");
+                        scanner.close();
                         return;
                     }
-                    currentPlayer = alice.poll();
+                    curPlayer = alice.poll();
                     break;
                 case 'B':
                     if (bob.isEmpty()) {
                         System.out.println("B");
+                        scanner.close();
                         return;
                     }
-                    currentPlayer = bob.poll();
+                    curPlayer = bob.poll();
                     break;
                 case 'C':
                     if (charlie.isEmpty()) {
                         System.out.println("C");
+                        scanner.close();
                         return;
                     }
-                    currentPlayer = charlie.poll();
+                    curPlayer = charlie.poll();
                     break;
             }
         }
@@ -183,3 +186,4 @@ public class Main {
 }
 
 
+// {annotations: "renamed variables and reformatted the program with my style"}

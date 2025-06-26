@@ -73,10 +73,12 @@ Sample Output 1
 #include <iostream>
 #include <sstream>
 
+using namespace std;
+
 int main() {
-    std::string line;
-    while (std::getline(std::cin, line)) {
-        std::istringstream iss(line);
+    string line;
+    while (getline(cin, line)) {
+        istringstream iss(line);
         int a, b;
         char op;
         iss >> a >> op >> b;
@@ -85,16 +87,16 @@ int main() {
 
         switch (op) {
             case '+':
-                std::cout << (a + b) << std::endl;
+                cout << (a + b) << endl;
                 break;
             case '-':
-                std::cout << (a - b) << std::endl;
+                cout << (a - b) << endl;
                 break;
             case '*':
-                std::cout << (a * b) << std::endl;
+                cout << (a * b) << endl;
                 break;
             case '/':
-                std::cout << (a / b) << std::endl;
+                cout << (a / b) << endl;
                 break;
         }
     }
@@ -102,3 +104,4 @@ int main() {
 }
 
 
+// {annotation: "used name space to simplify code"}
